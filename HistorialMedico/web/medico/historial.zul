@@ -1,88 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?link rel="stylesheet" type="text/css" href="/css/boostrap/bootstrap.css"?>  
 <?link rel="stylesheet" type="text/css" href="/css/style.css"?>
+<?link rel="stylesheet" type="text/css" href="/css/modales.css"?>
 <?init class="com.ec.seguridad.Autentificador"?>
 <?init class="org.zkoss.zk.ui.util.Composition" arg0="/plantilla/plantilla.zul"?>
 <?link rel="icon" type="image/x-icon" href="/iconos/deckxel.ico"?>
-<zk  contentStyle="overflow:auto" with="100%" >
-    <hbox self="@define(content)" apply="org.zkoss.bind.BindComposer" 
-          viewModel="@id('vm') @init('com.ec.controlador.Historial')" width="100%">
-        <tabbox  width="100%">
+<zk   with="100%" >
+    <div self="@define(content)" apply="org.zkoss.bind.BindComposer" 
+          viewModel="@id('vm') @init('com.ec.controlador.HIstorial')" >
+       <!-- <tabbox id="tboxPrincipal"  width="100%">
             <tabs >
-                <tab label="Historial medico" sclass="menutabs" /> 
+                <tab label="Armar Evaluacion " sclass="menutabs" /> 
             </tabs>
             <tabpanels >
                
-                <tabpanel  height="98%" width="99%"  >                    
-                    <div  class=" row ">
-<!--                        <div  class=" row col-12 col-sm-12 col-md-12 col-lg-12 ">
-                            <listbox model="@load(vm.listaTestModel)" 
-                                     nonselectableTags="" checkmark="true" 
-                                      onSelect="@command('seleccionarTest')"     
-                                     mold="paging" pageSize="12"  >
-                                <custom-attributes org.zkoss.zul.listbox.rod="true"/>
-                                <auxhead>
-                                   
-                                    <auxheader colspan="12" >  
-                                        <div class="row">
-                                  
-                                    
-                                            <div  class="col-12 col-sm-12 col-md-12 col-lg-12 ">
-                                                Seleccione el Test
-                                            </div>
-                                            
-
-                                        </div>
-                                
-                                    </auxheader>
-                                </auxhead>
-                       
-                                <listhead> 
-                                    <listheader width="30px"  label="" >
-                                       
-                                    </listheader>
-                                    <listheader width="100%"  label="" >
-                                        <textbox value="@bind(vm.buscarTest)"  
-                                                 tooltiptext="Nombre test"
-                                                 class="form-control form-control-sm"                                         
-                                                 placeholder="Nombre test"
-                                                 onOK="@command('buscarTest')"
-                                                 onChange="self.setValue(self.getValue().toUpperCase());" />
-                                    </listheader>  
-                                    <listheader width="5%"   tooltiptext="Editar" label="" align="center" />               
+                <tabpanel  height="98%" width="99%"  > -->                   
+                    <div  class="contenedorTest">
+                        <div  class="containerEva">
+                            <div class="">                                    
+                                <button    
+                                          iconSclass="z-icon-plus"
+                                          onClick="@command('nuevoCapitulo')"  
+                                          class="fa fa-plus"
+                                    tooltiptext="Buscar"></button>
+                            </div>    
+                            <listbox class="tabla" model="@load(vm.listaCapitulo)" 
+                                     nonselectableTags="*"  mold="paging" pageSize="5"  >
+                               
+                                <custom-attributes org.zkoss.zul.listbox.rod="true"/>                       
+                                <listhead class="tblCabecera"> 
+                                    <listheader label="Capitulo" />                                                                         
                                 </listhead>  
-                        
-                    
                                 <template name="model">                                                            
-                                    <listitem>
+                                    <listitem class="tblCuerpo" >
                               
-                                        <listcell zclass = "mycss-listcell">
-                                            
-                                        </listcell>
-                                        <listcell zclass = "mycss-listcell">
+                                        <listcell zclass = "mycss-listcell" style="width:100%;">
                                             <textbox readonly="true"  style="font-size:12px ;background:#EBF5FB"
                                                      class="form-control form-control-sm" 
-                                                     value="@bind(each.testNombre)" />
+                                                     value="@bind(each.capDetalle)" />
                                         </listcell>
-                                        
+                                        <listcell zclass = "mycss-listcell" style="font-size:12px;background:#F8F9F9">                                  
+                                            <button 
+                                                iconSclass="z-icon-pencil"
+                                                onClick="@command('modificarCapitulo',valor=each)" 
+                                                tooltiptext="Modificar">
+                                                Modificar
+                                            </button>                                      
+                                        </listcell>
+                                        <listcell zclass = "mycss-listcell" style="font-size:12px;background:#F8F9F9">     
+                                            <button 
+                                                iconSclass="z-icon-hand-o-up" 
+                                                tooltiptext="Modificar"
+                                                onClick="@command('buscarSubCapitulo',valor=each)">
+                                                Seleccionar
+                                            </button>   
+                                        </listcell>
+                               
+                                
                                 
                                     </listitem>
                                 </template>
                             </listbox>
-                    
-                        </div>-->
-                    
+                        </div>
+                        
+                        
                     </div>
-                    
-                    
-                
-                </tabpanel>
+          <!--      </tabpanel>
                 
 
             </tabpanels>
             
-        </tabbox>
-    </hbox>
+        </tabbox>-->
+    </div>
 
 
 </zk>

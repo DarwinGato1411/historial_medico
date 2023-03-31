@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?link rel="stylesheet" type="text/css" href="/css/boostrap/bootstrap.css"?>  
+<?link rel="stylesheet" type="text/css" href="/css/style.css"?>
+<?link rel="stylesheet" type="text/css" href="/css/modales.css"?>
+<?init class="com.ec.seguridad.Autentificador"?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="/plantilla/plantilla.zul"?>
+<?link rel="icon" type="image/x-icon" href="/iconos/deckxel.ico"?>
+<zk   with="100%" >
+    <div self="@define(content)" apply="org.zkoss.bind.BindComposer" 
+         viewModel="@id('vm') @init('com.ec.controlador.PacienteController')" >
+                  
+        <div  class="">
+            <div  >
+                <div class="">                                    
+                    <button    
+                        iconSclass="z-icon-plus"
+                        onClick="@command('nuevoPaciente')"  
+                        class="fa fa-plus"
+                        tooltiptext="Buscar">
+                    </button>
+                </div>    
+                <listbox class="tabla" model="@load(vm.listaPaciente)" 
+                                     nonselectableTags="*"  mold="paging" pageSize="5"  >
+                               
+                    <custom-attributes org.zkoss.zul.listbox.rod="true"/>                       
+                    <listhead > 
+                        <listheader label="" >
+                            <textbox value="@bind(vm.buscarPaciente)" 
+                                                 class="form-control form-control-sm"
+                                                 tooltiptext="Buscar por Nombre o Cédula "                         
+                                                 placeholder="....."
+                                                 onOK="@command('buscarLike')"
+                                                 onChange="self.setValue(self.getValue().toUpperCase());" />
+                        </listheader>                                                                         
+                        <listheader label="Nombre" />                                                                         
+                        <listheader label="Correo" />                                                                         
+                        <listheader label="Telefono" />                                                                         
+                        <listheader label="" />                                                                         
+                        <listheader label="" />                                                                         
+                    </listhead>  
+                    <template name="model">                                                            
+                        <listitem  >
+                              
+                            <listcell zclass = "mycss-listcell" style="width:100%;">
+                                <textbox readonly="true"  style="font-size:12px ;background:#EBF5FB"
+                                                     class="form-control form-control-sm" 
+                                                     value="@bind(each.pacRuc)" />
+                            </listcell>
+                            <listcell zclass = "mycss-listcell" style="width:100%;">
+                                <textbox readonly="true"  style="font-size:12px ;background:#EBF5FB"
+                                                     class="form-control form-control-sm" 
+                                                     value="@bind(each.pacNombre)" />
+                            </listcell>
+                            <listcell zclass = "mycss-listcell" style="width:100%;">
+                                <textbox readonly="true"  style="font-size:12px ;background:#EBF5FB"
+                                                     class="form-control form-control-sm" 
+                                                     value="@bind(each.pacCorreo)" />
+                            </listcell>
+                            <listcell zclass = "mycss-listcell" style="width:100%;">
+                                <textbox readonly="true"  style="font-size:12px ;background:#EBF5FB"
+                                                     class="form-control form-control-sm" 
+                                                     value="@bind(each.pacTelefono)" />
+                            </listcell>
+                            <listcell zclass = "mycss-listcell" style="font-size:12px;background:#F8F9F9">                                  
+                                <button label="modificar"
+                                    iconSclass="z-icon-pencil"
+                                    onClick="@command('modificarPaciente',valor=each)" 
+                                    tooltiptext="Modificar">
+                                    Modificar
+                                </button>                                      
+                            </listcell>
+                                      
+                               
+                                
+                                
+                        </listitem>
+                    </template>
+                </listbox>
+            </div>
+                        
+                        
+        </div>
+    </div>
+
+
+</zk>

@@ -53,6 +53,13 @@ public class PerfilController {
     ServicioParametrizar servicioParametrizar = new ServicioParametrizar();
     private Parametrizar parametrizar = new Parametrizar();
 
+    public PerfilController() {
+        Session sess = Sessions.getCurrent();
+        credential = (UserCredential) sess.getAttribute(EnumSesion.userCredential.getNombre());
+        usuario = credential.getUsuarioSistema();
+        parametrizar = servicioParametrizar.findActivo();
+    }
+
     @AfterCompose
     public void afterCompose(@ExecutionArgParam("img") String recibido, @ContextParam(ContextType.VIEW) Component view) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException, JRException, IOException {
         Selectors.wireComponents(view, this, false);
@@ -118,13 +125,6 @@ public class PerfilController {
 
         byte[] bytes = bos.toByteArray();
         return bytes;
-    }
-
-    public PerfilController() {
-        Session sess = Sessions.getCurrent();
-        credential = (UserCredential) sess.getAttribute(EnumSesion.userCredential.getNombre());
-        usuario = credential.getUsuarioSistema();
-        parametrizar = servicioParametrizar.findActivo();
     }
 
     @Command

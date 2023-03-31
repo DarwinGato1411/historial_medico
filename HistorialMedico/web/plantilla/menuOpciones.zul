@@ -7,7 +7,7 @@
          <div class="nav ul">
    
             <div class="li">
-                <label class="m1" value="Historial paciente" id="bnHistorial"/>
+                <label class="m1" value="Historial paciente" id="btnPaciente"/>
             </div>
             <div class="li">
                 <label class="m1" value="Cotalogos" id="btnCatalogo"/>

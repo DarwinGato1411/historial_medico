@@ -20,8 +20,6 @@ import org.zkoss.zk.ui.select.annotation.Listen;
  */
 public class MenuOpciones extends SelectorComposer<Component> {
 
-   
-
     UserCredential credential = new UserCredential();
     private String acceso = "";
 
@@ -36,7 +34,7 @@ public class MenuOpciones extends SelectorComposer<Component> {
     public void doAfterCompose(Component comp) throws Exception {
         super.doAfterCompose(comp);
         if (credential.getUsuarioSistema() != null) {
-         
+
         }
     }
 
@@ -45,7 +43,16 @@ public class MenuOpciones extends SelectorComposer<Component> {
         Executions.sendRedirect("/medico/perfil.zul");
     }
 
-   
+    @Listen("onClick = #btnCatalogo")
+    public void btnCatalogo() {
+        Executions.sendRedirect("/medico/catalogo.zul");
+    }
+
+    @Listen("onClick = #btnPaciente")
+    public void btnPaciente() {
+        Executions.sendRedirect("/medico/paciente.zul");
+    }
+
     @Command
     public void nuevoProducto() {
 
@@ -55,7 +62,6 @@ public class MenuOpciones extends SelectorComposer<Component> {
 
     }
 
-   
     public UserCredential getCredential() {
         return credential;
     }

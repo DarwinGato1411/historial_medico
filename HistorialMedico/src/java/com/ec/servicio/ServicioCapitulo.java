@@ -5,6 +5,8 @@
 package com.ec.servicio;
 
 import com.ec.entidad.Paciente;
+import com.ec.entidad.Capitulo;
+import com.ec.entidad.VisitaMedica;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -14,7 +16,7 @@ import javax.persistence.Query;
  *
  * @author gato
  */
-public class ServicioPaciente {
+public class ServicioCapitulo {
 
     private EntityManager em;
 
@@ -26,7 +28,7 @@ public class ServicioPaciente {
         this.em = em;
     }
 
-    public void crear(Paciente usuario) {
+    public void crear(Capitulo usuario) {
 
         try {
             em = HelperPersistencia.getEMF();
@@ -34,14 +36,14 @@ public class ServicioPaciente {
             em.persist(usuario);
             em.getTransaction().commit();
         } catch (Exception e) {
-            System.out.println("Error en insertar usuario");
+            System.out.println("Error en insertar usuario "+e.getMessage());
         } finally {
             em.close();
         }
 
     }
 
-    public void eliminar(Paciente usuario) {
+    public void eliminar(Capitulo usuario) {
 
         try {
             em = HelperPersistencia.getEMF();
@@ -50,14 +52,14 @@ public class ServicioPaciente {
             em.getTransaction().commit();
 
         } catch (Exception e) {
-            System.out.println("Error en eliminar  usuario" + e);
+            System.out.println("Error en eliminar  usuario "+e.getMessage());
         } finally {
             em.close();
         }
 
     }
 
-    public void modificar(Paciente usuario) {
+    public void modificar(Capitulo usuario) {
 
         try {
             em = HelperPersistencia.getEMF();
@@ -65,28 +67,28 @@ public class ServicioPaciente {
             em.merge(usuario);
             em.getTransaction().commit();
         } catch (Exception e) {
-            System.out.println("Error en insertar usuario");
+            System.out.println("Error en insertar usuario "+e.getMessage());
         } finally {
             em.close();
         }
 
     }
 
-    public Paciente findPacientePorNombre(String valor) {
+    public Capitulo findForVisitaMedica(String capDetalle) {
 
-        List<Paciente> listaClientes = new ArrayList<Paciente>();
-        Paciente usuarioObtenido = new Paciente();
+        List<Capitulo> listaClientes = new ArrayList<Capitulo>();
+        Capitulo usuarioObtenido = new Capitulo();
         try {
             //Connection connection = em.unwrap(Connection.class);
 
             em = HelperPersistencia.getEMF();
             em.getTransaction().begin();
-            Query query = em.createQuery("SELECT u FROM Paciente u WHERE u.pacRuc LIKE :pacRuc OR u.pacNombre LIKE :pacNombre ORDER BY u.pacNombre ASC");
-            query.setParameter("pacRuc", "%" + valor + "%");
-            query.setParameter("pacNombre", "%" + valor + "%");
-            listaClientes = (List<Paciente>) query.getResultList();
+            Query query = em.createQuery("SELECT u FROM Capitulo u WHERE u.capDetalle=:capDetalle ORDER BY u.capDetalle ASC");
+            query.setParameter("capDetalle", capDetalle);
+//            query.setParameter("pacNombre", "%" + valor + "%");
+            listaClientes = (List<Capitulo>) query.getResultList();
             if (listaClientes.size() > 0) {
-                for (Paciente usuario : listaClientes) {
+                for (Capitulo usuario : listaClientes) {
                     usuarioObtenido = usuario;
                 }
             } else {
@@ -94,7 +96,7 @@ public class ServicioPaciente {
             }
             em.getTransaction().commit();
         } catch (Exception e) {
-            System.out.println("Error en lsa consulta usuario  FindPacientePorNombre  " + e);
+            System.out.println("Error en lsa consulta usuario  FindCapituloPorNombre  " + e.getMessage());
         } finally {
             em.close();
         }
@@ -102,16 +104,16 @@ public class ServicioPaciente {
         return usuarioObtenido;
     }
 
-    public List<Paciente> finAll(String nombre) {
-        List<Paciente> listaPacientes = new ArrayList<Paciente>();
+    public List<Capitulo> finAll() {
+        List<Capitulo> listaCapitulos = new ArrayList<Capitulo>();
         try {
             System.out.println("Entra a consultar usuarios");
             //Connection connection = em.unwrap(Connection.class);
             em = HelperPersistencia.getEMF();
             em.getTransaction().begin();
-            Query query = em.createQuery("SELECT u FROM Paciente u");
+            Query query = em.createQuery("SELECT u FROM Capitulo u");
 //            query.setParameter("usuNombre", "%" + nombre + "%");
-            listaPacientes = (List<Paciente>) query.getResultList();
+            listaCapitulos = (List<Capitulo>) query.getResultList();
             em.getTransaction().commit();
         } catch (Exception e) {
             System.out.println("Error usuarios finAll " + e.getMessage());
@@ -119,27 +121,6 @@ public class ServicioPaciente {
             em.close();
         }
 
-        return listaPacientes;
-    }
-
-    public List<Paciente> finLike(String nombre) {
-        List<Paciente> listaPacientes = new ArrayList<Paciente>();
-        try {
-            System.out.println("Entra a consultar usuarios");
-            //Connection connection = em.unwrap(Connection.class);
-            em = HelperPersistencia.getEMF();
-            em.getTransaction().begin();
-            Query query = em.createQuery("SELECT u FROM Paciente u WHERE u.pacNombre LIKE :pacNombre OR u.pacRuc LIKE :pacRuc");
-            query.setParameter("pacNombre", "%" + nombre + "%");
-            query.setParameter("pacRuc", "%" + nombre + "%");
-            listaPacientes = (List<Paciente>) query.getResultList();
-            em.getTransaction().commit();
-        } catch (Exception e) {
-            System.out.println("Error usuarios finAll " + e.getMessage());
-        } finally {
-            em.close();
-        }
-
-        return listaPacientes;
+        return listaCapitulos;
     }
 }
