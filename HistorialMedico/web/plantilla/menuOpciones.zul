@@ -1,0 +1,25 @@
+<?init class="com.ec.seguridad.Autentificador"?>
+
+<zk  >
+ 
+    <div class="" viewModel="@id('vm')" apply="com.ec.controlador.MenuOpciones" >
+        
+         <div class="nav ul">
+   
+            <div class="li">
+                <label class="m1" value="Historial paciente" id="bnHistorial"/>
+            </div>
+            <div class="li">
+                <label class="m1" value="Cotalogos" id="btnCatalogo"/>
+            </div>
+            <div class="li">
+                <label class="m1" value="Perfil" id="btnPerfil"/>
+            </div>
+
+        </div>   
+
+       
+    </div>  
+     
+                       
+</zk>

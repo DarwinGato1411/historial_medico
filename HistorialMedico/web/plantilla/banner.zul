@@ -1,0 +1,35 @@
+<zk>  
+    <div class="fondoBanner"  id="loginWin"  width="100%"
+         apply="com.ec.controlador.LogoutController" style="background:black;">
+
+        <div class="row" >
+           
+            
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6  " align="start">
+
+
+                <label value="Candidato " style="  color:white;font-size:20px" />
+
+
+            </div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6  " align="end">
+                <label value="Usuario: " 
+                       if="${not sessionScope.userCredential.anonymous}" 
+                       style=" border-radius: 100%;color:white; background:transparent; font-size:20px" />
+                <label value="${sessionScope.usuario.nombreUsuario}" 
+                       style=" border-radius: 100%;color:white; background:transparent; font-size:20px"
+                       if="${not sessionScope.userCredential.anonymous}" />
+     
+                <a sclass="logout labelLogout" id="logout" >  
+                    <label  value="Salir " 
+                            if="${not sessionScope.userCredential.anonymous}" 
+                            sclass="labelLogout"/> 
+                    <image src="/iconos/logout-24.png"  />  
+                       
+                </a>
+               
+            </div>           
+        </div>
+        
+    </div>
+</zk>
