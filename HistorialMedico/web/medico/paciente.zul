@@ -36,7 +36,6 @@
                         <listheader label="Correo" />                                                                         
                         <listheader label="Telefono" />                                                                         
                         <listheader label="" />                                                                         
-                        <listheader label="" />                                                                         
                     </listhead>  
                     <template name="model">                                                            
                         <listitem  >

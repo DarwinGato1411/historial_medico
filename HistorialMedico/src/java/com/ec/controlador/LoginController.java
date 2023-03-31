@@ -50,7 +50,7 @@ public class LoginController extends SelectorComposer<Component> {
             UserCredential cre = (UserCredential) sess.getAttribute(EnumSesion.userCredential.getNombre());
             System.out.println("ascacsa" + " " + cre.getNivelUsuario().intValue() + " " + GrupoUsuarioEnum.CANDIDATO.getCodigo());
 
-            Executions.sendRedirect("/medico/historial.zul");
+            Executions.sendRedirect("/medico/paciente.zul");
 //            if (cre.getNivelUsuario().intValue() == GrupoUsuarioEnum.CANDIDATO.getCodigo()) {
 //                Executions.sendRedirect("/candidato/Historial.zul");
 //
