@@ -17,7 +17,7 @@
                     <div class="op2 op opSelect">Candidato</div>
                     <div class="op1 op">Empresa</div>
                 </div>
-                <div style="display:none;" class="login empresa" >
+                <div  class="login empresa" >
                 
                     <image src="imagenes/empresa.png"/>
                     <span  class="title">Empresa</span>
@@ -51,44 +51,9 @@
                     </div>
                     
                     <a class="btn" style="margin-top:20px;color:#fff" id="buttonEntrar">Iniciar Sesión</a>
-                    <a class="btn" style="color:#fff"  id="btnRegistraEmp">Registro</a>
+                    <!--<a class="btn" style="color:#fff"  id="btnRegistraEmp">Registro</a>-->
                 </div>
-                <div  class="login candidato" >
-                    <image src="imagenes/candidato.png"/>
-                    <span  class="title">Candidato</span>
-                    <div class="input-div one">
-                        <div class="i">
-                            <button iconSclass="z-icon-user" />   
-                        </div>
-                        <div class="div">
-                            <span>Usuario</span>
-                            <textbox  
-                                class="input" 
-                                id="account1"
-                                onCreate="self.focus()"/>
-                        </div>
-
-                    </div>
-                    <div class="input-div pass">
-                        <div class="i">
-                            <button iconSclass="z-icon-key" />                       
-                        </div>
-                         <div class="div">
-                            <span>Contraseña</span>
-                            <textbox 
-                                type="password" 
-                                class="input" 
-                                id="password1"
-                            />
-                        </div>
-                        <div class="i">
-                            <button iconSclass="z-icon-eye" />                       
-                        </div>
-                    </div>
-                    
-                    <a class="btn" style="margin-top:20px; color:#fff" id="buttonEntrar1">Iniciar Sesión</a>
-                    <a class="btn" style="color:#fff" id="btnRegistraCan">Registro</a>
-                </div>
+               
             </div>
         </div>
     </div>

@@ -41,7 +41,7 @@ public class LoginController extends SelectorComposer<Component> {
     }
 
 //    @Listen("onClick=#buttonEntrar; onOK=#loginWin")
-    @Listen("onClick=#buttonEntrar")
+    @Listen("onClick=#buttonEntrar;onOK=#loginWin")
     public void doLogin() {
 
         AutentificadorLogeo servicioAuth = new AutentificadorLogeo();
