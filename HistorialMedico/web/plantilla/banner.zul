@@ -1,17 +1,8 @@
 <zk>  
     <div class="fondoBanner"  id="loginWin"  width="100%"
-         apply="com.ec.controlador.LogoutController" style="background:black;">
+         apply="com.ec.controlador.LogoutController">
 
-        <div class="row" >
-           
-            
-            <div class="col-12 col-sm-12 col-md-6 col-lg-6  " align="start">
-
-
-                <label value="Candidato " style="  color:white;font-size:20px" />
-
-
-            </div>
+        <div class="" >
             <div class="col-12 col-sm-12 col-md-6 col-lg-6  " align="end">
                 <label value="Usuario: " 
                        if="${not sessionScope.userCredential.anonymous}" 

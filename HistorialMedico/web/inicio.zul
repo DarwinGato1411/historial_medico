@@ -6,21 +6,22 @@
 <?page title="Sistema integrado" contentType="text/html;charset=UTF-8"?>
 
 <zk >
-    <image class="wave" src="imagenes/wave.png"/>
+    <image class="wave1" src="imagenes/wave.png"/>
+    <image class="wave2" src="imagenes/wave.png"/>
     <div class="container" id="loginWin" apply="com.ec.controlador.LoginController"> 
         <div class="img">
-            <image src="imagenes/job.png"/>
+            <image src="imagenes/medico.png"/>
         </div>
         <div class="login-content">
             <div class="">
                 <div class="btnOpt">
-                    <div class="op2 op opSelect">Candidato</div>
-                    <div class="op1 op">Empresa</div>
+                    <div class="op2 op opSelect">Historial Médico</div>
+                    <!--<div class="op1 op">Empresa</div>-->
                 </div>
                 <div  class="login empresa" >
                 
-                    <image src="imagenes/empresa.png"/>
-                    <span  class="title">Empresa</span>
+                    <image src="imagenes/medico1.png"/>
+                    <!--<span  class="title">Empresa</span>-->
                     <div class="input-div one">
                         <div class="i">
                             <button iconSclass="z-icon-user" />  

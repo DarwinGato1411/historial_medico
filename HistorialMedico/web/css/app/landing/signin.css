@@ -18,12 +18,22 @@ body{
     overflow: hidden;
 }
 
-.wave{
+.wave1{
     position: fixed;
     bottom: 0;
     left: 0;
     height: 100%;
     z-index: -1;
+}
+
+.wave2{
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    z-index: -1;
+    transform: scaleY(-1) scaleX(-1);
+    
 }
 
 .container{
@@ -266,9 +276,7 @@ a:hover{
 }
 
 .login-content .btnOpt{
-
     display: grid;
-    grid-template-columns: 50% 50%;
 }
 
 .login-content .btnOpt .op{
@@ -280,12 +288,12 @@ a:hover{
 
 
 .login-content .btnOpt .op1{
-    border-radius:0 10px 10px 0;
+    border-radius:10px;
     transition: .5s;
 }
 
 .login-content .btnOpt .op2{
-    border-radius:10px 0 0 10px;
+    border-radius:10px;
     transition: .5s;
 }
 

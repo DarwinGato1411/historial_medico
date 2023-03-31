@@ -2940,6 +2940,7 @@ input, button, select, textarea {
 }
 .nav{
     width: 100%;
+   
 }
 .nav > .li {
 
@@ -2955,8 +2956,10 @@ input, button, select, textarea {
 }
 
 .nav .li .m1{
-    background: #343a40;
-    color:#fff;
+    
+    color:#2d7fd2;
+    background: #eee;
+   
 }
 
 
@@ -3000,6 +3003,7 @@ input, button, select, textarea {
     display: flex;
     flex-direction: row;
     width: 100%;
+    
 }
 
 .mainContainer{
@@ -3011,11 +3015,12 @@ input, button, select, textarea {
 .nav{
     display: flex;
     flex-direction: column;
-    background-color: #343a40;
+    background-color: white;
     width: 200px;
     position: fixed;
     height: 100vh;
     z-index: 2;
+    background: #eee;
 }
 
 .contenedorEmpresa {
@@ -3284,4 +3289,9 @@ input, button, select, textarea {
     .contenedorTest{
         grid-template-columns:repeat(3,1fr);
     }
+}
+
+.fondoBanner{
+      background: #2d7fd2;
+      padding: 10px;
 }
