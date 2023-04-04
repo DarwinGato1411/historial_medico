@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reciboCobro" language="groovy" pageWidth="330" pageHeight="396" columnWidth="290" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.239669421487604"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="numeracion" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select pa.*,sp.*,tar.*,cb.*
+, (select pr.parr_descripcion from parroquia pr where pr.id_parroquia=sp.id_parroquia)as par_descripcion,
+(select rc.rec_descripcion from recinto rc where rc.id_recinto=sp.id_recinto)as rec_descripcion,
+(select public.f_numerosletras(cb.cob_valor)) as tarifaletras
+from parametrizar pa,
+ solicitud_permiso sp, parroquia pr, recinto rc, tarifa tar, inspeccion insp, permiso per,cobro cb
+where pa.cod_parametrizar=sp.id_parametrizar
+and tar.id_tarifa=sp.id_tarifa
+and sp.id_solcitud_per=insp.id_solcitud_per
+and insp.id_inspeccion=per.id_inspeccion
+and per.id_permiso=cb.id_permiso
+and sp.solp_numeracion=$P{numeracion} limit 1;]]>
+	</queryString>
+	<field name="cod_parametrizar" class="java.lang.Integer"/>
+	<field name="par_contacto_empresa" class="java.lang.String"/>
+	<field name="par_empresa" class="java.lang.String"/>
+	<field name="par_ruc_empresa" class="java.lang.String"/>
+	<field name="par_codigo_iva" class="java.lang.String"/>
+	<field name="par_iva_actual" class="java.math.BigDecimal"/>
+	<field name="par_caduca" class="java.sql.Date"/>
+	<field name="par_host" class="java.lang.String"/>
+	<field name="par_port" class="java.lang.String"/>
+	<field name="par_protocol" class="java.lang.String"/>
+	<field name="par_usuario_smpt" class="java.lang.String"/>
+	<field name="par_password" class="java.lang.String"/>
+	<field name="par_imp_automatico" class="java.lang.Boolean"/>
+	<field name="par_nombre_impresora" class="java.lang.String"/>
+	<field name="par_ciudad" class="java.lang.String"/>
+	<field name="par_correo_defecto" class="java.lang.String"/>
+	<field name="isprincipal" class="java.lang.Boolean"/>
+	<field name="par_disco" class="java.lang.String"/>
+	<field name="par_carpeta" class="java.lang.String"/>
+	<field name="par_folder_adicional" class="java.lang.String"/>
+	<field name="par_path_logo" class="java.lang.String"/>
+	<field name="par_firma_uno" class="java.lang.String"/>
+	<field name="par_respon_firma_uno" class="java.lang.String"/>
+	<field name="par_firma_dos" class="java.lang.String"/>
+	<field name="par_respon_firma_dos" class="java.lang.String"/>
+	<field name="id_solcitud_per" class="java.lang.Integer"/>
+	<field name="id_estado_documento" class="java.lang.Integer"/>
+	<field name="id_usuario" class="java.lang.Integer"/>
+	<field name="solp_descripcion" class="java.lang.String"/>
+	<field name="solp_fecha" class="java.sql.Timestamp"/>
+	<field name="sol_num_cedula" class="java.lang.String"/>
+	<field name="solp_nombre_sol" class="java.lang.String"/>
+	<field name="solp_apellido_sol" class="java.lang.String"/>
+	<field name="solp_direccion" class="java.lang.String"/>
+	<field name="solp_referencia" class="java.lang.String"/>
+	<field name="solp_path_fotografia" class="java.lang.String"/>
+	<field name="solp_observacion" class="java.lang.String"/>
+	<field name="solp_path_ruc" class="java.lang.String"/>
+	<field name="solp_path_cedula" class="java.lang.String"/>
+	<field name="solp_pago_impuesto" class="java.lang.String"/>
+	<field name="solp_actividad" class="java.lang.String"/>
+	<field name="solp_barrio_urbanizacion" class="java.lang.String"/>
+	<field name="solp_calle" class="java.lang.String"/>
+	<field name="solp_numero" class="java.lang.String"/>
+	<field name="solp_interseccion" class="java.lang.String"/>
+	<field name="solp_edificio" class="java.lang.String"/>
+	<field name="solp_piso" class="java.lang.Integer"/>
+	<field name="solp_departamento" class="java.lang.String"/>
+	<field name="solp_persona_contacto" class="java.lang.String"/>
+	<field name="solp_telefono_contacto" class="java.lang.String"/>
+	<field name="solp_numero_ocupantes" class="java.lang.Integer"/>
+	<field name="solp_area_construccion" class="java.math.BigDecimal"/>
+	<field name="solp_nombre_negocio" class="java.lang.String"/>
+	<field name="id_parroquia" class="java.lang.Integer"/>
+	<field name="solp_telefono" class="java.lang.String"/>
+	<field name="solp_archivo_ruc" class="java.lang.String"/>
+	<field name="solp_archivo_impuesto" class="java.lang.String"/>
+	<field name="solp_path_croquis" class="java.lang.String"/>
+	<field name="solp_archivo_croquis" class="java.lang.String"/>
+	<field name="solp_lote" class="java.lang.String"/>
+	<field name="solp_recinto" class="java.lang.String"/>
+	<field name="sol_path_solicitud" class="java.lang.String"/>
+	<field name="sol_nombre_solicitud" class="java.lang.String"/>
+	<field name="solp_num_calle" class="java.lang.String"/>
+	<field name="solp_nota" class="java.lang.String"/>
+	<field name="solp_fecha_reinspeccion" class="java.sql.Timestamp"/>
+	<field name="id_tipo_solicitud" class="java.lang.Integer"/>
+	<field name="id_recinto" class="java.lang.Integer"/>
+	<field name="id_parametrizar" class="java.lang.Integer"/>
+	<field name="solp_esinspeccion" class="java.lang.Boolean"/>
+	<field name="solp_esplanos" class="java.lang.Boolean"/>
+	<field name="solp_esotro" class="java.lang.Boolean"/>
+	<field name="solp_nombre_local" class="java.lang.String"/>
+	<field name="solp_telefono_inspeccion" class="java.lang.String"/>
+	<field name="solp_proyecto" class="java.lang.String"/>
+	<field name="solp_telefono_proyecto" class="java.lang.String"/>
+	<field name="solp_otro" class="java.lang.String"/>
+	<field name="solp_numeracion" class="java.lang.Integer"/>
+	<field name="id_tarifa" class="java.lang.Integer"/>
+	<field name="id_bombero" class="java.lang.Integer"/>
+	<field name="solp_esvehiculo" class="java.lang.Boolean"/>
+	<field name="solp_anio" class="java.lang.Integer"/>
+	<field name="solp_capacidad" class="java.lang.String"/>
+	<field name="solp_placa" class="java.lang.String"/>
+	<field name="solp_color" class="java.lang.String"/>
+	<field name="solp_marca" class="java.lang.String"/>
+	<field name="solp_modelo" class="java.lang.String"/>
+	<field name="solp_caduca" class="java.sql.Date"/>
+	<field name="solp_impuesto_predial" class="java.math.BigDecimal"/>
+	<field name="solp_impuesto_predial_valor" class="java.math.BigDecimal"/>
+	<field name="solp_sube_archivo_prevencion" class="java.lang.Boolean"/>
+	<field name="solp_forma_pago" class="java.lang.String"/>
+	<field name="solp_valor_adicional" class="java.math.BigDecimal"/>
+	<field name="solp_det_valor_adicional" class="java.lang.String"/>
+	<field name="solp_obs_actualiza_datos" class="java.lang.String"/>
+	<field name="solp_sube_archivo_recaudacion" class="java.lang.Boolean"/>
+	<field name="solp_det_valor_construccion" class="java.math.BigDecimal"/>
+	<field name="tar_codigo" class="java.lang.String"/>
+	<field name="tar_descripcion" class="java.lang.String"/>
+	<field name="tar_valor" class="java.math.BigDecimal"/>
+	<field name="tar_estado" class="java.lang.Boolean"/>
+	<field name="id_tipo_tarifa" class="java.lang.Integer"/>
+	<field name="tar_valor_text" class="java.lang.String"/>
+	<field name="tar_valor_extra" class="java.math.BigDecimal"/>
+	<field name="id_cobro" class="java.lang.Integer"/>
+	<field name="id_permiso" class="java.lang.Integer"/>
+	<field name="cob_valor" class="java.math.BigDecimal"/>
+	<field name="cob_estado" class="java.lang.Boolean"/>
+	<field name="cob_detalle" class="java.lang.String"/>
+	<field name="cob_fecha" class="java.sql.Date"/>
+	<field name="cob_cantidad" class="java.math.BigDecimal"/>
+	<field name="cob_impuesto_predial" class="java.math.BigDecimal"/>
+	<field name="cob_impuesto_predial_cobro" class="java.math.BigDecimal"/>
+	<field name="cob_forma_pago" class="java.lang.String"/>
+	<field name="cob_valor_adicional" class="java.math.BigDecimal"/>
+	<field name="cob_valor_construccion" class="java.math.BigDecimal"/>
+	<field name="cob_tipo_cobro" class="java.lang.String"/>
+	<field name="par_descripcion" class="java.lang.String"/>
+	<field name="rec_descripcion" class="java.lang.String"/>
+	<field name="tarifaletras" class="java.lang.String"/>
+	<detail>
+		<band height="243" splitType="Stretch">
+			<textField pattern="EEEEE dd MMMMM yyyy" isBlankWhenNull="true">
+				<reportElement x="117" y="58" width="173" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.util.Date"><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="8" y="112" width="282" height="14">
+					<printWhenExpression><![CDATA[$F{solp_nombre_negocio}]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{solp_nombre_negocio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="8" y="98" width="282" height="14"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{solp_nombre_sol}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="8" y="126" width="282" height="14"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{tarifaletras} +" /100 DOLARES"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="161" y="78" width="129" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{cob_valor}]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy">
+				<reportElement x="229" y="158" width="52" height="16"/>
+				<textElement/>
+				<textFieldExpression class="java.util.Date"><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="174" width="281" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{solp_det_valor_adicional}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="158" width="229" height="16"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{id_tipo_solicitud}==2?"COBRO POR PERMISO DE CONSTRUCCION":"PERMISO DE FUNCIONAMIENTO PARA EL AÑO"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

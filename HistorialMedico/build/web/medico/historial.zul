@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?link rel="stylesheet" type="text/css" href="/css/boostrap/bootstrap.css"?>  
+<?link rel="stylesheet" type="text/css" href="/css/style.css"?>
+<?link rel="stylesheet" type="text/css" href="/css/modales.css"?>
+<?init class="com.ec.seguridad.Autentificador"?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="/plantilla/plantilla.zul"?>
+<?link rel="icon" type="image/x-icon" href="/iconos/deckxel.ico"?>
+<zk   with="100%" >
+    <div self="@define(content)" apply="org.zkoss.bind.BindComposer" 
+          viewModel="@id('vm') @init('com.ec.controlador.HIstorial')" >
+       <!-- <tabbox id="tboxPrincipal"  width="100%">
+            <tabs >
+                <tab label="Armar Evaluacion " sclass="menutabs" /> 
+            </tabs>
+            <tabpanels >
+               
+                <tabpanel  height="98%" width="99%"  > -->                   
+                    <div  class="contenedorTest">
+                        <div  class="containerEva">
+                            <div class="">                                    
+                                <button    
+                                          iconSclass="z-icon-plus"
+                                          onClick="@command('nuevoCapitulo')"  
+                                          class="fa fa-plus"
+                                    tooltiptext="Buscar"></button>
+                            </div>    
+                            <listbox class="tabla" model="@load(vm.listaCapitulo)" 
+                                     nonselectableTags="*"  mold="paging" pageSize="5"  >
+                               
+                                <custom-attributes org.zkoss.zul.listbox.rod="true"/>                       
+                                <listhead class="tblCabecera"> 
+                                    <listheader label="Capitulo" />                                                                         
+                                </listhead>  
+                                <template name="model">                                                            
+                                    <listitem class="tblCuerpo" >
+                              
+                                        <listcell zclass = "mycss-listcell" style="width:100%;">
+                                            <textbox readonly="true"  style="font-size:12px ;background:#EBF5FB"
+                                                     class="form-control form-control-sm" 
+                                                     value="@bind(each.capDetalle)" />
+                                        </listcell>
+                                        <listcell zclass = "mycss-listcell" style="font-size:12px;background:#F8F9F9">                                  
+                                            <button 
+                                                iconSclass="z-icon-pencil"
+                                                onClick="@command('modificarCapitulo',valor=each)" 
+                                                tooltiptext="Modificar">
+                                                Modificar
+                                            </button>                                      
+                                        </listcell>
+                                        <listcell zclass = "mycss-listcell" style="font-size:12px;background:#F8F9F9">     
+                                            <button 
+                                                iconSclass="z-icon-hand-o-up" 
+                                                tooltiptext="Modificar"
+                                                onClick="@command('buscarSubCapitulo',valor=each)">
+                                                Seleccionar
+                                            </button>   
+                                        </listcell>
+                               
+                                
+                                
+                                    </listitem>
+                                </template>
+                            </listbox>
+                        </div>
+                        
+                        
+                    </div>
+          <!--      </tabpanel>
+                
+
+            </tabpanels>
+            
+        </tabbox>-->
+    </div>
+
+
+</zk>

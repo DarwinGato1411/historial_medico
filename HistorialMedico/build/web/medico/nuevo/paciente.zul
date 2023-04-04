@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window  id="wCapitulo"  position="center" closable="true"  
+         apply="org.zkoss.bind.BindComposer" 
+         viewModel="@id('vm') @init('com.ec.controlador.NuevoPaciente')"
+         class="modalTest modalAll">
+    
+    <caption label="Test" style="font-weight:bold" class="titulo"/> 
+    
+
+    <div class="container_modal">
+
+        <div class="bodyModal">
+            <div class="container_row_input">
+              
+                <div class="wrapper_input_mod">
+                    <span>Cédula </span>
+                    <div class="wrapper_input_text">
+                        
+                        <textbox  
+                            maxlength="13"    
+                            onChange="self.setValue(self.getValue().toUpperCase());"  
+                            value="@bind(vm.entidad.pacRuc)" 
+                            class="input_text" />
+                    </div>
+                </div>
+                <div class="wrapper_input_mod">
+                    <span>Nombre: </span>
+                    <div class="wrapper_input_text">
+                        
+                        <textbox  
+                            maxlength="100"    
+                            onChange="self.setValue(self.getValue().toUpperCase());"  
+                            value="@bind(vm.entidad.pacNombre)" 
+                            class="input_text" />
+                    </div>
+                </div>
+                <div class="wrapper_input_mod">
+                    <span>Domicilio: </span>
+                    <div class="wrapper_input_text">
+                        
+                        <textbox  
+                            maxlength="100"    
+                            onChange="self.setValue(self.getValue().toUpperCase());"  
+                            value="@bind(vm.entidad.pacDomicilio)" 
+                            class="input_text" />
+                    </div>
+                </div>
+                <div class="wrapper_input_mod">
+                    <span>Correo: </span>
+                    <div class="wrapper_input_text">
+                        
+                        <textbox  
+                            maxlength="100"    
+                            value="@bind(vm.entidad.pacCorreo)" 
+                            class="input_text" />
+                    </div>
+                </div>
+             
+                <div class="wrapper_input_mod">
+                    <span>Teléfono: </span>
+                    <div class="wrapper_input_text">
+                        
+                        <textbox  
+                            maxlength="100"    
+                            onChange="self.setValue(self.getValue().toUpperCase());"  
+                            value="@bind(vm.entidad.pacTelefono)" 
+                            class="input_text" />
+                    </div>
+                </div>
+                <div class="wrapper_input_mod">
+                    <span>Aseguradora: </span>
+                    <div class="wrapper_input_text">
+                        
+                        <textbox  
+                            maxlength="100"    
+                            onChange="self.setValue(self.getValue().toUpperCase());"  
+                            value="@bind(vm.entidad.pacAseguradora)" 
+                            class="input_text" />
+                    </div>
+                </div>
+                
+
+            </div>
+            
+            <div style="display:flex;justify-content:flex-end;">
+                <a class="btn_modal"  onClick="@command('guardar')">
+                    Guardar
+                </a>
+            </div>
+        </div>     
+    </div>     
+                  
+
+</window>

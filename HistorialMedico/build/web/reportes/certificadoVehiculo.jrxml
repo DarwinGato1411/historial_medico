@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="certificadoVehiculo" language="groovy" pageWidth="595" pageHeight="800" orientation="Landscape" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="11"/>
+	<parameter name="numeracion" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select pa.*,sp.*,per.per_numero, per.per_numero_text
+, (select pr.parr_descripcion from parroquia pr where pr.id_parroquia=sp.id_parroquia)as par_descripcion,
+(select rc.rec_descripcion from recinto rc where rc.id_recinto=sp.id_recinto)as rec_descripcion
+from parametrizar pa,
+ solicitud_permiso sp, parroquia pr, recinto rc, permiso per, inspeccion ins
+where pa.cod_parametrizar=sp.id_parametrizar and
+sp.id_solcitud_per=ins.id_solcitud_per
+and ins.id_inspeccion=per.id_inspeccion
+and sp.solp_numeracion=$P{numeracion} limit 1]]>
+	</queryString>
+	<field name="cod_parametrizar" class="java.lang.Integer"/>
+	<field name="par_contacto_empresa" class="java.lang.String"/>
+	<field name="par_empresa" class="java.lang.String"/>
+	<field name="par_ruc_empresa" class="java.lang.String"/>
+	<field name="par_codigo_iva" class="java.lang.String"/>
+	<field name="par_iva_actual" class="java.math.BigDecimal"/>
+	<field name="par_caduca" class="java.sql.Date"/>
+	<field name="par_host" class="java.lang.String"/>
+	<field name="par_port" class="java.lang.String"/>
+	<field name="par_protocol" class="java.lang.String"/>
+	<field name="par_usuario_smpt" class="java.lang.String"/>
+	<field name="par_password" class="java.lang.String"/>
+	<field name="par_imp_automatico" class="java.lang.Boolean"/>
+	<field name="par_nombre_impresora" class="java.lang.String"/>
+	<field name="par_ciudad" class="java.lang.String"/>
+	<field name="par_correo_defecto" class="java.lang.String"/>
+	<field name="isprincipal" class="java.lang.Boolean"/>
+	<field name="par_disco" class="java.lang.String"/>
+	<field name="par_carpeta" class="java.lang.String"/>
+	<field name="par_folder_adicional" class="java.lang.String"/>
+	<field name="par_path_logo" class="java.lang.String"/>
+	<field name="par_firma_uno" class="java.lang.String"/>
+	<field name="par_respon_firma_uno" class="java.lang.String"/>
+	<field name="par_firma_dos" class="java.lang.String"/>
+	<field name="par_respon_firma_dos" class="java.lang.String"/>
+	<field name="id_solcitud_per" class="java.lang.Integer"/>
+	<field name="id_estado_documento" class="java.lang.Integer"/>
+	<field name="id_usuario" class="java.lang.Integer"/>
+	<field name="solp_descripcion" class="java.lang.String"/>
+	<field name="solp_fecha" class="java.sql.Timestamp"/>
+	<field name="sol_num_cedula" class="java.lang.String"/>
+	<field name="solp_nombre_sol" class="java.lang.String"/>
+	<field name="solp_apellido_sol" class="java.lang.String"/>
+	<field name="solp_direccion" class="java.lang.String"/>
+	<field name="solp_referencia" class="java.lang.String"/>
+	<field name="solp_path_fotografia" class="java.lang.String"/>
+	<field name="solp_observacion" class="java.lang.String"/>
+	<field name="solp_path_ruc" class="java.lang.String"/>
+	<field name="solp_path_cedula" class="java.lang.String"/>
+	<field name="solp_pago_impuesto" class="java.lang.String"/>
+	<field name="solp_actividad" class="java.lang.String"/>
+	<field name="solp_barrio_urbanizacion" class="java.lang.String"/>
+	<field name="solp_calle" class="java.lang.String"/>
+	<field name="solp_numero" class="java.lang.String"/>
+	<field name="solp_interseccion" class="java.lang.String"/>
+	<field name="solp_edificio" class="java.lang.String"/>
+	<field name="solp_piso" class="java.lang.Integer"/>
+	<field name="solp_departamento" class="java.lang.String"/>
+	<field name="solp_persona_contacto" class="java.lang.String"/>
+	<field name="solp_telefono_contacto" class="java.lang.String"/>
+	<field name="solp_numero_ocupantes" class="java.lang.Integer"/>
+	<field name="solp_area_construccion" class="java.math.BigDecimal"/>
+	<field name="solp_nombre_negocio" class="java.lang.String"/>
+	<field name="id_parroquia" class="java.lang.Integer"/>
+	<field name="solp_telefono" class="java.lang.String"/>
+	<field name="solp_archivo_ruc" class="java.lang.String"/>
+	<field name="solp_archivo_impuesto" class="java.lang.String"/>
+	<field name="solp_path_croquis" class="java.lang.String"/>
+	<field name="solp_archivo_croquis" class="java.lang.String"/>
+	<field name="solp_lote" class="java.lang.String"/>
+	<field name="solp_recinto" class="java.lang.String"/>
+	<field name="sol_path_solicitud" class="java.lang.String"/>
+	<field name="sol_nombre_solicitud" class="java.lang.String"/>
+	<field name="solp_num_calle" class="java.lang.String"/>
+	<field name="solp_nota" class="java.lang.String"/>
+	<field name="solp_fecha_reinspeccion" class="java.sql.Timestamp"/>
+	<field name="id_tipo_solicitud" class="java.lang.Integer"/>
+	<field name="id_recinto" class="java.lang.Integer"/>
+	<field name="id_parametrizar" class="java.lang.Integer"/>
+	<field name="solp_esinspeccion" class="java.lang.Boolean"/>
+	<field name="solp_esplanos" class="java.lang.Boolean"/>
+	<field name="solp_esotro" class="java.lang.Boolean"/>
+	<field name="solp_nombre_local" class="java.lang.String"/>
+	<field name="solp_telefono_inspeccion" class="java.lang.String"/>
+	<field name="solp_proyecto" class="java.lang.String"/>
+	<field name="solp_telefono_proyecto" class="java.lang.String"/>
+	<field name="solp_otro" class="java.lang.String"/>
+	<field name="solp_numeracion" class="java.lang.Integer"/>
+	<field name="id_tarifa" class="java.lang.Integer"/>
+	<field name="id_bombero" class="java.lang.Integer"/>
+	<field name="solp_esvehiculo" class="java.lang.Boolean"/>
+	<field name="solp_anio" class="java.lang.Integer"/>
+	<field name="solp_capacidad" class="java.lang.String"/>
+	<field name="solp_placa" class="java.lang.String"/>
+	<field name="solp_color" class="java.lang.String"/>
+	<field name="solp_marca" class="java.lang.String"/>
+	<field name="solp_modelo" class="java.lang.String"/>
+	<field name="solp_caduca" class="java.sql.Date"/>
+	<field name="per_numero" class="java.lang.Integer"/>
+	<field name="per_numero_text" class="java.lang.String"/>
+	<field name="par_descripcion" class="java.lang.String"/>
+	<field name="rec_descripcion" class="java.lang.String"/>
+	<title>
+		<band height="79" splitType="Stretch">
+			<image onErrorType="Blank">
+				<reportElement x="23" y="16" width="100" height="50"/>
+				<imageExpression class="java.lang.String"><![CDATA[$F{par_path_logo}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement positionType="Float" x="134" y="0" width="411" height="40" forecolor="#CC0000"/>
+				<textElement textAlignment="Center">
+					<font size="30" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CUERPO DE BOMBEROS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="134" y="40" width="411" height="39" forecolor="#0000FF"/>
+				<textElement textAlignment="Center">
+					<font size="20" isBold="false"/>
+				</textElement>
+				<text><![CDATA["DE PEDRO VICENTE MALDONADO"]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="49" splitType="Stretch">
+			<staticText>
+				<reportElement positionType="Float" x="11" y="6" width="219" height="37" forecolor="#000099"/>
+				<textElement textAlignment="Center">
+					<font size="18" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[VEHÍCULO AUTRIZADO]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Transparent" x="289" y="6" width="175" height="37" forecolor="#CC0000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="18" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{per_numero_text}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="356" splitType="Stretch">
+			<line>
+				<reportElement x="82" y="21" width="100" height="1" forecolor="#0000FF"/>
+			</line>
+			<staticText>
+				<reportElement positionType="Float" x="62" y="70" width="136" height="16" forecolor="#000099"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Nombre o Razón Social]]></text>
+			</staticText>
+			<line>
+				<reportElement x="22" y="69" width="240" height="1" forecolor="#0000FF"/>
+			</line>
+			<staticText>
+				<reportElement positionType="Float" x="373" y="70" width="136" height="16" forecolor="#000099"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[C.I. / RUC]]></text>
+			</staticText>
+			<line>
+				<reportElement x="348" y="68" width="197" height="1" forecolor="#0000FF"/>
+			</line>
+			<staticText>
+				<reportElement positionType="Float" x="11" y="102" width="170" height="16" forecolor="#000099"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[MATRICULA DE VEHICULO]]></text>
+			</staticText>
+			<line>
+				<reportElement x="181" y="117" width="108" height="1" forecolor="#0000FF"/>
+			</line>
+			<staticText>
+				<reportElement positionType="Float" x="181" y="118" width="108" height="16" forecolor="#000099"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[CAPACIDAD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="313" y="118" width="108" height="16" forecolor="#000099"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[PLACAS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="437" y="118" width="108" height="16" forecolor="#000099"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[MODELO]]></text>
+			</staticText>
+			<line>
+				<reportElement x="313" y="118" width="108" height="1" forecolor="#0000FF"/>
+			</line>
+			<line>
+				<reportElement x="437" y="119" width="108" height="1" forecolor="#0000FF"/>
+			</line>
+			<staticText>
+				<reportElement positionType="Float" x="62" y="153" width="100" height="16" forecolor="#000099"/>
+				<textElement>
+					<font size="12" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Para trámites de:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="181" y="168" width="108" height="1" forecolor="#0000FF"/>
+			</line>
+			<staticText>
+				<reportElement positionType="Float" x="181" y="169" width="108" height="16" forecolor="#000099"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Marca]]></text>
+			</staticText>
+			<line>
+				<reportElement x="313" y="169" width="108" height="1" forecolor="#0000FF"/>
+			</line>
+			<line>
+				<reportElement x="437" y="170" width="108" height="1" forecolor="#0000FF"/>
+			</line>
+			<staticText>
+				<reportElement positionType="Float" x="313" y="171" width="108" height="16" forecolor="#000099"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Color]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="437" y="171" width="108" height="16" forecolor="#000099"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Caduca]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="22" y="287" width="240" height="16" forecolor="#000099"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[PRIMERA JEFATURA DE BOMBEROS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="313" y="287" width="218" height="16" forecolor="#000099"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[RECAUDADOR]]></text>
+			</staticText>
+			<line>
+				<reportElement x="22" y="276" width="240" height="1" forecolor="#0000FF"/>
+			</line>
+			<line>
+				<reportElement x="313" y="276" width="218" height="1" forecolor="#0000FF"/>
+			</line>
+			<textField pattern="EEEEE dd MMMMM yyyy" isBlankWhenNull="true">
+				<reportElement x="85" y="5" width="166" height="16"/>
+				<textElement verticalAlignment="Top"/>
+				<textFieldExpression class="java.util.Date"><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="23" y="50" width="266" height="18"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{solp_nombre_sol}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="348" y="50" width="207" height="18"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{sol_num_cedula}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="181" y="100" width="108" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{solp_capacidad}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="313" y="100" width="108" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{solp_placa}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="313" y="151" width="108" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{solp_color}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="181" y="151" width="108" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{solp_marca}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="437" y="100" width="108" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{solp_modelo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="437" y="151" width="108" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{solp_caduca}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="23" y="5" width="57" height="16" forecolor="#000099"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<image>
+				<reportElement x="337" y="206" width="127" height="70"/>
+				<imageExpression class="java.lang.String"><![CDATA[$F{par_firma_dos}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="23" y="196" width="182" height="63"/>
+				<imageExpression class="java.lang.String"><![CDATA[$F{par_firma_uno}]]></imageExpression>
+			</image>
+		</band>
+	</detail>
+</jasperReport>
