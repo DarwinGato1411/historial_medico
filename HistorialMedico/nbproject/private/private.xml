@@ -11,6 +11,7 @@
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
         <group>
             <file>file:/D:/PROYECTOS/Sistema%20Integrado/Integrado/SisIntegrado/web/WEB-INF/glassfish-resources.xml</file>
             <file>file:/D:/PROYECTOS/Sistema%20Integrado/Integrado/SisIntegrado/src/java/com/ec/entidad/Test.java</file>
@@ -19,6 +20,10 @@
             <file>file:/D:/PROYECTOS/Sistema%20Integrado/Integrado/SisIntegrado/web/WEB-INF/glassfish-web.xml</file>
             <file>file:/D:/PROYECTOS/Sistema%20Integrado/Integrado/SisIntegrado/src/java/com/ec/controlador/empresa/GenerarEvaluacion.java</file>
         </group>
+=======
+        <group/>
+        <group/>
+>>>>>>> 6c051915269705935f3b74e73126a77d4ef259d4
         <group/>
         <group/>
     </open-files>

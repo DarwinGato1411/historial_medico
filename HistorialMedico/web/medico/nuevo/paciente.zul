@@ -2,18 +2,17 @@
 <window  id="wCapitulo"  position="center" closable="true"  
          apply="org.zkoss.bind.BindComposer" 
          viewModel="@id('vm') @init('com.ec.controlador.NuevoPaciente')"
-         class="modalTest modalAll">
+         class="modalAll modalPaciente">
     
-    <caption label="Test" style="font-weight:bold" class="titulo"/> 
+    <caption label="Paciente"  class="titulo"/> 
     
 
     <div class="container_modal">
 
         <div class="bodyModal">
-            <div class="container_row_input">
-              
+            <div class="container_row_input">  
                 <div class="wrapper_input_mod">
-                    <span>Cédula </span>
+                    <span>Cédula: </span>
                     <div class="wrapper_input_text">
                         
                         <textbox  
@@ -24,7 +23,7 @@
                     </div>
                 </div>
                 <div class="wrapper_input_mod">
-                    <span>Nombre: </span>
+                    <span>Nombre</span>
                     <div class="wrapper_input_text">
                         
                         <textbox  
@@ -35,7 +34,7 @@
                     </div>
                 </div>
                 <div class="wrapper_input_mod">
-                    <span>Domicilio: </span>
+                    <span>Domicilio</span>
                     <div class="wrapper_input_text">
                         
                         <textbox  
@@ -46,7 +45,7 @@
                     </div>
                 </div>
                 <div class="wrapper_input_mod">
-                    <span>Correo: </span>
+                    <span>Correo</span>
                     <div class="wrapper_input_text">
                         
                         <textbox  
@@ -57,7 +56,8 @@
                 </div>
              
                 <div class="wrapper_input_mod">
-                    <span>Teléfono: </span>
+                    <span>Teléfono</span>
+                   
                     <div class="wrapper_input_text">
                         
                         <textbox  
@@ -67,8 +67,61 @@
                             class="input_text" />
                     </div>
                 </div>
+                
                 <div class="wrapper_input_mod">
-                    <span>Aseguradora: </span>
+                    <span>Fecha naciemiento</span>
+                   
+                    <div class="wrapper_input_text">
+                        
+                        <textbox  
+                            maxlength="100"    
+                            onChange="self.setValue(self.getValue().toUpperCase());"  
+                            value="@bind(vm.entidad.pacTelefono)" 
+                            class="input_text" />
+                    </div>
+                </div>
+                
+                <div class="wrapper_input_mod_group">
+                    <div class="wrapper_input_mod">
+                        <span>Sexo</span>
+                   
+                        <div class="wrapper_input_text">
+                        
+                            <textbox  
+                                maxlength="100"    
+                                onChange="self.setValue(self.getValue().toUpperCase());"  
+                                value="@bind(vm.entidad.pacTelefono)" 
+                                class="input_text" />
+                        </div>
+                    </div>
+                    <div class="wrapper_input_mod">
+                        <span>Estado civil</span>
+                   
+                        <div class="wrapper_input_text">
+                        
+                            <textbox  
+                                maxlength="100"    
+                                onChange="self.setValue(self.getValue().toUpperCase());"  
+                                value="@bind(vm.entidad.pacTelefono)" 
+                                class="input_text" />
+                        </div>
+                    </div>
+                    <div class="wrapper_input_mod">
+                        <span>Tipo sangre</span>
+                   
+                        <div class="wrapper_input_text">
+                        
+                            <textbox  
+                                maxlength="100"    
+                                onChange="self.setValue(self.getValue().toUpperCase());"  
+                                value="@bind(vm.entidad.pacTelefono)" 
+                                class="input_text" />
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="wrapper_input_mod">
+                    <span>Aseguradora</span>
                     <div class="wrapper_input_text">
                         
                         <textbox  
@@ -87,7 +140,19 @@
                     Guardar
                 </a>
             </div>
-        </div>     
+        </div>
+        <div class="fotoPerfil">
+            <div class="perfil">
+                <div class="foto">
+                    <image/> 
+                </div>
+                <div style="display:flex;justify-content:flex-end;">
+                    <a class="btn_modal">
+                        Subir fotografía
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>     
                   
 

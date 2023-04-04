@@ -1,3 +1,5 @@
+/*background: #2d7fd2;*/
+
 .modalAll{
     width: 400px;
 }
@@ -48,29 +50,26 @@
 .modalAll .container_modal{
     display: grid;
     gap:10px;
-    padding: 10px !important;
+    padding: 10px;
 }
 
-.modalTest{
-   
-   
-}
+
 
 .modalAll .container_modal .container_row_input{
     display: grid;
     gap: 10px;
-   
+
 }
 
 .modalAll .container_modal .container_row_input .wrapper_input_mod{
-     display: grid;
-     grid-template-columns: 25% 75%;
-     align-items: center;
-    
+    display: grid;
+    grid-template-columns: 25% 75%;
+    align-items: center;
+
 }
 
 .modalAll .container_modal .container_row_input .wrapper_input_mod span{
-     font-size: 14px ;
+    font-size: 14px ;
 }
 
 .modalAll .container_modal .container_row_input .wrapper_input_mod .input_text{
@@ -79,20 +78,18 @@
 }
 
 .modalTest, .modalTest .z-window-content{
-     padding: 0;
-     margin:0;
+    padding: 0;
+    margin:0;
 }
 
-.modalTest .z-window-header
-
-{
+.modalTest .z-window-header{
     color: white;
     background: #007bff;
-    
+
 }
 .modalRespuesta,.modalRespuesta .z-window-content{
-     padding: 0;
-     margin:0;
+    padding: 0;
+    margin:0;
 }
 
 .modalRespuesta .z-window-header
@@ -100,12 +97,12 @@
 {
     color: white;
     background: #17a2b8;
-    
+
 }
 
 .modalPregunta , .modalPregunta .z-window-content{
-     padding: 0;
-     margin:0;
+    padding: 0;
+    margin:0;
 }
 
 .modalPregunta .z-window-header
@@ -113,5 +110,78 @@
 {
     color: white;
     background: #28a745;
+
+}
+
+
+/*Modal Paciente*/
+
+
+.modalPaciente{
+    width: 80%;
+    padding: 0px;
+}
+
+.modalPaciente .z-window-content{
+    padding: 0;
+    margin: 0;
+}
+
+.modalPaciente .z-window-header{
+    background: #007bff;
+    width: 100%;
+    padding: 0px;
+}
+
+.modalPaciente .titulo{
+    background: #007bff;
+    height: 100%;
+    display: flex;
     
 }
+
+.modalPaciente .titulo .z-caption-content{
+    width: 100%;
+    color: white;
+    font-size: 16px;
+}
+
+.modalPaciente .container_modal{
+    display: grid;
+    grid-template-columns:50% 50%;
+    padding: 20px;
+    
+}
+
+.modalPaciente .container_modal .bodyModal .wrapper_input_mod{
+    display: grid;
+    grid-template-columns:100%;
+}
+
+.modalPaciente .container_modal .bodyModal .container_row_input{
+    display: grid;
+    gap:15px;
+}
+
+.modalPaciente .container_modal .bodyModal .wrapper_input_mod_group{
+    display: grid;
+    grid-template-columns:repeat(3 ,1fr);
+    gap:10px;
+}
+
+.modalPaciente .container_modal .bodyModal .wrapper_input_mod span{
+    display: block;
+    font-weight: bold;
+}
+
+.container_modal .fotoPerfil{
+
+    padding: 10px;
+}
+
+.container_modal .fotoPerfil .perfil .foto{
+
+    height: 200px;
+
+}
+

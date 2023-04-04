@@ -1,6 +1,7 @@
 <?link rel="stylesheet" type="text/css" href="/css/app/landing/signin.css"?>
 <?script src="https://kit.fontawesome.com/484b16c999.js"?>
-<!--<?script src="./js/inicio.js?v1"?>-->
+
+<?script src="./js/inicio.js?v1"?>
 
 <?link rel="icon" type="image/x-icon" href="/iconos/defact.ico"?>  
 <?page title="Sistema integrado" contentType="text/html;charset=UTF-8"?>
@@ -42,12 +43,12 @@
                             <span>Contraseña</span>
                             <textbox 
                                 type="password" 
-                                class="input" 
+                                class="input input_password" 
                                 id="password"
                             />
                         </div>
                         <div class="i">
-                            <button iconSclass="z-icon-eye" />                       
+                            <button iconSclass="z-icon-eye" class="icon_eye" />                       
                         </div>
                     </div>
                     

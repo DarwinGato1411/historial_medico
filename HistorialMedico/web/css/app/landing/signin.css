@@ -27,13 +27,14 @@ body{
 }
 
 .wave2{
+    display: none;
     position: fixed;
     top: 0;
     right: 0;
     height: 100%;
     z-index: -1;
     transform: scaleY(-1) scaleX(-1);
-    
+
 }
 
 .container{
@@ -49,7 +50,7 @@ body{
     display: flex;
     justify-content: flex-end;
     align-items: center;
-   
+
 }
 
 .login-content{
@@ -57,7 +58,7 @@ body{
     justify-content: flex-start;
     align-items: center;
     text-align: center;
-   
+
 }
 
 .img img{
@@ -117,7 +118,7 @@ body{
     left: 10px;
     top: 50%;
     transform: translateY(-50%);
-    color: #999;
+    color: white;
     font-size: 18px;
     transition: .3s;
 }
@@ -228,10 +229,26 @@ a:hover{
 
 }
 
+@media screen and (min-width: 767px){
+    .input-div > div > span{
+
+        color: black;
+
+    }
+}
+
 
 @media screen and (max-width: 1050px){
     .container{
         grid-gap: 5rem;
+    }
+}
+
+@media screen and (min-width: 1270px){
+  
+    
+    .wave2{
+        display: block;
     }
 }
 
@@ -248,6 +265,7 @@ a:hover{
     .img img{
         width: 400px;
     }
+
 }
 
 @media screen and (max-width: 900px){

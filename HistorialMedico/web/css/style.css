@@ -2935,85 +2935,21 @@ input, button, select, textarea {
     bottom: 0;
 }
 
-.ul, ol {
-    list-style:none;
-}
-.nav{
-    width: 100%;
-   
-}
-.nav > .li {
-
-}
-
-.nav .li span {
-
-
-    padding: 20px;
-    display:block;
-    z-index: 2;
-    cursor: pointer
-}
-
-.nav .li .m1{
-    
-    color:#2d7fd2;
-    background: #eee;
-   
-}
-
-
-
-.nav .li .s1{
-    background: #343a40;
-    color:#fff;
-}
-
-.nav .li span:hover {
-    background-color:black;
-}
-
-.nav .li .ul {
-    display:none;
-    position:absolute;
-    width: 200px;
-    z-index: 2;
-    cursor: pointer
-}
-
-.nav .li:hover > .ul {
-    display:block;
-    margin-left: 200px;
-    margin-top: -60px;
-    z-index: 2;
-}
-
-.nav .li .ul .li {
-    position:relative;
-    z-index: 2;
-}
-
-.nav .li .ul .li ul {
-    right:-140px;
-    top:0px;
-    z-index: 2;
-}
-
 .contenedorMC{
     display: flex;
     flex-direction: row;
     width: 100%;
-    
+
 }
 
 .mainContainer{
-    margin-left: 200px;
-
+    /*margin-left: 200px;*/
     width: 100%;
+    padding: 10px;
 }
 
 .nav{
-    display: flex;
+    display: none;
     flex-direction: column;
     background-color: white;
     width: 200px;
@@ -3023,8 +2959,37 @@ input, button, select, textarea {
     background: #eee;
 }
 
-.contenedorEmpresa {
+.panelCerrarMenu{
+    display: none;
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    background-color:rgba(76, 76, 76, 0.66);
+    z-index: 1;
+}
 
+.desplegar{
+    display: flex;
+}
+
+.nav .li span:hover {
+    background-color:black;
+    color: white;
+}
+
+.nav .li span {
+    padding: 20px;
+    display:block;
+    z-index: 2;
+    cursor: pointer
+}
+
+.nav .li .m1{ 
+    color:#2d7fd2;
+    background: #eee; 
+}
+
+.contenedorEmpresa {
     margin: auto;
 }
 
@@ -3215,7 +3180,6 @@ input, button, select, textarea {
 }
 
 .contenedorTest .containerPreguntas .z-listbox{
-
     display: block;
     width: 100%;
 }
@@ -3282,16 +3246,89 @@ input, button, select, textarea {
 
 .contenedorTest .containerRespuestas .tblCuerpo{
     display: flex;
+}
+
+/*.containerRespuestas */
+.contenedorPacientes .paciente{
+    background: #eee;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+
+
+.contenedorPacientes .paciente table{
+    display: block !important;
+}
+
+.contenedorPacientes .paciente table tbody,
+.contenedorPacientes .pacientetable tbody tr,
+.contenedorPacientes .paciente table tbody tr th,
+.contenedorPacientes .paciente table tbody td{
+    display: block;
 
 }
+
+.contenedorPacientes .paciente.z-listbox{
+
+    display: block;
+    width: 100%;
+}
+
+.contenedorPacientes .z-listbox .tblCabecera{
+    display: block;
+    width: 100%;
+}
+
+.contenedorPacientes  .z-listbox .tblCabecera .z-listheader{
+    background: #eee;
+    color: white;
+    padding: 5px;
+    text-align: center;
+
+}
+
+.contenedorPacientes  .z-listbox .tblCabecera{
+    display: grid;
+    grid-template-columns:22% 22% 22% 22% 12%;
+}
+
+
+.contenedorPacientes  .z-listbox .tblCuerpo{
+
+    display: grid;
+    grid-template-columns:22% 22% 22% 22% 12%;
+}
+
+.fondoBanner{
+    background: #2d7fd2;
+    padding: 10px;
+}
+
+.banner{
+    display: grid;
+    grid-template-columns:repeat(3,1fr);
+    color: white;
+}
+
+
+
 
 @media only screen and (min-width: 1024px){
     .contenedorTest{
         grid-template-columns:repeat(3,1fr);
     }
+
+    .nav{
+        display: flex;
+    }
+
+    .mainContainer{
+        margin-left: 200px;
+        width: 100%;
+    }
+    .btnMenu{
+        display:none;
+    }
 }
 
-.fondoBanner{
-      background: #2d7fd2;
-      padding: 10px;
-}
