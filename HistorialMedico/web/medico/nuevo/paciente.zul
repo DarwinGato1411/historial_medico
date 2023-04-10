@@ -11,8 +11,31 @@
 
         <div class="bodyModal">
             <div class="container_row_input">  
+                
                 <div class="wrapper_input_mod">
-                    <span>Cédula: </span>
+                    <span>Nombres</span>
+                    <div class="wrapper_input_text">
+                        
+                        <textbox  
+                            maxlength="100"    
+                            onChange="self.setValue(self.getValue().toUpperCase());"  
+                            value="@bind(vm.entidad.pacNombres)" 
+                            class="input_text" />
+                    </div>
+                </div>
+                <div class="wrapper_input_mod">
+                    <span>Apellidos</span>
+                    <div class="wrapper_input_text">
+                        
+                        <textbox  
+                            maxlength="100"    
+                            onChange="self.setValue(self.getValue().toUpperCase());"  
+                            value="@bind(vm.entidad.pacApellidos)" 
+                            class="input_text" />
+                    </div>
+                </div>
+                <div class="wrapper_input_mod">
+                    <span>Cédula</span>
                     <div class="wrapper_input_text">
                         
                         <textbox  
@@ -23,14 +46,56 @@
                     </div>
                 </div>
                 <div class="wrapper_input_mod">
-                    <span>Nombre</span>
-                    <div class="wrapper_input_text">
+                    <span>Género</span>
+                   <!-- <radiogroup onCheck="fruit.value = self.selectedItem.label" selectedItem="A">
+                        <radio value="A" label="Masculino" />
+                        <radio value="B" label="Femenino" />
+                        <radio value="C" label="Otro" />
+                    </radiogroup>
+                    
+                    
+                    You have selected :
+                    <label id="fruit" style="color:red" />-->
+                    
+                    
+                </div>
+                
+                <div class="wrapper_input_mod_group">
+                    <div class="wrapper_input_mod">
+                        <span>Fecha naciemiento</span>
+                   
+                        <div class="wrapper_input_text">
                         
-                        <textbox  
-                            maxlength="100"    
-                            onChange="self.setValue(self.getValue().toUpperCase());"  
-                            value="@bind(vm.entidad.pacNombre)" 
-                            class="input_text" />
+                            <textbox  
+                                maxlength="100"    
+                                onChange="self.setValue(self.getValue().toUpperCase());"  
+                                value="@bind(vm.entidad.pacTelefono)" 
+                                class="input_text" />
+                        </div>
+                    </div>
+                    <div class="wrapper_input_mod">
+                        <span>Edad</span>
+                   
+                        <div class="wrapper_input_text">
+                           
+                            <intbox constraint="no negative,no zero"  value="@bind(vm.entidad.pacEdad)" format="##" class="input_text"   tabindex="1" />
+                           
+                        </div>
+                    </div>
+                    <div class="wrapper_input_mod">
+                        <span>Estado Civil</span>
+                   
+                        <div class="wrapper_input_text">
+                           
+                            <combobox>
+                                <comboitem value="A" label="Casado/a" />
+                                <comboitem value="B" label="Soltero/a" />
+                                <comboitem value="C" label="Divorciado/a"/>
+                            </combobox>
+                            
+                            
+                           
+                        </div>
                     </div>
                 </div>
                 <div class="wrapper_input_mod">
@@ -68,18 +133,7 @@
                     </div>
                 </div>
                 
-                <div class="wrapper_input_mod">
-                    <span>Fecha naciemiento</span>
-                   
-                    <div class="wrapper_input_text">
-                        
-                        <textbox  
-                            maxlength="100"    
-                            onChange="self.setValue(self.getValue().toUpperCase());"  
-                            value="@bind(vm.entidad.pacTelefono)" 
-                            class="input_text" />
-                    </div>
-                </div>
+                
                 
                 <div class="wrapper_input_mod_group">
                     <div class="wrapper_input_mod">

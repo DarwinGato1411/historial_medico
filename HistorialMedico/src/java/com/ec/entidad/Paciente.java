@@ -41,8 +41,10 @@ public class Paciente implements Serializable {
     private Integer idPaciente;
     @Column(name = "pac_ruc")
     private String pacRuc;
-    @Column(name = "pac_nombre")
-    private String pacNombre;
+    @Column(name = "pac_nombres")
+    private String pacNombres;
+    @Column(name = "pac_apellidos")
+    private String pacApellidos;
     @Column(name = "pac_domicilio")
     private String pacDomicilio;
     @Column(name = "pac_correo")
@@ -60,6 +62,9 @@ public class Paciente implements Serializable {
     private String pacTipoSangre;
     @Column(name = "pac_aseguradora")
     private String pacAseguradora;
+    @Column(name = "pac_edad")
+    private String pacEdad;
+    
     @OneToMany(mappedBy = "idPaciente")
     private Collection<VisitaMedica> visitaMedicaCollection;
     @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
@@ -89,13 +94,23 @@ public class Paciente implements Serializable {
         this.pacRuc = pacRuc;
     }
 
-    public String getPacNombre() {
-        return pacNombre;
+    public String getPacNombres() {
+        return pacNombres;
     }
 
-    public void setPacNombre(String pacNombre) {
-        this.pacNombre = pacNombre;
+    public void setPacNombres(String pacNombres) {
+        this.pacNombres = pacNombres;
     }
+
+    public String getPacApellidos() {
+        return pacApellidos;
+    }
+
+    public void setPacApellidos(String pacApellidos) {
+        this.pacApellidos = pacApellidos;
+    }
+
+    
 
     public String getPacDomicilio() {
         return pacDomicilio;
@@ -177,6 +192,16 @@ public class Paciente implements Serializable {
         this.idUsuario = idUsuario;
     }
 
+    public String getPacEdad() {
+        return pacEdad;
+    }
+
+    public void setPacEdad(String pacEdad) {
+        this.pacEdad = pacEdad;
+    }
+    
+    
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -201,5 +226,5 @@ public class Paciente implements Serializable {
     public String toString() {
         return "com.ec.entidad.Paciente[ idPaciente=" + idPaciente + " ]";
     }
-    
+
 }

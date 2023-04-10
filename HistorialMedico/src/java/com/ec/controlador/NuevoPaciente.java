@@ -53,7 +53,6 @@ public class NuevoPaciente {
         } else {
             this.entidad = new Paciente();
             accion = "create";
-
         }
 
     }
@@ -61,9 +60,10 @@ public class NuevoPaciente {
     @Command
     public void guardar() {
         if (entidad.getPacRuc() != null
-                    && entidad.getPacNombre() != null
-                    && entidad.getPacTelefono() != null
-                    && entidad.getPacCorreo() != null) {
+                && entidad.getPacNombres() != null
+                && entidad.getPacApellidos() != null
+                && entidad.getPacTelefono() != null
+                && entidad.getPacCorreo() != null) {
 
             if (accion.equals("create")) {
                 servicio.crear(entidad);
@@ -89,8 +89,6 @@ public class NuevoPaciente {
     public void setEntidad(Paciente entidad) {
         this.entidad = entidad;
     }
-
-  
 
     public String getAccion() {
         return accion;

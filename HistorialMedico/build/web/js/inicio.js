@@ -33,13 +33,9 @@ const showPassword = () => {
 
     const toggleShowPass = () => {
         if (password.type === "password") {
-            password.type = "text";
-            icon.classList.remove("fa-eye");
-            icon.classList.add("fa-eye-slash");
+            password.type = "text";   
         } else {
             password.type = "password";
-            icon.classList.remove("fa-eye-slash");
-            icon.classList.add("fa-eye");
         }
     };
 
@@ -74,6 +70,7 @@ const login = () => {
 
 
 
+
 function addcl() {
     let parent = this.parentNode.parentNode;
     parent.classList.add("focus");
@@ -90,11 +87,11 @@ function remcl() {
     zk.afterMount(function () {
 
 //            deleteTags(".login_container"); //inicio.zul
-//            showPassword();
+            showPassword();
 //            stopLoading();
-        login();
+        //login();
         const inputs = document.querySelectorAll(".input");
-        console.log(inputs);
+        
         inputs.forEach(input => {
             input.addEventListener("focus", addcl);
             input.addEventListener("blur", remcl);
