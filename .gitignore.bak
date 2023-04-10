@@ -19,18 +19,7 @@
 *.tar.gz
 *.rar
 
-# NetBeans specific
-nbproject/private/
-build/
-nbbuild/
-dist/
-build/
-HistorialMedico/dist/
-HistorialMedico/build/
-nbdist/
-nbactions.xml
-nb-configuration.xml
-nbproject/
+
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
