@@ -4,7 +4,6 @@
  */
 package com.ec.servicio;
 
-import com.ec.entidad.Paciente;
 import com.ec.entidad.Receta;
 import com.ec.entidad.VisitaMedica;
 import java.util.ArrayList;
@@ -74,7 +73,36 @@ public class ServicioReceta {
 
     }
 
-    public Receta findForVisitaMedica(VisitaMedica idVisitaMedica) {
+//    public Receta findForVisitaMedica(VisitaMedica idVisitaMedica) {
+//
+//        List<Receta> listaClientes = new ArrayList<Receta>();
+//        Receta usuarioObtenido = new Receta();
+//        try {
+//            //Connection connection = em.unwrap(Connection.class);
+//
+//            em = HelperPersistencia.getEMF();
+//            em.getTransaction().begin();
+//            Query query = em.createQuery("SELECT u FROM Receta u WHERE u.idVisitaMedica=:idVisitaMedica ORDER BY u.idVisitaMedica.visFecha ASC");
+//            query.setParameter("idVisitaMedica", idVisitaMedica);
+////            query.setParameter("pacNombre", "%" + valor + "%");
+//            listaClientes = (List<Receta>) query.getResultList();
+//            if (listaClientes.size() > 0) {
+//                for (Receta usuario : listaClientes) {
+//                    usuarioObtenido = usuario;
+//                }
+//            } else {
+//                usuarioObtenido = null;
+//            }
+//            em.getTransaction().commit();
+//        } catch (Exception e) {
+//            System.out.println("Error en lsa consulta usuario  FindRecetaPorNombre  " + e.getMessage());
+//        } finally {
+//            em.close();
+//        }
+//
+//        return usuarioObtenido;
+//    }
+    public List<Receta> findForVisitaMedica(VisitaMedica idVisitaMedica) {
 
         List<Receta> listaClientes = new ArrayList<Receta>();
         Receta usuarioObtenido = new Receta();
@@ -87,13 +115,7 @@ public class ServicioReceta {
             query.setParameter("idVisitaMedica", idVisitaMedica);
 //            query.setParameter("pacNombre", "%" + valor + "%");
             listaClientes = (List<Receta>) query.getResultList();
-            if (listaClientes.size() > 0) {
-                for (Receta usuario : listaClientes) {
-                    usuarioObtenido = usuario;
-                }
-            } else {
-                usuarioObtenido = null;
-            }
+
             em.getTransaction().commit();
         } catch (Exception e) {
             System.out.println("Error en lsa consulta usuario  FindRecetaPorNombre  " + e.getMessage());
@@ -101,7 +123,7 @@ public class ServicioReceta {
             em.close();
         }
 
-        return usuarioObtenido;
+        return listaClientes;
     }
 
     public List<Receta> finAll(String nombre) {

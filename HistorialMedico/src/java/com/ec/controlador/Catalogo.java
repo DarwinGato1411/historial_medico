@@ -33,7 +33,7 @@ import org.zkoss.zk.ui.util.Clients;
  * @author gato
  */
 public class Catalogo {
-
+    
     ServicioCapitulo servicioCapitulo = new ServicioCapitulo();
     ServicioSubCapitulo servicioSubCapitulo = new ServicioSubCapitulo();
     ServicioDetalle servicioDetalle = new ServicioDetalle();
@@ -47,26 +47,30 @@ public class Catalogo {
     AMedia fileContent = null;
     Connection con = null;
     UserCredential credential = new UserCredential();
-
+    
+    private String buscarCapitulo = "";
+    private String buscarSubCapitulo = "";
+    private String buscarDetalle = "";
+    
     public Catalogo() {
         Session sess = Sessions.getCurrent();
         credential = (UserCredential) sess.getAttribute(EnumSesion.userCredential.getNombre());
         buscarCapitulo();
-
+        
     }
-
+    
     private void buscarCapitulo() {
-        listaCapitulo = servicioCapitulo.finAll();
+        listaCapitulo = servicioCapitulo.finLike(buscarCapitulo);
     }
-
+    
     private void buscarSubcapitulo() {
-        listaSubcapitulos = servicioSubCapitulo.findByCapitulo(capituloSelected);
+        listaSubcapitulos = servicioSubCapitulo.findByCapitulo(capituloSelected, buscarSubCapitulo);
     }
-
+    
     private void buscarDetalle() {
-        listaDetalles = servicioDetalle.findBySubCapitulo(subCapituloSelected);
+        listaDetalles = servicioDetalle.findBySubCapitulo(subCapituloSelected, buscarDetalle);
     }
-
+    
     @Command
     @NotifyChange({"listaSubcapitulos", "buscar", "capituloSelected", "listaDetalles"})
     public void buscarSubCapitulo(@BindingParam("valor") Capitulo valor) {
@@ -75,19 +79,19 @@ public class Catalogo {
         buscarSubcapitulo();
         buscarDetalle();
     }
-
+    
     @Command
     @NotifyChange({"listaDetalles", "buscar", "subCapituloSelected"})
     public void busacarDetalle(@BindingParam("valor") Subcapitulo valor) {
         subCapituloSelected = valor;
         buscarDetalle();
     }
-
+    
     @Command
     @NotifyChange({"listaCapitulo", "buscar"})
     public void nuevoCapitulo() {
         try {
-
+            
             org.zkoss.zul.Window window = (org.zkoss.zul.Window) Executions.createComponents(
                         "/medico/nuevo/capitulo.zul", null, null);
             window.doModal();
@@ -97,14 +101,14 @@ public class Catalogo {
                         Clients.NOTIFICATION_TYPE_ERROR, null, "middle_center", 2000, true);
         }
     }
-
+    
     @Command
     @NotifyChange({"listaCapitulo", "buscar"})
     public void modificarCapitulo(@BindingParam("valor") Capitulo valor) {
         try {
 //            if (Messagebox.show("¿Desea modificar el registro, recuerde que debe crear las reteniones nuevamente?", "Atención", Messagebox.YES | Messagebox.NO, Messagebox.INFORMATION) == Messagebox.YES) {
             final HashMap<String, Capitulo> map = new HashMap<String, Capitulo>();
-
+            
             map.put("valor", valor);
             org.zkoss.zul.Window window = (org.zkoss.zul.Window) Executions.createComponents(
                         "/medico/nuevo/capitulo.zul", null, map);
@@ -114,7 +118,7 @@ public class Catalogo {
                         Clients.NOTIFICATION_TYPE_ERROR, null, "middle_center", 2000, true);
         }
     }
-
+    
     @Command
     @NotifyChange({"listaSubcapitulos", "buscar"})
     public void nuevoSubcapitulo() {
@@ -136,7 +140,7 @@ public class Catalogo {
                         Clients.NOTIFICATION_TYPE_ERROR, null, "middle_center", 2000, true);
         }
     }
-
+    
     @Command
     @NotifyChange({"listaSubcapitulos", "buscar"})
     public void modificarSubcapitulo(@BindingParam("valor") Subcapitulo valor) {
@@ -156,9 +160,9 @@ public class Catalogo {
             Clients.showNotification("Ocurrio un error " + e.getMessage(),
                         Clients.NOTIFICATION_TYPE_ERROR, null, "middle_center", 2000, true);
         }
-
+        
     }
-
+    
     @Command
     @NotifyChange({"listaDetalles", "buscar"})
     public void nuevoDetalle() {
@@ -180,7 +184,7 @@ public class Catalogo {
                         Clients.NOTIFICATION_TYPE_ERROR, null, "middle_center", 2000, true);
         }
     }
-
+    
     @Command
     @NotifyChange({"listaDetalles", "buscar"})
     public void modificarDetalle(@BindingParam("valor") Detalle valor) {
@@ -200,48 +204,71 @@ public class Catalogo {
             Clients.showNotification("Ocurrio un error " + e.getMessage(),
                         Clients.NOTIFICATION_TYPE_ERROR, null, "middle_center", 2000, true);
         }
-
+        
     }
-
+    
     public List<Capitulo> getListaCapitulo() {
         return listaCapitulo;
     }
-
+    
     public void setListaCapitulo(List<Capitulo> listaCapitulo) {
         this.listaCapitulo = listaCapitulo;
     }
-
+    
     public Capitulo getCapituloSelected() {
         return capituloSelected;
     }
-
+    
     public void setCapituloSelected(Capitulo capituloSelected) {
         this.capituloSelected = capituloSelected;
     }
-
+    
     public Subcapitulo getSubCapituloSelected() {
         return subCapituloSelected;
     }
-
+    
     public void setSubCapituloSelected(Subcapitulo subCapituloSelected) {
         this.subCapituloSelected = subCapituloSelected;
     }
-
+    
     public List<Subcapitulo> getListaSubcapitulos() {
         return listaSubcapitulos;
     }
-
+    
     public void setListaSubcapitulos(List<Subcapitulo> listaSubcapitulos) {
         this.listaSubcapitulos = listaSubcapitulos;
     }
-
+    
     public List<Detalle> getListaDetalles() {
         return listaDetalles;
     }
-
+    
     public void setListaDetalles(List<Detalle> listaDetalles) {
         this.listaDetalles = listaDetalles;
     }
-
-   
+    
+    public String getBuscarCapitulo() {
+        return buscarCapitulo;
+    }
+    
+    public void setBuscarCapitulo(String buscarCapitulo) {
+        this.buscarCapitulo = buscarCapitulo;
+    }
+    
+    public String getBuscarSubCapitulo() {
+        return buscarSubCapitulo;
+    }
+    
+    public void setBuscarSubCapitulo(String buscarSubCapitulo) {
+        this.buscarSubCapitulo = buscarSubCapitulo;
+    }
+    
+    public String getBuscarDetalle() {
+        return buscarDetalle;
+    }
+    
+    public void setBuscarDetalle(String buscarDetalle) {
+        this.buscarDetalle = buscarDetalle;
+    }
+    
 }

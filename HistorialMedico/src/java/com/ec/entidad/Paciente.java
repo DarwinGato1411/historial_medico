@@ -6,6 +6,7 @@
 package com.ec.entidad;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -63,8 +64,40 @@ public class Paciente implements Serializable {
     @Column(name = "pac_aseguradora")
     private String pacAseguradora;
     @Column(name = "pac_edad")
-    private String pacEdad;
-    
+    private Integer pacEdad;
+    @Column(name = "pac_movil")
+    private String pacMovil;
+    @Column(name = "pac_alegias")
+    private String pacAlegias;
+    @Column(name = "pac_cirugias")
+    private String pacCirugias;
+    @Column(name = "pac_enfermedad_existente")
+    private String pacEnfermedadExistente;
+    @Column(name = "pac_enfermedad_familia")
+    private String pacEnfermedadFamilia;
+    @Column(name = "pac_talla")
+    private BigDecimal pacTalla;
+    @Column(name = "pac_peso")
+    private BigDecimal pacPeso;
+    @Column(name = "pac_imc")
+    private BigDecimal pacImc;
+    @Column(name = "pac_pa")
+    private String pacPa;
+    @Column(name = "pac_fc")
+    private String pacFc;
+    @Column(name = "pac_sp02")
+    private String pacSp02;
+    @Column(name = "pac_tm_bucal")
+    private String pacTmBucal;
+    @Column(name = "pac_cuello")
+    private String pacCuello;
+    @Column(name = "pac_cintura")
+    private String pacCintura;
+    @Column(name = "pac_per_abdominal")
+    private String pacPerAbdominal;
+    @Column(name = "pac_fotografia")
+    private String pacFotografia;
+
     @OneToMany(mappedBy = "idPaciente")
     private Collection<VisitaMedica> visitaMedicaCollection;
     @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
@@ -109,8 +142,6 @@ public class Paciente implements Serializable {
     public void setPacApellidos(String pacApellidos) {
         this.pacApellidos = pacApellidos;
     }
-
-    
 
     public String getPacDomicilio() {
         return pacDomicilio;
@@ -192,16 +223,143 @@ public class Paciente implements Serializable {
         this.idUsuario = idUsuario;
     }
 
-    public String getPacEdad() {
+    public Integer getPacEdad() {
         return pacEdad;
     }
 
-    public void setPacEdad(String pacEdad) {
+    public void setPacEdad(Integer pacEdad) {
         this.pacEdad = pacEdad;
     }
-    
-    
 
+    public String getPacMovil() {
+        return pacMovil;
+    }
+
+    public void setPacMovil(String pacMovil) {
+        this.pacMovil = pacMovil;
+    }
+
+    public String getPacAlegias() {
+        return pacAlegias;
+    }
+
+    public void setPacAlegias(String pacAlegias) {
+        this.pacAlegias = pacAlegias;
+    }
+
+    public String getPacCirugias() {
+        return pacCirugias;
+    }
+
+    public void setPacCirugias(String pacCirugias) {
+        this.pacCirugias = pacCirugias;
+    }
+
+    public String getPacEnfermedadExistente() {
+        return pacEnfermedadExistente;
+    }
+
+    public void setPacEnfermedadExistente(String pacEnfermedadExistente) {
+        this.pacEnfermedadExistente = pacEnfermedadExistente;
+    }
+
+    public String getPacEnfermedadFamilia() {
+        return pacEnfermedadFamilia;
+    }
+
+    public void setPacEnfermedadFamilia(String pacEnfermedadFamilia) {
+        this.pacEnfermedadFamilia = pacEnfermedadFamilia;
+    }
+
+    public BigDecimal getPacTalla() {
+        return pacTalla;
+    }
+
+    public void setPacTalla(BigDecimal pacTalla) {
+        this.pacTalla = pacTalla;
+    }
+
+    public BigDecimal getPacPeso() {
+        return pacPeso;
+    }
+
+    public void setPacPeso(BigDecimal pacPeso) {
+        this.pacPeso = pacPeso;
+    }
+
+    public BigDecimal getPacImc() {
+        return pacImc;
+    }
+
+    public void setPacImc(BigDecimal pacImc) {
+        this.pacImc = pacImc;
+    }
+
+    public String getPacTmBucal() {
+        return pacTmBucal;
+    }
+
+    public void setPacTmBucal(String pacTmBucal) {
+        this.pacTmBucal = pacTmBucal;
+    }
+
+    public String getPacCuello() {
+        return pacCuello;
+    }
+
+    public void setPacCuello(String pacCuello) {
+        this.pacCuello = pacCuello;
+    }
+
+    public String getPacCintura() {
+        return pacCintura;
+    }
+
+    public void setPacCintura(String pacCintura) {
+        this.pacCintura = pacCintura;
+    }
+
+    public String getPacPerAbdominal() {
+        return pacPerAbdominal;
+    }
+
+    public void setPacPerAbdominal(String pacPerAbdominal) {
+        this.pacPerAbdominal = pacPerAbdominal;
+    }
+
+    public String getPacPa() {
+        return pacPa;
+    }
+
+    public void setPacPa(String pacPa) {
+        this.pacPa = pacPa;
+    }
+
+    public String getPacFc() {
+        return pacFc;
+    }
+
+    public void setPacFc(String pacFc) {
+        this.pacFc = pacFc;
+    }
+
+    public String getPacSp02() {
+        return pacSp02;
+    }
+
+    public void setPacSp02(String pacSp02) {
+        this.pacSp02 = pacSp02;
+    }
+
+    public String getPacFotografia() {
+        return pacFotografia;
+    }
+
+    public void setPacFotografia(String pacFotografia) {
+        this.pacFotografia = pacFotografia;
+    }
+
+    
     @Override
     public int hashCode() {
         int hash = 0;

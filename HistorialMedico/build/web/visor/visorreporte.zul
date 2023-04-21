@@ -7,7 +7,7 @@
              apply="org.zkoss.bind.BindComposer"  maximizable="true" 
            
              onCtrlKey="@command('cerrar')"
-             viewModel="@id('vm') @init('com.ec.controlador.VisorReporte')" >
+             viewModel="@id('vm') @init('com.ec.controlador.VisorReporteController')" >
         <caption label="Informes" style="font-weight:bold" >
             <progressmeter id="pm" width="100px" style="align:rigth" value="100" onCancel="@command('cerrar')" />
         </caption> 

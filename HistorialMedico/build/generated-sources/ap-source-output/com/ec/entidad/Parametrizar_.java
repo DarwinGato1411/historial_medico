@@ -4,12 +4,13 @@ import javax.annotation.Generated;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2023-04-04T14:13:11")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2023-04-21T06:16:07")
 @StaticMetamodel(Parametrizar.class)
 public class Parametrizar_ { 
 
     public static volatile SingularAttribute<Parametrizar, Integer> idParametrizar;
     public static volatile SingularAttribute<Parametrizar, String> paraProtocolo;
+    public static volatile SingularAttribute<Parametrizar, String> parHost;
     public static volatile SingularAttribute<Parametrizar, Integer> parPuerto;
     public static volatile SingularAttribute<Parametrizar, String> parBase;
     public static volatile SingularAttribute<Parametrizar, String> parCorreo;

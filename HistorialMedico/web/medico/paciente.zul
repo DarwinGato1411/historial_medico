@@ -7,7 +7,7 @@
 <?link rel="icon" type="image/x-icon" href="/iconos/deckxel.ico"?>
 
 
-<zk   with="100%" >
+<zk   with="90%" >
     <div self="@define(content)" apply="org.zkoss.bind.BindComposer" 
          viewModel="@id('vm') @init('com.ec.controlador.PacienteController')" >
                   
@@ -22,7 +22,7 @@
                     </button>
                 </div>    
                 <listbox class="tabla" model="@load(vm.listaPaciente)" 
-                         nonselectableTags="*"  mold="paging" pageSize="5"  >
+                         nonselectableTags="*"  mold="paging" pageSize="15"  >
                                
                     <custom-attributes org.zkoss.zul.listbox.rod="true"/>                       
                     <listhead  class="tblCabecera"> 
@@ -50,7 +50,7 @@
                             <listcell zclass = "mycss-listcell" style="width:100%;">
                                 <textbox readonly="true"  style="font-size:12px ;background:#EBF5FB"
                                          class="form-control form-control-sm" 
-                                         value="@bind(each.pacNombre)" />
+                                         value="@bind(each.pacNombres)" />
                             </listcell>
                             <listcell zclass = "mycss-listcell" style="width:100%;">
                                 <textbox readonly="true"  style="font-size:12px ;background:#EBF5FB"
@@ -62,13 +62,20 @@
                                          class="form-control form-control-sm" 
                                          value="@bind(each.pacTelefono)" />
                             </listcell>
-                            <listcell zclass = "mycss-listcell" style="font-size:12px;background:#F8F9F9">                                  
-                                <button label=""
+                            <listcell zclass = "mycss-listcell" style="font-size:12px;background:#F8F9F9">   
+                                <button label="Visita medica"
+                                         iconSclass="z-icon-pencil"
+                                         onClick="@command('registrarVisita',valor=each)" 
+                                         tooltiptext="">
+                                    
+                                </button>                                                  
+                                <button label="Editar"
                                         iconSclass="z-icon-pencil"
                                         onClick="@command('modificarPaciente',valor=each)" 
                                         tooltiptext="">
                                     
                                 </button>                                      
+                                                  
                             </listcell>
                                       
                                

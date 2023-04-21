@@ -105,7 +105,7 @@ public class ServicioSubCapitulo {
         return usuarioObtenido;
     }
 
-    public List<Subcapitulo> findByCapitulo(Capitulo capitulo) {
+    public List<Subcapitulo> findByCapitulo(Capitulo capitulo, String buscar) {
 
         List<Subcapitulo> listaDatos = new ArrayList<Subcapitulo>();
         Subcapitulo usuarioObtenido = new Subcapitulo();
@@ -114,9 +114,9 @@ public class ServicioSubCapitulo {
 
             em = HelperPersistencia.getEMF();
             em.getTransaction().begin();
-            Query query = em.createQuery("SELECT u FROM Subcapitulo u WHERE u.idCapitulo=:idCapitulo ORDER BY u.subDetalle ASC");
+            Query query = em.createQuery("SELECT u FROM Subcapitulo u WHERE u.idCapitulo=:idCapitulo AND UPPER(u.subDetalle) LIKE :subDetalle ORDER BY u.subDetalle ASC");
             query.setParameter("idCapitulo", capitulo);
-//            query.setParameter("pacNombre", "%" + valor + "%");
+            query.setParameter("subDetalle", "%" + buscar + "%");
             listaDatos = (List<Subcapitulo>) query.getResultList();
 
             em.getTransaction().commit();

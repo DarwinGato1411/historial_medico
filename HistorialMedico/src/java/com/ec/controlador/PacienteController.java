@@ -5,7 +5,6 @@
  */
 package com.ec.controlador;
 
-import com.ec.entidad.Capitulo;
 import com.ec.entidad.Paciente;
 import com.ec.entidad.Usuario;
 import com.ec.seguridad.EnumSesion;
@@ -96,6 +95,22 @@ public class PacienteController {
             map.put("valor", valor);
             org.zkoss.zul.Window window = (org.zkoss.zul.Window) Executions.createComponents(
                         "/medico/nuevo/paciente.zul", null, map);
+            window.doModal();
+        } catch (Exception e) {
+            Clients.showNotification("Ocurrio un error " + e.getMessage(),
+                        Clients.NOTIFICATION_TYPE_ERROR, null, "middle_center", 2000, true);
+        }
+    }
+    @Command
+    @NotifyChange({"listaPaciente", "buscarPaciente"})
+    public void registrarVisita(@BindingParam("valor") Paciente valor) {
+        try {
+//            if (Messagebox.show("¿Desea modificar el registro, recuerde que debe crear las reteniones nuevamente?", "Atención", Messagebox.YES | Messagebox.NO, Messagebox.INFORMATION) == Messagebox.YES) {
+            final HashMap<String, Paciente> map = new HashMap<String, Paciente>();
+
+            map.put("valor", valor);
+            org.zkoss.zul.Window window = (org.zkoss.zul.Window) Executions.createComponents(
+                        "/medico/nuevo/visita_medica.zul", null, map);
             window.doModal();
         } catch (Exception e) {
             Clients.showNotification("Ocurrio un error " + e.getMessage(),

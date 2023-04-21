@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<window  id="wPregunta"  position="center" closable="true"  
+ class="modalAll modalPaciente"
+         apply="org.zkoss.bind.BindComposer" 
+         viewModel="@id('vm') @init('com.ec.controlador.VisitaController')"
+         >
+    
+    <caption label="Historial de visita medica" style="font-weight:bold" class="titulo"/> 
+    
+
+    <div  >
+            <div class="paciente" >
+                <div class="">                                    
+                    <button    label="Nueva visita"
+                        iconSclass="z-icon-plus"
+                        onClick="@command('nuevaVisita')"  
+                        class="fa fa-plus"
+                        tooltiptext="Buscar">
+                    </button>
+                </div>    
+                <listbox  model="@load(vm.listaVisitaMedicas)" 
+                         nonselectableTags="*"  mold="paging" pageSize="10"  >
+                               
+                    <custom-attributes org.zkoss.zul.listbox.rod="true"/>                       
+                    <listhead  > 
+                         <listheader label="Fecha" width="10%" /> 
+                        <listheader label="" width="40%" >
+                           
+                            <textbox value="@bind(vm.buscar)" 
+                                     class="form-control form-control-sm"
+                                     tooltiptext="Buscar por observacion "                         
+                                     placeholder="....."
+                                     onOK="@command('buscarLike')"
+                                     onChange="self.setValue(self.getValue().toUpperCase());" />
+                        </listheader>                                                                         
+                                                                                                
+                                                                                           
+                        <listheader label="" width="50%" />                                                                         
+                    </listhead>  
+                    <template name="model" >                                                            
+                        <listitem >
+                              
+                            <listcell zclass = "mycss-listcell" style="width:100%;">
+                                <datebox compact="true" value="@bind(each.visFecha)" 
+                                         height=" 30px" 
+                                         buttonVisible="false" lenient="true" readonly="true"
+                                         format="medium" width="100%"  />
+                            </listcell>
+                            <listcell zclass = "mycss-listcell" style="width:100%;">
+                                <textbox readonly="true"  style="font-size:12px ;background:#EBF5FB"
+                                         class="form-control form-control-sm" 
+                                         value="@bind(each.visObservacion)" />
+                            </listcell>
+                            
+                            <listcell zclass = "mycss-listcell" style="font-size:12px;background:#F8F9F9">                                  
+                                <button label="Editar"
+                                        iconSclass="z-icon-pencil"
+                                        onClick="@command('modificarVisita',valor=each)" 
+                                        tooltiptext="">
+                                    
+                                </button>                                      
+                                <button label="Enviar correo"
+                                        iconSclass="z-icon-pencil"
+                                        onClick="@command('enviarReceta',valor=each)" 
+                                        tooltiptext="">
+                                    
+                                </button>                                      
+                                <button label="WhatsApp"
+                                        iconSclass="z-icon-pencil"
+                                        onClick="@command('enviarWhastApp',valor=each)" 
+                                        tooltiptext="">
+                                    
+                                </button>                                      
+                                <button label="Reseta"
+                                        iconSclass="z-icon-pencil"
+                                        onClick="@command('verReceta',valor=each)" 
+                                        tooltiptext="">
+                                    
+                                </button>                                      
+                            </listcell>
+                                      
+                               
+                                
+                                
+                        </listitem>
+                    </template>
+                </listbox>
+            </div>
+                        
+                        
+        </div> 
+                  
+
+</window>

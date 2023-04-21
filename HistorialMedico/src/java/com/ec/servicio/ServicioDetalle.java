@@ -103,7 +103,7 @@ public class ServicioDetalle {
         return usuarioObtenido;
     }
 
-    public List<Detalle> findBySubCapitulo(Subcapitulo subcapitulo) {
+    public List<Detalle> findBySubCapitulo(Subcapitulo subcapitulo, String valor) {
 
         List<Detalle> listaDatos = new ArrayList<Detalle>();
         Detalle usuarioObtenido = new Detalle();
@@ -112,9 +112,9 @@ public class ServicioDetalle {
 
             em = HelperPersistencia.getEMF();
             em.getTransaction().begin();
-            Query query = em.createQuery("SELECT u FROM Detalle u WHERE u.idSubcapitulo=:subcapitulo ORDER BY u.detDetalle ASC");
+            Query query = em.createQuery("SELECT u FROM Detalle u WHERE u.idSubcapitulo=:subcapitulo AND UPPER(u.detDetalle) LIKE :detDetalle ORDER BY u.detDetalle ASC");
             query.setParameter("subcapitulo", subcapitulo);
-//            query.setParameter("pacNombre", "%" + valor + "%");
+            query.setParameter("detDetalle", "%" + valor + "%");
             listaDatos = (List<Detalle>) query.getResultList();
 
             em.getTransaction().commit();

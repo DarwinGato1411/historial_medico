@@ -6,11 +6,12 @@ package com.ec.servicio;
 
 import com.ec.entidad.Paciente;
 import com.ec.entidad.VisitaMedica;
-import com.ec.entidad.VisitaMedica;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.ParameterMode;
 import javax.persistence.Query;
+import javax.persistence.StoredProcedureQuery;
 
 /**
  *
@@ -74,26 +75,20 @@ public class ServicioVisitaMedica {
 
     }
 
-    public VisitaMedica findForPaciente(Paciente idPaciente) {
+    public List<VisitaMedica> findForPaciente(Paciente idPaciente, String buscar) {
 
-        List<VisitaMedica> listaClientes = new ArrayList<VisitaMedica>();
-        VisitaMedica usuarioObtenido = new VisitaMedica();
+        List<VisitaMedica> listado = new ArrayList<VisitaMedica>();
+//        VisitaMedica usuarioObtenido = new VisitaMedica();
         try {
             //Connection connection = em.unwrap(Connection.class);
 
             em = HelperPersistencia.getEMF();
             em.getTransaction().begin();
-            Query query = em.createQuery("SELECT u FROM VisitaMedica u WHERE u.idPaciente=:idPaciente ORDER BY u.visFecha DESC");
+            Query query = em.createQuery("SELECT u FROM VisitaMedica u WHERE u.idPaciente=:idPaciente AND u.visObservacion LIKE :visObservacion ORDER BY u.visFecha DESC");
             query.setParameter("idPaciente", idPaciente);
-//            query.setParameter("pacNombre", "%" + valor + "%");
-            listaClientes = (List<VisitaMedica>) query.getResultList();
-            if (listaClientes.size() > 0) {
-                for (VisitaMedica usuario : listaClientes) {
-                    usuarioObtenido = usuario;
-                }
-            } else {
-                usuarioObtenido = null;
-            }
+            query.setParameter("visObservacion", "%" + buscar + "%");
+            listado = (List<VisitaMedica>) query.getResultList();
+            
             em.getTransaction().commit();
         } catch (Exception e) {
             System.out.println("Error en lsa consulta usuario  FindVisitaMedicaPorNombre  " + e.getMessage());
@@ -101,7 +96,7 @@ public class ServicioVisitaMedica {
             em.close();
         }
 
-        return usuarioObtenido;
+        return listado;
     }
 
     public List<VisitaMedica> finAll(String nombre) {
@@ -122,5 +117,29 @@ public class ServicioVisitaMedica {
         }
 
         return listaVisitaMedicas;
+    }
+    
+     public void eliminarExamenesRecetas(Integer idVisitaMedica) {
+        try {
+
+            em = HelperPersistencia.getEMF();
+
+            em.getTransaction().begin();
+
+            StoredProcedureQuery queryStore = em.createStoredProcedureQuery("eliminar_examen_receta");
+            queryStore.registerStoredProcedureParameter("id_visita_param", Integer.class, ParameterMode.IN);
+
+            queryStore.setParameter("id_visita_param", idVisitaMedica);
+            queryStore.executeUpdate();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            if (em != null) {
+                em.getTransaction().rollback();
+            }
+            System.out.println("Error generarEvaluacion " + e.getMessage());
+        } finally {
+            em.close();
+        }
+
     }
 }

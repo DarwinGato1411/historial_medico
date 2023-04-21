@@ -25,7 +25,7 @@
                                     tooltiptext="Buscar">Agregar Capitulo</button>
                             </div>    
                             <listbox class="tabla" model="@load(vm.listaCapitulo)" 
-                                     nonselectableTags="*"  mold="paging" pageSize="5"  >
+                                     nonselectableTags="*"  mold="paging" pageSize="15"  >
                                
                                 <custom-attributes org.zkoss.zul.listbox.rod="true"/>                       
                                 <listhead class="tblCabecera"> 
@@ -75,7 +75,7 @@
                                  </div>
                             </div>
                             <listbox class="tabla" model="@load(vm.listaSubcapitulos)" 
-                                     nonselectableTags=""  mold="paging" pageSize="5"  >
+                                     nonselectableTags=""  mold="paging" pageSize="15"  >
                                 <custom-attributes org.zkoss.zul.listbox.rod="true"/>
                                 
                        
@@ -133,7 +133,7 @@
                                  </div>
                             </div>
                             <listbox class="tabla" model="@load(vm.listaDetalles)" 
-                                     nonselectableTags=""  mold="paging" pageSize="5"  >
+                                     nonselectableTags=""  mold="paging" pageSize="15"  >
                                 <custom-attributes org.zkoss.zul.listbox.rod="true"/>
                                 
                        

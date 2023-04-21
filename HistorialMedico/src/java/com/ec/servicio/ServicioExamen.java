@@ -4,7 +4,7 @@
  */
 package com.ec.servicio;
 
-import com.ec.entidad.Receta;
+import com.ec.entidad.Examen;
 import com.ec.entidad.VisitaMedica;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,99 +27,123 @@ public class ServicioExamen {
         this.em = em;
     }
 
-    public void crear(Receta usuario) {
+    public void crear(Examen examen) {
 
         try {
             em = HelperPersistencia.getEMF();
             em.getTransaction().begin();
-            em.persist(usuario);
+            em.persist(examen);
             em.getTransaction().commit();
         } catch (Exception e) {
-            System.out.println("Error en insertar usuario");
+            System.out.println("Error en insertar examen");
         } finally {
             em.close();
         }
 
     }
 
-    public void eliminar(Receta usuario) {
+    public void eliminar(Examen examen) {
 
         try {
             em = HelperPersistencia.getEMF();
             em.getTransaction().begin();
-            em.remove(em.merge(usuario));
+            em.remove(em.merge(examen));
             em.getTransaction().commit();
 
         } catch (Exception e) {
-            System.out.println("Error en eliminar  usuario" + e);
+            System.out.println("Error en eliminar  examen" + e);
         } finally {
             em.close();
         }
 
     }
 
-    public void modificar(Receta usuario) {
+    public void modificar(Examen examen) {
 
         try {
             em = HelperPersistencia.getEMF();
             em.getTransaction().begin();
-            em.merge(usuario);
+            em.merge(examen);
             em.getTransaction().commit();
         } catch (Exception e) {
-            System.out.println("Error en insertar usuario");
+            System.out.println("Error en insertar examen");
         } finally {
             em.close();
         }
 
     }
 
-    public Receta findForVisiMedica(VisitaMedica idVisitaMedica) {
+//    public Examen findForVisiMedica(VisitaMedica idVisitaMedica) {
+//
+//        List<Examen> listaClientes = new ArrayList<Examen>();
+//        Examen examenObtenido = new Examen();
+//        try {
+//            //Connection connection = em.unwrap(Connection.class);
+//
+//            em = HelperPersistencia.getEMF();
+//            em.getTransaction().begin();
+//            Query query = em.createQuery("SELECT u FROM Examen u WHERE u.idVisitaMedica=:idVisitaMedica ORDER BY u.idVisitaMedica.visFecha ASC");
+//            query.setParameter("idVisitaMedica", idVisitaMedica);
+////            query.setParameter("pacNombre", "%" + valor + "%");
+//            listaClientes = (List<Examen>) query.getResultList();
+//            if (listaClientes.size() > 0) {
+//                for (Examen examen : listaClientes) {
+//                    examenObtenido = examen;
+//                }
+//            } else {
+//                examenObtenido = null;
+//            }
+//            em.getTransaction().commit();
+//        } catch (Exception e) {
+//            System.out.println("Error en lsa consulta examen  FindExamenPorNombre  " + e.getMessage());
+//        } finally {
+//            em.close();
+//        }
+//
+//        return examenObtenido;
+//    }
 
-        List<Receta> listaClientes = new ArrayList<Receta>();
-        Receta usuarioObtenido = new Receta();
+    public List<Examen> findForVisiMedica(VisitaMedica idVisitaMedica) {
+
+        List<Examen> listaClientes = new ArrayList<Examen>();
+        Examen examenObtenido = new Examen();
         try {
             //Connection connection = em.unwrap(Connection.class);
 
             em = HelperPersistencia.getEMF();
             em.getTransaction().begin();
-            Query query = em.createQuery("SELECT u FROM Receta u WHERE u.idVisitaMedica=:idVisitaMedica ORDER BY u.idVisitaMedica.visFecha ASC");
+            Query query = em.createQuery("SELECT u FROM Examen u WHERE u.idVisitaMedica=:idVisitaMedica ORDER BY u.idVisitaMedica.visFecha ASC");
             query.setParameter("idVisitaMedica", idVisitaMedica);
 //            query.setParameter("pacNombre", "%" + valor + "%");
-            listaClientes = (List<Receta>) query.getResultList();
-            if (listaClientes.size() > 0) {
-                for (Receta usuario : listaClientes) {
-                    usuarioObtenido = usuario;
-                }
-            } else {
-                usuarioObtenido = null;
-            }
+            listaClientes = (List<Examen>) query.getResultList();
+
             em.getTransaction().commit();
         } catch (Exception e) {
-            System.out.println("Error en lsa consulta usuario  FindRecetaPorNombre  " + e.getMessage());
+            System.out.println("Error en lsa consulta examen  FindExamenPorNombre  " + e.getMessage());
         } finally {
             em.close();
         }
 
-        return usuarioObtenido;
+        return listaClientes;
     }
 
-    public List<Receta> finAll(String nombre) {
-        List<Receta> listaRecetas = new ArrayList<Receta>();
+    public List<Examen> finAll(String nombre) {
+        List<Examen> listaExamens = new ArrayList<Examen>();
         try {
-            System.out.println("Entra a consultar usuarios");
+            System.out.println("Entra a consultar examens");
             //Connection connection = em.unwrap(Connection.class);
             em = HelperPersistencia.getEMF();
             em.getTransaction().begin();
-            Query query = em.createQuery("SELECT u FROM Receta u");
+            Query query = em.createQuery("SELECT u FROM Examen u");
 //            query.setParameter("usuNombre", "%" + nombre + "%");
-            listaRecetas = (List<Receta>) query.getResultList();
+            listaExamens = (List<Examen>) query.getResultList();
             em.getTransaction().commit();
         } catch (Exception e) {
-            System.out.println("Error usuarios finAll " + e.getMessage());
+            System.out.println("Error examens finAll " + e.getMessage());
         } finally {
             em.close();
         }
 
-        return listaRecetas;
+        return listaExamens;
     }
 }

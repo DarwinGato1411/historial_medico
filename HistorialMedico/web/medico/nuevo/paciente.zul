@@ -11,95 +11,107 @@
 
         <div class="bodyModal">
             <div class="container_row_input">  
-                
-                <div class="wrapper_input_mod">
-                    <span>Nombres</span>
-                    <div class="wrapper_input_text">
-                        
-                        <textbox  
-                            maxlength="100"    
-                            onChange="self.setValue(self.getValue().toUpperCase());"  
-                            value="@bind(vm.entidad.pacNombres)" 
-                            class="input_text" />
-                    </div>
-                </div>
-                <div class="wrapper_input_mod">
-                    <span>Apellidos</span>
-                    <div class="wrapper_input_text">
-                        
-                        <textbox  
-                            maxlength="100"    
-                            onChange="self.setValue(self.getValue().toUpperCase());"  
-                            value="@bind(vm.entidad.pacApellidos)" 
-                            class="input_text" />
-                    </div>
-                </div>
-                <div class="wrapper_input_mod">
-                    <span>Cédula</span>
-                    <div class="wrapper_input_text">
-                        
-                        <textbox  
-                            maxlength="13"    
-                            onChange="self.setValue(self.getValue().toUpperCase());"  
-                            value="@bind(vm.entidad.pacRuc)" 
-                            class="input_text" />
-                    </div>
-                </div>
-                <div class="wrapper_input_mod">
-                    <span>Género</span>
-                   <!-- <radiogroup onCheck="fruit.value = self.selectedItem.label" selectedItem="A">
-                        <radio value="A" label="Masculino" />
-                        <radio value="B" label="Femenino" />
-                        <radio value="C" label="Otro" />
-                    </radiogroup>
-                    
-                    
-                    You have selected :
-                    <label id="fruit" style="color:red" />-->
-                    
-                    
-                </div>
-                
                 <div class="wrapper_input_mod_group">
                     <div class="wrapper_input_mod">
-                        <span>Fecha naciemiento</span>
-                   
+                        <span>Cédula</span>
+                        <div class="wrapper_input_text">
+                        
+                            <textbox  
+                                maxlength="13"     
+                                value="@bind(vm.entidad.pacRuc)" 
+                                class="input_text" />
+                        </div>
+                    </div>
+
+                    <div class="wrapper_input_mod">
+                        <span>Nombres</span>
                         <div class="wrapper_input_text">
                         
                             <textbox  
                                 maxlength="100"    
                                 onChange="self.setValue(self.getValue().toUpperCase());"  
-                                value="@bind(vm.entidad.pacTelefono)" 
+                                value="@bind(vm.entidad.pacNombres)" 
                                 class="input_text" />
                         </div>
                     </div>
                     <div class="wrapper_input_mod">
-                        <span>Edad</span>
-                   
+                        <span>Apellidos</span>
                         <div class="wrapper_input_text">
-                           
-                            <intbox constraint="no negative,no zero"  value="@bind(vm.entidad.pacEdad)" format="##" class="input_text"   tabindex="1" />
-                           
+                        
+                            <textbox  
+                                maxlength="100"    
+                                onChange="self.setValue(self.getValue().toUpperCase());"  
+                                value="@bind(vm.entidad.pacApellidos)" 
+                                class="input_text" />
                         </div>
                     </div>
+                </div>
+                <div class="wrapper_input_mod_group">
                     <div class="wrapper_input_mod">
                         <span>Estado Civil</span>
                    
                         <div class="wrapper_input_text">
                            
-                            <combobox>
-                                <comboitem value="A" label="Casado/a" />
-                                <comboitem value="B" label="Soltero/a" />
-                                <comboitem value="C" label="Divorciado/a"/>
+                            <combobox readonly="true"                                     
+                                   selectedItem="@bind(vm.entidad.pacEstadoCivil)"> 
+                                <comboitem value="Casado" label="Casado/a" />
+                                <comboitem value="Soltero" label="Soltero/a" />
+                                <comboitem value="Divorciado" label="Divorciado/a"/>
+                                  <comboitem value="Viudo" label="Viudo/a"/>
                             </combobox>
                             
                             
                            
                         </div>
                     </div>
+                    <div class="wrapper_input_mod">
+                        <span>Género</span>
+                        <combobox  readonly="true"                                     
+                                   selectedItem="@bind(vm.entidad.pacSexo)">
+                            <comboitem value="Masculino" label="Masculino" />
+                            <comboitem value="Femenino" label="Femenino" />
+                            <comboitem value="Otro" label="Otros"/>
+                        </combobox>
+                    
+                    
+                   
+                    
+                    
+                    </div>
+                
+                    <div class="wrapper_input_mod_group">
+                        <div class="wrapper_input_mod">
+                            <span>Fecha naciemiento</span>
+                   
+                            <div class="wrapper_input_text">
+                                <datebox compact="true" 
+                                         value="@bind(vm.entidad.pacFechaNacimiento)" 
+                                         onChange="@command('obtenerEdad')" 
+                                         readonly="true"   
+                                         buttonVisible="true" 
+                                         lenient="true" 
+                                         format="dd/MM/yyyy"
+                                         class="input_date"
+                                />
+                            
+                            </div>
+                        </div>
+                        <div class="wrapper_input_mod">
+                            <span>Edad</span>
+                   
+                            <div class="wrapper_input_text">
+                           
+                                <intbox constraint="no negative,no zero"  
+                                        value="@bind(vm.entidad.pacEdad)" 
+                                        format="##" class="input_text"   
+                                        tabindex="1" />
+                           
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="wrapper_input_mod">
-                    <span>Domicilio</span>
+                    <span>Direccion domicilio</span>
                     <div class="wrapper_input_text">
                         
                         <textbox  
@@ -109,35 +121,25 @@
                             class="input_text" />
                     </div>
                 </div>
-                <div class="wrapper_input_mod">
-                    <span>Correo</span>
-                    <div class="wrapper_input_text">
-                        
-                        <textbox  
-                            maxlength="100"    
-                            value="@bind(vm.entidad.pacCorreo)" 
-                            class="input_text" />
-                    </div>
-                </div>
+               
              
-                <div class="wrapper_input_mod">
-                    <span>Teléfono</span>
-                   
-                    <div class="wrapper_input_text">
-                        
-                        <textbox  
-                            maxlength="100"    
-                            onChange="self.setValue(self.getValue().toUpperCase());"  
-                            value="@bind(vm.entidad.pacTelefono)" 
-                            class="input_text" />
-                    </div>
-                </div>
+                
                 
                 
                 
                 <div class="wrapper_input_mod_group">
                     <div class="wrapper_input_mod">
-                        <span>Sexo</span>
+                        <span>Correo</span>
+                        <div class="wrapper_input_text">
+                        
+                            <textbox  
+                                maxlength="100"    
+                                value="@bind(vm.entidad.pacCorreo)" 
+                                class="input_text" />
+                        </div>
+                    </div>
+                    <div class="wrapper_input_mod">
+                        <span>Teléfono</span>
                    
                         <div class="wrapper_input_text">
                         
@@ -149,29 +151,20 @@
                         </div>
                     </div>
                     <div class="wrapper_input_mod">
-                        <span>Estado civil</span>
+                        <span>Teléfono celular</span>
                    
                         <div class="wrapper_input_text">
                         
                             <textbox  
                                 maxlength="100"    
                                 onChange="self.setValue(self.getValue().toUpperCase());"  
-                                value="@bind(vm.entidad.pacTelefono)" 
+                                value="@bind(vm.entidad.pacMovil)" 
                                 class="input_text" />
                         </div>
                     </div>
-                    <div class="wrapper_input_mod">
-                        <span>Tipo sangre</span>
-                   
-                        <div class="wrapper_input_text">
-                        
-                            <textbox  
-                                maxlength="100"    
-                                onChange="self.setValue(self.getValue().toUpperCase());"  
-                                value="@bind(vm.entidad.pacTelefono)" 
-                                class="input_text" />
-                        </div>
-                    </div>
+                    
+                    
+                    
                 </div>
                 
                 <div class="wrapper_input_mod">
@@ -186,7 +179,188 @@
                     </div>
                 </div>
                 
-
+                Antecedentes personales / patologicos
+                <div class="wrapper_input_mod">
+                    <span>Alergias</span>
+                    <div class="wrapper_input_text">
+                        
+                        <textbox  
+                            maxlength="100"    
+                            onChange="self.setValue(self.getValue().toUpperCase());"  
+                            value="@bind(vm.entidad.pacAlegias)" 
+                            class="input_text" />
+                    </div>
+                </div>
+                <div class="wrapper_input_mod">
+                    <span>Cirugías</span>
+                    <div class="wrapper_input_text">
+                        
+                        <textbox  
+                            maxlength="100"    
+                            onChange="self.setValue(self.getValue().toUpperCase());"  
+                            value="@bind(vm.entidad.pacCirugias)" 
+                            class="input_text" />
+                    </div>
+                </div>
+                <div class="wrapper_input_mod">
+                    <span>Enfermedades existentes</span>
+                    <div class="wrapper_input_text">
+                        
+                        <textbox  
+                            maxlength="100"    
+                            onChange="self.setValue(self.getValue().toUpperCase());"  
+                            value="@bind(vm.entidad.pacEnfermedadExistente)" 
+                            class="input_text" />
+                    </div>
+                </div>
+                <div class="wrapper_input_mod">
+                    <span>Enfermedades familiares</span>
+                    <div class="wrapper_input_text">
+                        
+                        <textbox  
+                            maxlength="100"    
+                            onChange="self.setValue(self.getValue().toUpperCase());"  
+                            value="@bind(vm.entidad.pacEnfermedadFamilia)" 
+                            class="input_text" />
+                    </div>
+                </div>
+                Datos de control / medidas antropométricas
+                <div class="wrapper_input_mod_group">
+                    <div class="wrapper_input_mod">
+                        <span>Talla (metros)</span>
+                        <div class="wrapper_input_text">
+                        
+                            <textbox    
+                                constraint="/^[0-9]{1,9}(?:[.][0-9]{1,5})?$/:Ingrese solo numeros"                           
+                                value="@bind(vm.entidad.pacTalla)"  
+                                class="input_text"  
+                            />
+                        </div>
+                    </div>
+                    <div class="wrapper_input_mod">
+                        <span>Peso (Kilogramos)</span>
+                        <div class="wrapper_input_text">
+                        
+                            <textbox    
+                                constraint="/^[0-9]{1,9}(?:[.][0-9]{1,5})?$/:Ingrese solo numeros"                           
+                                value="@bind(vm.entidad.pacPeso)"  
+                                class="input_text"  
+                            />
+                        </div>
+                    </div>
+                    <div class="wrapper_input_mod">
+                        <span>IMC</span>
+                        <div class="wrapper_input_text">
+                        
+                            <textbox    
+                                constraint="/^[0-9]{1,9}(?:[.][0-9]{1,5})?$/:Ingrese solo numeros"                           
+                                value="@bind(vm.entidad.pacImc)"  
+                                class="input_text"  
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="wrapper_input_mod_group">
+                    <div class="wrapper_input_mod">
+                        <span>P/A</span>
+                        <div class="wrapper_input_text">
+                        
+                            <textbox    
+                                constraint="/^[0-9]{1,9}(?:[.][0-9]{1,5})?$/:Ingrese solo numeros"                           
+                                value="@bind(vm.entidad.pacPa)"  
+                                class="input_text"  
+                            />
+                        </div>
+                    </div>
+                    <div class="wrapper_input_mod">
+                        <span>FC</span>
+                        <div class="wrapper_input_text">
+                        
+                            <textbox    
+                                constraint="/^[0-9]{1,9}(?:[.][0-9]{1,5})?$/:Ingrese solo numeros"                           
+                                value="@bind(vm.entidad.pacFc)"  
+                                class="input_text"  
+                            />
+                        </div>
+                    </div>
+                    <div class="wrapper_input_mod">
+                        <span>Sp02</span>
+                        <div class="wrapper_input_text">
+                        
+                            <textbox    
+                                constraint="/^[0-9]{1,9}(?:[.][0-9]{1,5})?$/:Ingrese solo numeros"                           
+                                value="@bind(vm.entidad.pacSp02)"  
+                                class="input_text"  
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="wrapper_input_mod_group">
+                    <div class="wrapper_input_mod">
+                        <span>Tm BUCAL</span>
+                        <div class="wrapper_input_text">
+                        
+                            <textbox    
+                                constraint="/^[0-9]{1,9}(?:[.][0-9]{1,5})?$/:Ingrese solo numeros"                           
+                                value="@bind(vm.entidad.pacTmBucal)"  
+                                class="input_text"  
+                            />
+                        </div>
+                    </div>
+                    <div class="wrapper_input_mod">
+                        <span>Cuello</span>
+                        <div class="wrapper_input_text">
+                        
+                            <textbox    
+                                constraint="/^[0-9]{1,9}(?:[.][0-9]{1,5})?$/:Ingrese solo numeros"                           
+                                value="@bind(vm.entidad.pacCuello)"  
+                                class="input_text"  
+                            />
+                        </div>
+                    </div>
+                    <div class="wrapper_input_mod">
+                        <span>Cintura</span>
+                        <div class="wrapper_input_text">
+                        
+                            <textbox    
+                                constraint="/^[0-9]{1,9}(?:[.][0-9]{1,5})?$/:Ingrese solo numeros"                           
+                                value="@bind(vm.entidad.pacCintura)"  
+                                class="input_text"  
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="wrapper_input_mod_group">
+                    <div class="wrapper_input_mod">
+                        <span>Per Abdominal</span>
+                        <div class="wrapper_input_text">
+                        
+                            <textbox    
+                                constraint="/^[0-9]{1,9}(?:[.][0-9]{1,5})?$/:Ingrese solo numeros"                           
+                                value="@bind(vm.entidad.pacPerAbdominal)"  
+                                class="input_text"  
+                            />
+                        </div>
+                    </div>
+                    <div class="wrapper_input_mod">
+                        <span>Tipo sangre</span>
+                        <div class="wrapper_input_text">
+                        
+                              <combobox readonly="true"                                     
+                                   selectedItem="@bind(vm.entidad.pacTipoSangre)"> 
+                                <comboitem value="A+" label="A+" />
+                                <comboitem value="A-" label="A-" />
+                                <comboitem value="AB+" label="AB+" />
+                                <comboitem value="AB-" label="AB-" />
+                                <comboitem value="B+" label="B+" />
+                                <comboitem value="B-" label="B-" />
+                                <comboitem value="O+" label="O+"/>
+                                <comboitem value="O-" label="O-"/>
+                            </combobox>
+                        </div>
+                    </div>
+                    
+                </div>
             </div>
             
             <div style="display:flex;justify-content:flex-end;">
@@ -197,11 +371,11 @@
         </div>
         <div class="fotoPerfil">
             <div class="perfil">
-                <div class="foto">
-                    <image/> 
+                <div class="foto" align="center">
+                    <image   content="@bind(vm.fotoGeneral)"  width="200px"/>
                 </div>
                 <div style="display:flex;justify-content:flex-end;">
-                    <a class="btn_modal">
+                    <a class="btn_modal"  onClick="@command('subirFotografia')"  >
                         Subir fotografía
                     </a>
                 </div>

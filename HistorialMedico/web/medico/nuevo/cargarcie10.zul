@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk   with="100%" >
+    <window  id="wVCargarCie"  position="center" closable="true"  
+             apply="org.zkoss.bind.BindComposer" 
+             viewModel="@id('vm') @init('com.ec.controlador.NuevoVisita')"
+             class="modalAll modalPaciente">
+  
+    
+        <caption label="CIE-10 "  class="titulo"/> 
+                  
+        <div  class="contenedorTest">
+            <div  class="containerEva">
+             
+                <listbox class="tabla" model="@load(vm.listaCapitulo)" 
+                                     nonselectableTags="*"  mold="paging" pageSize="15"  >
+                               
+                    <custom-attributes org.zkoss.zul.listbox.rod="true"/>                       
+                    <listhead class="tblCabecera"> 
+                        <listheader label="Capitulo" />                                                                         
+                        <listheader label="" >
+                            
+                            <textbox value="@bind(vm.buscarCapitulo)" 
+                                     class="form-control form-control-sm"
+                                     tooltiptext="Buscar "                         
+                                     placeholder="....."
+                                     onOK="@command('buscarCapitulo')"
+                                     onChange="self.setValue(self.getValue().toUpperCase());" />
+                        </listheader>                                                                         
+                    </listhead>  
+                    <template name="model">                                                            
+                        <listitem class="tblCuerpo" >
+                              
+                            <listcell zclass = "mycss-listcell" style="width:100%;">
+                                <textbox readonly="true"  style="font-size:12px ;background:#EBF5FB"
+                                                     class="form-control form-control-sm" 
+                                                     value="@bind(each.capDetalle)" />
+                            </listcell>
+
+                            <listcell zclass = "mycss-listcell" style="font-size:12px;background:#F8F9F9">     
+                                <button 
+                                    iconSclass="z-icon-hand-o-up" 
+                                    tooltiptext="Modificar"
+                                    onClick="@command('buscarSubCapitulo',valor=each)">
+                                    Seleccionar
+                                </button>   
+                            </listcell>
+                               
+                                
+                                
+                        </listitem>
+                    </template>
+                </listbox>
+            </div>
+            <div  class="containerPreguntas">
+               
+                <listbox class="tabla" model="@load(vm.listaSubcapitulos)" 
+                                     nonselectableTags=""  mold="paging" pageSize="15"  >
+                    <custom-attributes org.zkoss.zul.listbox.rod="true"/>
+                                
+                       
+                    <listhead class="tblCabecera"> 
+                        <listheader label="@bind('Capitulo: ('.concat(vm.capituloSelected.capDetalle).concat(')'))" />                                           
+                        <listheader label="" >
+                            
+                            <textbox value="@bind(vm.buscarSubCapitulo)" 
+                                     class="form-control form-control-sm"
+                                     tooltiptext="Buscar "                         
+                                     placeholder="....."
+                                     onOK="@command('buscarSubCapitulo')"
+                                     onChange="self.setValue(self.getValue().toUpperCase());" />
+                        </listheader>                            
+                    </listhead>  
+                        
+                    
+                    <template name="model">                                                            
+                        <listitem class="tblCuerpo">
+                              
+                            <listcell zclass = "mycss-listcell" style="width:100%;">
+                                <textbox readonly="true"  style="font-size:12px ;background:#EBF5FB"
+                                                     class="form-control form-control-sm" 
+                                                     value="@bind(each.subDetalle)"
+                                />
+                            </listcell>
+                          
+                            <listcell zclass = "mycss-listcell" style="font-size:12px;background:#F8F9F9">
+                                            
+                                            
+                                <button 
+                                    iconSclass="z-icon-hand-o-up" 
+                                    tooltiptext="Seleccionar"
+                                    onClick="@command('busacarDetalle',valor=each)" >
+                                    Seleccionar
+                                </button>   
+                                   
+                            </listcell>
+                                
+                                
+                        </listitem>
+                    </template>
+                </listbox>
+            </div>
+            <div  class="containerRespuestas">
+                
+                <listbox class="tabla" model="@load(vm.listaDetalles)" 
+                                     nonselectableTags=""  mold="paging" pageSize="15"  >
+                    <custom-attributes org.zkoss.zul.listbox.rod="true"/>
+                                
+                       
+                    <listhead class="tblCabecera"> 
+                        <listheader label="@bind('Sub capitulo: ('.concat(vm.subCapituloSelected.subDetalle).concat(')'))" />   
+                        <listheader label="" >
+                            
+                            <textbox value="@bind(vm.buscarDetalle)" 
+                                     class="form-control form-control-sm"
+                                     tooltiptext="Buscar "                         
+                                     placeholder="....."
+                                     onOK="@command('busacarDetalle')"
+                                     onChange="self.setValue(self.getValue().toUpperCase());" />
+                        </listheader>                                 
+                                                
+                    </listhead>  
+                        
+                    
+                    <template name="model">                                                            
+                        <listitem class="tblCuerpo">
+                              
+                            <listcell zclass = "mycss-listcell" style="width:100%;">
+                                <textbox readonly="true"  style="font-size:12px ;background:#EBF5FB"
+                                                     class="form-control form-control-sm" 
+                                                     value="@bind(each.detDetalle)" />
+                            </listcell>
+                            <listcell zclass = "mycss-listcell" style="font-size:12px;background:#F8F9F9">                       
+                                <button 
+                                    iconSclass="z-icon-hand-o-up"
+                                    onClick="@command('seleccionarCie',valor=each)"  
+                                    tooltiptext="Selecccionar">
+                                    Seleccionar
+                                </button> 
+                            </listcell>
+                        </listitem>
+                    </template>
+                </listbox>
+            </div>
+        </div>
+   
+  </window>
+
+
+</zk>

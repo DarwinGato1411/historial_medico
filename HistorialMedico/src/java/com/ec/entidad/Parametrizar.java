@@ -48,6 +48,8 @@ public class Parametrizar implements Serializable {
     private String parBase;
     @Column(name = "par_activo")
     private Boolean parActivo;
+    @Column(name = "par_host")
+    private String parHost;
 
     public Parametrizar() {
     }
@@ -126,6 +128,14 @@ public class Parametrizar implements Serializable {
 
     public void setParActivo(Boolean parActivo) {
         this.parActivo = parActivo;
+    }
+
+    public String getParHost() {
+        return parHost;
+    }
+
+    public void setParHost(String parHost) {
+        this.parHost = parHost;
     }
 
     @Override

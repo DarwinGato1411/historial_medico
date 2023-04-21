@@ -23,6 +23,9 @@ import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -282,7 +285,7 @@ public class ArchivoUtils {
 //        }
 //        return "";
 //    }
-    public static void reporteGeneralPdfMail(String pathPDF, Integer numeroFactura, String tipo) throws JRException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException, NamingException {
+    public static void reporteGeneralPdfMail(String pathPDF, Integer idVisitaMedica) throws JRException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException, NamingException {
         EntityManager emf = HelperPersistencia.getEMF();
         Connection con = null;
         try {
@@ -291,20 +294,14 @@ public class ArchivoUtils {
             String reportPath = "";
             emf.getTransaction().begin();
             con = emf.unwrap(Connection.class);
-            if (tipo.contains("FACT")) {
-                reportPath = reportFile + File.separator + "factura.jasper";
-            } else if (tipo.contains("NCRE")) {
-                reportPath = reportFile + File.separator + "notacr.jasper";
-            } else if (tipo.contains("RET")) {
-                reportPath = reportFile + File.separator + "retencion.jasper";
-            } else if (tipo.contains("GUIA")) {
-                reportPath = reportFile + File.separator + "guia.jasper";
-            }
+           
+                reportPath = reportFile + File.separator + "receta.jasper";
+           
 
             Map<String, Object> parametros = new HashMap<String, Object>();
 
             //  parametros.put("codUsuario", String.valueOf(credentialLog.getAdUsuario().getCodigoUsuario()));
-            parametros.put("numfactura", numeroFactura);
+            parametros.put("IdVisitaMedica", idVisitaMedica);
 
             if (con != null) {
                 System.out.println("Conexión Realizada Correctamenteeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
@@ -725,5 +722,11 @@ public class ArchivoUtils {
 
     }
     
-    
+    public static BigDecimal obtenerEdad(Date fechaNac) {
+        LocalDate hoy = LocalDate.now();
+        LocalDate nacimiento = fechaNac.toInstant().
+                atZone(ZoneId.systemDefault()).toLocalDate();
+        long edad = ChronoUnit.YEARS.between(nacimiento, hoy);
+        return BigDecimal.valueOf(edad);
+    }
 }

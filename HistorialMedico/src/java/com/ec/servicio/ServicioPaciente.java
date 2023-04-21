@@ -129,7 +129,7 @@ public class ServicioPaciente {
             //Connection connection = em.unwrap(Connection.class);
             em = HelperPersistencia.getEMF();
             em.getTransaction().begin();
-            Query query = em.createQuery("SELECT u FROM Paciente u WHERE u.pacNombre LIKE :pacNombre OR u.pacRuc LIKE :pacRuc");
+            Query query = em.createQuery("SELECT u FROM Paciente u WHERE u.pacNombres LIKE :pacNombre OR u.pacRuc LIKE :pacRuc");
             query.setParameter("pacNombre", "%" + nombre + "%");
             query.setParameter("pacRuc", "%" + nombre + "%");
             listaPacientes = (List<Paciente>) query.getResultList();

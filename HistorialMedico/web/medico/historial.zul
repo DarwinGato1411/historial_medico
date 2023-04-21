@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?link rel="stylesheet" type="text/css" href="/css/boostrap/bootstrap.css"?>  
-<?link rel="stylesheet" type="text/css" href="/css/style.css"?>
-<?link rel="stylesheet" type="text/css" href="/css/modales.css"?>
-<?init class="com.ec.seguridad.Autentificador"?>
-<?init class="org.zkoss.zk.ui.util.Composition" arg0="/plantilla/plantilla.zul"?>
-<?link rel="icon" type="image/x-icon" href="/iconos/deckxel.ico"?>
 <zk   with="100%" >
-    <div self="@define(content)" apply="org.zkoss.bind.BindComposer" 
-          viewModel="@id('vm') @init('com.ec.controlador.HIstorial')" >
+    <window  id="wPregunta"  position="center" closable="true"  
+         apply="org.zkoss.bind.BindComposer" 
+         viewModel="@id('vm') @init('com.ec.controlador.HIstorial')"
+             class="modalRespuesta modalAll">
+ 
+ 
        <!-- <tabbox id="tboxPrincipal"  width="100%">
             <tabs >
                 <tab label="Armar Evaluacion " sclass="menutabs" /> 
@@ -71,7 +69,6 @@
             </tabpanels>
             
         </tabbox>-->
-    </div>
-
+      </window>
 
 </zk>
