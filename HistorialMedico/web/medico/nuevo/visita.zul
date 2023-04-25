@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<window  id="wVisita"  position="center" closable="true"  
+<window  id="wVisita"  position="top,center" closable="true"  
          apply="org.zkoss.bind.BindComposer" 
          viewModel="@id('vm') @init('com.ec.controlador.NuevoVisita')"
          class="modalAll modalPaciente">

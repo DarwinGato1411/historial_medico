@@ -132,7 +132,7 @@ public class NuevoVisita {
         if (valor.getTipo().equals("cie")) {
             buscarCapituloBD();
         } else {
-            if (valor.getVisita() != null) {
+            if (valor.getTipo().equals("modifica")) {
                 this.entidad = valor.getVisita();
 
                 accion = "update";
@@ -148,6 +148,7 @@ public class NuevoVisita {
                 listaRecetaModel = new ListModelList();
                 listaExamenModel = new ListModelList();
                 this.entidad = new VisitaMedica();
+                this.entidad.setIdPaciente(valor.getIdPaciente());
                 this.entidad.setVisFecha(new Date());
                 accion = "create";
 

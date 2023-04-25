@@ -63,8 +63,8 @@
                                          class="form-control form-control-sm" 
                                          value="@bind(each.pacTelefono)" />
                             </listcell>
-                            <listcell class="btnCell"  style="font-size:12px;background:#F8F9F9">   
-                                <button 
+                            <listcell zclass = "mycss-listcell"  class="btnCell"  style="font-size:12px;background:#F8F9F9">   
+                                <button   class="inputGroupBtn"
                                     iconSclass="z-icon-eye"
                                     onClick="@command('registrarVisita',valor=each)" 
                                     tooltiptext="">
@@ -78,7 +78,7 @@
                                 </button>                                      
                                                   
                             </listcell>
-                            <listcell class="btnPc" style="font-size:12px;background:#F8F9F9">   
+                            <listcell zclass = "mycss-listcell"  class="btnPc" style="font-size:12px;background:#F8F9F9">   
                                 <button 
                                     label="Registrar"
                                     iconSclass="z-icon-eye"

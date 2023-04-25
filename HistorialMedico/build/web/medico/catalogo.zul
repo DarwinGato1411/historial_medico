@@ -38,7 +38,7 @@
                                             <textbox readonly="true"  style="font-size:12px ;background:#EBF5FB"
                                                      class="form-control form-control-sm" 
                                                      value="@bind(each.capDetalle)"
-                                                     rows="2"
+                                                    
                                             />
                                         </listcell>
                                         <listcell zclass = "mycss-listcell" style="font-size:12px;background:#F8F9F9">                                  
@@ -82,7 +82,14 @@
                                 
                        
                                 <listhead class="tblCabecera"> 
-                                    <listheader label="@bind('Capitulo: ('.concat(vm.capituloSelected.capDetalle).concat(')'))" style="display:block;" />                                           
+                                    <listheader 
+                                                style="display:block;" >
+                                    
+                                        <textbox style="width:100%;background-color:transparent ;color:white"
+                                                 rows="2"
+                                                 value="@bind('Capitulo: ('.concat(vm.capituloSelected.capDetalle).concat(')'))">
+                                        </textbox>
+                                    </listheader>                                           
                                 </listhead>  
                         
                     
@@ -93,7 +100,7 @@
                                             <textbox readonly="true"  style="font-size:12px ;background:#EBF5FB"
                                                      class="form-control form-control-sm" 
                                                      value="@bind(each.subDetalle)"
-                                                     rows="2"
+                                                    
                                             />
                                         </listcell>
                                         <listcell zclass = "mycss-listcell" style="font-size:12px;background:#F8F9F9">
@@ -141,7 +148,13 @@
                                 
                        
                                 <listhead class="tblCabecera"> 
-                                    <listheader label="@bind('Sub capitulo: ('.concat(vm.subCapituloSelected.subDetalle).concat(')'))" />                                  
+                                    <listheader  >
+                                        <textbox style="width:100%;background-color:transparent ;color:white"
+                                                 rows="2"
+                                                 value="@bind('Sub capitulo: ('.concat(vm.subCapituloSelected.subDetalle).concat(')'))">
+                                        </textbox>
+                                        
+                                    </listheader>                                  
                                                 
                                 </listhead>  
                         
@@ -153,7 +166,7 @@
                                             <textbox readonly="true"  style="font-size:12px ;background:#EBF5FB"
                                                      class="form-control form-control-sm" 
                                                      value="@bind(each.detDetalle)"
-                                                     rows="2"
+                                                    
                                             />
                                         </listcell>
                                         <listcell zclass = "mycss-listcell" style="font-size:12px;background:#F8F9F9">                       

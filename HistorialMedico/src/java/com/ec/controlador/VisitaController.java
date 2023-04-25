@@ -106,11 +106,12 @@ public class VisitaController {
     }
 
     @Command
-    @NotifyChange({"listaPaciente", "buscarPaciente"})
+    @NotifyChange({"listaPaciente", "buscarPaciente","listaVisitaMedicas"})
     public void nuevaVisita() {
         try {
             final HashMap<String, NuevaVisitaParam> map = new HashMap<String, NuevaVisitaParam>();
             NuevaVisitaParam param = new NuevaVisitaParam("nuevo", null);
+            param.setIdPaciente(pacienteSelected);
             map.put("valor", param);
             org.zkoss.zul.Window window = (org.zkoss.zul.Window) Executions.createComponents(
                         "/medico/nuevo/visita.zul", null, map);
@@ -130,6 +131,7 @@ public class VisitaController {
 //            if (Messagebox.show("¿Desea modificar el registro, recuerde que debe crear las reteniones nuevamente?", "Atención", Messagebox.YES | Messagebox.NO, Messagebox.INFORMATION) == Messagebox.YES) {
             final HashMap<String, NuevaVisitaParam> map = new HashMap<String, NuevaVisitaParam>();
             NuevaVisitaParam param = new NuevaVisitaParam("modifica", valor);
+            param.setIdPaciente(pacienteSelected);
             map.put("valor", param);
             org.zkoss.zul.Window window = (org.zkoss.zul.Window) Executions.createComponents(
                         "/medico/nuevo/visita.zul", null, map);
