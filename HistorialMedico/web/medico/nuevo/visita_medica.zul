@@ -12,7 +12,7 @@
     <div  >
             <div class="paciente" >
                 <div class="">                                    
-                    <button    label="Nueva visita"
+                    <button    label="Nueva visita médica"
                         iconSclass="z-icon-plus"
                         onClick="@command('nuevaVisita')"  
                         class="fa fa-plus"
@@ -41,39 +41,39 @@
                     <template name="model" >                                                            
                         <listitem >
                               
-                            <listcell zclass = "mycss-listcell">
+                            <listcell zclass = "mycss-listcell" >
                                 <datebox compact="true" value="@bind(each.visFecha)" 
                                          height=" 30px" 
                                          buttonVisible="false" lenient="true" readonly="true"
                                          format="medium" width="100%"  />
                             </listcell>
-                            <listcell zclass = "mycss-listcell" >
+                            <listcell zclass = "mycss-listcell"  >
                                 <textbox readonly="true"  style="font-size:12px ;background:#EBF5FB"
                                          class="form-control form-control-sm" 
                                          value="@bind(each.visObservacion)" />
                             </listcell>
                             
                             <listcell zclass = "mycss-listcell" >                                  
-                                <button 
+                                <button label="Editar visita"
                                         iconSclass="z-icon-pencil"
                                         onClick="@command('modificarVisita',valor=each)" 
                                         tooltiptext="Editar Receta">
                                         
                                 </button>                                      
-                                <button 
+                                <button label="Enviar correo"
                                         iconSclass="z-icon-files-o"
                                         onClick="@command('enviarReceta',valor=each)" 
                                         tooltiptext="Eniviar Receta Correo">
                                     
                                 </button>                                      
-                                <button 
+                                <button label="Enviar WhatsApp"
                                         iconSclass="z-icon-krw"
                                         onClick="@command('enviarWhastApp',valor=each)" 
                                         tooltiptext="Enviar Whatsapp">
                                     
                                 </button>                                      
                                 <button 
-                                        
+                                        label="Ver receta"
                                         iconSclass="z-icon-book"
                                         onClick="@command('verReceta',valor=each)" 
                                         tooltiptext="Ver Receta">

@@ -84,7 +84,7 @@
                             <listcell zclass = "mycss-listcell"  class="btnPc" style="font-size:12px;background:#F8F9F9">   
 
                                 <button 
-                                    label="Registrar"
+                                    label="Visita médica"
                                     iconSclass="z-icon-eye"
                                     onClick="@command('registrarVisita',valor=each)" 
                                     tooltiptext="">
