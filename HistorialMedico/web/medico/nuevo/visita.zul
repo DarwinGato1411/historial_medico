@@ -11,154 +11,163 @@
 
         <div class="bodyModal">
             <div class="container_row_input">  
-                <div class="wrapper_input_mod_group">
-                    <div class="wrapper_input_mod">
-                        <span>Fecha</span>
+                
+                <div class="VM">
+                    <div class="wrapper_input_mod_group">
+                        <div class="wrapper_input_mod">
+                            <span>Fecha</span>
                    
-                        <div class="wrapper_input_text">
-                            <datebox compact="true" 
-                                     value="@bind(vm.entidad.visFecha)" 
-                                     readonly="true"   
-                                     buttonVisible="true" 
-                                     lenient="true" 
-                                     format="dd/MM/yyyy"
-                                     class="input_date"
-                            />
+                            <div class="wrapper_input_text">
+                                <datebox compact="true" 
+                                         value="@bind(vm.entidad.visFecha)" 
+                                         readonly="true"   
+                                         buttonVisible="true" 
+                                         lenient="true" 
+                                         format="dd/MM/yyyy"
+                                         class="input_date"
+                                />
                             
+                            </div>
                         </div>
-                    </div>
                     
                     
-                </div>
-                <div class="wrapper_input_mod">
-                    <span>Observación</span>
-                    <div class="wrapper_input_text">
+                    </div>
+                    <div class="wrapper_input_mod">
+                        <span>Observación</span>
+                        <div class="wrapper_input_text">
                         
-                        <textbox  
-                            maxlength="100" 
-                            rows="3"    
-                            onChange="self.setValue(self.getValue().toUpperCase());"  
-                            value="@bind(vm.entidad.visObservacion)" 
-                            class="input_text" />
-                    </div>
-                </div>
-                <div class="wrapper_input_mod">
-                    <span>Diagnóstico</span>
-                    <div class="wrapper_input_text">
-                        
-                        <textbox  
-                            maxlength="100"  
-                            rows="3"   
-                            onChange="self.setValue(self.getValue().toUpperCase());"  
-                            value="@bind(vm.entidad.visDiagnostico)" 
-                            class="input_text" />
-                    </div>
-                </div>
-                <div class="wrapper_input_mod">
-                    <span>Cargar CIE-10</span>
-                    <div style="display:flex;justify-content:flex-end;">
-                        <a class="btn_modal"  onClick="@command('cargarCie')"  >
-                            Seleccionar CIE-10
-                        </a>
-                    </div>
-                    <div class="wrapper_input_text">
-                        
-                        <textbox  
-                            maxlength="100"  
-                            rows="2"   
-                            onChange="self.setValue(self.getValue().toUpperCase());"  
-                            value="@bind(vm.entidad.visCargarCie10)" 
-                            class="input_text" />
-                    </div>
-                </div>
-                <div class="wrapper_input_mod">
-                    <span>Indicaciones</span>
-                    <div class="wrapper_input_text">
-                        <div style="display:flex;justify-content:flex-end;">
-                            <a class="btn_modal"  onClick="@command('agregarItemReceta')"  >
-                                Agregar indicación
-                            </a>
+                            <textbox  
+                                maxlength="100" 
+                                rows="3"    
+                                onChange="self.setValue(self.getValue().toUpperCase());"  
+                                value="@bind(vm.entidad.visObservacion)" 
+                                class="input_text" />
                         </div>
-                       
-                        <listbox  model="@load(vm.listaRecetaModel)" 
-                                  nonselectableTags="*"  mold="paging" pageSize="10"  >
-                               
-                            <custom-attributes org.zkoss.zul.listbox.rod="true"/>                       
-                            <listhead  > 
-                                <listheader label="Medicamento" width="45%" /> 
-                                <listheader label="Indicaciones" width="45%" /> 
-                                <listheader label="" width="10%" /> 
-                                                                                                      
-                            </listhead>  
-                            <template name="model" >                                                            
-                                <listitem >
-                              
-                                    <listcell zclass = "mycss-listcell" style="width:100%;">
-                                       
-                                        <textbox class="form-control form-control-sm" 
-                                                 value="@bind(each.medicamento)" />
-                                    </listcell>
-                                    <listcell zclass = "mycss-listcell" style="width:100%;">
-                                        <textbox class="form-control form-control-sm" 
-                                                 value="@bind(each.indicacion)" />
-                                    </listcell>
-                                    <listcell zclass = "mycss-listcell" style="width:100%;">
-                                        <button label="Eliminar"
-                                                iconSclass="z-icon-delete"
-                                                onClick="@command('eliminarReceta',valor=each)" 
-                                                tooltiptext="Eliminar indicacion">
-                                        </button>
-                                    </listcell>
-                                </listitem>
-                            </template>
-                        </listbox>
                     </div>
-                </div>
-                <div class="wrapper_input_mod">
-                    <span>Examenes</span>
-                    <div class="wrapper_input_text">
-                        <div style="display:flex;justify-content:flex-end;">
-                            <a class="btn_modal"  onClick="@command('subirExamen')"  >
-                                Subir examen
-                            </a>
+                    <div class="wrapper_input_mod">
+                        <span>Diagnóstico</span>
+                        <div class="wrapper_input_text">
+                        
+                            <textbox  
+                                maxlength="100"  
+                                rows="3"   
+                                onChange="self.setValue(self.getValue().toUpperCase());"  
+                                value="@bind(vm.entidad.visDiagnostico)" 
+                                class="input_text" />
                         </div>
-                        <listbox  model="@load(vm.listaExamenModel)" 
-                                  nonselectableTags="*"  mold="paging" pageSize="10"  >
-                               
-                            <custom-attributes org.zkoss.zul.listbox.rod="true"/>                       
-                            <listhead  > 
-                                <listheader label="Medicamento" width="90%" /> 
-                                <listheader label="" width="10%" /> 
-                                                                                                      
-                            </listhead>  
-                            <template name="model" >                                                            
-                                <listitem >
-                              
-                                    <listcell zclass = "mycss-listcell" style="width:100%;">
-                                       
-                                        <textbox class="form-control form-control-sm" 
-                                                 value="@bind(each.descripcion)" />
-                                    </listcell>
-                                    <listcell zclass = "mycss-listcell" style="width:100%;">
-                                        <button label="Ver examen"
-                                                iconSclass="z-icon-pencil"
-                                                onClick="@command('verImagen',valor=each)" 
-                                                tooltiptext="visualizar examen">
-                                        </button>
-                                    </listcell>
-                                    <listcell zclass = "mycss-listcell" style="width:100%;">
-                                        <button label="Eliminar"
-                                                iconSclass="z-icon-delete"
-                                                onClick="@command('eliminarExamen',valor=each)" 
-                                                tooltiptext="Eliminar examen">
-                                        </button>
-                                    </listcell>
-                                </listitem>
-                            </template>
-                        </listbox>
                     </div>
                 </div>
                 
+                <div class="VM">
+                    <div class="wrapper_input_mod">
+                        <span>Cargar CIE-10</span>
+                        <div style="display:flex;justify-content:flex-end;">
+                            <a class="btn_modal"  onClick="@command('cargarCie')"  >
+                                Seleccionar CIE-10
+                            </a>
+                        </div>
+                        <div class="wrapper_input_text">
+                        
+                            <textbox  
+                                maxlength="100"  
+                                rows="2"   
+                                onChange="self.setValue(self.getValue().toUpperCase());"  
+                                value="@bind(vm.entidad.visCargarCie10)" 
+                                class="input_text" />
+                        </div>
+                    </div>
+                </div>
+                <div class="VM">
+                    <div class="wrapper_input_mod">
+                        <span>Indicaciones</span>
+                        <div class="wrapper_input_text">
+                            <div style="display:flex;justify-content:flex-end;">
+                                <a class="btn_modal"  onClick="@command('agregarItemReceta')"  >
+                                    Agregar indicación
+                                </a>
+                            </div>
+                       
+                            <listbox  model="@load(vm.listaRecetaModel)" 
+                                      nonselectableTags="*"  mold="paging" pageSize="10"  >
+                               
+                                <custom-attributes org.zkoss.zul.listbox.rod="true"/>                       
+                                <listhead  > 
+                                    <listheader label="Medicamento" width="45%" /> 
+                                    <listheader label="Indicaciones" width="45%" /> 
+                                    <listheader label="" width="10%" /> 
+                                                                                                      
+                                </listhead>  
+                                <template name="model" >                                                            
+                                    <listitem >
+                              
+                                        <listcell zclass = "mycss-listcell" style="width:100%;">
+                                       
+                                            <textbox class="form-control form-control-sm" 
+                                                     value="@bind(each.medicamento)" />
+                                        </listcell>
+                                        <listcell zclass = "mycss-listcell" style="width:100%;">
+                                            <textbox class="form-control form-control-sm" 
+                                                     value="@bind(each.indicacion)" />
+                                        </listcell>
+                                        <listcell zclass = "mycss-listcell" style="width:100%;">
+                                            <button label="Eliminar"
+                                                    iconSclass="z-icon-delete"
+                                                    onClick="@command('eliminarReceta',valor=each)" 
+                                                    tooltiptext="Eliminar indicacion">
+                                            </button>
+                                        </listcell>
+                                    </listitem>
+                                </template>
+                            </listbox>
+                        </div>
+                    </div>
+                </div>
+                <div class="VM">
+                    <div class="wrapper_input_mod">
+                        <span>Examenes</span>
+                        <div class="wrapper_input_text">
+                            <div style="display:flex;justify-content:flex-end;">
+                                <a class="btn_modal"  onClick="@command('subirExamen')"  >
+                                    Subir examen
+                                </a>
+                            </div>
+                            <listbox  model="@load(vm.listaExamenModel)" 
+                                     nonselectableTags="*"  mold="paging" pageSize="10"  >
+                               
+                                <custom-attributes org.zkoss.zul.listbox.rod="true"/>                       
+                                <listhead  > 
+                                    <listheader label="Medicamento" width="90%" /> 
+                                    <listheader label="" width="10%" /> 
+                                                                                                      
+                                </listhead>  
+                                <template name="model" >                                                            
+                                    <listitem >
+                              
+                                        <listcell zclass = "mycss-listcell" style="width:100%;">
+                                       
+                                            <textbox class="form-control form-control-sm" 
+                                                     value="@bind(each.descripcion)" />
+                                        </listcell>
+                                        <listcell zclass = "mycss-listcell" style="width:100%;">
+                                            <button label="Ver examen"
+                                                    iconSclass="z-icon-pencil"
+                                                    onClick="@command('verImagen',valor=each)" 
+                                                    tooltiptext="visualizar examen">
+                                            </button>
+                                        </listcell>
+                                        <listcell zclass = "mycss-listcell" style="width:100%;">
+                                            <button label="Eliminar"
+                                                    iconSclass="z-icon-delete"
+                                                    onClick="@command('eliminarExamen',valor=each)" 
+                                                    tooltiptext="Eliminar examen">
+                                            </button>
+                                        </listcell>
+                                    </listitem>
+                                </template>
+                            </listbox>
+                        </div>
+                    </div>
+                </div>
             </div>
             
             <div style="display:flex;justify-content:flex-end;">

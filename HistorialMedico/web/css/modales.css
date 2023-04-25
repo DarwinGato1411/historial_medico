@@ -1,6 +1,13 @@
 /*background: #2d7fd2;*/
 
+:root {
 
+    --primary-color: #0aa397;
+    --secondary-color: #456262;
+    --background-color: #aaa9a9;
+    --alpha: 0.5;
+    --base-color: #fff;
+}
 
 .modalAll{
     width: 400px;
@@ -8,9 +15,9 @@
 
 .btn_modal{
     width: 100%;
-    border: solid 1px black;
+    
     padding: 10px;
-    background: black;
+    background: var(--primary-color);
     color:white;
     margin-top: 10px;
     text-align: center;
@@ -67,6 +74,7 @@
     display: grid;
     grid-template-columns: 25% 75%;
     align-items: center;
+    margin-bottom: 10px;
 
 }
 
@@ -166,8 +174,6 @@
 .modalPaciente .container_modal .bodyModal .container_row_input{
     display: grid;
     gap:15px;
-
-
 }
 
 .modalPaciente .container_modal .bodyModal .wrapper_input_mod_group{
@@ -181,6 +187,40 @@
     display: block;
     font-weight: bold;
 }
+
+/* modal hm*/
+
+.modalHm{
+    width: 90%;
+    height: 500px;
+}
+
+.modalHm .z-window-content{
+    padding: 0;
+    margin: 0;
+}
+
+.modalHm .z-window-header{
+    background: #007bff;
+    width: 100%;
+    padding: 0px;
+}
+
+.modalHm .titulo{
+    background: #007bff;
+    height: 100%;
+    display: flex;
+
+}
+
+.modalHm .titulo .z-caption-content{
+    width: 100%;
+    color: white;
+    font-size: 16px;
+}
+
+
+
 
 .container_modal .fotoPerfil{
 
@@ -201,4 +241,9 @@
 
     }
 
+}
+
+.DP, .AP, .DC,.VM{
+    background: #eee;
+    padding: 15px;  
 }

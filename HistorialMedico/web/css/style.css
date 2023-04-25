@@ -1,3 +1,12 @@
+:root {
+
+    --primary-color: #0aa397;
+    --secondary-color: #456262;
+    --background-color: #aaa9a9;
+    --alpha: 0.5;
+    --base-color: #fff;
+}
+
 
 *{
     padding: 0px;
@@ -2950,6 +2959,8 @@ input, button, select, textarea {
     /*margin-left: 200px;*/
     width: 100%;
     padding: 10px;
+    height: 90vh;
+    overflow-y: scroll;
 }
 
 .nav{
@@ -2960,7 +2971,7 @@ input, button, select, textarea {
     position: fixed;
     height: 100vh;
     z-index: 2;
-    background: #eee;
+    background: var(--secondary-color);
 }
 
 .panelCerrarMenu{
@@ -2989,8 +3000,8 @@ input, button, select, textarea {
 }
 
 .nav .li .m1{ 
-    color:#2d7fd2;
-    background: #eee; 
+    color:#ffffff;
+    
 }
 
 .contenedorEmpresa {
@@ -3201,6 +3212,7 @@ input, button, select, textarea {
     padding: 10px;
     text-align: center;
     border-radius: 10px 10px 0 0;
+    height: 70px;
 }
 
 .contenedorTest .containerPreguntas .tblCuerpo{
@@ -3315,7 +3327,7 @@ input, button, select, textarea {
 }
 
 .fondoBanner{
-    background: #2d7fd2;
+    background: var(--primary-color);
     padding: 10px;
 }
 
@@ -3323,6 +3335,8 @@ input, button, select, textarea {
     display: grid;
     grid-template-columns:repeat(3,1fr);
     color: white;
+    align-items: center;
+    justify-content: flex-end;
 }
 
 
@@ -3345,12 +3359,12 @@ input, button, select, textarea {
         display:none;
     }
 
-    
+
 }
 
 
 @media only screen and (min-width: 1300px){
-    
+
 
     .contenedorPacientes .paciente table tbody .btnCell { 
         display: none !important;
@@ -3360,7 +3374,7 @@ input, button, select, textarea {
 
     .contenedorPacientes .paciente table tbody .btnPc {
         display: block ;
-       
+
     }
 }
 

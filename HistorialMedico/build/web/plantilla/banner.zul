@@ -14,10 +14,11 @@
                     tooltiptext="Buscar">
                 </button>  
             </div>
-            <div class="logo">
-                LOGO
+            <div class="logo" style="margin:auto;">
+                <image src="/imagenes/logohm.png" style="width:50px;" />
+                <span>Historial Médico</span>
             </div>
-            <div class="">
+            <div class="" style="margin:auto;">
                 <label value="Usuario: " 
                        if="${not sessionScope.userCredential.anonymous}"/>
                 <label value="${sessionScope.usuario.nombreUsuario}" 

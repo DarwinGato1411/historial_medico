@@ -37,7 +37,9 @@
                                         <listcell zclass = "mycss-listcell" style="width:100%;">
                                             <textbox readonly="true"  style="font-size:12px ;background:#EBF5FB"
                                                      class="form-control form-control-sm" 
-                                                     value="@bind(each.capDetalle)" />
+                                                     value="@bind(each.capDetalle)"
+                                                     rows="2"
+                                            />
                                         </listcell>
                                         <listcell zclass = "mycss-listcell" style="font-size:12px;background:#F8F9F9">                                  
                                             <button 
@@ -80,7 +82,7 @@
                                 
                        
                                 <listhead class="tblCabecera"> 
-                                    <listheader label="@bind('Capitulo: ('.concat(vm.capituloSelected.capDetalle).concat(')'))" />                                           
+                                    <listheader label="@bind('Capitulo: ('.concat(vm.capituloSelected.capDetalle).concat(')'))" style="display:block;" />                                           
                                 </listhead>  
                         
                     
@@ -91,6 +93,7 @@
                                             <textbox readonly="true"  style="font-size:12px ;background:#EBF5FB"
                                                      class="form-control form-control-sm" 
                                                      value="@bind(each.subDetalle)"
+                                                     rows="2"
                                             />
                                         </listcell>
                                         <listcell zclass = "mycss-listcell" style="font-size:12px;background:#F8F9F9">
@@ -149,7 +152,9 @@
                                         <listcell zclass = "mycss-listcell" style="width:100%;">
                                             <textbox readonly="true"  style="font-size:12px ;background:#EBF5FB"
                                                      class="form-control form-control-sm" 
-                                                     value="@bind(each.detDetalle)" />
+                                                     value="@bind(each.detDetalle)"
+                                                     rows="2"
+                                            />
                                         </listcell>
                                         <listcell zclass = "mycss-listcell" style="font-size:12px;background:#F8F9F9">                       
                                             <button 

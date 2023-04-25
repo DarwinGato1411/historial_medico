@@ -24,7 +24,7 @@
                                
                     <custom-attributes org.zkoss.zul.listbox.rod="true"/>                       
                     <listhead  > 
-                         <listheader label="Fecha" width="10%" /> 
+                         <listheader label="Fecha" width="20%" /> 
                         <listheader label="" width="40%" >
                            
                             <textbox value="@bind(vm.buscar)" 
@@ -36,46 +36,47 @@
                         </listheader>                                                                         
                                                                                                 
                                                                                            
-                        <listheader label="" width="50%" />                                                                         
+                        <listheader label="" width="40%" />                                                                         
                     </listhead>  
                     <template name="model" >                                                            
                         <listitem >
                               
-                            <listcell zclass = "mycss-listcell" style="width:100%;">
+                            <listcell zclass = "mycss-listcell">
                                 <datebox compact="true" value="@bind(each.visFecha)" 
                                          height=" 30px" 
                                          buttonVisible="false" lenient="true" readonly="true"
                                          format="medium" width="100%"  />
                             </listcell>
-                            <listcell zclass = "mycss-listcell" style="width:100%;">
+                            <listcell zclass = "mycss-listcell" >
                                 <textbox readonly="true"  style="font-size:12px ;background:#EBF5FB"
                                          class="form-control form-control-sm" 
                                          value="@bind(each.visObservacion)" />
                             </listcell>
                             
-                            <listcell zclass = "mycss-listcell" style="font-size:12px;background:#F8F9F9">                                  
-                                <button label="Editar"
+                            <listcell zclass = "mycss-listcell" >                                  
+                                <button 
                                         iconSclass="z-icon-pencil"
                                         onClick="@command('modificarVisita',valor=each)" 
-                                        tooltiptext="">
-                                    
+                                        tooltiptext="Editar Receta">
+                                        
                                 </button>                                      
-                                <button label="Enviar correo"
-                                        iconSclass="z-icon-pencil"
+                                <button 
+                                        iconSclass="z-icon-files-o"
                                         onClick="@command('enviarReceta',valor=each)" 
-                                        tooltiptext="">
+                                        tooltiptext="Eniviar Receta Correo">
                                     
                                 </button>                                      
-                                <button label="WhatsApp"
-                                        iconSclass="z-icon-pencil"
+                                <button 
+                                        iconSclass="z-icon-krw"
                                         onClick="@command('enviarWhastApp',valor=each)" 
-                                        tooltiptext="">
+                                        tooltiptext="Enviar Whatsapp">
                                     
                                 </button>                                      
-                                <button label="Reseta"
-                                        iconSclass="z-icon-pencil"
+                                <button 
+                                        
+                                        iconSclass="z-icon-book"
                                         onClick="@command('verReceta',valor=each)" 
-                                        tooltiptext="">
+                                        tooltiptext="Ver Receta">
                                     
                                 </button>                                      
                             </listcell>
