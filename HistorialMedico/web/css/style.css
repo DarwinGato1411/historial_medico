@@ -6,6 +6,10 @@
 
 }
 
+.z-modal-mask{
+    display: flex !important;
+}
+
 body{
     padding: 0;
 }
@@ -3269,6 +3273,15 @@ input, button, select, textarea {
 
 }
 
+.contenedorPacientes .paciente table tbody .btnCell { 
+    display: block;
+
+}
+
+.contenedorPacientes .paciente table tbody .btnPc {
+    display: none;
+}
+
 .contenedorPacientes .paciente.z-listbox{
 
     display: block;
@@ -3290,14 +3303,15 @@ input, button, select, textarea {
 
 .contenedorPacientes  .z-listbox .tblCabecera{
     display: grid;
-    grid-template-columns:22% 22% 22% 22% 12%;
+    grid-template-columns:22% 22% 23% 18% 15%;
 }
+
 
 
 .contenedorPacientes  .z-listbox .tblCuerpo{
 
     display: grid;
-    grid-template-columns:22% 22% 22% 22% 12%;
+    grid-template-columns:22% 22% 23% 18% 15%;
 }
 
 .fondoBanner{
@@ -3316,7 +3330,7 @@ input, button, select, textarea {
 
 @media only screen and (min-width: 1024px){
     .contenedorTest{
-        grid-template-columns:repeat(3,1fr);
+        grid-template-columns:repeat(1,1fr);
     }
 
     .nav{
@@ -3330,5 +3344,24 @@ input, button, select, textarea {
     .btnMenu{
         display:none;
     }
+
+    
 }
+
+
+@media only screen and (min-width: 1300px){
+    
+
+    .contenedorPacientes .paciente table tbody .btnCell { 
+        display: none !important;
+        border: solid 1px black;
+
+    }
+
+    .contenedorPacientes .paciente table tbody .btnPc {
+        display: block ;
+       
+    }
+}
+
 

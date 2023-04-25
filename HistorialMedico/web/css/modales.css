@@ -1,5 +1,7 @@
 /*background: #2d7fd2;*/
 
+
+
 .modalAll{
     width: 400px;
 }
@@ -118,8 +120,8 @@
 
 
 .modalPaciente{
-    width: 80%;
-    padding: 0px;
+    width: 90%;
+    height: 500px;
 }
 
 .modalPaciente .z-window-content{
@@ -150,23 +152,29 @@
     display: flex;
     flex-direction: column-reverse;    
     padding: 20px;
+    overflow-y: scroll;
+    height: 700px;
 
 }
 
 .modalPaciente .container_modal .bodyModal .wrapper_input_mod{
     display: grid;
     grid-template-columns:100%;
+
 }
 
 .modalPaciente .container_modal .bodyModal .container_row_input{
     display: grid;
     gap:15px;
+
+
 }
 
 .modalPaciente .container_modal .bodyModal .wrapper_input_mod_group{
     display: grid;
-    grid-template-columns:repeat(3 ,1fr);
+    grid-template-columns:repeat(1 ,1fr);
     gap:10px;
+
 }
 
 .modalPaciente .container_modal .bodyModal .wrapper_input_mod span{
@@ -185,3 +193,12 @@
 
 }
 
+@media only screen and (min-width: 600px){
+    .modalPaciente .container_modal .bodyModal .wrapper_input_mod_group{
+        display: grid;
+        grid-template-columns:repeat(3 ,1fr);
+        gap:10px;
+
+    }
+
+}

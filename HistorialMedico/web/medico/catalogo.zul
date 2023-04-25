@@ -44,7 +44,7 @@
                                                 iconSclass="z-icon-pencil"
                                                 onClick="@command('modificarCapitulo',valor=each)" 
                                                 tooltiptext="Modificar">
-                                                Modificar
+                                                
                                             </button>                                      
                                         </listcell>
                                         <listcell zclass = "mycss-listcell" style="font-size:12px;background:#F8F9F9">     
@@ -52,7 +52,7 @@
                                                 iconSclass="z-icon-hand-o-up" 
                                                 tooltiptext="Modificar"
                                                 onClick="@command('buscarSubCapitulo',valor=each)">
-                                                Seleccionar
+                                               
                                             </button>   
                                         </listcell>
                                
@@ -100,7 +100,7 @@
                                                 iconSclass="z-icon-pencil"
                                                 onClick="@command('modificarSubcapitulo',valor=each)" 
                                                 tooltiptext="Modificar">
-                                                Modificar
+                                                
                                             </button>   
                                    
                                         </listcell>
@@ -111,7 +111,7 @@
                                                 iconSclass="z-icon-hand-o-up" 
                                                 tooltiptext="Seleccionar"
                                                 onClick="@command('busacarDetalle',valor=each)" >
-                                                Seleccionar
+                                                
                                             </button>   
                                    
                                         </listcell>
@@ -156,7 +156,7 @@
                                                 iconSclass="z-icon-pencil"
                                                 onClick="@command('modificarDetalle',valor=each)"  
                                                 tooltiptext="Modificar">
-                                                Modificar
+                                               
                                             </button> 
                                         </listcell>
                                     </listitem>

@@ -19,6 +19,7 @@
                         onClick="@command('nuevoPaciente')"  
                         class="fa fa-plus"
                         tooltiptext="Buscar">
+                        Agregar Paciente
                     </button>
                 </div>    
                 <listbox class="tabla" model="@load(vm.listaPaciente)" 
@@ -62,17 +63,34 @@
                                          class="form-control form-control-sm" 
                                          value="@bind(each.pacTelefono)" />
                             </listcell>
-                            <listcell zclass = "mycss-listcell" style="font-size:12px;background:#F8F9F9">   
-                                <button label="Visita medica"
-                                         iconSclass="z-icon-pencil"
-                                         onClick="@command('registrarVisita',valor=each)" 
-                                         tooltiptext="">
+                            <listcell class="btnCell"  style="font-size:12px;background:#F8F9F9">   
+                                <button 
+                                    iconSclass="z-icon-eye"
+                                    onClick="@command('registrarVisita',valor=each)" 
+                                    tooltiptext="">
                                     
                                 </button>                                                  
-                                <button label="Editar"
-                                        iconSclass="z-icon-pencil"
-                                        onClick="@command('modificarPaciente',valor=each)" 
-                                        tooltiptext="">
+                                <button 
+                                    iconSclass="z-icon-pencil"
+                                    onClick="@command('modificarPaciente',valor=each)" 
+                                    tooltiptext="">
+                                    
+                                </button>                                      
+                                                  
+                            </listcell>
+                            <listcell class="btnPc" style="font-size:12px;background:#F8F9F9">   
+                                <button 
+                                    label="Registrar"
+                                    iconSclass="z-icon-eye"
+                                    onClick="@command('registrarVisita',valor=each)" 
+                                    tooltiptext="">
+                                         
+                                </button>                                                  
+                                <button 
+                                    label="Editar"
+                                    iconSclass="z-icon-pencil"
+                                    onClick="@command('modificarPaciente',valor=each)" 
+                                    tooltiptext="">
                                     
                                 </button>                                      
                                                   
