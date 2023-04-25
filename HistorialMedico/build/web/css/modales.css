@@ -2,7 +2,9 @@
 
 :root {
 
-    --primary-color: #0aa397;
+    /*    --primary-color: #0aa397;
+        --secondary-color: #456262;*/
+    --primary-color:#007bff;
     --secondary-color: #456262;
     --background-color: #aaa9a9;
     --alpha: 0.5;
@@ -15,7 +17,7 @@
 
 .btn_modal{
     width: 100%;
-    
+
     padding: 10px;
     background: var(--primary-color);
     color:white;

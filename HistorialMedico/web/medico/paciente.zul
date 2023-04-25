@@ -48,7 +48,7 @@
                                          class="form-control form-control-sm" 
                                          value="@bind(each.pacRuc)" />
                             </listcell>
-                            <listcell zclass = "mycss-listcell" style="width:100%;">
+                            <listcell  zclass = "mycss-listcell" style="width:100%;">
                                 <textbox readonly="true"  style="font-size:12px ;background:#EBF5FB"
                                          class="form-control form-control-sm" 
                                          value="@bind(each.pacNombres)" />
@@ -63,7 +63,7 @@
                                          class="form-control form-control-sm" 
                                          value="@bind(each.pacTelefono)" />
                             </listcell>
-                            <listcell class="btnCell"  style="font-size:12px;background:#F8F9F9">   
+                            <listcell zclass = "mycss-listcell" class="btnCell"  style="font-size:12px;background:#F8F9F9">   
                                 <button 
                                     iconSclass="z-icon-eye"
                                     onClick="@command('registrarVisita',valor=each)" 
@@ -78,7 +78,7 @@
                                 </button>                                      
                                                   
                             </listcell>
-                            <listcell class="btnPc" style="font-size:12px;background:#F8F9F9">   
+                            <listcell zclass = "mycss-listcell" class="btnPc" style="font-size:12px;background:#F8F9F9">   
                                 <button 
                                     label="Registrar"
                                     iconSclass="z-icon-eye"
