@@ -1,6 +1,6 @@
 :root {
 
-    --primary-color: #0aa397;
+   --primary-color:#007bff;
     --secondary-color: #456262;
     --background-color: #aaa9a9;
     --alpha: 0.5;
@@ -2966,12 +2966,12 @@ input, button, select, textarea {
 .nav{
     display: none;
     flex-direction: column;
-    background-color: white;
+    background-color: black;
     width: 200px;
     position: fixed;
     height: 100vh;
     z-index: 2;
-    background: var(--secondary-color);
+    background: #eee;
 }
 
 .panelCerrarMenu{
@@ -3000,7 +3000,7 @@ input, button, select, textarea {
 }
 
 .nav .li .m1{ 
-    color:#ffffff;
+    color:#000;
     
 }
 
@@ -3155,7 +3155,7 @@ input, button, select, textarea {
 }
 
 .contenedorTest .z-listbox .tblCabecera .z-listheader {
-    background: #007bff;
+     background: var(--primary-color);
     color: white;
     padding: 5px;
     text-align: center;
@@ -3207,7 +3207,7 @@ input, button, select, textarea {
 }
 
 .contenedorTest .containerPreguntas .z-listbox .tblCabecera .z-listheader {
-    background: #28a745;
+    background: var(--primary-color);
     color: white;
     padding: 10px;
     text-align: center;
@@ -3253,7 +3253,7 @@ input, button, select, textarea {
 }
 
 .contenedorTest .containerRespuestas .z-listbox .tblCabecera .z-listheader{
-    background: #17a2b8;
+    background: var(--primary-color);
     color: white;
     padding: 10px;
     text-align: center;
