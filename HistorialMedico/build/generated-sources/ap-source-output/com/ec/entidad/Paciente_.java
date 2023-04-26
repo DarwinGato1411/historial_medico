@@ -9,7 +9,7 @@ import javax.persistence.metamodel.CollectionAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2023-04-25T14:19:45")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2023-04-26T00:07:46")
 @StaticMetamodel(Paciente.class)
 public class Paciente_ { 
 
@@ -21,6 +21,7 @@ public class Paciente_ {
     public static volatile SingularAttribute<Paciente, String> pacApellidos;
     public static volatile SingularAttribute<Paciente, String> pacCuello;
     public static volatile SingularAttribute<Paciente, String> pacCintura;
+    public static volatile SingularAttribute<Paciente, String> pacTelefonoReferencia;
     public static volatile SingularAttribute<Paciente, String> pacEnfermedadFamilia;
     public static volatile SingularAttribute<Paciente, String> pacAlegias;
     public static volatile SingularAttribute<Paciente, Date> pacFechaNacimiento;
@@ -32,8 +33,10 @@ public class Paciente_ {
     public static volatile SingularAttribute<Paciente, String> pacPerAbdominal;
     public static volatile SingularAttribute<Paciente, Integer> pacEdad;
     public static volatile SingularAttribute<Paciente, String> pacEstadoCivil;
+    public static volatile SingularAttribute<Paciente, String> pacMedicacionActual;
     public static volatile SingularAttribute<Paciente, String> pacRuc;
     public static volatile SingularAttribute<Paciente, BigDecimal> pacImc;
+    public static volatile SingularAttribute<Paciente, String> pacRefFamiliar;
     public static volatile CollectionAttribute<Paciente, VisitaMedica> visitaMedicaCollection;
     public static volatile SingularAttribute<Paciente, Integer> idPaciente;
     public static volatile SingularAttribute<Paciente, String> pacCirugias;

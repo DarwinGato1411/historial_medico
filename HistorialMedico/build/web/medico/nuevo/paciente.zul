@@ -13,7 +13,10 @@
             
             <div class="container_row_input">  
                 <div class="DP">
-                    Datos Personales
+                    <div class="leyenda">
+                        <label class="leyenda" value="Datos Personales"></label> 
+                    </div>  
+                    
                     <div class="wrapper_input_mod_group">
                    
                         <div class="wrapper_input_mod">
@@ -21,6 +24,8 @@
                             <div class="wrapper_input_text">
                         
                                 <textbox  
+                                      onOK="@command('buscarInformacion')"
+                                    
                                     maxlength="20"     
                                     value="@bind(vm.entidad.pacRuc)" 
                                     class="input_text" />
@@ -38,7 +43,8 @@
                                     class="input_text" />
                             </div>
                         </div>
-                        <div class="wrapper_input_mod">
+                        
+<!--                        <div class="wrapper_input_mod">
                             <span>Apellidos</span>
                             <div class="wrapper_input_text">
                         
@@ -48,7 +54,7 @@
                                     value="@bind(vm.entidad.pacApellidos)" 
                                     class="input_text" />
                             </div>
-                        </div>
+                        </div>-->
                     </div>
                     <div class="wrapper_input_mod_group">
                         <div class="wrapper_input_mod">
@@ -182,7 +188,9 @@
                 </div>
                 
                 <div class="AP">
-                    Antecedentes personales / patologicos
+                    <div class="leyenda">
+                        <label class="leyenda" value=" Antecedentes personales / patologicos"></label> 
+                    </div>  
                     <div class="wrapper_input_mod">
                         <span>Alergias</span>
                         <div class="wrapper_input_text">
@@ -227,15 +235,60 @@
                                 class="input_text" />
                         </div>
                     </div>
+                    
+                    <div class="wrapper_input_mod_group">
+                        <div class="wrapper_input_mod">
+                            <span>Referencia familiar</span>
+                            <div class="wrapper_input_text">
+                        
+                                <textbox  
+                                    maxlength="100"    
+                                    onChange="self.setValue(self.getValue().toUpperCase());"  
+                                    value="@bind(vm.entidad.pacRefFamiliar)" 
+                                    class="input_text" />
+                            </div>
+                        </div>
+                        <div class="wrapper_input_mod">
+                            <span>Teléfono referencia familiar</span>
+                   
+                            <div class="wrapper_input_text">
+                        
+                                <textbox  
+                                    maxlength="100"    
+                                    onChange="self.setValue(self.getValue().toUpperCase());"  
+                                    value="@bind(vm.entidad.pacTelefonoReferencia)" 
+                                    class="input_text" />
+                            </div>
+                        </div>
+                        <div class="wrapper_input_mod">
+                            <span>Medicina actual</span>
+                   
+                            <div class="wrapper_input_text">
+                        
+                                <textbox  
+                                    maxlength="100"    
+                                    onChange="self.setValue(self.getValue().toUpperCase());"  
+                                    value="@bind(vm.entidad.pacMedicacionActual)" 
+                                    class="input_text" />
+                            </div>
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    
                 </div>
                 <div class="DC">
-                    Datos de control / medidas antropométricas
+                    <div class="leyenda">
+                        <label class="leyenda" value=" Datos de control / Medidas Antropométricas"></label> 
+                    </div>  
                     <div class="wrapper_input_mod_group">
                         <div class="wrapper_input_mod">
                             <span>Talla (metros)</span>
                             <div class="wrapper_input_text">
                         
                                 <textbox    
+                                    onOK="@command('calcularIMC')"
                                     constraint="/^[0-9]{1,9}(?:[.][0-9]{1,5})?$/:Ingrese solo numeros"                           
                                     value="@bind(vm.entidad.pacTalla)"  
                                     class="input_text"  
@@ -247,6 +300,7 @@
                             <div class="wrapper_input_text">
                         
                                 <textbox    
+                                    onOK="@command('calcularIMC')"
                                     constraint="/^[0-9]{1,9}(?:[.][0-9]{1,5})?$/:Ingrese solo numeros"                           
                                     value="@bind(vm.entidad.pacPeso)"  
                                     class="input_text"  

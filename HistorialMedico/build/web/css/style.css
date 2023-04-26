@@ -1,6 +1,6 @@
 :root {
 
-   --primary-color:#007bff;
+    --primary-color:#007bff;
     --secondary-color: #456262;
     --background-color: #aaa9a9;
     --alpha: 0.5;
@@ -3001,7 +3001,7 @@ input, button, select, textarea {
 
 .nav .li .m1{ 
     color:#000;
-    
+
 }
 
 .contenedorEmpresa {
@@ -3155,7 +3155,7 @@ input, button, select, textarea {
 }
 
 .contenedorTest .z-listbox .tblCabecera .z-listheader {
-     background: var(--primary-color);
+    background: var(--primary-color);
     color: white;
     padding: 5px;
     text-align: center;
@@ -3306,7 +3306,7 @@ input, button, select, textarea {
 }
 
 .contenedorPacientes  .z-listbox .tblCabecera .z-listheader{
-    background: #eee;
+    background: #f2f9fe;
     color: white;
     padding: 5px;
     text-align: center;
@@ -3379,3 +3379,50 @@ input, button, select, textarea {
 }
 
 
+
+.z-button {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 12px; 
+    font-weight: normal; 
+    font-style: normal; 
+    color: white; 
+    min-height: 24px; 
+    border: 1px solid #a9a9a9; 
+    -webkit-border-radius: 4px; 
+    border-radius: 4px; 
+    padding: 3px 12px; 
+    line-height: 14px; 
+    background: -webkit-linear-gradient(top, #fefefe 0%, #eeeeee 100%); 
+    background: #0275d8;
+    text-shadow: 0 1px #fff; 
+    cursor: pointer; 
+    white-space: nowrap; 
+}
+
+.z-button:hover {
+    border-color: #8fb9d0;
+    background: -webkit-linear-gradient(top, #f2f9fe 0%, #22c7b8 100%);
+    color: black;
+    background: linear-gradient(to bottom, #f2f9fe 0%, #22c7b8 100%);
+}
+
+div.z-listbox-header th.z-listheader, div.z-listbox-header th.z-auxheader {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid;
+    white-space: nowrap;
+    color: black;
+    border-color: #cfcfcf #cfcfcf #cfcfcf white;
+    border-top: 0;
+    padding: 0;
+    background: #f2f9fe;
+    font-weight: bold;
+}
+
+.leyenda{
+    color: #900;
+    background: #ffe1e1;
+    font-size: 21px;
+    size: 15px;
+    margin-bottom: 10px;
+}

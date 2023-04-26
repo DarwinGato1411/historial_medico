@@ -54,7 +54,7 @@
         <div  apply="com.ec.controlador.LogoutController">
             <button    
                 id="logout" 
-                iconSclass="z-icon-plus"      
+                width="100%"     
                 tooltiptext="Buscar">
                 Cerrar Sesión
             </button>   

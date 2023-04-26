@@ -11,12 +11,17 @@ import com.ec.seguridad.UserCredential;
 import com.ec.servicio.ServicioPaciente;
 import com.ec.servicio.ServicioParametrizar;
 import com.ec.utilitario.ArchivoUtils;
+import com.ec.utilitario.InfoPersona;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.net.URISyntaxException;
+import javax.xml.xpath.XPathExpressionException;
+import org.json.JSONException;
 
 import org.zkoss.bind.annotation.AfterCompose;
 import org.zkoss.bind.annotation.Command;
@@ -60,7 +65,7 @@ public class NuevoPaciente {
     public NuevoPaciente() {
         Session sess = Sessions.getCurrent();
         credential = (UserCredential) sess.getAttribute(EnumSesion.userCredential.getNombre());
-        parametrizar=servicioParametrizar.findActivo();
+        parametrizar = servicioParametrizar.findActivo();
 
     }
 
@@ -88,6 +93,50 @@ public class NuevoPaciente {
     }
 
     @Command
+    @NotifyChange({"entidad"})
+    public void calcularIMC() {
+        if (entidad.getPacTalla() != null) {
+            if (entidad.getPacTalla().doubleValue() > 0) {
+                if (entidad.getPacTalla().doubleValue() > 0) {
+                    BigDecimal talla2 = entidad.getPacTalla().multiply(entidad.getPacTalla()).setScale(5, RoundingMode.FLOOR);
+                    BigDecimal IMC = entidad.getPacPeso() != null ? entidad.getPacPeso().doubleValue() > 0 ? entidad.getPacPeso().divide(talla2, 5, RoundingMode.FLOOR) : BigDecimal.ZERO : BigDecimal.ZERO;
+                    entidad.setPacImc(ArchivoUtils.redondearDecimales(IMC, 2));
+                }
+
+            } else {
+                entidad.setPacImc(BigDecimal.ZERO);
+            }
+
+        }
+
+    }
+
+    @Command
+    @NotifyChange({"entidad"})
+    public void buscarInformacion() throws URISyntaxException, IOException, XPathExpressionException, JSONException {
+        InfoPersona aduana = new InfoPersona();
+        String nombre = "";
+        if (entidad.getPacRuc() != null) {
+            if (!entidad.getPacRuc().equals("")) {
+                String cedulaBuscar = "";
+                if (entidad.getPacRuc().length() == 13) {
+                    cedulaBuscar = entidad.getPacRuc();
+                    nombre = ArchivoUtils.obtenerPorRuc(cedulaBuscar);
+                    entidad.setPacNombres(nombre);
+
+                } else if (entidad.getPacRuc().length() == 10) {
+                    cedulaBuscar = entidad.getPacRuc();
+                    aduana = ArchivoUtils.obtenerPorCedula(cedulaBuscar);
+                    entidad.setPacNombres(aduana.getNombre());
+                    entidad.setPacDomicilio(aduana.getDireccion());
+                }
+
+            }
+        }
+
+    }
+
+    @Command
     @NotifyChange("entidad")
     public void obtenerEdad() {
         if (entidad.getPacFechaNacimiento() != null) {
@@ -100,7 +149,7 @@ public class NuevoPaciente {
     public void guardar() {
         if (entidad.getPacRuc() != null
                     && entidad.getPacNombres() != null
-                    && entidad.getPacMovil()!= null
+                    && entidad.getPacMovil() != null
                     && entidad.getPacCorreo() != null) {
 
             if (accion.equals("create")) {

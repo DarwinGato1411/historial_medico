@@ -4,7 +4,7 @@
 
     /*    --primary-color: #0aa397;
         --secondary-color: #456262;*/
-    --primary-color:#007bff;
+    --primary-color:#22c7b8;
     --secondary-color: #456262;
     --background-color: #aaa9a9;
     --alpha: 0.5;
@@ -96,7 +96,7 @@
 
 .modalTest .z-window-header{
     color: white;
-    background: #007bff;
+    background: #22c7b8;
 
 }
 .modalRespuesta,.modalRespuesta .z-window-content{
@@ -131,7 +131,7 @@
 
 .modalPaciente{
     width: 90%;
-    height: 500px;
+    height: 99%;
 }
 
 .modalPaciente .z-window-content{
@@ -140,13 +140,13 @@
 }
 
 .modalPaciente .z-window-header{
-    background: #007bff;
+    background: #22c7b8;
     width: 100%;
     padding: 0px;
 }
 
 .modalPaciente .titulo{
-    background: #007bff;
+    background: #22c7b8;
     height: 100%;
     display: flex;
 
@@ -156,6 +156,7 @@
     width: 100%;
     color: white;
     font-size: 16px;
+    background: 
 }
 
 .modalPaciente .container_modal{
@@ -203,13 +204,13 @@
 }
 
 .modalHm .z-window-header{
-    background: #007bff;
+    background: #22c7b8;
     width: 100%;
     padding: 0px;
 }
 
 .modalHm .titulo{
-    background: #007bff;
+    background: #22c7b8;
     height: 100%;
     display: flex;
 

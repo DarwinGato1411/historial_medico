@@ -97,6 +97,12 @@ public class Paciente implements Serializable {
     private String pacPerAbdominal;
     @Column(name = "pac_fotografia")
     private String pacFotografia;
+    @Column(name = "pac_ref_familiar")
+    private String pacRefFamiliar;
+    @Column(name = "pac_telefono_referencia")
+    private String pacTelefonoReferencia;
+    @Column(name = "pac_medicacion_actual")
+    private String pacMedicacionActual;
 
     @OneToMany(mappedBy = "idPaciente")
     private Collection<VisitaMedica> visitaMedicaCollection;
@@ -359,7 +365,30 @@ public class Paciente implements Serializable {
         this.pacFotografia = pacFotografia;
     }
 
-    
+    public String getPacRefFamiliar() {
+        return pacRefFamiliar;
+    }
+
+    public void setPacRefFamiliar(String pacRefFamiliar) {
+        this.pacRefFamiliar = pacRefFamiliar;
+    }
+
+    public String getPacTelefonoReferencia() {
+        return pacTelefonoReferencia;
+    }
+
+    public void setPacTelefonoReferencia(String pacTelefonoReferencia) {
+        this.pacTelefonoReferencia = pacTelefonoReferencia;
+    }
+
+    public String getPacMedicacionActual() {
+        return pacMedicacionActual;
+    }
+
+    public void setPacMedicacionActual(String pacMedicacionActual) {
+        this.pacMedicacionActual = pacMedicacionActual;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;

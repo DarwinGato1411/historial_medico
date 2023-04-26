@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?link rel="stylesheet" type="text/css" href="/css/boostrap/bootstrap.css"?>  
-<?link rel="stylesheet" type="text/css" href="/css/style.css"?>
+<?link rel="stylesheet" type="text/css" href="../css/style.css"?>
 <?link rel="stylesheet" type="text/css" href="/css/modales.css"?>
 <?init class="com.ec.seguridad.Autentificador"?>
 <?init class="org.zkoss.zk.ui.util.Composition" arg0="/plantilla/plantilla.zul"?>
 <?link rel="icon" type="image/x-icon" href="/iconos/deckxel.ico"?>
+
 
 
 <zk   with="90%" >
@@ -22,7 +23,7 @@
                         Agregar Paciente
                     </button>
                 </div>    
-                <listbox class="tabla" model="@load(vm.listaPaciente)" 
+                <listbox class="tabla table-responsive table table-striped table-bordered second" model="@load(vm.listaPaciente)" 
                          nonselectableTags="*"  mold="paging" pageSize="15"  >
                                
                     <custom-attributes org.zkoss.zul.listbox.rod="true"/>                       
@@ -65,14 +66,14 @@
                             </listcell>
 
                             <listcell zclass = "mycss-listcell"  class="btnCell"  style="font-size:12px;background:#F8F9F9">   
-                                <button   class="inputGroupBtn"
+                                <button   class="inputGroupBtn btn btn-primary"
 
-                                    iconSclass="z-icon-eye"
-                                    onClick="@command('registrarVisita',valor=each)" 
-                                    tooltiptext="">
+                                          iconSclass="z-icon-eye"
+                                          onClick="@command('registrarVisita',valor=each)" 
+                                          tooltiptext="">
                                     
                                 </button>                                                  
-                                <button 
+                                <button class="btn btn-primary"
                                     iconSclass="z-icon-pencil"
                                     onClick="@command('modificarPaciente',valor=each)" 
                                     tooltiptext="">
@@ -83,7 +84,7 @@
 
                             <listcell zclass = "mycss-listcell"  class="btnPc" style="font-size:12px;background:#F8F9F9">   
 
-                                <button 
+                                <button  class=" btn btn-primary"
                                     label="Visita médica"
                                     iconSclass="z-icon-eye"
                                     onClick="@command('registrarVisita',valor=each)" 

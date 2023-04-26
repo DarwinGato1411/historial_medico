@@ -228,7 +228,11 @@ public class NuevoVisita {
                     receta.setIdVisitaMedica(entidad);
                     servicioReceta.crear(receta);
                 }
-
+                try {
+                    reporteGeneral(entidad.getIdVisitaMedica());
+                } catch (SQLException ex) {
+                    Logger.getLogger(NuevoVisita.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 wVisita.detach();
             } else {
 
@@ -252,11 +256,6 @@ public class NuevoVisita {
                     servicioReceta.crear(receta);
                 }
 
-                try {
-                    reporteGeneral(entidad.getIdVisitaMedica());
-                } catch (SQLException ex) {
-                    Logger.getLogger(NuevoVisita.class.getName()).log(Level.SEVERE, null, ex);
-                }
                 wVisita.detach();
             }
 
@@ -427,7 +426,7 @@ public class NuevoVisita {
                         "/medico/nuevo/cargarcie10.zul", null, map);
             window.doModal();
             String CIE10CONCAt = entidad.getVisCargarCie10() != null ? entidad.getVisCargarCie10() : "";
-            CIE10CONCAt = CIE10CONCAt + CIE10.toUpperCase() + "\n";;
+            CIE10CONCAt = CIE10CONCAt + CIE10.toUpperCase();
             entidad.setVisCargarCie10(CIE10CONCAt);
         } catch (Exception e) {
             Clients.showNotification("Ocurrio un error " + e.getMessage(),

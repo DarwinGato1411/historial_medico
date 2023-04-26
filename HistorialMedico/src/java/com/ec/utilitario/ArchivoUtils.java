@@ -20,6 +20,9 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.math.BigDecimal;
+import java.net.URL;
+import java.nio.charset.Charset;
+import java.security.cert.X509Certificate;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -34,11 +37,14 @@ import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.X509TrustManager;
 import javax.persistence.EntityManager;
 import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.print.attribute.PrintRequestAttributeSet;
 import javax.print.attribute.standard.Copies;
 import javax.print.attribute.standard.MediaSizeName;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -63,6 +69,9 @@ import javax.xml.transform.stream.StreamResult;
 import net.sf.jasperreports.engine.JRExporterParameter;
 import net.sf.jasperreports.engine.export.JRPrintServiceExporter;
 import net.sf.jasperreports.engine.export.JRPrintServiceExporterParameter;
+import okhttp3.Headers;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -73,6 +82,12 @@ import org.w3c.dom.DOMException;
 
 import org.xml.sax.SAXException;
 import org.zkoss.util.media.AMedia;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
+import okhttp3.tls.Certificates;
+import okhttp3.tls.HandshakeCertificates;
 
 public class ArchivoUtils {
 
@@ -132,7 +147,7 @@ public class ArchivoUtils {
     }
 
     public static byte[] archivoToByte(File file)
-            throws IOException {
+                throws IOException {
         /* 136 */ byte[] buffer = new byte[(int) file.length()];
         /* 137 */ InputStream ios = null;
         try {
@@ -195,7 +210,7 @@ public class ArchivoUtils {
     }
 
     private static Document merge(String exp, File[] files)
-            throws Exception {
+                throws Exception {
         /* 537 */ XPathFactory xPathFactory = XPathFactory.newInstance();
         /* 538 */ XPath xpath = xPathFactory.newXPath();
         /* 539 */ XPathExpression expression = xpath.compile(exp);
@@ -290,13 +305,12 @@ public class ArchivoUtils {
         Connection con = null;
         try {
             String reportFile = Executions.getCurrent().getDesktop().getWebApp()
-                    .getRealPath("/reportes");
+                        .getRealPath("/reportes");
             String reportPath = "";
             emf.getTransaction().begin();
             con = emf.unwrap(Connection.class);
-           
-                reportPath = reportFile + File.separator + "receta.jasper";
-           
+
+            reportPath = reportFile + File.separator + "receta.jasper";
 
             Map<String, Object> parametros = new HashMap<String, Object>();
 
@@ -407,12 +421,12 @@ public class ArchivoUtils {
 
     /*CREAR LA CLAVE DE ACCESO*/
     public static String generaClave(Date fechaEmision,
-            String tipoComprobante,
-            String ruc,
-            String ambiente,
-            String serie,
-            String numeroComprobante,
-            String codigoNumerico, String tipoEmision) {
+                String tipoComprobante,
+                String ruc,
+                String ambiente,
+                String serie,
+                String numeroComprobante,
+                String codigoNumerico, String tipoEmision) {
         String claveGenerada = "";
         int verificador = 0;
 
@@ -714,19 +728,241 @@ public class ArchivoUtils {
 
         Calendar calendar = Calendar.getInstance();
 
-        calendar.set(calendar.get(Calendar.YEAR)+1, 12, 31);
+        calendar.set(calendar.get(Calendar.YEAR) + 1, 12, 31);
 
-      //  calendar.add(Calendar.DAY_OF_YEAR, dias);
-
+        //  calendar.add(Calendar.DAY_OF_YEAR, dias);
         return calendar.getTime();
 
     }
-    
+
     public static BigDecimal obtenerEdad(Date fechaNac) {
         LocalDate hoy = LocalDate.now();
         LocalDate nacimiento = fechaNac.toInstant().
-                atZone(ZoneId.systemDefault()).toLocalDate();
+                    atZone(ZoneId.systemDefault()).toLocalDate();
         long edad = ChronoUnit.YEARS.between(nacimiento, hoy);
         return BigDecimal.valueOf(edad);
     }
+
+    public static String obtenerPorRuc(String cedula) {
+        if (cedula.length() == 10) {
+            cedula = cedula + "001";
+        }
+
+        try {
+            JSONObject json = readJsonFromUrl("https://srienlinea.sri.gob.ec/sri-catastro-sujeto-servicio-internet/rest/Persona/obtenerPersonaDesdeRucPorIdentificacion?numeroRuc=" + cedula);
+            System.out.println(json.toString());
+            System.out.println(json.get("nombreCompleto"));
+            return json.get("nombreCompleto").toString();
+        } catch (IOException ex) {
+//                Logger.getLogger(Archi.class.getName()).log(Level.SEVERE, null, ex);
+            return "";
+        } catch (JSONException ex) {
+//                Logger.getLogger(Verificador.class.getName()).log(Level.SEVERE, null, ex);
+            return "";
+        }
+
+        
+
+    }
+
+    public static JSONObject readJsonFromUrl(String url) throws IOException, JSONException {
+        InputStream is = new URL(url).openStream();
+        try {
+            BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
+            String jsonText = readAll(rd);
+            JSONObject json = new JSONObject(jsonText);
+            return json;
+        } finally {
+            is.close();
+        }
+    }
+
+    private static String readAll(Reader rd) throws IOException {
+        StringBuilder sb = new StringBuilder();
+        int cp;
+        while ((cp = rd.read()) != -1) {
+            sb.append((char) cp);
+        }
+        return sb.toString();
+    }
+
+    public static InfoPersona obtenerPorCedula(String cedula) {
+        String contenido = "";
+        String direccion = "";
+        System.out.println("gestion doc");
+
+        X509TrustManager trustManager;
+        SSLSocketFactory sslSocketFactory;
+        try {
+            HandshakeCertificates certificates = new HandshakeCertificates.Builder()
+                        .addTrustedCertificate(letsEncryptCertificateAuthority)
+                        .addTrustedCertificate(entrustRootCertificateAuthority)
+                        .addTrustedCertificate(comodoRsaCertificationAuthority)
+                        // Uncomment if standard certificates are also required.
+                        //.addPlatformTrustedCertificates()
+                        .build();
+            OkHttpClient client = new OkHttpClient.Builder()
+                        .sslSocketFactory(certificates.sslSocketFactory(), certificates.trustManager())
+                        .build();
+            Request request = new Request.Builder()
+                        .url("https://www.gestiondocumental.gob.ec/Administracion/usuarios/validar_datos_registro_civil.php?cedula=" + cedula)
+                        .build();
+            System.out.println("EEEE");
+
+            try {
+                Response response = client.newCall(request).execute();
+                if (!response.isSuccessful()) {
+                    Headers responseHeaders = response.headers();
+                    for (int i = 0; i < responseHeaders.size(); i++) {
+                        System.out.println(responseHeaders.name(i) + ": " + responseHeaders.value(i));
+                    }
+
+                    throw new IOException("Unexpected code " + response);
+                }
+
+                String contenidoObt = response.body().string();
+                System.out.println(contenidoObt);
+                String obtNombre[] = contenidoObt.split("lbl_datos_rc_nombre");
+
+//                   contenido += inputLine.replace("lbl_datos_rc_apellido", "@");
+//                        String[] exploded = contenido.split("@");
+                contenido = obtNombre[1] + ">";
+                String contDos[] = contenido.split("</span>");
+                contenido = contDos[0].replace("\">", "");
+
+                System.out.println("contenido " + contenido);
+                String obtDireccion[] = contenidoObt.split("lbl_datos_rc_direccion");
+
+                direccion = obtDireccion[1] + ">";
+                direccion = direccion.replaceAll("\\<.*?\\>", "").trim();
+                direccion = direccion.replace("\">", "");
+                direccion = direccion.replace(">", "").trim();
+                System.out.println("direccion " + direccion);
+
+            } catch (IOException e) {
+                System.out.println("ERROR IOException " + e.getMessage());
+            }
+        } catch (Exception e) {
+            return new InfoPersona("", "");
+        }
+//            
+
+        return new InfoPersona(contenido, direccion);
+    }
+
+    static final X509Certificate comodoRsaCertificationAuthority = Certificates.decodeCertificatePem(""
+                + "-----BEGIN CERTIFICATE-----\n"
+                + "MIIGQDCCBSigAwIBAgIQOn5WQUsmGTD8lZbZ6fBTcjANBgkqhkiG9w0BAQsFADBM\n"
+                + "MQswCQYDVQQGEwJMVjENMAsGA1UEBxMEUmlnYTERMA8GA1UEChMIR29HZXRTU0wx\n"
+                + "GzAZBgNVBAMTEkdvR2V0U1NMIFJTQSBEViBDQTAeFw0yMjA1MDMwMDAwMDBaFw0y\n"
+                + "MzA2MDMyMzU5NTlaMCcxJTAjBgNVBAMTHHd3dy5nZXN0aW9uZG9jdW1lbnRhbC5n\n"
+                + "b2IuZWMwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDRJzKb2uHUrbg5\n"
+                + "aiI5Zr3yNw5Nnoi4P+1700QS7HQBgpXu8bFUmbvgTYnrrg9leub/3GW02EkaEorL\n"
+                + "o67TOr9iNInNqCeLyAdvJktShlYbKvF4+0Bi15N5fGR0Av7xwQ+K45qpJJL2pJR2\n"
+                + "RKV/tsyWa+lxRu6PzfgB7UGvWfkUu8DXzmST90v1wMVjO7JjvZzfxuMtU+9SwC3M\n"
+                + "b9stJcLwZuYIMlq82BERa1sXWNavRKZ8prigeBoKfLyOedMX0F0Mf0L5j7OfnXXD\n"
+                + "2ufU3J7xzTzlTPFpx3m/wJjqmvylbTjI4xBI2ogd8V01hDTABbKowdvT20ArCQrf\n"
+                + "AYL07G5lAgMBAAGjggNBMIIDPTAfBgNVHSMEGDAWgBT5+1DEi2e7Z2T+gyGmqc4/\n"
+                + "VYSTmTAdBgNVHQ4EFgQUbgX0xopX6SzpCPqj1tE5etfO2ZEwDgYDVR0PAQH/BAQD\n"
+                + "AgWgMAwGA1UdEwEB/wQCMAAwHQYDVR0lBBYwFAYIKwYBBQUHAwEGCCsGAQUFBwMC\n"
+                + "MEsGA1UdIAREMEIwNgYLKwYBBAGyMQECAkAwJzAlBggrBgEFBQcCARYZaHR0cHM6\n"
+                + "Ly9jcHMudXNlcnRydXN0LmNvbTAIBgZngQwBAgEwPQYDVR0fBDYwNDAyoDCgLoYs\n"
+                + "aHR0cDovL2NybC51c2VydHJ1c3QuY29tL0dvR2V0U1NMUlNBRFZDQS5jcmwwbwYI\n"
+                + "KwYBBQUHAQEEYzBhMDgGCCsGAQUFBzAChixodHRwOi8vY3J0LnVzZXJ0cnVzdC5j\n"
+                + "b20vR29HZXRTU0xSU0FEVkNBLmNydDAlBggrBgEFBQcwAYYZaHR0cDovL29jc3Au\n"
+                + "dXNlcnRydXN0LmNvbTBBBgNVHREEOjA4ghx3d3cuZ2VzdGlvbmRvY3VtZW50YWwu\n"
+                + "Z29iLmVjghhnZXN0aW9uZG9jdW1lbnRhbC5nb2IuZWMwggF8BgorBgEEAdZ5AgQC\n"
+                + "BIIBbASCAWgBZgB1AK33vvp8/xDIi509nB4+GGq0Zyldz7EMJMqFhjTr3IKKAAAB\n"
+                + "gIrjdDMAAAQDAEYwRAIgDbbKM7tEkciFzyMESNPxkYmuIkY/dYHMvd2XxRscoNkC\n"
+                + "IHfN0ZZIi06T9/LmiCKCFGKkvRt4Dg+x4mngTsc5CLlOAHUAejKMVNi3LbYg6jjg\n"
+                + "Uh7phBZwMhOFTTvSK8E6V6NS61IAAAGAiuN0SAAABAMARjBEAiBGmi3jC+pf0T0p\n"
+                + "z5HyVyxBiCoIk7lnpgewFtwQqiFrkQIgWPBZoO0e82HP/7IAKR/jbf5Efl2wNGk9\n"
+                + "Kxru7SanrQ0AdgDoPtDaPvUGNTLnVyi8iWvJA9PL0RFr7Otp4Xd9bQa9bgAAAYCK\n"
+                + "43QTAAAEAwBHMEUCIQD1xiCFqvaIrKDhHfVL6QU6JQ/Ecc8dsGN2kQm2tcvjIAIg\n"
+                + "fJhObS8yTy8LrcaHXJO9iv7lRK5EDhfgerE54fePZkgwDQYJKoZIhvcNAQELBQAD\n"
+                + "ggEBAFuR4/oc7iANBZ04BtYTMMOWvQxRLPLB1UjxQueAy5/YvdWYrIbHTSDVypFp\n"
+                + "HR5gVAhRKRwgbCTCdmW/dqUjbhaAGRKQ8/uTI2O+4ZGdUiDR+ZnjozATIhHJ/Byj\n"
+                + "/IInnEThRrbVElPk1xehLMry0NDx8o7TJJd+8jeK3GAYBXNUfoSWhtXWTZBnEtLf\n"
+                + "l05gi4xMyGhIrVoSDBLCztqKj3/Vh17sXQHB5LJzF6s3gfNKS0noUsokeGzH740u\n"
+                + "aE10VBlAt4rFQi8Kh0bJk43o1gVj0WY1MRspm7moNyVin+WUzlhyl3IT8OeKNiFl\n"
+                + "RFJUDupYzfrC36/sXqWOrBvCEkM=\n"
+                + "-----END CERTIFICATE-----");
+
+    static final X509Certificate entrustRootCertificateAuthority = Certificates.decodeCertificatePem(""
+                + "-----BEGIN CERTIFICATE-----\n"
+                + "MIIGQDCCBSigAwIBAgIQOn5WQUsmGTD8lZbZ6fBTcjANBgkqhkiG9w0BAQsFADBM\n"
+                + "MQswCQYDVQQGEwJMVjENMAsGA1UEBxMEUmlnYTERMA8GA1UEChMIR29HZXRTU0wx\n"
+                + "GzAZBgNVBAMTEkdvR2V0U1NMIFJTQSBEViBDQTAeFw0yMjA1MDMwMDAwMDBaFw0y\n"
+                + "MzA2MDMyMzU5NTlaMCcxJTAjBgNVBAMTHHd3dy5nZXN0aW9uZG9jdW1lbnRhbC5n\n"
+                + "b2IuZWMwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDRJzKb2uHUrbg5\n"
+                + "aiI5Zr3yNw5Nnoi4P+1700QS7HQBgpXu8bFUmbvgTYnrrg9leub/3GW02EkaEorL\n"
+                + "o67TOr9iNInNqCeLyAdvJktShlYbKvF4+0Bi15N5fGR0Av7xwQ+K45qpJJL2pJR2\n"
+                + "RKV/tsyWa+lxRu6PzfgB7UGvWfkUu8DXzmST90v1wMVjO7JjvZzfxuMtU+9SwC3M\n"
+                + "b9stJcLwZuYIMlq82BERa1sXWNavRKZ8prigeBoKfLyOedMX0F0Mf0L5j7OfnXXD\n"
+                + "2ufU3J7xzTzlTPFpx3m/wJjqmvylbTjI4xBI2ogd8V01hDTABbKowdvT20ArCQrf\n"
+                + "AYL07G5lAgMBAAGjggNBMIIDPTAfBgNVHSMEGDAWgBT5+1DEi2e7Z2T+gyGmqc4/\n"
+                + "VYSTmTAdBgNVHQ4EFgQUbgX0xopX6SzpCPqj1tE5etfO2ZEwDgYDVR0PAQH/BAQD\n"
+                + "AgWgMAwGA1UdEwEB/wQCMAAwHQYDVR0lBBYwFAYIKwYBBQUHAwEGCCsGAQUFBwMC\n"
+                + "MEsGA1UdIAREMEIwNgYLKwYBBAGyMQECAkAwJzAlBggrBgEFBQcCARYZaHR0cHM6\n"
+                + "Ly9jcHMudXNlcnRydXN0LmNvbTAIBgZngQwBAgEwPQYDVR0fBDYwNDAyoDCgLoYs\n"
+                + "aHR0cDovL2NybC51c2VydHJ1c3QuY29tL0dvR2V0U1NMUlNBRFZDQS5jcmwwbwYI\n"
+                + "KwYBBQUHAQEEYzBhMDgGCCsGAQUFBzAChixodHRwOi8vY3J0LnVzZXJ0cnVzdC5j\n"
+                + "b20vR29HZXRTU0xSU0FEVkNBLmNydDAlBggrBgEFBQcwAYYZaHR0cDovL29jc3Au\n"
+                + "dXNlcnRydXN0LmNvbTBBBgNVHREEOjA4ghx3d3cuZ2VzdGlvbmRvY3VtZW50YWwu\n"
+                + "Z29iLmVjghhnZXN0aW9uZG9jdW1lbnRhbC5nb2IuZWMwggF8BgorBgEEAdZ5AgQC\n"
+                + "BIIBbASCAWgBZgB1AK33vvp8/xDIi509nB4+GGq0Zyldz7EMJMqFhjTr3IKKAAAB\n"
+                + "gIrjdDMAAAQDAEYwRAIgDbbKM7tEkciFzyMESNPxkYmuIkY/dYHMvd2XxRscoNkC\n"
+                + "IHfN0ZZIi06T9/LmiCKCFGKkvRt4Dg+x4mngTsc5CLlOAHUAejKMVNi3LbYg6jjg\n"
+                + "Uh7phBZwMhOFTTvSK8E6V6NS61IAAAGAiuN0SAAABAMARjBEAiBGmi3jC+pf0T0p\n"
+                + "z5HyVyxBiCoIk7lnpgewFtwQqiFrkQIgWPBZoO0e82HP/7IAKR/jbf5Efl2wNGk9\n"
+                + "Kxru7SanrQ0AdgDoPtDaPvUGNTLnVyi8iWvJA9PL0RFr7Otp4Xd9bQa9bgAAAYCK\n"
+                + "43QTAAAEAwBHMEUCIQD1xiCFqvaIrKDhHfVL6QU6JQ/Ecc8dsGN2kQm2tcvjIAIg\n"
+                + "fJhObS8yTy8LrcaHXJO9iv7lRK5EDhfgerE54fePZkgwDQYJKoZIhvcNAQELBQAD\n"
+                + "ggEBAFuR4/oc7iANBZ04BtYTMMOWvQxRLPLB1UjxQueAy5/YvdWYrIbHTSDVypFp\n"
+                + "HR5gVAhRKRwgbCTCdmW/dqUjbhaAGRKQ8/uTI2O+4ZGdUiDR+ZnjozATIhHJ/Byj\n"
+                + "/IInnEThRrbVElPk1xehLMry0NDx8o7TJJd+8jeK3GAYBXNUfoSWhtXWTZBnEtLf\n"
+                + "l05gi4xMyGhIrVoSDBLCztqKj3/Vh17sXQHB5LJzF6s3gfNKS0noUsokeGzH740u\n"
+                + "aE10VBlAt4rFQi8Kh0bJk43o1gVj0WY1MRspm7moNyVin+WUzlhyl3IT8OeKNiFl\n"
+                + "RFJUDupYzfrC36/sXqWOrBvCEkM=\n"
+                + "-----END CERTIFICATE-----"
+    );
+
+    static final X509Certificate letsEncryptCertificateAuthority = Certificates.decodeCertificatePem(""
+                + "-----BEGIN CERTIFICATE-----\n"
+                + "MIIGQDCCBSigAwIBAgIQOn5WQUsmGTD8lZbZ6fBTcjANBgkqhkiG9w0BAQsFADBM\n"
+                + "MQswCQYDVQQGEwJMVjENMAsGA1UEBxMEUmlnYTERMA8GA1UEChMIR29HZXRTU0wx\n"
+                + "GzAZBgNVBAMTEkdvR2V0U1NMIFJTQSBEViBDQTAeFw0yMjA1MDMwMDAwMDBaFw0y\n"
+                + "MzA2MDMyMzU5NTlaMCcxJTAjBgNVBAMTHHd3dy5nZXN0aW9uZG9jdW1lbnRhbC5n\n"
+                + "b2IuZWMwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDRJzKb2uHUrbg5\n"
+                + "aiI5Zr3yNw5Nnoi4P+1700QS7HQBgpXu8bFUmbvgTYnrrg9leub/3GW02EkaEorL\n"
+                + "o67TOr9iNInNqCeLyAdvJktShlYbKvF4+0Bi15N5fGR0Av7xwQ+K45qpJJL2pJR2\n"
+                + "RKV/tsyWa+lxRu6PzfgB7UGvWfkUu8DXzmST90v1wMVjO7JjvZzfxuMtU+9SwC3M\n"
+                + "b9stJcLwZuYIMlq82BERa1sXWNavRKZ8prigeBoKfLyOedMX0F0Mf0L5j7OfnXXD\n"
+                + "2ufU3J7xzTzlTPFpx3m/wJjqmvylbTjI4xBI2ogd8V01hDTABbKowdvT20ArCQrf\n"
+                + "AYL07G5lAgMBAAGjggNBMIIDPTAfBgNVHSMEGDAWgBT5+1DEi2e7Z2T+gyGmqc4/\n"
+                + "VYSTmTAdBgNVHQ4EFgQUbgX0xopX6SzpCPqj1tE5etfO2ZEwDgYDVR0PAQH/BAQD\n"
+                + "AgWgMAwGA1UdEwEB/wQCMAAwHQYDVR0lBBYwFAYIKwYBBQUHAwEGCCsGAQUFBwMC\n"
+                + "MEsGA1UdIAREMEIwNgYLKwYBBAGyMQECAkAwJzAlBggrBgEFBQcCARYZaHR0cHM6\n"
+                + "Ly9jcHMudXNlcnRydXN0LmNvbTAIBgZngQwBAgEwPQYDVR0fBDYwNDAyoDCgLoYs\n"
+                + "aHR0cDovL2NybC51c2VydHJ1c3QuY29tL0dvR2V0U1NMUlNBRFZDQS5jcmwwbwYI\n"
+                + "KwYBBQUHAQEEYzBhMDgGCCsGAQUFBzAChixodHRwOi8vY3J0LnVzZXJ0cnVzdC5j\n"
+                + "b20vR29HZXRTU0xSU0FEVkNBLmNydDAlBggrBgEFBQcwAYYZaHR0cDovL29jc3Au\n"
+                + "dXNlcnRydXN0LmNvbTBBBgNVHREEOjA4ghx3d3cuZ2VzdGlvbmRvY3VtZW50YWwu\n"
+                + "Z29iLmVjghhnZXN0aW9uZG9jdW1lbnRhbC5nb2IuZWMwggF8BgorBgEEAdZ5AgQC\n"
+                + "BIIBbASCAWgBZgB1AK33vvp8/xDIi509nB4+GGq0Zyldz7EMJMqFhjTr3IKKAAAB\n"
+                + "gIrjdDMAAAQDAEYwRAIgDbbKM7tEkciFzyMESNPxkYmuIkY/dYHMvd2XxRscoNkC\n"
+                + "IHfN0ZZIi06T9/LmiCKCFGKkvRt4Dg+x4mngTsc5CLlOAHUAejKMVNi3LbYg6jjg\n"
+                + "Uh7phBZwMhOFTTvSK8E6V6NS61IAAAGAiuN0SAAABAMARjBEAiBGmi3jC+pf0T0p\n"
+                + "z5HyVyxBiCoIk7lnpgewFtwQqiFrkQIgWPBZoO0e82HP/7IAKR/jbf5Efl2wNGk9\n"
+                + "Kxru7SanrQ0AdgDoPtDaPvUGNTLnVyi8iWvJA9PL0RFr7Otp4Xd9bQa9bgAAAYCK\n"
+                + "43QTAAAEAwBHMEUCIQD1xiCFqvaIrKDhHfVL6QU6JQ/Ecc8dsGN2kQm2tcvjIAIg\n"
+                + "fJhObS8yTy8LrcaHXJO9iv7lRK5EDhfgerE54fePZkgwDQYJKoZIhvcNAQELBQAD\n"
+                + "ggEBAFuR4/oc7iANBZ04BtYTMMOWvQxRLPLB1UjxQueAy5/YvdWYrIbHTSDVypFp\n"
+                + "HR5gVAhRKRwgbCTCdmW/dqUjbhaAGRKQ8/uTI2O+4ZGdUiDR+ZnjozATIhHJ/Byj\n"
+                + "/IInnEThRrbVElPk1xehLMry0NDx8o7TJJd+8jeK3GAYBXNUfoSWhtXWTZBnEtLf\n"
+                + "l05gi4xMyGhIrVoSDBLCztqKj3/Vh17sXQHB5LJzF6s3gfNKS0noUsokeGzH740u\n"
+                + "aE10VBlAt4rFQi8Kh0bJk43o1gVj0WY1MRspm7moNyVin+WUzlhyl3IT8OeKNiFl\n"
+                + "RFJUDupYzfrC36/sXqWOrBvCEkM=\n"
+                + "-----END CERTIFICATE-----");
+
 }
