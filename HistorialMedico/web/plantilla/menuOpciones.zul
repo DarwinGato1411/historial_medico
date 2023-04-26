@@ -43,7 +43,7 @@
     
     <div class="nav ul" viewModel="@id('vm')" apply="com.ec.controlador.MenuOpciones" >
         <div class="li">
-            <label class="m1" value="Historial paciente" id="btnPaciente"/>
+            <label class="m1" value="Pacientes" id="btnPaciente"/>
         </div>
         <div class="li">
             <label class="m1" value="Catálogos" id="btnCatalogo"/>

@@ -36,6 +36,8 @@ public class Detalle implements Serializable {
     private Integer idDetalle;
     @Column(name = "det_detalle")
     private String detDetalle;
+    @Column(name = "det_codigo")
+    private String detCodigo;
     @Column(name = "can_estado")
     private Boolean canEstado;
     @JoinColumn(name = "id_subcapitulo", referencedColumnName = "id_subcapitulo")
@@ -81,6 +83,15 @@ public class Detalle implements Serializable {
         this.idSubcapitulo = idSubcapitulo;
     }
 
+    public String getDetCodigo() {
+        return detCodigo;
+    }
+
+    public void setDetCodigo(String detCodigo) {
+        this.detCodigo = detCodigo;
+    }
+
+   
     @Override
     public int hashCode() {
         int hash = 0;

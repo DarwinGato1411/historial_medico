@@ -120,6 +120,7 @@ public class NuevoVisita {
     private String buscarSubCapitulo = "";
     private String buscarDetalle = "";
 
+
     /*MOstrar pdf*/
     //reporte
     AMedia fileContent = null;
@@ -130,7 +131,7 @@ public class NuevoVisita {
         Selectors.wireComponents(view, this, false);
 
         if (valor.getTipo().equals("cie")) {
-            buscarCapituloBD();
+            buscarDetalleBD();
         } else {
             if (valor.getTipo().equals("modifica")) {
                 this.entidad = valor.getVisita();
@@ -425,8 +426,9 @@ public class NuevoVisita {
             org.zkoss.zul.Window window = (org.zkoss.zul.Window) Executions.createComponents(
                         "/medico/nuevo/cargarcie10.zul", null, map);
             window.doModal();
-
-            entidad.setVisCargarCie10(CIE10.toUpperCase());
+            String CIE10CONCAt = entidad.getVisCargarCie10() != null ? entidad.getVisCargarCie10() : "";
+            CIE10CONCAt = CIE10CONCAt + CIE10.toUpperCase() + "\n";;
+            entidad.setVisCargarCie10(CIE10CONCAt);
         } catch (Exception e) {
             Clients.showNotification("Ocurrio un error " + e.getMessage(),
                         Clients.NOTIFICATION_TYPE_ERROR, null, "middle_center", 2000, true);
@@ -443,7 +445,8 @@ public class NuevoVisita {
     }
 
     private void buscarDetalleBD() {
-        listaDetalles = servicioDetalle.findBySubCapitulo(subCapituloSelected, buscarDetalle);
+        listaDetalles = servicioDetalle.findBySubCapituloLike(buscarDetalle);
+//        listaDetalles = servicioDetalle.findBySubCapitulo(subCapituloSelected, buscarDetalle);
     }
 
     @Command
@@ -466,17 +469,19 @@ public class NuevoVisita {
 
     @Command
     @NotifyChange({"listaDetalles", "buscar", "subCapituloSelected"})
-    public void busacarDetalle(@BindingParam("valor") Subcapitulo valor) {
-        if (subCapituloSelected == null) {
-            subCapituloSelected = valor;
-        }
+    public void busacarDetalle() {
+//        @BindingParam("valor") Subcapitulo valor
+//        if (subCapituloSelected == null) {
+//            subCapituloSelected = valor;
+//        }
         buscarDetalleBD();
     }
 
     @Command
     @NotifyChange({"listaDetalles", "buscarDetalle", "subCapituloSelected"})
     public void seleccionarCie(@BindingParam("valor") Detalle valor) {
-        CIE10 = valor.getDetDetalle() + "/" + valor.getIdSubcapitulo().getSubDetalle() + "/" + valor.getIdSubcapitulo().getIdCapitulo().getCapDetalle();
+//        CIE10 = valor.getDetDetalle() + "/" + valor.getIdSubcapitulo().getSubDetalle() + "/" + valor.getIdSubcapitulo().getIdCapitulo().getCapDetalle();
+        CIE10 = valor.getDetCodigo() + " - " + valor.getDetDetalle() + "\n";
         wVCargarCie.detach();
     }
 

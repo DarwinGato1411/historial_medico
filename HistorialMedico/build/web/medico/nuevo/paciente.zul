@@ -21,7 +21,7 @@
                             <div class="wrapper_input_text">
                         
                                 <textbox  
-                                    maxlength="13"     
+                                    maxlength="20"     
                                     value="@bind(vm.entidad.pacRuc)" 
                                     class="input_text" />
                             </div>
@@ -59,9 +59,11 @@
                                 <combobox readonly="true"                                   
                                           selectedItem="@bind(vm.entidad.pacEstadoCivil)"> 
                                     <comboitem value="Casado" label="Casado/a" />
-                                    <comboitem value="Soltero" label="Soltero/a" />
                                     <comboitem value="Divorciado" label="Divorciado/a"/>
+                                    <comboitem value="Soltero" label="Soltero/a" />  
+                                    <comboitem value="Unión libre" label="Union libre"/>                                  
                                     <comboitem value="Viudo" label="Viudo/a"/>
+                                  
                                 </combobox>
                             
                             
@@ -91,7 +93,7 @@
                                     <datebox compact="true" 
                                              value="@bind(vm.entidad.pacFechaNacimiento)" 
                                              onChange="@command('obtenerEdad')" 
-                                             readonly="true"   
+                                             readonly="false"   
                                              buttonVisible="true" 
                                              lenient="true" 
                                              format="dd/MM/yyyy"
@@ -138,7 +140,7 @@
                             </div>
                         </div>
                         <div class="wrapper_input_mod">
-                            <span>Teléfono</span>
+                            <span>Teléfono fijo</span>
                    
                             <div class="wrapper_input_text">
                         

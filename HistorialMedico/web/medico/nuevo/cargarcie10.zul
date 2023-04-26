@@ -9,7 +9,7 @@
         <caption label="CIE-10 "  class="titulo"/> 
                   
         <div  class="contenedorTest">
-            <div  class="containerEva">
+<!--            <div  class="containerEva">
              
                 <listbox class="tabla" model="@load(vm.listaCapitulo)" 
                                      nonselectableTags="*"  mold="paging" pageSize="15"  >
@@ -98,16 +98,17 @@
                         </listitem>
                     </template>
                 </listbox>
-            </div>
+            </div>-->
             <div  class="containerRespuestas">
                 
                 <listbox class="tabla" model="@load(vm.listaDetalles)" 
-                                     nonselectableTags=""  mold="paging" pageSize="15"  >
+                         nonselectableTags=""  mold="paging" pageSize="15"  >
                     <custom-attributes org.zkoss.zul.listbox.rod="true"/>
                                 
                        
                     <listhead class="tblCabecera"> 
-                        <listheader label="@bind('Sub capitulo: ('.concat(vm.subCapituloSelected.subDetalle).concat(')'))" />   
+                        <!--<listheader label="@bind('Sub capitulo: ('.concat(vm.subCapituloSelected.subDetalle).concat(')'))" />-->   
+                        <!--<listheader label="" ></listheader>-->
                         <listheader label="" >
                             
                             <textbox value="@bind(vm.buscarDetalle)" 
@@ -126,8 +127,14 @@
                               
                             <listcell zclass = "mycss-listcell" style="width:100%;">
                                 <textbox readonly="true"  style="font-size:12px ;background:#EBF5FB"
-                                                     class="form-control form-control-sm" 
-                                                     value="@bind(each.detDetalle)" />
+                                         class="form-control form-control-sm" 
+                                         value="@bind(each.detCodigo)" />
+                            </listcell>
+                            <listcell zclass = "mycss-listcell" style="width:100%;">
+                                
+                                <textbox readonly="true"  style="font-size:12px ;background:#EBF5FB"
+                                         class="form-control form-control-sm" 
+                                         value="@bind(each.detDetalle)" />
                             </listcell>
                             <listcell zclass = "mycss-listcell" style="font-size:12px;background:#F8F9F9">                       
                                 <button 
@@ -143,7 +150,7 @@
             </div>
         </div>
    
-  </window>
+    </window>
 
 
 </zk>

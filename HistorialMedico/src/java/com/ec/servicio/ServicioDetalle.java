@@ -126,6 +126,29 @@ public class ServicioDetalle {
 
         return listaDatos;
     }
+    public List<Detalle> findBySubCapituloLike( String valor) {
+
+        List<Detalle> listaDatos = new ArrayList<Detalle>();
+        Detalle usuarioObtenido = new Detalle();
+        try {
+            //Connection connection = em.unwrap(Connection.class);
+
+            em = HelperPersistencia.getEMF();
+            em.getTransaction().begin();
+            Query query = em.createQuery("SELECT u FROM Detalle u WHERE UPPER(u.detDetalle) LIKE :detDetalle ORDER BY u.detDetalle ASC");
+//            query.setParameter("subcapitulo", subcapitulo);
+            query.setParameter("detDetalle", "%" + valor + "%");
+            listaDatos = (List<Detalle>) query.getResultList();
+
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println("Error en lsa consulta usuario  FindDetallePorNombre  " + e.getMessage());
+        } finally {
+            em.close();
+        }
+
+        return listaDatos;
+    }
 
     public List<Detalle> finAll(String nombre) {
         List<Detalle> listaDetalles = new ArrayList<Detalle>();

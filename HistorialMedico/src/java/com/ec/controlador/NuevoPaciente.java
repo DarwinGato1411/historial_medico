@@ -100,8 +100,7 @@ public class NuevoPaciente {
     public void guardar() {
         if (entidad.getPacRuc() != null
                     && entidad.getPacNombres() != null
-                    && entidad.getPacApellidos() != null
-                    && entidad.getPacTelefono() != null
+                    && entidad.getPacMovil()!= null
                     && entidad.getPacCorreo() != null) {
 
             if (accion.equals("create")) {
