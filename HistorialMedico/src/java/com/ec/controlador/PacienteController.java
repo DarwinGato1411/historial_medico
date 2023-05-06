@@ -31,6 +31,7 @@ import org.zkoss.zk.ui.Session;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.util.Clients;
+import org.zkoss.zul.Messagebox;
 
 /**
  *
@@ -87,6 +88,21 @@ public class PacienteController {
 
     @Command
     @NotifyChange({"listaPaciente", "buscarPaciente"})
+    public void eliminarPaciente(@BindingParam("valor") Paciente valor) {
+        try {
+            if (Messagebox.show("¿Esta seguro de eliminar el paciente?", "Atención", Messagebox.YES | Messagebox.NO, Messagebox.INFORMATION) == Messagebox.YES) {
+                valor.setPacHabilitado(Boolean.FALSE);
+                servicioPaciente.modificar(valor);
+                buscarLike();
+            }
+        } catch (Exception e) {
+            Clients.showNotification("Ocurrio un error " + e.getMessage(),
+                        Clients.NOTIFICATION_TYPE_ERROR, null, "middle_center", 2000, true);
+        }
+    }
+
+    @Command
+    @NotifyChange({"listaPaciente", "buscarPaciente"})
     public void modificarPaciente(@BindingParam("valor") Paciente valor) {
         try {
 //            if (Messagebox.show("¿Desea modificar el registro, recuerde que debe crear las reteniones nuevamente?", "Atención", Messagebox.YES | Messagebox.NO, Messagebox.INFORMATION) == Messagebox.YES) {
@@ -101,6 +117,7 @@ public class PacienteController {
                         Clients.NOTIFICATION_TYPE_ERROR, null, "middle_center", 2000, true);
         }
     }
+
     @Command
     @NotifyChange({"listaPaciente", "buscarPaciente"})
     public void registrarVisita(@BindingParam("valor") Paciente valor) {

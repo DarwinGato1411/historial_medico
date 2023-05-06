@@ -27,7 +27,7 @@
                          nonselectableTags="*"  mold="paging" pageSize="15"  >
                                
                     <custom-attributes org.zkoss.zul.listbox.rod="true"/>                       
-                    <listhead  class="tblCabecera"> 
+                    <listhead  class="tblCabecera " > 
                         <listheader label="" >
                             <textbox value="@bind(vm.buscarPaciente)" 
                                      class="form-control form-control-sm"
@@ -74,9 +74,15 @@
                                     
                                 </button>                                                  
                                 <button class="btn btn-primary"
-                                    iconSclass="z-icon-pencil"
-                                    onClick="@command('modificarPaciente',valor=each)" 
-                                    tooltiptext="">
+                                        iconSclass="z-icon-pencil"
+                                        onClick="@command('modificarPaciente',valor=each)" 
+                                        tooltiptext="">
+                                    
+                                </button>                                      
+                                <button class="btn btn-primary"
+                                        iconSclass="z-icon-pencil"
+                                        onClick="@command('eliminarPaciente',valor=each)" 
+                                        tooltiptext="">
                                     
                                 </button>                                      
                                                   
@@ -84,21 +90,28 @@
 
                             <listcell zclass = "mycss-listcell"  class="btnPc" style="font-size:12px;background:#F8F9F9">   
 
-                                <button  class=" btn btn-primary"
-                                    label="Visita médica"
-                                    iconSclass="z-icon-eye"
-                                    onClick="@command('registrarVisita',valor=each)" 
-                                    tooltiptext="">
+                                <button  class=" btn btn-primary btn-primary-zk"
+                                         label="Visita médica"
+                                         iconSclass="z-icon-eye"
+                                         onClick="@command('registrarVisita',valor=each)" 
+                                         tooltiptext="">
                                          
                                 </button>                                                  
                                 <button 
                                     label="Editar"
+                                    class=" btn btn-primary btn-primary-zk"
                                     iconSclass="z-icon-pencil"
                                     onClick="@command('modificarPaciente',valor=each)" 
                                     tooltiptext="">
                                     
                                 </button>                                      
-                                                  
+                                <button class="btn-danger-zk"
+                                                 label="Eliminar"
+                                                 iconSclass="z-icon-pencil"
+                                                 onClick="@command('eliminarPaciente',valor=each)" 
+                                                 tooltiptext="">
+                                    
+                                </button>          
                             </listcell>
                                       
                                

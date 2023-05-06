@@ -5,9 +5,18 @@
 package com.ec.seguridad;
 
 import com.ec.entidad.Usuario;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.zkoss.image.AImage;
+import org.zkoss.zk.ui.Executions;
 
 public class UserCredential implements Serializable {
 
@@ -15,10 +24,16 @@ public class UserCredential implements Serializable {
     String account;
     String name;
     String nombreUsuario;
+
     private Integer nivelUsuario;
     private Usuario usuarioSistema;
     private Boolean puedeEditar = Boolean.FALSE;
     Set<String> roles = new HashSet<String>();
+    /*foto usuario*/
+
+    private String filePath;
+    byte[] buffer = new byte[1024 * 1024];
+    private AImage fotoGeneral = null;
 
     public UserCredential(Usuario usuario, String account, String name, Integer nivelUsuario, String nombreUsuario) {
         this.usuarioSistema = usuario;
@@ -26,6 +41,15 @@ public class UserCredential implements Serializable {
         this.account = account;
         this.nivelUsuario = nivelUsuario;
         this.nombreUsuario = nombreUsuario;
+    }
+
+    public UserCredential(Usuario usuario, String account, String name, Integer nivelUsuario, String nombreUsuario, AImage fotoGeneral) {
+        this.usuarioSistema = usuario;
+        this.name = name;
+        this.account = account;
+        this.nivelUsuario = nivelUsuario;
+        this.nombreUsuario = nombreUsuario;
+        this.fotoGeneral = fotoGeneral;
     }
 
     public UserCredential() {
@@ -100,4 +124,51 @@ public class UserCredential implements Serializable {
         this.puedeEditar = puedeEditar;
     }
 
+    public AImage getFotoGeneral() throws FileNotFoundException, IOException {
+        if (usuarioSistema.getUsuFoto() != null) {
+            String reportFile = Executions.getCurrent().getDesktop().getWebApp()
+                        .getRealPath("/iconos");
+            try {
+                System.out.println("PATH" + usuarioSistema.getUsuFoto());
+                fotoGeneral = new AImage("fotoPedido", Imagen_A_Bytes(usuarioSistema.getUsuFoto()));
+//                Imagen_A_Bytes(empresa.getIdUsuario().getUsuFoto());
+            } catch (FileNotFoundException e) {
+                System.out.println("error imagen " + e.getMessage());
+
+                fotoGeneral = new AImage("fotoPedido", Imagen_A_Bytes(reportFile + File.separator + "user.png"));
+            } catch (IOException ex) {
+                fotoGeneral = new AImage("fotoPedido", Imagen_A_Bytes(reportFile + File.separator + "user.png"));
+//                Logger.getLogger(AutentificadorLogeo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return fotoGeneral;
+    }
+
+    public void setFotoGeneral(AImage fotoGeneral) {
+        this.fotoGeneral = fotoGeneral;
+    }
+
+    public byte[] Imagen_A_Bytes(String pathImagen) throws FileNotFoundException {
+        String reportPath = "";
+        reportPath = pathImagen;
+        File file = new File(reportPath);
+
+        FileInputStream fis = new FileInputStream(file);
+        //create FileInputStream which obtains input bytes from a file in a file system
+        //FileInputStream is meant for reading streams of raw bytes such as image data. For reading streams of characters, consider using FileReader.
+
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        byte[] buf = new byte[1024];
+        try {
+            for (int readNum; (readNum = fis.read(buf)) != -1;) {
+                //Writes to this byte array output stream
+                bos.write(buf, 0, readNum);
+//                System.out.println("read " + readNum + " bytes,");
+            }
+        } catch (IOException ex) {
+        }
+
+        byte[] bytes = bos.toByteArray();
+        return bytes;
+    }
 }

@@ -51,7 +51,7 @@ element.style {
 .banner {
     background-color:transparent;
     color: black;
-    padding: 10px 5px 5px 10px;
+    padding: 0px 0px 0px 0px;
 }
 .banner-head{
     font-size: 1.2em;
@@ -3149,13 +3149,13 @@ input, button, select, textarea {
 
 .contenedorTest .z-listbox .tblCabecera{
 
-
+    background: #007bff;
     display: block;
     width: 100%;
 }
 
 .contenedorTest .z-listbox .tblCabecera .z-listheader {
-    background: var(--primary-color);
+    background: #007bff;
     color: white;
     padding: 5px;
     text-align: center;
@@ -3207,7 +3207,7 @@ input, button, select, textarea {
 }
 
 .contenedorTest .containerPreguntas .z-listbox .tblCabecera .z-listheader {
-    background: var(--primary-color);
+    background: #007bff;
     color: white;
     padding: 10px;
     text-align: center;
@@ -3253,7 +3253,7 @@ input, button, select, textarea {
 }
 
 .contenedorTest .containerRespuestas .z-listbox .tblCabecera .z-listheader{
-    background: var(--primary-color);
+    background: #007bff;
     color: white;
     padding: 10px;
     text-align: center;
@@ -3315,7 +3315,7 @@ input, button, select, textarea {
 
 .contenedorPacientes  .z-listbox .tblCabecera{
     display: grid;
-    grid-template-columns:22% 22% 23% 18% 15%;
+    grid-template-columns:15% 25% 30% 10% 25%;
 }
 
 
@@ -3323,11 +3323,11 @@ input, button, select, textarea {
 .contenedorPacientes  .z-listbox .tblCuerpo{
 
     display: grid;
-    grid-template-columns:22% 22% 23% 18% 15%;
+    grid-template-columns:15% 25% 30% 10% 25%;
 }
 
 .fondoBanner{
-    background: var(--primary-color);
+    background: #2d7fd2;
     padding: 10px;
 }
 
@@ -3393,7 +3393,7 @@ input, button, select, textarea {
     padding: 3px 12px; 
     line-height: 14px; 
     background: -webkit-linear-gradient(top, #fefefe 0%, #eeeeee 100%); 
-    background: #0275d8;
+    background: #0c4c83;
     text-shadow: 0 1px #fff; 
     cursor: pointer; 
     white-space: nowrap; 
@@ -3401,9 +3401,23 @@ input, button, select, textarea {
 
 .z-button:hover {
     border-color: #8fb9d0;
-    background: -webkit-linear-gradient(top, #f2f9fe 0%, #22c7b8 100%);
+    background: -webkit-linear-gradient(top, #f2f9fe 30%, #22c7b8 100%);
     color: black;
-    background: linear-gradient(to bottom, #f2f9fe 0%, #22c7b8 100%);
+    background: linear-gradient(to bottom, #449f83 30%, #22c7b8 100%);
+}
+.btn-primary:focus, .btn-primary.focus {
+    border-color: #8fb9d0;
+    background: -webkit-linear-gradient(top, #fefefe 0%, #eeeeee 100%) !important;
+    color: black;
+    background: #0c4c83 !important;
+}
+.z-button:focus {
+    color: #000;
+    border-color: #00b9ff;
+    /*background: -webkit-linear-gradient(top, #f2f9fe 0%, #22c7b8 100%) !important;*/
+    background: #0c4c83 !important;;
+    -webkit-box-shadow: inset 0 0 2px #0CBCFF;
+    box-shadow: inset 0 0 2px #0CBCFF;
 }
 
 div.z-listbox-header th.z-listheader, div.z-listbox-header th.z-auxheader {
@@ -3425,4 +3439,62 @@ div.z-listbox-header th.z-listheader, div.z-listbox-header th.z-auxheader {
     font-size: 21px;
     size: 15px;
     margin-bottom: 10px;
+}
+
+.avatar {
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.tituloUserheader{
+    display: flex;
+    justify-content: center;
+    position: relative;
+    background: #22c7b8;
+    color: #fff;
+    justify-content: center;
+    min-width: 160px;
+    padding-left: 30px;
+    padding-right: 30px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 18px;
+    margin-left: 10px !important;
+    padding: 11px 20px;
+    white-space: nowrap;
+}
+.textoHeader{
+    font-family: Arial,Sans-serif !important;
+    font-size: 16px;
+    font-weight: bold !important;
+
+}
+
+.btn-primary-zk {
+    color: #fff !important;
+    background-color: #0c4c83 !important;
+    border-color: #0c4c83 !important;
+}
+.btn-danger-zk {
+    color: #fff !important;
+    background-color: #dc3545 !important;
+    border-color: #dc3545 !important;
+}
+.btn-success-zk {
+    color: #fff !important;
+    background-color: #28a745 !important;
+    border-color: #28a745 !important;
+}
+.btn-info-zk {
+    color: #fff !important;
+    background-color: #17a2b8 !important;
+    border-color: #17a2b8 !important;
+}
+.btn-warning-zk {
+    color: #fff !important;
+    background-color: #ffc107 !important;
+    border-color: #ffc107 !important;
 }

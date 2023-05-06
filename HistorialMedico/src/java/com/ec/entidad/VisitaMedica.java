@@ -50,6 +50,18 @@ public class VisitaMedica implements Serializable {
     private String visReseta;
     @Column(name = "vis_observacion")
     private String visObservacion;
+    @Column(name = "vis_hora")
+    @Temporal(TemporalType.TIME)
+    private Date visHora;
+    @Column(name = "vis_hora_fin")
+    @Temporal(TemporalType.TIME)
+    private Date visHoraFin;
+    @Column(name = "vis_atendida")
+    private Boolean visAtendida;
+    @Column(name = "vis_fecha_atencion")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date visFechaAtencion;
+
     @OneToMany(mappedBy = "idVisitaMedica")
     private Collection<Receta> recetaCollection;
     @JoinColumn(name = "id_paciente", referencedColumnName = "id_paciente")
@@ -161,5 +173,37 @@ public class VisitaMedica implements Serializable {
     public String toString() {
         return "com.ec.entidad.VisitaMedica[ idVisitaMedica=" + idVisitaMedica + " ]";
     }
-    
+
+    public Date getVisHora() {
+        return visHora;
+    }
+
+    public void setVisHora(Date visHora) {
+        this.visHora = visHora;
+    }
+
+    public Boolean getVisAtendida() {
+        return visAtendida;
+    }
+
+    public void setVisAtendida(Boolean visAtendida) {
+        this.visAtendida = visAtendida;
+    }
+
+    public Date getVisFechaAtencion() {
+        return visFechaAtencion;
+    }
+
+    public void setVisFechaAtencion(Date visFechaAtencion) {
+        this.visFechaAtencion = visFechaAtencion;
+    }
+
+    public Date getVisHoraFin() {
+        return visHoraFin;
+    }
+
+    public void setVisHoraFin(Date visHoraFin) {
+        this.visHoraFin = visHoraFin;
+    }
+
 }

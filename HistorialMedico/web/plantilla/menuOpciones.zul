@@ -43,10 +43,13 @@
     
     <div class="nav ul" viewModel="@id('vm')" apply="com.ec.controlador.MenuOpciones" >
         <div class="li">
-            <label class="m1" value="Pacientes" id="btnPaciente"/>
+            <label class="m1" value="Gestion de Pacientes" id="btnPaciente"/>
         </div>
         <div class="li">
-            <label class="m1" value="Catálogos" id="btnCatalogo"/>
+            <label class="m1" value="Agendamiento de citas" id="btnAgendamiento"/>
+        </div>
+        <div class="li">
+            <label class="m1" value="Clasificación Internacional de Enfermedades (CIE-10)" id="btnCatalogo"/>
         </div>
         <div class="li">
             <label class="m1" value="Perfil" id="btnPerfil"/>

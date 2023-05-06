@@ -140,13 +140,13 @@
 }
 
 .modalPaciente .z-window-header{
-    background: #22c7b8;
+    background: #007bff;
     width: 100%;
     padding: 0px;
 }
 
 .modalPaciente .titulo{
-    background: #22c7b8;
+    background: #007bff;
     height: 100%;
     display: flex;
 
@@ -156,7 +156,7 @@
     width: 100%;
     color: white;
     font-size: 16px;
-    background: 
+    background: #007bff; 
 }
 
 .modalPaciente .container_modal{

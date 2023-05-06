@@ -29,6 +29,35 @@
                             
                             </div>
                         </div>
+                        <div class="wrapper_input_mod">
+                            <span>Hora inicio:</span>
+                   
+                            <div class="">
+                                <timebox   
+                                         value="@bind(vm.entidad.visHora)" 
+                                         readonly="false"   
+                                         buttonVisible="true" 
+                                        style="display: contents"
+                                         format="short"
+                                         
+                                />
+                            
+                            </div>
+                        </div>
+                        <div class="wrapper_input_mod">
+                            <span>Hora fin</span>
+                   
+                            <div class="wrapper_input_text">
+                                <timebox  
+                                         value="@bind(vm.entidad.visHoraFin)" 
+                                         readonly="false"   
+                                         buttonVisible="true" 
+                                        style="display: contents"
+                                          format="short"
+                                />
+                            
+                            </div>
+                        </div>
                     
                     
                     </div>
@@ -132,7 +161,7 @@
                                 </a>
                             </div>
                             <listbox  model="@load(vm.listaExamenModel)" 
-                                     nonselectableTags="*"  mold="paging" pageSize="10"  >
+                                      nonselectableTags="*"  mold="paging" pageSize="10"  >
                                
                                 <custom-attributes org.zkoss.zul.listbox.rod="true"/>                       
                                 <listhead  > 

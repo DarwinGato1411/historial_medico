@@ -7,24 +7,28 @@
 
         <div class="banner">
             <div>
-           
+            
                 <button  
                     class="btnMenu"    
                     iconSclass="z-icon-align-justify"      
                     tooltiptext="Buscar">
-                </button>  
+                </button> 
+                <image  src="/imagenes/hospital.png" style="width:50px;" />
+                 <label value="Sistema de Agendamiento y Citas Medicas" class="textoHeader"></label> 
             </div>
             <div class="logo" style="margin:auto;">
-                <image src="/imagenes/logohm.png" style="width:50px;" />
-                <span>Historial Médico</span>
+               
             </div>
-            <div class="" style="margin:auto;">
-                <label value="Usuario: " 
-                       if="${not sessionScope.userCredential.anonymous}"/>
-                <label value="${sessionScope.usuario.nombreUsuario}" 
-                       if="${not sessionScope.userCredential.anonymous}" />
+            <div  style="margin:auto;display: flex;justify-content: center;position: relative;" >
+                <image content="${sessionScope.usuario.fotoGeneral}"  class="avatar"></image>
+                <div class="tituloUserheader" style="margin:auto;" >
+                    <label value="Usuario: " 
+                           if="${not sessionScope.userCredential.anonymous}"/>
+                    <label value="${sessionScope.usuario.nombreUsuario}" 
+                           if="${not sessionScope.userCredential.anonymous}" />
                              
              
+                </div>           
             </div>           
         </div>
         
