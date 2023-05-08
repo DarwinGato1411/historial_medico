@@ -235,6 +235,7 @@
                                 class="input_text" />
                         </div>
                     </div>
+                   
                     
                     <div class="wrapper_input_mod_group">
                         <div class="wrapper_input_mod">
@@ -276,7 +277,18 @@
                     
                     
                     </div>
-                    
+                     <div class="wrapper_input_mod">
+                        <span>Otros</span>
+                        <div class="wrapper_input_text">
+                        
+                            <textbox  
+                                maxlength="100"  
+                                rows="3"  
+                                onChange="self.setValue(self.getValue().toUpperCase());"  
+                                value="@bind(vm.entidad.pacOtros)" 
+                                class="input_text" />
+                        </div>
+                    </div>
                 </div>
                 <div class="DC">
                     <div class="leyenda">
@@ -324,8 +336,7 @@
                             <span>P/A</span>
                             <div class="wrapper_input_text">
                         
-                                <textbox    
-                                    constraint="/^[0-9]{1,9}(?:[.][0-9]{1,5})?$/:Ingrese solo numeros"                           
+                                <textbox                              
                                     value="@bind(vm.entidad.pacPa)"  
                                     class="input_text"  
                                 />
@@ -356,7 +367,7 @@
                     </div>
                     <div class="wrapper_input_mod_group">
                         <div class="wrapper_input_mod">
-                            <span>Tm BUCAL</span>
+                            <span>T° BUCAL</span>
                             <div class="wrapper_input_text">
                         
                                 <textbox    

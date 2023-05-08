@@ -20,6 +20,9 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import javax.xml.xpath.XPathExpressionException;
 import org.json.JSONException;
 
@@ -62,6 +65,9 @@ public class NuevoPaciente {
     ServicioParametrizar servicioParametrizar = new ServicioParametrizar();
     private Parametrizar parametrizar = new Parametrizar();
 
+    private List<BigDecimal> listaTalla = new ArrayList<BigDecimal>();
+    private List<BigDecimal> listaPeso = new ArrayList<BigDecimal>();
+
     public NuevoPaciente() {
         Session sess = Sessions.getCurrent();
         credential = (UserCredential) sess.getAttribute(EnumSesion.userCredential.getNombre());
@@ -77,6 +83,7 @@ public class NuevoPaciente {
             accion = "update";
         } else {
             this.entidad = new Paciente();
+            this.entidad.setPacFechaNacimiento(new Date());
             accion = "create";
         }
 
@@ -89,6 +96,16 @@ public class NuevoPaciente {
                 System.out.println("error imagen " + e.getMessage());
             }
         }
+//        BigDecimal inicial = BigDecimal.valueOf(0.60);
+//        while (inicial.doubleValue() < BigDecimal.valueOf(3).doubleValue()) {
+//            listaTalla.add(inicial);
+//            inicial = inicial.add(BigDecimal.valueOf(0.01));
+//        }
+//        BigDecimal inicialPeso = BigDecimal.valueOf(10);
+//        while (inicialPeso.doubleValue() < BigDecimal.valueOf(200).doubleValue()) {
+//            listaPeso.add(inicialPeso);
+//            inicialPeso = inicialPeso.add(BigDecimal.valueOf(0.1));
+//        }
 
     }
 
@@ -98,7 +115,8 @@ public class NuevoPaciente {
         if (entidad.getPacTalla() != null) {
             if (entidad.getPacTalla().doubleValue() > 0) {
                 if (entidad.getPacTalla().doubleValue() > 0) {
-                    BigDecimal talla2 = entidad.getPacTalla().multiply(entidad.getPacTalla()).setScale(5, RoundingMode.FLOOR);
+                    BigDecimal tallaCentimetros = entidad.getPacTalla();
+                    BigDecimal talla2 = tallaCentimetros.multiply(tallaCentimetros).setScale(5, RoundingMode.FLOOR);
                     BigDecimal IMC = entidad.getPacPeso() != null ? entidad.getPacPeso().doubleValue() > 0 ? entidad.getPacPeso().divide(talla2, 5, RoundingMode.FLOOR) : BigDecimal.ZERO : BigDecimal.ZERO;
                     entidad.setPacImc(ArchivoUtils.redondearDecimales(IMC, 2));
                 }
@@ -245,4 +263,21 @@ public class NuevoPaciente {
     public void setFotoGeneral(AImage fotoGeneral) {
         this.fotoGeneral = fotoGeneral;
     }
+
+    public List<BigDecimal> getListaTalla() {
+        return listaTalla;
+    }
+
+    public void setListaTalla(List<BigDecimal> listaTalla) {
+        this.listaTalla = listaTalla;
+    }
+
+    public List<BigDecimal> getListaPeso() {
+        return listaPeso;
+    }
+
+    public void setListaPeso(List<BigDecimal> listaPeso) {
+        this.listaPeso = listaPeso;
+    }
+    
 }

@@ -103,6 +103,8 @@ public class Paciente implements Serializable {
     private String pacTelefonoReferencia;
     @Column(name = "pac_medicacion_actual")
     private String pacMedicacionActual;
+    @Column(name = "pac_otros")
+    private String pacOtros;
 
     @OneToMany(mappedBy = "idPaciente")
     private Collection<VisitaMedica> visitaMedicaCollection;
@@ -387,6 +389,14 @@ public class Paciente implements Serializable {
 
     public void setPacMedicacionActual(String pacMedicacionActual) {
         this.pacMedicacionActual = pacMedicacionActual;
+    }
+
+    public String getPacOtros() {
+        return pacOtros;
+    }
+
+    public void setPacOtros(String pacOtros) {
+        this.pacOtros = pacOtros;
     }
 
     @Override

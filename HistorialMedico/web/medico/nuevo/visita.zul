@@ -37,8 +37,8 @@
                         <div class="wrapper_input_text">
                         
                             <textbox  
-                                maxlength="200" 
-                                rows="3"    
+                                maxlength="800" 
+                                rows="10"    
                                 onChange="self.setValue(self.getValue().toUpperCase());"  
                                 value="@bind(vm.entidad.visObservacion)" 
                                 class="input_text" />
