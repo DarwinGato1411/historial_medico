@@ -105,6 +105,8 @@ public class Paciente implements Serializable {
     private String pacMedicacionActual;
     @Column(name = "pac_otros")
     private String pacOtros;
+    @Column(name = "pac_estado")
+    private Boolean pacEstado;
 
     @OneToMany(mappedBy = "idPaciente")
     private Collection<VisitaMedica> visitaMedicaCollection;
@@ -393,6 +395,14 @@ public class Paciente implements Serializable {
 
     public String getPacOtros() {
         return pacOtros;
+    }
+
+    public Boolean getPacEstado() {
+        return pacEstado == null ? Boolean.TRUE : pacEstado;
+    }
+
+    public void setPacEstado(Boolean pacEstado) {
+        this.pacEstado = pacEstado;
     }
 
     public void setPacOtros(String pacOtros) {

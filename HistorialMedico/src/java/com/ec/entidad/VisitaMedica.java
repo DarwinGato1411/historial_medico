@@ -50,6 +50,8 @@ public class VisitaMedica implements Serializable {
     private String visReseta;
     @Column(name = "vis_observacion")
     private String visObservacion;
+    @Column(name = "vis_estado")
+    private Boolean visEstado;
     @OneToMany(mappedBy = "idVisitaMedica")
     private Collection<Receta> recetaCollection;
     @JoinColumn(name = "id_paciente", referencedColumnName = "id_paciente")
@@ -136,6 +138,15 @@ public class VisitaMedica implements Serializable {
     public void setExamenCollection(Collection<Examen> examenCollection) {
         this.examenCollection = examenCollection;
     }
+
+    public Boolean getVisEstado() {
+        return visEstado==null?Boolean.TRUE:visEstado;
+    }
+
+    public void setVisEstado(Boolean visEstado) {
+        this.visEstado = visEstado;
+    }
+    
 
     @Override
     public int hashCode() {

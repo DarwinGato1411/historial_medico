@@ -151,6 +151,7 @@ public class NuevoVisita {
                 this.entidad = new VisitaMedica();
                 this.entidad.setIdPaciente(valor.getIdPaciente());
                 this.entidad.setVisFecha(new Date());
+                this.entidad.setVisEstado(Boolean.TRUE);
                 accion = "create";
 
             }

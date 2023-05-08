@@ -72,7 +72,7 @@ public class ServicioPaciente {
 
     }
 
-    public Paciente findPacientePorNombre(String valor) {
+    public Paciente findPacientePorNombre(String valor, Boolean estado) {
 
         List<Paciente> listaClientes = new ArrayList<Paciente>();
         Paciente usuarioObtenido = new Paciente();
@@ -81,9 +81,10 @@ public class ServicioPaciente {
 
             em = HelperPersistencia.getEMF();
             em.getTransaction().begin();
-            Query query = em.createQuery("SELECT u FROM Paciente u WHERE u.pacRuc LIKE :pacRuc OR u.pacNombre LIKE :pacNombre ORDER BY u.pacNombre ASC");
+            Query query = em.createQuery("SELECT u FROM Paciente u WHERE u.pacRuc LIKE :pacRuc OR u.pacNombre LIKE :pacNombre AND u.pacEstado=:pacEstado ORDER BY u.pacNombre ASC");
             query.setParameter("pacRuc", "%" + valor + "%");
             query.setParameter("pacNombre", "%" + valor + "%");
+            query.setParameter("pacEstado", estado);
             listaClientes = (List<Paciente>) query.getResultList();
             if (listaClientes.size() > 0) {
                 for (Paciente usuario : listaClientes) {
@@ -122,16 +123,17 @@ public class ServicioPaciente {
         return listaPacientes;
     }
 
-    public List<Paciente> finLike(String nombre) {
+    public List<Paciente> finLike(String nombre, Boolean estado) {
         List<Paciente> listaPacientes = new ArrayList<Paciente>();
         try {
             System.out.println("Entra a consultar usuarios");
             //Connection connection = em.unwrap(Connection.class);
             em = HelperPersistencia.getEMF();
             em.getTransaction().begin();
-            Query query = em.createQuery("SELECT u FROM Paciente u WHERE u.pacNombres LIKE :pacNombre OR u.pacRuc LIKE :pacRuc");
+            Query query = em.createQuery("SELECT u FROM Paciente u WHERE (u.pacNombres LIKE :pacNombre OR u.pacRuc LIKE :pacRuc) and u.pacEstado=:pacEstado ORDER BY u.pacNombres ASC");
             query.setParameter("pacNombre", "%" + nombre + "%");
             query.setParameter("pacRuc", "%" + nombre + "%");
+            query.setParameter("pacEstado", estado);
             listaPacientes = (List<Paciente>) query.getResultList();
             em.getTransaction().commit();
         } catch (Exception e) {

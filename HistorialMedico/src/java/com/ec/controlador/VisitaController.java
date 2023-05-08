@@ -53,6 +53,7 @@ import org.zkoss.zk.ui.Session;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.util.Clients;
+import org.zkoss.zul.Messagebox;
 
 /**
  *
@@ -106,7 +107,7 @@ public class VisitaController {
     }
 
     @Command
-    @NotifyChange({"listaPaciente", "buscarPaciente","listaVisitaMedicas"})
+    @NotifyChange({"listaPaciente", "buscarPaciente", "listaVisitaMedicas"})
     public void nuevaVisita() {
         try {
             final HashMap<String, NuevaVisitaParam> map = new HashMap<String, NuevaVisitaParam>();
@@ -125,7 +126,7 @@ public class VisitaController {
     }
 
     @Command
-    @NotifyChange({"listaPaciente", "buscarPaciente"})
+    @NotifyChange({"listaVisitaMedicas", "buscar"})
     public void modificarVisita(@BindingParam("valor") VisitaMedica valor) {
         try {
 //            if (Messagebox.show("¿Desea modificar el registro, recuerde que debe crear las reteniones nuevamente?", "Atención", Messagebox.YES | Messagebox.NO, Messagebox.INFORMATION) == Messagebox.YES) {
@@ -136,6 +137,22 @@ public class VisitaController {
             org.zkoss.zul.Window window = (org.zkoss.zul.Window) Executions.createComponents(
                         "/medico/nuevo/visita.zul", null, map);
             window.doModal();
+        } catch (Exception e) {
+            Clients.showNotification("Ocurrio un error " + e.getMessage(),
+                        Clients.NOTIFICATION_TYPE_ERROR, null, "middle_center", 2000, true);
+        }
+    }
+
+    @Command
+    @NotifyChange({"listaVisitaMedicas", "buscar"})
+    public void eliminarVisita(@BindingParam("valor") VisitaMedica valor) {
+        try {
+            if (Messagebox.show("¿Desea eliminar la visita?", "Atención", Messagebox.YES | Messagebox.NO, Messagebox.INFORMATION) == Messagebox.YES) {
+
+                valor.setVisEstado(Boolean.FALSE);
+                servicioVisitaMedica.modificar(valor);
+                buscarVisita();
+            }
         } catch (Exception e) {
             Clients.showNotification("Ocurrio un error " + e.getMessage(),
                         Clients.NOTIFICATION_TYPE_ERROR, null, "middle_center", 2000, true);
@@ -184,7 +201,7 @@ public class VisitaController {
     }
 
     private void buscarVisita() {
-        listaVisitaMedicas = servicioVisitaMedica.findForPaciente(pacienteSelected, buscar);
+        listaVisitaMedicas = servicioVisitaMedica.findForPaciente(pacienteSelected, buscar, Boolean.TRUE);
     }
 
     public List<VisitaMedica> getListaVisitaMedicas() {
@@ -252,6 +269,14 @@ public class VisitaController {
 
         }
 
+    }
+
+    public Paciente getPacienteSelected() {
+        return pacienteSelected;
+    }
+
+    public void setPacienteSelected(Paciente pacienteSelected) {
+        this.pacienteSelected = pacienteSelected;
     }
 
 }

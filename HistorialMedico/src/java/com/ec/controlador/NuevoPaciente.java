@@ -84,6 +84,7 @@ public class NuevoPaciente {
         } else {
             this.entidad = new Paciente();
             this.entidad.setPacFechaNacimiento(new Date());
+            this.entidad.setPacEstado(Boolean.TRUE);
             accion = "create";
         }
 
@@ -279,5 +280,5 @@ public class NuevoPaciente {
     public void setListaPeso(List<BigDecimal> listaPeso) {
         this.listaPeso = listaPeso;
     }
-    
+
 }

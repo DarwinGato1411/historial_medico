@@ -75,7 +75,7 @@ public class ServicioVisitaMedica {
 
     }
 
-    public List<VisitaMedica> findForPaciente(Paciente idPaciente, String buscar) {
+    public List<VisitaMedica> findForPaciente(Paciente idPaciente, String buscar, Boolean estado) {
 
         List<VisitaMedica> listado = new ArrayList<VisitaMedica>();
 //        VisitaMedica usuarioObtenido = new VisitaMedica();
@@ -84,9 +84,10 @@ public class ServicioVisitaMedica {
 
             em = HelperPersistencia.getEMF();
             em.getTransaction().begin();
-            Query query = em.createQuery("SELECT u FROM VisitaMedica u WHERE u.idPaciente=:idPaciente AND u.visObservacion LIKE :visObservacion ORDER BY u.visFecha DESC");
+            Query query = em.createQuery("SELECT u FROM VisitaMedica u WHERE u.idPaciente=:idPaciente AND u.visObservacion LIKE :visObservacion and u.visEstado=:visEstado ORDER BY u.visFecha DESC");
             query.setParameter("idPaciente", idPaciente);
             query.setParameter("visObservacion", "%" + buscar + "%");
+            query.setParameter("visEstado", estado);
             listado = (List<VisitaMedica>) query.getResultList();
             
             em.getTransaction().commit();
