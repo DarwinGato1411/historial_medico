@@ -168,7 +168,9 @@ public class VisitaController {
             MailerClass mailerClass = new MailerClass();
             String pathReceta[] = new String[1];
             pathReceta[0] = pathEnvio;
-            mailerClass.sendMailSimple("darwinvinicio14_11@hotmail.com", "Saludos, estimado paciente envio su receta medica", pathReceta, "RECETA MEDICA");
+            mailerClass.sendMailSimple((valor.getIdPaciente().getPacCorreo() == null ? "consultoriospichincha@gmail.com"
+                        : valor.getIdPaciente().getPacCorreo()), "Saludos, estimado paciente envio su receta medica", pathReceta,
+                         "RECETA MEDICA");
         } catch (RemoteException e) {
             Clients.showNotification("Ocurrio un error " + e.getMessage(),
                         Clients.NOTIFICATION_TYPE_ERROR, null, "middle_center", 2000, true);

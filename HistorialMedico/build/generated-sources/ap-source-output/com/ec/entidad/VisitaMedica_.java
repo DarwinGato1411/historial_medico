@@ -9,7 +9,7 @@ import javax.persistence.metamodel.CollectionAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2023-05-08T09:18:04")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2023-05-08T13:40:37")
 @StaticMetamodel(VisitaMedica.class)
 public class VisitaMedica_ { 
 
@@ -18,6 +18,7 @@ public class VisitaMedica_ {
     public static volatile SingularAttribute<VisitaMedica, String> visDiagnostico;
     public static volatile SingularAttribute<VisitaMedica, String> visCargarCie10;
     public static volatile SingularAttribute<VisitaMedica, String> visReseta;
+    public static volatile SingularAttribute<VisitaMedica, Boolean> visEstado;
     public static volatile CollectionAttribute<VisitaMedica, Receta> recetaCollection;
     public static volatile CollectionAttribute<VisitaMedica, Examen> examenCollection;
     public static volatile SingularAttribute<VisitaMedica, Date> visFecha;
