@@ -39,7 +39,7 @@
                         <listheader label="Nombre" />                                                                         
                         <!--                        <listheader label="Correo" />                                                                         
                         <listheader label="Telefono" />                                                                         -->
-                        <listheader label="" align="center" />                                                                         
+                        <listheader label=""  />                                                                         
                     </listhead>  
                     <template name="model" >                                                            
                         <listitem class="tblCuerpo" >
