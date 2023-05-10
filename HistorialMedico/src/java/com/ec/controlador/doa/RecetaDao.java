@@ -10,8 +10,16 @@ package com.ec.controlador.doa;
  * @author Darwin
  */
 public class RecetaDao {
+
     private String medicamento;
     private String indicacion;
+    private String recCantidad;
+
+    private Boolean recM;
+
+    private Boolean recT;
+
+    private Boolean recN;
 
     public RecetaDao() {
     }
@@ -36,6 +44,37 @@ public class RecetaDao {
     public void setIndicacion(String indicacion) {
         this.indicacion = indicacion;
     }
-    
-    
+
+    public String getRecCantidad() {
+        return recCantidad;
+    }
+
+    public void setRecCantidad(String recCantidad) {
+        this.recCantidad = recCantidad;
+    }
+
+    public Boolean getRecM() {
+        return recM;
+    }
+
+    public void setRecM(Boolean recM) {
+        this.recM = recM;
+    }
+
+    public Boolean getRecT() {
+        return recT;
+    }
+
+    public void setRecT(Boolean recT) {
+        this.recT = recT;
+    }
+
+    public Boolean getRecN() {
+        return recN;
+    }
+
+    public void setRecN(Boolean recN) {
+        this.recN = recN;
+    }
+
 }

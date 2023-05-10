@@ -46,6 +46,9 @@
             <label class="m1" value="Pacientes" id="btnPaciente"/>
         </div>
         <div class="li">
+            <label class="m1" value="Historico" id="btnHistorico"/>
+        </div>
+        <div class="li">
             <label class="m1" value="Catálogos" id="btnCatalogo"/>
         </div>
         <div class="li">

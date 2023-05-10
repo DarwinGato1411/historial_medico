@@ -44,6 +44,18 @@
                                 class="input_text" />
                         </div>
                     </div>
+                    <div class="wrapper_input_mod">
+                        <span>Certificado medico:</span>
+                        <div class="wrapper_input_text">
+                        
+                            <textbox  
+                                maxlength="3000" 
+                                rows="10"    
+                                onChange="self.setValue(self.getValue().toUpperCase());"  
+                                value="@bind(vm.entidad.visCertificado)" 
+                                class="input_text" />
+                        </div>
+                    </div>
 <!--                    <div class="wrapper_input_mod">
                         <span>Diagnóstico</span>
                         <div class="wrapper_input_text">
@@ -92,9 +104,11 @@
                                
                                 <custom-attributes org.zkoss.zul.listbox.rod="true"/>                       
                                 <listhead  > 
-                                    <listheader label="Medicamento" width="45%" /> 
-                                    <listheader label="Indicaciones" width="45%" /> 
-                                    <listheader label="" width="10%" /> 
+                                    <listheader label="Medicamento" width="25%" /> 
+                                    <listheader label="Cantidad" width="15%" /> 
+                                    <listheader label="Indicaciones" width="30%" /> 
+                                    <listheader label="Horario" width="25%" /> 
+                                    <listheader label="" width="5%" /> 
                                                                                                       
                                 </listhead>  
                                 <template name="model" >                                                            
@@ -103,12 +117,35 @@
                                         <listcell zclass = "mycss-listcell" style="width:100%;">
                                        
                                             <textbox class="form-control form-control-sm" 
+                                                     rows="4" 
+                                                     onChange="self.setValue(self.getValue().toUpperCase());"  
                                                      value="@bind(each.medicamento)" />
                                         </listcell>
                                         <listcell zclass = "mycss-listcell" style="width:100%;">
                                             <textbox class="form-control form-control-sm" 
+                                                     rows="4" 
+                                                     onChange="self.setValue(self.getValue().toUpperCase());"  
+                                                     value="@bind(each.recCantidad)" />
+                                        </listcell>
+                                        
+                                        <listcell zclass = "mycss-listcell" style="width:100%;">
+                                            <textbox class="form-control form-control-sm" 
+                                                     rows="4" 
+                                                     onChange="self.setValue(self.getValue().toUpperCase());"  
                                                      value="@bind(each.indicacion)" />
                                         </listcell>
+                                        <listcell zclass = "mycss-listcell" style="width:100%;">
+                                            <checkbox label="M" 
+                                                      checked="@bind(each.recM)" 
+                                            />
+                                            <checkbox label="T" 
+                                                      checked="@bind(each.recT)" 
+                                            />
+                                            <checkbox label="N" 
+                                                      checked="@bind(each.recN)" 
+                                            />
+                                        </listcell>
+                                       
                                         <listcell zclass = "mycss-listcell" style="width:100%;">
                                             <button label="Eliminar"
                                                     iconSclass="z-icon-delete"
@@ -132,7 +169,7 @@
                                 </a>
                             </div>
                             <listbox  model="@load(vm.listaExamenModel)" 
-                                     nonselectableTags="*"  mold="paging" pageSize="10"  >
+                                      nonselectableTags="*"  mold="paging" pageSize="10"  >
                                
                                 <custom-attributes org.zkoss.zul.listbox.rod="true"/>                       
                                 <listhead  > 

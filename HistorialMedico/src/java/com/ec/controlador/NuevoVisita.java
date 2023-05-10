@@ -170,6 +170,9 @@ public class NuevoVisita {
     @NotifyChange({"listaRecetaModel"})
     public void agregarItemReceta() {
         RecetaDao rec = new RecetaDao();
+        rec.setRecM(Boolean.TRUE);
+        rec.setRecT(Boolean.TRUE);
+        rec.setRecN(Boolean.TRUE);
         ((ListModelList<RecetaDao>) listaRecetaModel).add(rec);
     }
 
@@ -197,6 +200,10 @@ public class NuevoVisita {
         for (Receta receta : listaReceta) {
             RecetaDao item = new RecetaDao();
             item.setMedicamento(receta.getRecMedicamento());
+            item.setRecCantidad(receta.getRecCantidad());
+            item.setRecM(receta.getRecM());
+            item.setRecT(receta.getRecT());
+            item.setRecN(receta.getRecN());
             item.setIndicacion(receta.getRecDescripcion());
 
             ((ListModelList<RecetaDao>) listaRecetaModel).add(item);
@@ -227,6 +234,10 @@ public class NuevoVisita {
                     receta.setRecDescripcion(recetaDao.getIndicacion());
                     receta.setRecMedicamento(recetaDao.getMedicamento());
                     receta.setIdVisitaMedica(entidad);
+                    receta.setRecCantidad(recetaDao.getRecCantidad());
+                    receta.setRecM(recetaDao.getRecM());
+                    receta.setRecT(recetaDao.getRecT());
+                    receta.setRecN(recetaDao.getRecN());
                     servicioReceta.crear(receta);
                 }
                 try {
@@ -247,6 +258,7 @@ public class NuevoVisita {
                     examen.setExaPath(examenDao.getPath());
                     examen.setExaDescripcion(examenDao.getDescripcion());
                     examen.setIdVisitaMedica(entidad);
+
                     servicioExamen.crear(examen);
                 }
                 for (RecetaDao recetaDao : listaRecetaModel) {
@@ -254,6 +266,10 @@ public class NuevoVisita {
                     receta.setRecDescripcion(recetaDao.getIndicacion());
                     receta.setRecMedicamento(recetaDao.getMedicamento());
                     receta.setIdVisitaMedica(entidad);
+                    receta.setRecCantidad(recetaDao.getRecCantidad());
+                    receta.setRecM(recetaDao.getRecM());
+                    receta.setRecT(recetaDao.getRecT());
+                    receta.setRecN(recetaDao.getRecN());
                     servicioReceta.crear(receta);
                 }
 

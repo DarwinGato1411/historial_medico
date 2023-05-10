@@ -52,6 +52,10 @@ public class MenuOpciones extends SelectorComposer<Component> {
     public void btnPaciente() {
         Executions.sendRedirect("/medico/paciente.zul");
     }
+    @Listen("onClick = #btnHistorico")
+    public void btnHistorico() {
+        Executions.sendRedirect("/medico/historico_paciente.zul");
+    }
 
     @Command
     public void nuevoProducto() {

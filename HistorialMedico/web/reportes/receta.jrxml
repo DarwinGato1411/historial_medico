@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="receta" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-	<property name="ireport.zoom" value="1.0"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="receta" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.2100000000000009"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<style name="table">
@@ -48,96 +48,142 @@
 			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 		</parameter>
 		<queryString>
-			<![CDATA[select * from receta where id_visita_medica=$P{IdVisitaMed}]]>
+			<![CDATA[select * from receta where id_visita_medica=$P{IdVisitaMed};]]>
 		</queryString>
 		<field name="id_receta" class="java.lang.Integer"/>
 		<field name="id_visita_medica" class="java.lang.Integer"/>
 		<field name="rec_medicamento" class="java.lang.String"/>
 		<field name="rec_descripcion" class="java.lang.String"/>
 		<field name="host" class="java.lang.String"/>
+		<field name="rec_cantidad" class="java.lang.String"/>
+		<field name="rec_m" class="java.lang.Boolean"/>
+		<field name="rec_t" class="java.lang.Boolean"/>
+		<field name="rec_n" class="java.lang.Boolean"/>
 	</subDataset>
 	<parameter name="IdVisitaMedica" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[select * from visita_medica where id_visita_medica=$P{IdVisitaMedica}]]>
+		<![CDATA[select * from paciente pc,visita_medica vs where pc.id_paciente=vs.id_paciente and vs.vis_estado=true and vs.id_visita_medica=$P{IdVisitaMedica}]]>
 	</queryString>
-	<field name="id_visita_medica" class="java.lang.Integer"/>
 	<field name="id_paciente" class="java.lang.Integer"/>
+	<field name="id_usuario" class="java.lang.Integer"/>
+	<field name="pac_ruc" class="java.lang.String"/>
+	<field name="pac_nombres" class="java.lang.String"/>
+	<field name="pac_domicilio" class="java.lang.String"/>
+	<field name="pac_correo" class="java.lang.String"/>
+	<field name="pac_telefono" class="java.lang.String"/>
+	<field name="pac_fecha_nacimiento" class="java.sql.Date"/>
+	<field name="pac_sexo" class="java.lang.String"/>
+	<field name="pac_estado_civil" class="java.lang.String"/>
+	<field name="pac_tipo_sangre" class="java.lang.String"/>
+	<field name="pac_aseguradora" class="java.lang.String"/>
+	<field name="pac_apellidos" class="java.lang.String"/>
+	<field name="pac_edad" class="java.lang.Integer"/>
+	<field name="pac_movil" class="java.lang.String"/>
+	<field name="pac_alegias" class="java.lang.String"/>
+	<field name="pac_cirugias" class="java.lang.String"/>
+	<field name="pac_enfermedad_existente" class="java.lang.String"/>
+	<field name="pac_enfermedad_familia" class="java.lang.String"/>
+	<field name="pac_talla" class="java.math.BigDecimal"/>
+	<field name="pac_peso" class="java.math.BigDecimal"/>
+	<field name="pac_imc" class="java.math.BigDecimal"/>
+	<field name="pac_tm_bucal" class="java.lang.String"/>
+	<field name="pac_cuello" class="java.lang.String"/>
+	<field name="pac_cintura" class="java.lang.String"/>
+	<field name="pac_per_abdominal" class="java.lang.String"/>
+	<field name="pac_pa" class="java.lang.String"/>
+	<field name="pac_fc" class="java.lang.String"/>
+	<field name="pac_sp02" class="java.lang.String"/>
+	<field name="pac_fotografia" class="java.lang.String"/>
+	<field name="pac_ref_familiar" class="java.lang.String"/>
+	<field name="pac_telefono_referencia" class="java.lang.String"/>
+	<field name="pac_medicacion_actual" class="java.lang.String"/>
+	<field name="pac_otros" class="java.lang.String"/>
+	<field name="pac_estado" class="java.lang.Boolean"/>
+	<field name="id_visita_medica" class="java.lang.Integer"/>
 	<field name="vis_fecha" class="java.sql.Date"/>
 	<field name="vis_diagnostico" class="java.lang.String"/>
 	<field name="vis_cargar_cie10" class="java.lang.String"/>
 	<field name="vis_reseta" class="java.lang.String"/>
 	<field name="vis_observacion" class="java.lang.String"/>
+	<field name="vis_estado" class="java.lang.Boolean"/>
+	<field name="vis_certificado" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="119" splitType="Stretch">
+		<band height="218" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="555" height="79"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="14"/>
+				<reportElement x="151" y="0" width="651" height="17" forecolor="#5B9BD5"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="10" isBold="true"/>
 				</textElement>
-				<text><![CDATA[DR.  MARCO ESCOBAR BUCHELI
-CARDIOLOGO – INTENSIVISTA
-MAPAS DE PRESION
-HOLTER 24HORAS Y 48 HORAS
+				<text><![CDATA[DR. MARCO ESCOBAR BUCHELI  CARDIOLOGO - INTENSIVISTA / MAPAS DE PRESION  / HOLTER 24 HORAS Y 48 HORAS
 ]]></text>
 			</staticText>
-		</band>
-	</title>
-	<detail>
-		<band height="317" splitType="Stretch">
-			<componentElement>
-				<reportElement key="table 1" style="table 1" x="0" y="0" width="555" height="317"/>
-				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-					<datasetRun subDataset="receta">
-						<datasetParameter name="IdVisitaMed">
-							<datasetParameterExpression><![CDATA[$P{IdVisitaMedica}]]></datasetParameterExpression>
-						</datasetParameter>
-						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-					</datasetRun>
-					<jr:column width="265">
-						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
-							<staticText>
-								<reportElement x="0" y="0" width="265" height="30"/>
-								<textElement/>
-								<text><![CDATA[Medicamentos]]></text>
-							</staticText>
-						</jr:columnHeader>
-						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
-							<textField>
-								<reportElement x="0" y="0" width="265" height="20"/>
-								<textElement/>
-								<textFieldExpression class="java.lang.String"><![CDATA[$F{rec_medicamento}]]></textFieldExpression>
-							</textField>
-						</jr:detailCell>
-					</jr:column>
-					<jr:column width="287">
-						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
-							<staticText>
-								<reportElement x="0" y="0" width="287" height="30"/>
-								<textElement/>
-								<text><![CDATA[Indicaciones]]></text>
-							</staticText>
-						</jr:columnHeader>
-						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
-							<textField>
-								<reportElement x="0" y="0" width="287" height="20"/>
-								<textElement/>
-								<textFieldExpression class="java.lang.String"><![CDATA[$F{rec_descripcion}]]></textFieldExpression>
-							</textField>
-						</jr:detailCell>
-					</jr:column>
-				</jr:table>
-			</componentElement>
-		</band>
-	</detail>
-	<pageFooter>
-		<band height="54" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="555" height="54"/>
+				<reportElement x="9" y="134" width="55" height="14"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CI:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="64" y="135" width="268" height="14"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{pac_ruc}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="9" y="148" width="55" height="14"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Edad:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="64" y="149" width="268" height="14"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{pac_edad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="64" y="121" width="268" height="14"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{pac_nombres}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="9" y="120" width="55" height="14"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[PCTE:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="9" y="163" width="85" height="14"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DIAGNÓSTICO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="9" y="177" width="55" height="14"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[HCL Nº:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="64" y="177" width="268" height="14"/>
+				<textElement/>
+				<text><![CDATA[XXXXXXXXXXXX]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="94" y="163" width="238" height="14"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{vis_cargar_cie10}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="151" y="17" width="651" height="54" forecolor="#5B9BD5"/>
 				<textElement textAlignment="Center"/>
 				<text><![CDATA[Consultorio: Ulpiano Páez N22-188 y Veintimilla Consultorios Médicos Pichincha Torre C Piso 4 Oficina 413
 Teléfono: 2559133 Cel. 0997124127/ 0980023883.
@@ -148,6 +194,288 @@ Síguenos en Facebook: Centro Integral de Cardiología CITAS: https://marcoescob
 e-mail:marcoescobar10@hotmail.com
 ]]></text>
 			</staticText>
+			<image hAlign="Center" vAlign="Middle" onErrorType="Blank">
+				<reportElement x="0" y="0" width="151" height="101"/>
+				<imageExpression class="java.lang.String"><![CDATA["D:\\PROYECTOS\\SISTEMA_HISTORIAL_MEDICO\\historial_medico\\HistorialMedico\\web\\imagenes\\logohm.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="151" y="71" width="651" height="30"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[HORARIOS DE ATENCION:   CONSULTORIO PICHINCHA LUNES MARTES Y MIERCOLES 09H00 A 13H00 Y 15H00 A 18H00
+EDIFICIO FORTUNE JUEVES Y VIERNES 9H00 A 14H00  Y  15H00 A 18H00  SABADOS 9H00  A 13H00  PREVIA CITA
+]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="477" y="121" width="268" height="14"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{pac_nombres}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="422" y="120" width="55" height="14"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[PCTE:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="422" y="148" width="55" height="14"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Edad:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="477" y="177" width="268" height="14"/>
+				<textElement/>
+				<text><![CDATA[XXXXXXXXXXXX]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="422" y="177" width="55" height="14"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[HCL Nº:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="477" y="135" width="268" height="14"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{pac_ruc}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="422" y="134" width="55" height="14"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CI:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="507" y="163" width="238" height="14"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{vis_cargar_cie10}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="422" y="163" width="85" height="14"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DIAGNÓSTICO:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="477" y="149" width="268" height="14"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{pac_edad}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="9" y="200" width="55" height="14"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RECETA.-]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="422" y="200" width="132" height="14"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[INDICACIONES.-]]></text>
+			</staticText>
 		</band>
-	</pageFooter>
+	</title>
+	<detail>
+		<band height="177" splitType="Stretch">
+			<componentElement>
+				<reportElement key="table 1" style="table" positionType="Float" x="9" y="0" width="313" height="33"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="receta">
+						<datasetParameter name="IdVisitaMed">
+							<datasetParameterExpression><![CDATA[$P{IdVisitaMedica}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="188">
+						<jr:columnHeader style="table" height="20" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="188" height="20"/>
+								<box leftPadding="3"/>
+								<textElement verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[Medicamentos]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="12" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="188" height="12" isPrintWhenDetailOverflows="true"/>
+								<box leftPadding="3"/>
+								<textElement>
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression class="java.lang.String"><![CDATA[$F{rec_medicamento}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="122">
+						<jr:columnHeader style="table" height="20" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="122" height="20"/>
+								<box leftPadding="3"/>
+								<textElement verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[Cantidad]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="12" rowSpan="1">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="122" height="12" isPrintWhenDetailOverflows="true"/>
+								<box leftPadding="3"/>
+								<textElement>
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression class="java.lang.String"><![CDATA[$F{rec_cantidad}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<componentElement>
+				<reportElement key="table 1" style="table" positionType="Float" x="422" y="0" width="380" height="33"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="receta">
+						<datasetParameter name="IdVisitaMed">
+							<datasetParameterExpression><![CDATA[$P{IdVisitaMedica}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="160">
+						<jr:columnHeader style="table" height="20" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="160" height="20"/>
+								<box leftPadding="3"/>
+								<textElement verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[Medicamentos]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="12" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="160" height="12" isPrintWhenDetailOverflows="true"/>
+								<box leftPadding="3"/>
+								<textElement>
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression class="java.lang.String"><![CDATA[$F{rec_medicamento}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="160">
+						<jr:columnHeader style="table" height="20" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="160" height="20"/>
+								<box leftPadding="3"/>
+								<textElement verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[Indicaciones]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="12" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="160" height="12" isPrintWhenDetailOverflows="true"/>
+								<box leftPadding="3"/>
+								<textElement>
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression class="java.lang.String"><![CDATA[$F{rec_descripcion}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="60">
+						<jr:columnHeader height="20" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="60" height="20"/>
+								<box leftPadding="3"/>
+								<textElement verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[Horario]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="12" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="20" height="12">
+									<printWhenExpression><![CDATA[$F{rec_m}]]></printWhenExpression>
+								</reportElement>
+								<textElement textAlignment="Center">
+									<font size="8"/>
+								</textElement>
+								<text><![CDATA[M /]]></text>
+							</staticText>
+							<staticText>
+								<reportElement x="20" y="0" width="20" height="12">
+									<printWhenExpression><![CDATA[$F{rec_t}]]></printWhenExpression>
+								</reportElement>
+								<textElement textAlignment="Center">
+									<font size="8"/>
+								</textElement>
+								<text><![CDATA[T /]]></text>
+							</staticText>
+							<staticText>
+								<reportElement x="40" y="0" width="20" height="12">
+									<printWhenExpression><![CDATA[$F{rec_n}]]></printWhenExpression>
+								</reportElement>
+								<textElement textAlignment="Center">
+									<font size="8"/>
+								</textElement>
+								<text><![CDATA[N ]]></text>
+							</staticText>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<staticText>
+				<reportElement positionType="Float" x="9" y="46" width="313" height="44"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[DR. MARCO ANTONIO ESCOBAR BUCHELI
+CARDIOLOGO - INTENSIVISTA
+MSP: 1704353273001
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="422" y="46" width="380" height="44"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[DR. MARCO ANTONIO ESCOBAR BUCHELI
+CARDIOLOGO - INTENSIVISTA
+MSP: 1704353273001
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="9" y="126" width="313" height="50"/>
+				<textElement/>
+				<text><![CDATA[RECOMENDACIONES: Las enfermedades cardiovasculares son geneticas y deben darse control preventivo a partir de los 10 años en los padres portadores de cardiopatias
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="422" y="127" width="132" height="15" forecolor="#FF0000"/>
+				<textElement/>
+				<text><![CDATA[SIGNOS DE ALARMA:
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="422" y="157" width="132" height="15"/>
+				<textElement/>
+				<text><![CDATA[FECHA PROXIMA CITA:
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="422" y="142" width="213" height="15"/>
+				<textElement/>
+				<text><![CDATA[RECOMENDACIONES GENERALES:
+]]></text>
+			</staticText>
+		</band>
+	</detail>
 </jasperReport>

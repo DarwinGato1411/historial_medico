@@ -52,6 +52,8 @@ public class VisitaMedica implements Serializable {
     private String visObservacion;
     @Column(name = "vis_estado")
     private Boolean visEstado;
+    @Column(name = "vis_certificado")
+    private String visCertificado;
     @OneToMany(mappedBy = "idVisitaMedica")
     private Collection<Receta> recetaCollection;
     @JoinColumn(name = "id_paciente", referencedColumnName = "id_paciente")
@@ -145,6 +147,14 @@ public class VisitaMedica implements Serializable {
 
     public void setVisEstado(Boolean visEstado) {
         this.visEstado = visEstado;
+    }
+
+    public String getVisCertificado() {
+        return visCertificado;
+    }
+
+    public void setVisCertificado(String visCertificado) {
+        this.visCertificado = visCertificado;
     }
     
 
