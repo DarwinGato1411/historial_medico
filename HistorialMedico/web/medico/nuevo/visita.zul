@@ -106,35 +106,35 @@
                                 <listhead  > 
                                     <listheader label="Medicamento" width="25%" /> 
                                     <listheader label="Cantidad" width="15%" /> 
-                                    <listheader label="Indicaciones" width="30%" /> 
+                                    <listheader label="Indicaciones" width="25%" /> 
                                     <listheader label="Horario" width="25%" /> 
-                                    <listheader label="" width="5%" /> 
+                                    <listheader label="" width="10%" /> 
                                                                                                       
                                 </listhead>  
                                 <template name="model" >                                                            
                                     <listitem >
                               
-                                        <listcell zclass = "mycss-listcell" style="width:100%;">
+                                        <listcell zclass = "mycss-listcell" >
                                        
                                             <textbox class="form-control form-control-sm" 
                                                      rows="4" 
                                                      onChange="self.setValue(self.getValue().toUpperCase());"  
                                                      value="@bind(each.medicamento)" />
                                         </listcell>
-                                        <listcell zclass = "mycss-listcell" style="width:100%;">
+                                        <listcell zclass = "mycss-listcell" >
                                             <textbox class="form-control form-control-sm" 
                                                      rows="4" 
                                                      onChange="self.setValue(self.getValue().toUpperCase());"  
                                                      value="@bind(each.recCantidad)" />
                                         </listcell>
                                         
-                                        <listcell zclass = "mycss-listcell" style="width:100%;">
+                                        <listcell zclass = "mycss-listcell" >
                                             <textbox class="form-control form-control-sm" 
                                                      rows="4" 
                                                      onChange="self.setValue(self.getValue().toUpperCase());"  
                                                      value="@bind(each.indicacion)" />
                                         </listcell>
-                                        <listcell zclass = "mycss-listcell" style="width:100%;">
+                                        <listcell zclass = "mycss-listcell" >
                                             <checkbox label="M" 
                                                       checked="@bind(each.recM)" 
                                             />
@@ -146,7 +146,7 @@
                                             />
                                         </listcell>
                                        
-                                        <listcell zclass = "mycss-listcell" style="width:100%;">
+                                        <listcell zclass = "mycss-listcell" >
                                             <button label="Eliminar"
                                                     iconSclass="z-icon-delete"
                                                     onClick="@command('eliminarReceta',valor=each)" 
