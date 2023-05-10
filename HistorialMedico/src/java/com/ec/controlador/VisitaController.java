@@ -170,7 +170,7 @@ public class VisitaController {
             pathReceta[0] = pathEnvio;
             mailerClass.sendMailSimple((valor.getIdPaciente().getPacCorreo() == null ? "consultoriospichincha@gmail.com"
                         : valor.getIdPaciente().getPacCorreo()), "Saludos, estimado paciente envio su receta medica", pathReceta,
-                         "RECETA MEDICA");
+                        "RECETA MEDICA");
         } catch (RemoteException e) {
             Clients.showNotification("Ocurrio un error " + e.getMessage(),
                         Clients.NOTIFICATION_TYPE_ERROR, null, "middle_center", 2000, true);
@@ -224,10 +224,15 @@ public class VisitaController {
 
     @Command
     public void verReceta(@BindingParam("valor") VisitaMedica valor) throws JRException, IOException, NamingException, SQLException {
-        reporteGeneral(valor.getIdVisitaMedica());
+        reporteGeneral(valor.getIdVisitaMedica(), "REC");
     }
 
-    public void reporteGeneral(Integer idVisitaMedica) throws JRException, IOException, NamingException, SQLException {
+    @Command
+    public void verCertificado(@BindingParam("valor") VisitaMedica valor) throws JRException, IOException, NamingException, SQLException {
+        reporteGeneral(valor.getIdVisitaMedica(), "CER");
+    }
+
+    public void reporteGeneral(Integer idVisitaMedica, String tipo) throws JRException, IOException, NamingException, SQLException {
 
         EntityManager emf = HelperPersistencia.getEMF();
 
@@ -239,7 +244,11 @@ public class VisitaController {
                         .getRealPath("/reportes");
             String reportPath = "";
 
-            reportPath = reportFile + File.separator + "receta.jasper";
+            if (tipo.equals("REC")) {
+                reportPath = reportFile + File.separator + "receta.jasper";
+            } else {
+                reportPath = reportFile + File.separator + "certificado.jasper";
+            }
 
             Map<String, Object> parametros = new HashMap<String, Object>();
 

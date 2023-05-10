@@ -64,7 +64,7 @@
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[select * from paciente pc,visita_medica vs where pc.id_paciente=vs.id_paciente and vs.vis_estado=true and vs.id_visita_medica=$P{IdVisitaMedica}]]>
+		<![CDATA[select * from paciente pc,visita_medica vs where pc.id_paciente=vs.id_paciente and vs.vis_estado=true and vs.id_visita_medica=$P{IdVisitaMedica};]]>
 	</queryString>
 	<field name="id_paciente" class="java.lang.Integer"/>
 	<field name="id_usuario" class="java.lang.Integer"/>
@@ -109,6 +109,7 @@
 	<field name="vis_observacion" class="java.lang.String"/>
 	<field name="vis_estado" class="java.lang.Boolean"/>
 	<field name="vis_certificado" class="java.lang.String"/>
+	<field name="vis_reposo" class="java.lang.Integer"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -217,36 +218,20 @@ EDIFICIO FORTUNE JUEVES Y VIERNES 9H00 A 14H00  Y  15H00 A 18H00  SABADOS 9H00  
 		</band>
 	</title>
 	<detail>
-		<band height="177" splitType="Stretch">
-			<staticText>
-				<reportElement positionType="Float" x="9" y="126" width="313" height="50"/>
-				<textElement/>
-				<text><![CDATA[RECOMENDACIONES: Las enfermedades cardiovasculares son geneticas y deben darse control preventivo a partir de los 10 años en los padres portadores de cardiopatias
-]]></text>
-			</staticText>
-			<staticText>
-				<reportElement positionType="Float" x="422" y="127" width="132" height="15" forecolor="#FF0000"/>
-				<textElement/>
-				<text><![CDATA[SIGNOS DE ALARMA:
-]]></text>
-			</staticText>
-			<staticText>
-				<reportElement positionType="Float" x="422" y="157" width="132" height="15"/>
-				<textElement/>
-				<text><![CDATA[FECHA PROXIMA CITA:
-]]></text>
-			</staticText>
-			<staticText>
-				<reportElement positionType="Float" x="422" y="142" width="213" height="15"/>
-				<textElement/>
-				<text><![CDATA[RECOMENDACIONES GENERALES:
-]]></text>
-			</staticText>
+		<band height="253" splitType="Stretch">
 			<textField>
 				<reportElement x="9" y="0" width="793" height="109"/>
 				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA["Yo  DR. MARCO ESCOBAR BUCHELI  a peticion verbal  Certifico que el paciente " +$F{pac_nombres}+ " de "+ $F{pac_edad} + " AÑOS de edad, con numero de cédula "+$F{pac_ruc}+" fue atendido en mi consultorio por presentar CI10 / I-10: " +$F{vis_cargar_cie10}+" "+$F{vis_observacion} +" por lo cual recominedo reposo absoluto por un periodo de 6 dias desde el "+$F{vis_fecha}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA["Yo  DR. MARCO ESCOBAR BUCHELI  a peticion verbal  Certifico que el paciente " +$F{pac_nombres}+ " de "+ $F{pac_edad} + " AÑOS de edad, con numero de cédula "+$F{pac_ruc}+" fue atendido en mi consultorio por presentar CI10 / I-10: " +$F{vis_cargar_cie10}+", "+$F{vis_observacion} +" por lo cual recominedo reposo absoluto por un periodo de "+$F{vis_reposo}+" DIAS desde el "+$F{vis_fecha}]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="191" width="802" height="44"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[DR. MARCO ANTONIO ESCOBAR BUCHELI
+CARDIOLOGO - INTENSIVISTA
+MSP: 1704353273001
+]]></text>
+			</staticText>
 		</band>
 	</detail>
 </jasperReport>
