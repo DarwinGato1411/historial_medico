@@ -46,10 +46,10 @@
             <label class="m1" value="Pacientes" id="btnPaciente"/>
         </div>
         <div class="li">
-            <label class="m1" value="Historico" id="btnHistorico"/>
+            <label class="m1" value="Reporte HCL" id="btnHistorico"/>
         </div>
         <div class="li">
-            <label class="m1" value="Catálogos" id="btnCatalogo"/>
+            <label class="m1" value="CIE10" id="btnCatalogo"/>
         </div>
         <div class="li">
             <label class="m1" value="Perfil" id="btnPerfil"/>

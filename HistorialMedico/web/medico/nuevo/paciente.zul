@@ -43,6 +43,17 @@
                                     class="input_text" />
                             </div>
                         </div>
+                        <div class="wrapper_input_mod">
+                            <span>HCL</span>
+                            <div class="wrapper_input_text">
+                        
+                                <textbox  
+                                    readonly="true"
+                                    maxlength="100"     
+                                    value="@bind(vm.entidad.idPaciente)" 
+                                    class="input_text" />
+                            </div>
+                        </div>
                         
 <!--                        <div class="wrapper_input_mod">
                             <span>Apellidos</span>
@@ -93,7 +104,7 @@
                 
                         <div class="wrapper_input_mod_group">
                             <div class="wrapper_input_mod">
-                                <span>Fecha naciemiento</span>
+                                <span>Fecha nacimiento</span>
                    
                                 <div class="wrapper_input_text">
                                     <datebox compact="true" 
@@ -184,6 +195,43 @@
                                 value="@bind(vm.entidad.pacAseguradora)" 
                                 class="input_text" />
                         </div>
+                    </div>
+                    <div class="wrapper_input_mod_group">
+                   
+                        <div class="wrapper_input_mod">
+                            <span>Cargo</span>
+                            <div class="wrapper_input_text">
+                        
+                                <textbox  
+                                    maxlength="200"     
+                                    value="@bind(vm.entidad.pacCargo)" 
+                                    class="input_text" />
+                            </div>
+                        </div>
+
+                        <div class="wrapper_input_mod">
+                            <span>Dirección trabajo</span>
+                            <div class="wrapper_input_text">
+                        
+                                <textbox  
+                                    maxlength="300"    
+                                    onChange="self.setValue(self.getValue().toUpperCase());"  
+                                    value="@bind(vm.entidad.pacDireccionTrabajo)" 
+                                    class="input_text" />
+                            </div>
+                        </div>
+                        <div class="wrapper_input_mod">
+<!--                            <span>HCL</span>
+                            <div class="wrapper_input_text">
+                        
+                                <textbox  
+                                    readonly="true"
+                                    maxlength="100"     
+                                    value="@bind(vm.entidad.idPaciente)" 
+                                    class="input_text" />
+                            </div>-->
+                        </div>
+
                     </div>
                 </div>
                 
@@ -277,7 +325,7 @@
                     
                     
                     </div>
-                     <div class="wrapper_input_mod">
+                    <div class="wrapper_input_mod">
                         <span>Otros</span>
                         <div class="wrapper_input_text">
                         
@@ -296,10 +344,11 @@
                     </div>  
                     <div class="wrapper_input_mod_group">
                         <div class="wrapper_input_mod">
-                            <span>Talla (metros)</span>
+                            <span>Talla (centímetros)</span>
                             <div class="wrapper_input_text">
                         
-                                <textbox    
+                                <textbox   
+                                    onChange="@command('calcularIMC')"   
                                     onOK="@command('calcularIMC')"
                                     constraint="/^[0-9]{1,9}(?:[.][0-9]{1,5})?$/:Ingrese solo numeros"                           
                                     value="@bind(vm.entidad.pacTalla)"  
@@ -312,6 +361,7 @@
                             <div class="wrapper_input_text">
                         
                                 <textbox    
+                                    onChange="@command('calcularIMC')"   
                                     onOK="@command('calcularIMC')"
                                     constraint="/^[0-9]{1,9}(?:[.][0-9]{1,5})?$/:Ingrese solo numeros"                           
                                     value="@bind(vm.entidad.pacPeso)"  

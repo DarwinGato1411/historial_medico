@@ -4,7 +4,7 @@
          viewModel="@id('vm') @init('com.ec.controlador.NuevoSubCapitulo')" 
          class="modalPregunta modalAll">
     
-    <caption label="Pregunta" style="font-weight:bold" class="titulo"/> 
+    <caption label="SUBCAPITULO" style="font-weight:bold" class="titulo"/> 
     
 
     <div class="container_modal">
@@ -12,6 +12,7 @@
         <div class="bodyModal">
             <div class="container_row_input">
               
+                
                 <div class="wrapper_input_mod">
                     <span>Subcapitulo: </span>
                     <div class="wrapper_input_text">

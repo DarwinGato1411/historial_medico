@@ -116,7 +116,7 @@ public class NuevoPaciente {
         if (entidad.getPacTalla() != null) {
             if (entidad.getPacTalla().doubleValue() > 0) {
                 if (entidad.getPacTalla().doubleValue() > 0) {
-                    BigDecimal tallaCentimetros = entidad.getPacTalla();
+                    BigDecimal tallaCentimetros = entidad.getPacTalla().divide(BigDecimal.valueOf(100));
                     BigDecimal talla2 = tallaCentimetros.multiply(tallaCentimetros).setScale(5, RoundingMode.FLOOR);
                     BigDecimal IMC = entidad.getPacPeso() != null ? entidad.getPacPeso().doubleValue() > 0 ? entidad.getPacPeso().divide(talla2, 5, RoundingMode.FLOOR) : BigDecimal.ZERO : BigDecimal.ZERO;
                     entidad.setPacImc(ArchivoUtils.redondearDecimales(IMC, 2));

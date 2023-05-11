@@ -6,7 +6,7 @@
          viewModel="@id('vm') @init('com.ec.controlador.VisitaController')"
 >
     
-    <caption label="Historial de visita medica" style="font-weight:bold" class="titulo"/> 
+    <caption label="HISTORIAL DE VISITA MÉDICA" style="font-weight:bold" class="titulo"/> 
     
 
     <div  >
@@ -33,7 +33,7 @@
                 <custom-attributes org.zkoss.zul.listbox.rod="true"/>                       
                 <listhead  > 
                     <listheader label="Fecha" width="10%" /> 
-                    <listheader label="" width="40%" >
+                    <listheader label="" width="60%" >
                            
                         <textbox value="@bind(vm.buscar)" 
                                  class="form-control form-control-sm"
@@ -44,7 +44,7 @@
                     </listheader>                                                                         
                                                                                                 
                                                                                            
-                    <listheader label="" width="50%" />                                                                         
+                    <listheader label="" width="30%" />                                                                         
                 </listhead>  
                 <template name="model" >                                                            
                     <listitem >
@@ -62,45 +62,43 @@
                         </listcell>
                             
                         <listcell zclass = "mycss-listcell" >                                  
-                            <button label="Editar visita"
-                                    iconSclass="z-icon-pencil"
+                            <button label="Ver"
                                     onClick="@command('modificarVisita',valor=each)" 
                                     tooltiptext="Editar visita">
                                         
                             </button>   
                             <button 
-                                label="Ver receta"
-                                iconSclass="z-icon-book"
+                                 class="btn-success-zk"
+                                iconSclass="z-icon-file-text-o  "
                                 onClick="@command('verReceta',valor=each)" 
-                                tooltiptext="Ver Receta">
+                                tooltiptext="Imprimir receta">
                                     
                             </button>  
                             <button 
-                                label="Ver certificado"
-                                iconSclass="z-icon-times"
+                                class="btn-success-zk"
+                                iconSclass="z-icon-file-o  "
                                 onClick="@command('verCertificado',valor=each)" 
-                                tooltiptext="">
+                                tooltiptext="Imprimir certificado">
                                     
                             </button>                                  
-                            <button label="Enviar correo"
-                                    iconSclass="z-icon-files-o"
+                            <button iconSclass="z-icon-envelope-o"
                                     onClick="@command('enviarReceta',valor=each)" 
-                                    tooltiptext="Eniviar Receta Correo">
+                                    tooltiptext="Eniviar  Correo">
                                     
                             </button>                                      
-                            <button label="Enviar WhatsApp"
-                                    iconSclass="z-icon-krw"
+                            <button label=""
+                            class="btn-successws-zk"
+                                    iconSclass="z-icon-phone-square "
                                     onClick="@command('enviarWhastApp',valor=each)" 
                                     tooltiptext="Enviar Whatsapp">
                                     
                             </button>                                      
                                                                 
                             <button 
-                                label="Eliminar"
                                 class="btn-danger-zk"
-                                iconSclass="z-icon-times"
+                                iconSclass="z-icon-trash-o"
                                 onClick="@command('eliminarVisita',valor=each)" 
-                                tooltiptext="">
+                                tooltiptext="Eliminar">
                                     
                             </button>                                  
                                   

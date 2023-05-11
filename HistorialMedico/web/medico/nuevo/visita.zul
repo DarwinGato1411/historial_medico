@@ -4,7 +4,7 @@
          viewModel="@id('vm') @init('com.ec.controlador.NuevoVisita')"
          class="modalAll modalPaciente">
     
-    <caption label="Visita medica"  class="titulo"/> 
+    <caption label="VISITA MÉDICA"   class="titulo"/> 
     
 
     <div class="container_modal">
@@ -58,7 +58,7 @@
                     </div>
                      <div class="wrapper_input_mod_group">
                         <div class="wrapper_input_mod">
-                            <span>Dias reposo</span>
+                            <span>Horas de reposo</span>
                    
                                 <div class="wrapper_input_text">
                            
@@ -100,7 +100,7 @@
                 
                 <div class="VM">
                     <div class="wrapper_input_mod">
-                        <span>CI10 / I-10</span>
+                        <span>CIE10</span>
                         <div style="display:flex;justify-content:flex-end;">
                             <a class="btn_modal"  onClick="@command('cargarCie')"  >
                                 Seleccionar 
@@ -119,11 +119,11 @@
                 </div>
                 <div class="VM">
                     <div class="wrapper_input_mod">
-                        <span>Indicaciones</span>
+                        <span>Receta</span>
                         <div class="wrapper_input_text">
                             <div style="display:flex;justify-content:flex-end;">
                                 <a class="btn_modal"  onClick="@command('agregarItemReceta')"  >
-                                    Agregar indicación
+                                    Agregar
                                 </a>
                             </div>
                        

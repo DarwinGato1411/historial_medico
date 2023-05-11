@@ -105,6 +105,10 @@ public class Paciente implements Serializable {
     private String pacMedicacionActual;
     @Column(name = "pac_otros")
     private String pacOtros;
+    @Column(name = "pac_direccion_trabajo")
+    private String pacDireccionTrabajo;
+    @Column(name = "pac_cargo")
+    private String pacCargo;
     @Column(name = "pac_estado")
     private Boolean pacEstado;
 
@@ -407,6 +411,22 @@ public class Paciente implements Serializable {
 
     public void setPacOtros(String pacOtros) {
         this.pacOtros = pacOtros;
+    }
+
+    public String getPacDireccionTrabajo() {
+        return pacDireccionTrabajo;
+    }
+
+    public void setPacDireccionTrabajo(String pacDireccionTrabajo) {
+        this.pacDireccionTrabajo = pacDireccionTrabajo;
+    }
+
+    public String getPacCargo() {
+        return pacCargo;
+    }
+
+    public void setPacCargo(String pacCargo) {
+        this.pacCargo = pacCargo;
     }
 
     @Override

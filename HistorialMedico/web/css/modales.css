@@ -39,6 +39,9 @@
 
 .modalAll .titulo .z-caption-content{
     text-align: center;
+    font-size:1.5em;
+    font-weight: bold;
+    text-transform: uppercase;
     padding: 10px;
 }
 

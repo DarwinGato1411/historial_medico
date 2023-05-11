@@ -35,7 +35,7 @@
                                  width="90%"                    />
                     </div>                     
                     <div class="inputGroup"  >
-                        <label value="Dirección:"/>
+                        <label value="Nombre:"/>
                         <textbox value="@bind(vm.usuario.usuNombre)" 
                                  placeholder="Dirección"
                                  class="form-control form-control-sm"
@@ -43,7 +43,7 @@
                                  width="90%"                    />
                     </div>
                     <div class="inputGroup"  > 
-                        <label value="Teléfono:"/>
+                        <label value="Correo:"/>
                         <textbox value="@bind(vm.usuario.usuCorreo)" 
                                  placeholder="Telefono"
                                  class="form-control form-control-sm"

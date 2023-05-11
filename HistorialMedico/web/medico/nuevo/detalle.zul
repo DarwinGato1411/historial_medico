@@ -11,7 +11,19 @@
 
         <div class="bodyModal">
             <div class="container_row_input">
-              
+              <div class="wrapper_input_mod">
+                    <span>Código </span>
+                    <div class="wrapper_input_text">
+                        <div class="fa-solid fa-address-card icon"></div>
+                        <textbox  
+                            maxlength="100"    
+                            onChange="self.setValue(self.getValue().toUpperCase());"  
+                            value="@bind(vm.entidad.detCodigo)" 
+                            class="input_text" 
+                             
+                        />
+                    </div>
+                </div>
                 <div class="wrapper_input_mod">
                     <span>Detalle: </span>
                     <div class="wrapper_input_text">

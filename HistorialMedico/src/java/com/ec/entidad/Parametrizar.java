@@ -50,7 +50,6 @@ public class Parametrizar implements Serializable {
     private Boolean parActivo;
     @Column(name = "par_host")
     private String parHost;
-
     public Parametrizar() {
     }
 

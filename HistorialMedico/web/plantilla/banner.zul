@@ -16,12 +16,15 @@
             </div>
             <div class="logo" style="margin:auto;">
                 <image src="/imagenes/logohm.png" style="width:50px;" />
-                <span>Historial Médico</span>
+                <span >
+                    <label style="font-size:2em;vertical-align: middle;" value="Historial Médico"></label></span>
             </div>
             <div class="" style="margin:auto;">
                 <label value="Usuario: " 
+                style="font-size:1em;vertical-align: middle;"
                        if="${not sessionScope.userCredential.anonymous}"/>
                 <label value="${sessionScope.usuario.nombreUsuario}" 
+                style="font-size:1em;vertical-align: middle;"
                        if="${not sessionScope.userCredential.anonymous}" />
                              
              

@@ -152,6 +152,7 @@ public class NuevoVisita {
                 this.entidad.setIdPaciente(valor.getIdPaciente());
                 this.entidad.setVisFecha(new Date());
                 this.entidad.setVisEstado(Boolean.TRUE);
+                this.entidad.setVisCertificado("POR MEDIO DE LA PRESENTE CERTIFICO QUE EL PACIENTE ACUDE A CONSULTA ");
                 accion = "create";
 
             }
@@ -443,7 +444,7 @@ public class NuevoVisita {
                         "/medico/nuevo/cargarcie10.zul", null, map);
             window.doModal();
             String CIE10CONCAt = entidad.getVisCargarCie10() != null ? entidad.getVisCargarCie10() : "";
-            CIE10CONCAt = CIE10CONCAt + CIE10.toUpperCase();
+            CIE10CONCAt = CIE10CONCAt + "CIE10 "+CIE10.toUpperCase();
             entidad.setVisCargarCie10(CIE10CONCAt);
         } catch (Exception e) {
             Clients.showNotification("Ocurrio un error " + e.getMessage(),

@@ -28,6 +28,7 @@
                                
                     <custom-attributes org.zkoss.zul.listbox.rod="true"/>                       
                     <listhead  class="tblCabecera"> 
+                         <listheader label="Nº HCL" />  
                         <listheader label="" >
                             <textbox value="@bind(vm.buscarPaciente)" 
                                      class="form-control form-control-sm"
@@ -44,6 +45,11 @@
                     <template name="model" >                                                            
                         <listitem class="tblCuerpo" >
                               
+                            <listcell zclass = "mycss-listcell" style="width:100%;">
+                               <textbox readonly="true"  style="font-size:12px ;background:#EBF5FB"
+                                         class="form-control form-control-sm" 
+                                         value="@bind(each.idPaciente)" />
+                            </listcell>
                             <listcell zclass = "mycss-listcell" style="width:100%;">
                                 <textbox readonly="true"  style="font-size:12px ;background:#EBF5FB"
                                          class="form-control form-control-sm" 
@@ -80,7 +86,7 @@
                                 </button>      
                                 <button 
                                     class="btn-danger-zk"
-                                    iconSclass="z-icon-times"
+                                    iconSclass="z-icon-trash-o"
                                     onClick="@command('eliminarPaciente',valor=each)" 
                                     tooltiptext="">
                                     
@@ -91,23 +97,22 @@
                             <listcell zclass = "mycss-listcell"  class="btnPc" style="font-size:12px;background:#F8F9F9">   
 
                                 <button  class="btn-success-zk"
-                                         label="Visita médica"                                      
-                                         iconSclass="z-icon-eye"
+                                         label="Historial"       
                                          onClick="@command('registrarVisita',valor=each)" 
                                          tooltiptext="">
                                          
                                 </button>                                                  
                                 <button 
-                                    label="Editar"
-                                    iconSclass="z-icon-pencil"
+                                    label="Ver"
+                                    iconSclass="z-icon-eye"
                                     onClick="@command('modificarPaciente',valor=each)" 
                                     tooltiptext="">
                                     
                                 </button>                                      
                                 <button 
-                                    label="Eliminar"
+                                    label=""
                                     class="btn-danger-zk"
-                                    iconSclass="z-icon-times"
+                                    iconSclass="z-icon-trash-o"
                                     onClick="@command('eliminarPaciente',valor=each)" 
                                     tooltiptext="">
                                     

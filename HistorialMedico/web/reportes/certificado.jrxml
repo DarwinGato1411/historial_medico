@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="certificado" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-	<property name="ireport.zoom" value="1.2100000000000009"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="certificado" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.771561000000002"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="430"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -47,6 +47,7 @@
 		<parameter name="IdVisitaMed" class="java.lang.Integer">
 			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 		</parameter>
+		<parameter name="fechaFin" class="java.util.Date"/>
 		<queryString>
 			<![CDATA[select * from receta where id_visita_medica=$P{IdVisitaMed};]]>
 		</queryString>
@@ -63,6 +64,10 @@
 	<parameter name="IdVisitaMedica" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
+	<parameter name="logo" class="java.lang.String"/>
+	<parameter name="fechaInicioText" class="java.lang.String"/>
+	<parameter name="fechaFinText" class="java.lang.String"/>
+	<parameter name="fechaFinal" class="java.util.Date"/>
 	<queryString>
 		<![CDATA[select * from paciente pc,visita_medica vs where pc.id_paciente=vs.id_paciente and vs.vis_estado=true and vs.id_visita_medica=$P{IdVisitaMedica};]]>
 	</queryString>
@@ -101,6 +106,8 @@
 	<field name="pac_medicacion_actual" class="java.lang.String"/>
 	<field name="pac_otros" class="java.lang.String"/>
 	<field name="pac_estado" class="java.lang.Boolean"/>
+	<field name="pac_direccion_trabajo" class="java.lang.String"/>
+	<field name="pac_cargo" class="java.lang.String"/>
 	<field name="id_visita_medica" class="java.lang.Integer"/>
 	<field name="vis_fecha" class="java.sql.Date"/>
 	<field name="vis_diagnostico" class="java.lang.String"/>
@@ -114,124 +121,217 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="218" splitType="Stretch">
+		<band height="312" splitType="Stretch">
 			<staticText>
-				<reportElement x="151" y="0" width="651" height="17" forecolor="#5B9BD5"/>
+				<reportElement x="107" y="23" width="426" height="26" forecolor="#1DA799"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[DR. MARCO ESCOBAR BUCHELI  CARDIOLOGO - INTENSIVISTA / MAPAS DE PRESION  / HOLTER 24 HORAS Y 48 HORAS
 ]]></text>
 			</staticText>
+			<image hAlign="Center" vAlign="Middle" onErrorType="Blank">
+				<reportElement x="0" y="0" width="94" height="76"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{logo}]]></imageExpression>
+			</image>
 			<staticText>
-				<reportElement x="9" y="134" width="55" height="14"/>
-				<textElement>
-					<font isBold="true"/>
+				<reportElement x="0" y="134" width="555" height="39"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="20" isBold="true"/>
 				</textElement>
-				<text><![CDATA[CI:]]></text>
+				<text><![CDATA[CERTIFICADO MÉDICO]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="64" y="135" width="268" height="14"/>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="63" y="88" width="186" height="20"/>
 				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{pac_ruc}]]></textFieldExpression>
+				<textFieldExpression class="java.util.Date"><![CDATA[new Date()]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="9" y="148" width="55" height="14"/>
-				<textElement>
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Edad:]]></text>
+				<reportElement x="28" y="88" width="65" height="20"/>
+				<textElement/>
+				<text><![CDATA[QUITO,]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="64" y="149" width="268" height="14"/>
+			<textField isBlankWhenNull="true">
+				<reportElement x="94" y="221" width="450" height="14"/>
 				<textElement/>
-				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{pac_edad}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="64" y="121" width="268" height="14"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{pac_nombres}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{vis_cargar_cie10}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="9" y="120" width="55" height="14"/>
-				<textElement>
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[PCTE:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="9" y="163" width="85" height="14"/>
-				<textElement>
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[DIAGNÓSTICO:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="9" y="177" width="55" height="14"/>
+				<reportElement x="9" y="263" width="85" height="14"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[HCL Nº:]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="64" y="177" width="268" height="14"/>
+			<textField isBlankWhenNull="true">
+				<reportElement x="358" y="207" width="186" height="14"/>
 				<textElement/>
-				<text><![CDATA[XXXXXXXXXXXX]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="94" y="163" width="238" height="14"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{vis_cargar_cie10}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{pac_edad}+" AÑOS"]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="151" y="17" width="651" height="54" forecolor="#5B9BD5"/>
-				<textElement textAlignment="Center"/>
-				<text><![CDATA[Consultorio: Ulpiano Páez N22-188 y Veintimilla Consultorios Médicos Pichincha Torre C Piso 4 Oficina 413
-Teléfono: 2559133 Cel. 0997124127/ 0980023883.
-Consultorio: Av. Eloy Alfaro N29-235 entre Alemania e Italia Edificio Fortune Plaza
-Frente a la Clínica Pasteur, Piso 7 Oficina 710 Teléfono: 3801640
-Cel. 0997124127 / 0980023883.
-Síguenos en Facebook: Centro Integral de Cardiología CITAS: https://marcoescobarcardiologointensivista.com
-e-mail:marcoescobar10@hotmail.com
-]]></text>
-			</staticText>
-			<image hAlign="Center" vAlign="Middle" onErrorType="Blank">
-				<reportElement x="0" y="0" width="151" height="101"/>
-				<imageExpression class="java.lang.String"><![CDATA["D:\\PROYECTOS\\SISTEMA_HISTORIAL_MEDICO\\historial_medico\\HistorialMedico\\web\\imagenes\\logohm.png"]]></imageExpression>
-			</image>
-			<staticText>
-				<reportElement x="151" y="71" width="651" height="30"/>
+				<reportElement x="303" y="206" width="55" height="14"/>
 				<textElement>
-					<font size="11" isBold="true"/>
+					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[HORARIOS DE ATENCION:   CONSULTORIO PICHINCHA LUNES MARTES Y MIERCOLES 09H00 A 13H00 Y 15H00 A 18H00
-EDIFICIO FORTUNE JUEVES Y VIERNES 9H00 A 14H00  Y  15H00 A 18H00  SABADOS 9H00  A 13H00  PREVIA CITA
-]]></text>
+				<text><![CDATA[Edad:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="9" y="200" width="55" height="14"/>
+				<reportElement x="9" y="221" width="85" height="14"/>
 				<textElement>
-					<font size="11" isBold="true"/>
+					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[RECETA.-]]></text>
+				<text><![CDATA[Dirección:]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="9" y="193" width="85" height="14"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[P	ACIENTE:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="9" y="207" width="85" height="14"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CI:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="94" y="207" width="209" height="14"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{pac_ruc}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="94" y="193" width="461" height="14"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{pac_nombres}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="94" y="263" width="450" height="14"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA["Nº "+$F{id_paciente}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="9" y="277" width="85" height="14"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DIAGNÓSTICO:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="94" y="277" width="450" height="14" isPrintWhenDetailOverflows="true"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{vis_cargar_cie10}==null?"":$F{vis_cargar_cie10}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="9" y="235" width="85" height="14"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DIR. Laboral]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="9" y="249" width="85" height="14"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cargo:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="94" y="249" width="450" height="14"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{pac_cargo}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="94" y="235" width="450" height="14"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{pac_direccion_trabajo}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<detail>
-		<band height="253" splitType="Stretch">
-			<textField>
-				<reportElement x="9" y="0" width="793" height="109"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA["Yo  DR. MARCO ESCOBAR BUCHELI  a peticion verbal  Certifico que el paciente " +$F{pac_nombres}+ " de "+ $F{pac_edad} + " AÑOS de edad, con numero de cédula "+$F{pac_ruc}+" fue atendido en mi consultorio por presentar CI10 / I-10: " +$F{vis_cargar_cie10}+", "+$F{vis_observacion} +" por lo cual recominedo reposo absoluto por un periodo de "+$F{vis_reposo}+" DIAS desde el "+$F{vis_fecha}]]></textFieldExpression>
+		<band height="271" splitType="Stretch">
+			<textField isStretchWithOverflow="true" pattern="dd MMMMM yyyy" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="74" y="53" width="118" height="14" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Justified"/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{vis_fecha} ]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="9" y="32" width="535" height="14" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Justified"/>
+				<textFieldExpression class="java.lang.String"><![CDATA["POR LO TANTO, REQUIERE REPOSO DE "+$F{vis_reposo}+" HORAS "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="9" y="11" width="535" height="14" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Justified">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{vis_certificado}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="191" width="802" height="44"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<reportElement positionType="Float" x="12" y="216" width="543" height="44"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
 				<text><![CDATA[DR. MARCO ANTONIO ESCOBAR BUCHELI
 CARDIOLOGO - INTENSIVISTA
 MSP: 1704353273001
 ]]></text>
 			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="9" y="53" width="65" height="14"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[DESDE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="9" y="73" width="65" height="14"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[HASTA]]></text>
+			</staticText>
+			<textField pattern="">
+				<reportElement positionType="Float" x="192" y="53" width="352" height="14"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA["("+$P{fechaInicioText}+")"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="192" y="73" width="352" height="14"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA["("+$P{fechaFinText}+")"]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd MMMMM yyyy" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="74" y="73" width="118" height="14"/>
+				<textElement/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$P{fechaFinal}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="9" y="106" width="65" height="14"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ATTE:]]></text>
+			</staticText>
 		</band>
 	</detail>
+	<pageFooter>
+		<band height="66">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="66" forecolor="#5B9BD5"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Consultorio: Ulpiano Páez N22-188 y Veintimilla Consultorios Médicos Pichincha Torre C Piso 4 Oficina 413
+Teléfono: 2559133 Cel. 0997124127/ 0980023883.
+Consultorio: Av. Eloy Alfaro N29-235 entre Alemania e Italia Edificio Fortune Plaza Frente a la Clínica Pasteur, Piso 7
+Oficina 710. Teléfono: 3801640 Cel. 0997124127 / 0980023883.
+Síguenos en Facebook: Centro Integral de Cardiología CITAS: https://marcoescobarcardiologointensivista.com/ email:marcoescobar10@hotmail.com
+]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
 </jasperReport>
