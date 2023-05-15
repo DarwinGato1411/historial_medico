@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="receta" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.6105100000000014"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="187"/>
 	<property name="ireport.y" value="0"/>
 	<style name="table">
 		<box>
@@ -124,42 +124,42 @@
 ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="9" y="122" width="55" height="12"/>
+				<reportElement x="9" y="122" width="69" height="12"/>
 				<textElement>
 					<font size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[CI:]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement x="64" y="122" width="268" height="12"/>
+				<reportElement x="78" y="122" width="254" height="12"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{pac_ruc}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="9" y="134" width="55" height="12"/>
+				<reportElement x="9" y="134" width="69" height="12"/>
 				<textElement>
 					<font size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Edad:]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement x="64" y="134" width="268" height="12"/>
+				<reportElement x="78" y="134" width="254" height="12"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{pac_edad}+" AÑOS"]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="64" y="110" width="268" height="12"/>
+				<reportElement x="78" y="110" width="254" height="12"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{pac_nombres}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="9" y="111" width="55" height="12"/>
+				<reportElement x="9" y="111" width="69" height="12"/>
 				<textElement>
 					<font size="8" isBold="true"/>
 				</textElement>
@@ -173,7 +173,7 @@
 				<text><![CDATA[DIAGNÓSTICO:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="9" y="158" width="55" height="12"/>
+				<reportElement x="9" y="158" width="69" height="12"/>
 				<textElement>
 					<font size="8" isBold="true"/>
 				</textElement>
@@ -214,14 +214,14 @@ EDIFICIO FORTUNE JUEVES Y VIERNES 9H00 A 14H00  Y  15H00 A 18H00  PREVIA CITA SA
 ]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement x="477" y="111" width="268" height="12"/>
+				<reportElement x="486" y="111" width="259" height="12"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{pac_nombres}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="422" y="110" width="55" height="12"/>
+				<reportElement x="422" y="110" width="64" height="12"/>
 				<textElement>
 					<font size="8" isBold="true"/>
 				</textElement>
@@ -235,14 +235,14 @@ EDIFICIO FORTUNE JUEVES Y VIERNES 9H00 A 14H00  Y  15H00 A 18H00  PREVIA CITA SA
 				<text><![CDATA[Edad:]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement x="477" y="125" width="109" height="12"/>
+				<reportElement x="486" y="125" width="100" height="12"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{pac_ruc}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="422" y="124" width="55" height="12"/>
+				<reportElement x="422" y="124" width="64" height="12"/>
 				<textElement>
 					<font size="8" isBold="true"/>
 				</textElement>
@@ -325,14 +325,14 @@ e-mail:marcoescobar10@hotmail.com
 EDIFICIO FORTUNE JUEVES Y VIERNES 9H00 A 14H00  Y  15H00 A 18H00  PREVIA CITA SABADOS 9H00  A 13H00
 ]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="64" y="158" width="268" height="12"/>
+			<textField isBlankWhenNull="true">
+				<reportElement x="78" y="158" width="254" height="12"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA["Nº "+$F{id_paciente}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement x="507" y="165" width="268" height="12"/>
 				<textElement>
 					<font size="8"/>

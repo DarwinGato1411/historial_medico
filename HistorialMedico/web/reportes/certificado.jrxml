@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="certificado" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.771561000000002"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="430"/>
+	<property name="ireport.y" value="438"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -152,12 +152,12 @@
 				<text><![CDATA[QUITO,]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement x="94" y="221" width="450" height="14"/>
+				<reportElement x="107" y="221" width="437" height="14"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{vis_cargar_cie10}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="9" y="263" width="85" height="14"/>
+				<reportElement x="9" y="263" width="98" height="14"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
@@ -176,76 +176,76 @@
 				<text><![CDATA[Edad:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="9" y="221" width="85" height="14"/>
+				<reportElement x="9" y="221" width="98" height="14"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Dirección:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="9" y="193" width="85" height="14"/>
+				<reportElement x="9" y="193" width="98" height="14"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[P	ACIENTE:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="9" y="207" width="85" height="14"/>
+				<reportElement x="9" y="207" width="98" height="14"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[CI:]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement x="94" y="207" width="209" height="14"/>
+				<reportElement x="107" y="207" width="196" height="14"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{pac_ruc}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="94" y="193" width="461" height="14"/>
+				<reportElement x="107" y="193" width="448" height="14"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{pac_nombres}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="94" y="263" width="450" height="14"/>
+				<reportElement x="107" y="263" width="437" height="14"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA["Nº "+$F{id_paciente}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="9" y="277" width="85" height="14"/>
+				<reportElement x="9" y="277" width="98" height="14"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[DIAGNÓSTICO:]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="94" y="277" width="450" height="14" isPrintWhenDetailOverflows="true"/>
+				<reportElement x="107" y="277" width="437" height="14" isPrintWhenDetailOverflows="true"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{vis_cargar_cie10}==null?"":$F{vis_cargar_cie10}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="9" y="235" width="85" height="14"/>
+				<reportElement x="9" y="235" width="98" height="14"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[DIR. Laboral]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="9" y="249" width="85" height="14"/>
+				<reportElement x="9" y="249" width="98" height="14"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Cargo:]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement x="94" y="249" width="450" height="14"/>
+				<reportElement x="107" y="249" width="437" height="14"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{pac_cargo}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="94" y="235" width="450" height="14"/>
+				<reportElement x="107" y="235" width="437" height="14"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{pac_direccion_trabajo}]]></textFieldExpression>
 			</textField>
@@ -256,7 +256,7 @@
 			<textField isStretchWithOverflow="true" pattern="dd MMMMM yyyy" isBlankWhenNull="true">
 				<reportElement positionType="Float" x="74" y="53" width="118" height="14" isPrintWhenDetailOverflows="true"/>
 				<textElement textAlignment="Justified"/>
-				<textFieldExpression class="java.util.Date"><![CDATA[$F{vis_fecha} ]]></textFieldExpression>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{vis_fecha}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement positionType="Float" x="9" y="32" width="535" height="14" isPrintWhenDetailOverflows="true"/>
@@ -271,12 +271,13 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{vis_certificado}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement positionType="Float" x="12" y="216" width="543" height="44"/>
+				<reportElement positionType="Float" x="12" y="215" width="543" height="44"/>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[DR. MARCO ANTONIO ESCOBAR BUCHELI
 CARDIOLOGO - INTENSIVISTA
+C.M.P 3418 - INHMT 17 - 0802117
 MSP: 1704353273001
 ]]></text>
 			</staticText>
@@ -319,9 +320,9 @@ MSP: 1704353273001
 		</band>
 	</detail>
 	<pageFooter>
-		<band height="66">
+		<band height="71">
 			<staticText>
-				<reportElement x="0" y="0" width="555" height="66" forecolor="#5B9BD5"/>
+				<reportElement x="0" y="0" width="555" height="71" forecolor="#5B9BD5"/>
 				<textElement verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
@@ -330,6 +331,8 @@ Teléfono: 2559133 Cel. 0997124127/ 0980023883.
 Consultorio: Av. Eloy Alfaro N29-235 entre Alemania e Italia Edificio Fortune Plaza Frente a la Clínica Pasteur, Piso 7
 Oficina 710. Teléfono: 3801640 Cel. 0997124127 / 0980023883.
 Síguenos en Facebook: Centro Integral de Cardiología CITAS: https://marcoescobarcardiologointensivista.com/ email:marcoescobar10@hotmail.com
+HORARIOS DE ATENCION:   CONSULTORIO PICHINCHA LUNES MARTES Y MIERCOLES 09H00 A 14H00 Y 15H00 A 18H00
+EDIFICIO FORTUNE JUEVES Y VIERNES 9H00 A 14H00  Y  15H00 A 18H00  PREVIA CITA SABADOS 9H00  A 13H00
 ]]></text>
 			</staticText>
 		</band>
