@@ -44,58 +44,8 @@
                                 class="input_text" />
                         </div>
                     </div>
-                    <div class="wrapper_input_mod">
-                        <span>Certificado medico:</span>
-                        <div class="wrapper_input_text">
-                        
-                            <textbox  
-                                maxlength="3000" 
-                                rows="10"    
-                                onChange="self.setValue(self.getValue().toUpperCase());"  
-                                value="@bind(vm.entidad.visCertificado)" 
-                                class="input_text" />
-                        </div>
-                    </div>
-                     <div class="wrapper_input_mod_group">
-                        <div class="wrapper_input_mod">
-                            <span>Horas de reposo</span>
-                   
-                                <div class="wrapper_input_text">
-                           
-                                    <intbox constraint="no negative,no zero"  
-                                            value="@bind(vm.entidad.visReposo)" 
-                                            format="##" class="input_text"   
-                                            tabindex="1" />
-                           
-                                </div>
-                    
-                            
-                           
-                           
-                        </div>
-                        <div class="wrapper_input_mod">
-                           
-                   
-                    
-                    
-                        </div>
-                
-                        <div class="wrapper_input_mod_group">
-                           
-                        </div>
-                    </div>
-<!--                    <div class="wrapper_input_mod">
-                        <span>Diagnóstico</span>
-                        <div class="wrapper_input_text">
-                        
-                            <textbox  
-                                maxlength="100"  
-                                rows="3"   
-                                onChange="self.setValue(self.getValue().toUpperCase());"  
-                                value="@bind(vm.entidad.visDiagnostico)" 
-                                class="input_text" />
-                        </div>
-                    </div>-->
+                 
+
                 </div>
                 
                 <div class="VM">
@@ -230,6 +180,38 @@
                                     </listitem>
                                 </template>
                             </listbox>
+                        </div>
+                    </div>
+                </div>
+                <div class="VM">
+                    <div class="wrapper_input_mod">
+                        <span>Certificado medico:</span>
+                        <div class="wrapper_input_text">
+                        
+                            <textbox  
+                                maxlength="3000" 
+                                rows="10"    
+                                onChange="self.setValue(self.getValue().toUpperCase());"  
+                                value="@bind(vm.entidad.visCertificado)" 
+                                class="input_text" />
+                        </div>
+                    </div>
+                    <div class="wrapper_input_mod_group">
+                        <div class="wrapper_input_mod">
+                            <span>Horas de reposo</span>
+                   
+                            <div class="wrapper_input_text">
+                           
+                                <intbox constraint="no negative,no zero"  
+                                            value="@bind(vm.entidad.visReposo)" 
+                                            format="##" class="input_text"   
+                                            tabindex="1" />
+                           
+                            </div>
+                    
+                            
+                           
+                           
                         </div>
                     </div>
                 </div>

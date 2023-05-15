@@ -30,6 +30,7 @@ import java.io.UnsupportedEncodingException;
 import java.rmi.RemoteException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -71,7 +72,8 @@ public class VisitaController {
     private List<VisitaMedica> listaVisitaMedicas = new ArrayList<VisitaMedica>();
     private Paciente pacienteSelected = new Paciente();
     private String buscar = "";
-
+    private String fechaFomateada = "";
+    private String DatosPersonales = "";
     //subir pdf
     private String filePath;
     byte[] buffer = new byte[1024 * 1024];
@@ -99,15 +101,35 @@ public class VisitaController {
     public void afterCompose(@ExecutionArgParam("valor") Paciente valor, @ContextParam(ContextType.VIEW) Component view) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException, JRException, IOException {
         Selectors.wireComponents(view, this, false);
         pacienteSelected = valor;
+        setFechaFomateada(infoPersonal(pacienteSelected));
         buscarVisita();
+    }
+
+    public String infoPersonal(Paciente pacienteSelected) {
+        setFechaFomateada(new SimpleDateFormat("dd/MM/yyyy").format(pacienteSelected.getPacFechaNacimiento()));
+        String msg = "";
+        if (pacienteSelected.getPacRuc() != null) {
+            msg += " " + pacienteSelected.getPacRuc();
+        }
+        if (pacienteSelected.getPacNombres() != null) {
+            msg += " " + pacienteSelected.getPacNombres();
+        }
+        if (pacienteSelected.getPacFechaNacimiento() != null) {
+            msg += " " + new SimpleDateFormat("dd/MM/yyyy").format(pacienteSelected.getPacFechaNacimiento());
+        }
+        if (pacienteSelected.getPacEdad() != null) {
+            msg += " Edad:" + pacienteSelected.getPacEdad();
+        }
+
+        return msg;
     }
 
     public VisitaController() {
 
         Session sess = Sessions.getCurrent();
         credential = (UserCredential) sess.getAttribute(EnumSesion.userCredential.getNombre());
-        parametrizar = servicioParametrizar.findActivo();
 
+        parametrizar = servicioParametrizar.findActivo();
     }
 
     @Command
@@ -126,13 +148,13 @@ public class VisitaController {
             param.setIdPaciente(pacienteSelected);
             map.put("valor", param);
             org.zkoss.zul.Window window = (org.zkoss.zul.Window) Executions.createComponents(
-                        "/medico/nuevo/visita.zul", null, map);
+                    "/medico/nuevo/visita.zul", null, map);
 
             window.doModal();
             buscarVisita();
         } catch (Exception e) {
             Clients.showNotification("Ocurrio un error " + e.getMessage(),
-                        Clients.NOTIFICATION_TYPE_ERROR, null, "middle_center", 2000, true);
+                    Clients.NOTIFICATION_TYPE_ERROR, null, "middle_center", 2000, true);
         }
     }
 
@@ -146,11 +168,11 @@ public class VisitaController {
             param.setIdPaciente(pacienteSelected);
             map.put("valor", param);
             org.zkoss.zul.Window window = (org.zkoss.zul.Window) Executions.createComponents(
-                        "/medico/nuevo/visita.zul", null, map);
+                    "/medico/nuevo/visita.zul", null, map);
             window.doModal();
         } catch (Exception e) {
             Clients.showNotification("Ocurrio un error " + e.getMessage(),
-                        Clients.NOTIFICATION_TYPE_ERROR, null, "middle_center", 2000, true);
+                    Clients.NOTIFICATION_TYPE_ERROR, null, "middle_center", 2000, true);
         }
     }
 
@@ -166,7 +188,7 @@ public class VisitaController {
             }
         } catch (Exception e) {
             Clients.showNotification("Ocurrio un error " + e.getMessage(),
-                        Clients.NOTIFICATION_TYPE_ERROR, null, "middle_center", 2000, true);
+                    Clients.NOTIFICATION_TYPE_ERROR, null, "middle_center", 2000, true);
         }
     }
 
@@ -180,11 +202,11 @@ public class VisitaController {
             String pathReceta[] = new String[1];
             pathReceta[0] = pathEnvio;
             mailerClass.sendMailSimple((valor.getIdPaciente().getPacCorreo() == null ? "consultoriospichincha@gmail.com"
-                        : valor.getIdPaciente().getPacCorreo()), "Saludos, estimado paciente envio su receta medica", pathReceta,
-                        "RECETA MEDICA");
+                    : valor.getIdPaciente().getPacCorreo()), "Saludos, estimado paciente envio su receta medica", pathReceta,
+                    "RECETA MEDICA");
         } catch (RemoteException e) {
             Clients.showNotification("Ocurrio un error " + e.getMessage(),
-                        Clients.NOTIFICATION_TYPE_ERROR, null, "middle_center", 2000, true);
+                    Clients.NOTIFICATION_TYPE_ERROR, null, "middle_center", 2000, true);
         }
     }
 
@@ -209,7 +231,7 @@ public class VisitaController {
             Executions.getCurrent().sendRedirect(enviarSMS.replace(" ", "%20"), "_blank");
         } catch (Exception e) {
             Clients.showNotification("Ocurrio un error " + e.getMessage(),
-                        Clients.NOTIFICATION_TYPE_ERROR, null, "middle_center", 2000, true);
+                    Clients.NOTIFICATION_TYPE_ERROR, null, "middle_center", 2000, true);
         }
     }
 
@@ -252,7 +274,7 @@ public class VisitaController {
             con = emf.unwrap(Connection.class);
 
             String reportFile = Executions.getCurrent().getDesktop().getWebApp()
-                        .getRealPath("/reportes");
+                    .getRealPath("/reportes");
             String reportPath = "";
 
             if (tipo.equals("REC")) {
@@ -293,7 +315,7 @@ public class VisitaController {
 //para pasar al visor
             map.put("pdf", fileContent);
             org.zkoss.zul.Window window = (org.zkoss.zul.Window) Executions.createComponents(
-                        "/visor/visorreporte.zul", null, map);
+                    "/visor/visorreporte.zul", null, map);
             window.doModal();
         } catch (Exception e) {
             System.out.println("ERROR EL PRESENTAR EL REPORTE " + e.getMessage());
@@ -466,6 +488,22 @@ public class VisitaController {
         }
         System.out.println(mesString);
         return mesString;
+    }
+
+    public String getFechaFomateada() {
+        return fechaFomateada;
+    }
+
+    public void setFechaFomateada(String fechaFomateada) {
+        this.fechaFomateada = fechaFomateada;
+    }
+
+    public String getDatosPersonales() {
+        return DatosPersonales;
+    }
+
+    public void setDatosPersonales(String DatosPersonales) {
+        this.DatosPersonales = DatosPersonales;
     }
 
 }

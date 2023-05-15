@@ -12,10 +12,9 @@
     <div  >
         <div class="paciente" >
             <div class="leyenda" >
-                       
                 <label 
                     class=" form-control-sm" 
-                    value="@load(vm.pacienteSelected.pacNombres)" />
+                    value="@load(vm.fechaFomateada)" />     
             </div> 
             <div class="">                                    
                 <button    label="Nueva visita médica"
@@ -68,7 +67,7 @@
                                         
                             </button>   
                             <button 
-                                 class="btn-success-zk"
+                                class="btn-success-zk"
                                 iconSclass="z-icon-file-text-o  "
                                 onClick="@command('verReceta',valor=each)" 
                                 tooltiptext="Imprimir receta">
@@ -87,7 +86,7 @@
                                     
                             </button>                                      
                             <button label=""
-                            class="btn-successws-zk"
+                                    class="btn-successws-zk"
                                     iconSclass="z-icon-phone-square "
                                     onClick="@command('enviarWhastApp',valor=each)" 
                                     tooltiptext="Enviar Whatsapp">
