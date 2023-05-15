@@ -1,6 +1,6 @@
 :root {
 
-    --primary-color:#007bff;
+    --primary-color:#2a4a70;
     --secondary-color: #456262;
     --background-color: #aaa9a9;
     --alpha: 0.5;
@@ -3327,7 +3327,7 @@ input, button, select, textarea {
 }
 
 .fondoBanner{
-    background: #2a4a70;
+    background: var(--primary-color);
     padding: 10px;
 }
 
@@ -3421,8 +3421,8 @@ div.z-listbox-header th.z-listheader, div.z-listbox-header th.z-auxheader {
 }
 
 .leyenda{
-    color: #900;
-    background: #ffe1e1;
+    color: var(--primary-color);
+    background: #eee;
     font-size: 21px;
     size: 15px;
     margin-bottom: 10px;

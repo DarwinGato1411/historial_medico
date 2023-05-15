@@ -1,10 +1,10 @@
 @import "https://fonts.googleapis.com/css2?family=Nunito:wght@300&family=Poppins&family=Raleway:wght@300&display=swap";
 
 :root {
-   --primary-color: #03aff1;
-  --secondary-color:#0b0d3e;
-  --tertiary-color: #d5ecfb;
-  --background-color: #fff;
+   --primary-color:#2a4a70;
+    --secondary-color:#0b0d3e;
+    --tertiary-color: #d5ecfb;
+    --background-color: #fff;
 }
 
 *,
@@ -150,7 +150,7 @@ body {
   top: 8px;
   left: 6px;
   font-size: 10px;
-  color: var(--secondary-color);
+  color: var(--primary-color);
 }
 
 .btn_modal {

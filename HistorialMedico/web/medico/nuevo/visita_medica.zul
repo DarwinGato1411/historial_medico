@@ -13,7 +13,7 @@
         <div class="paciente" >
             <div class="leyenda" >
                 <label 
-                    class=" form-control-sm" 
+                    class="form-control-sm" 
                     value="@load(vm.fechaFomateada)" />     
             </div> 
             <div class="">                                    

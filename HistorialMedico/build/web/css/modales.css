@@ -4,7 +4,7 @@
 
     /*    --primary-color: #0aa397;
         --secondary-color: #456262;*/
-    --primary-color:#22c7b8;
+    --primary-color:#2a4a70;
     --secondary-color: #456262;
     --background-color: #aaa9a9;
     --alpha: 0.5;
@@ -149,7 +149,7 @@
 }
 
 .modalPaciente .titulo{
-    background: #22c7b8;
+    background: var(--primary-color);
     height: 100%;
     display: flex;
 
