@@ -291,12 +291,24 @@ public class VisitaController {
             Calendar calendar = Calendar.getInstance(); //obtiene la fecha de hoy 
             calendar.add(Calendar.HOUR, valor.getVisReposo() == null ? 0 : valor.getVisReposo()); //el -3 indica que se le restaran 3 dias 
             Date fechaFinal = calendar.getTime();
-            String textoFechaInicio = (Convertir(String.valueOf(valor.getVisFecha().getDay()), Boolean.TRUE) + "de " + mesLetras(valor.getVisFecha().getMonth()) + " del " + Convertir(String.valueOf(1900 + valor.getVisFecha().getYear()), Boolean.TRUE));
-            String textoFechaFinal = (Convertir(String.valueOf(fechaFinal.getDay()), Boolean.TRUE) + "de " + mesLetras(fechaFinal.getMonth()) + " del " + Convertir(String.valueOf(1900 + fechaFinal.getYear()), Boolean.TRUE));
 
+            Calendar c = Calendar.getInstance();
+            c.setTime(valor.getVisFecha());
+            Integer dia = c.get(Calendar.DATE);
+            Integer mes = c.get(Calendar.MONTH) + 1;
+            Integer annio = c.get(Calendar.YEAR);
+            Calendar cc = Calendar.getInstance();
+            cc.setTime(fechaFinal);
+
+            Integer diaF = cc.get(Calendar.DATE);
+            Integer mesF = cc.get(Calendar.MONTH) + 1;
+            Integer annioF = cc.get(Calendar.YEAR);
+
+            String textoFechaInicio = (Convertir(String.valueOf(dia), Boolean.TRUE) + "de " + mesLetras(mes) + " del " + Convertir(String.valueOf(annio), Boolean.TRUE));
+            String textoFechaFinal = (Convertir(String.valueOf(diaF), Boolean.TRUE) + "de " + mesLetras(mesF) + " del " + Convertir(String.valueOf(annioF), Boolean.TRUE));
 //                System.out.println("FECHA EN TEXTO "+calendar.);
-            System.out.println("FECHA INICIO " + textoFechaInicio.toLowerCase());
-            System.out.println("FECHA FIN " + textoFechaFinal.toLowerCase());
+            System.out.println("FECHA INICIO " + dia + "   " + mes + "    " + annio + " " + textoFechaInicio.toLowerCase());
+            System.out.println("FECHA FIN " + fechaFinal + "  " + textoFechaFinal.toLowerCase());
             parametros.put("fechaFinal", fechaFinal);
             parametros.put("fechaInicioText", textoFechaInicio.toLowerCase());
             parametros.put("fechaFinText", textoFechaFinal.toLowerCase());

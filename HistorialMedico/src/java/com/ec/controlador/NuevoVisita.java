@@ -99,8 +99,10 @@ public class NuevoVisita {
 
     //subir imagen
     private String filePath;
-    byte[] buffer = new byte[1024 * 1024];
+    byte[] buffer = new byte[2024 * 1024];
     private AImage fotoGeneral = null;
+
+    AMedia fileContent = null;
 
     ServicioParametrizar servicioParametrizar = new ServicioParametrizar();
     private Parametrizar parametrizar = new Parametrizar();
@@ -123,7 +125,7 @@ public class NuevoVisita {
 
     /*MOstrar pdf*/
     //reporte
-    AMedia fileContent = null;
+//    AMedia fileContent = null;
     Connection con = null;
 
     @AfterCompose
@@ -336,8 +338,15 @@ public class NuevoVisita {
     public void subirExamen() throws InterruptedException, IOException {
 
         org.zkoss.util.media.Media media = Fileupload.get();
-        if (media instanceof org.zkoss.image.Image) {
+        if (media instanceof org.zkoss.util.media.AMedia) {
             String nombre = media.getName();
+
+            if (!nombre.contains("pdf")) {
+                Clients.showNotification("Debe cargar un archivo PDF ",
+                            Clients.NOTIFICATION_TYPE_ERROR, null, "end_center", 3000, true);
+
+                return;
+            }
 
             if (media.getByteData().length > 10 * 1024 * 1024) {
                 Messagebox.show("El arhivo seleccionado sobrepasa el tamaño de 10Mb.\n Por favor seleccione un archivo más pequeño.", "Atención", Messagebox.OK, Messagebox.ERROR);
@@ -352,14 +361,21 @@ public class NuevoVisita {
             }
             Files.copy(new File(filePath + File.separator + media.getName()),
                         media.getStreamData());
+            filePath = filePath + File.separator + media.getName();
+            System.out.println("pathhhhhhh " + filePath);
+            File f = new File(filePath);
+            // Messagebox.show(" dfdfdfdsfdsf" + filePath);
 
-//            usuario.setUsuFoto(filePath + File.separator + media.getName());
-            System.out.println("PATH SUBIR " + filePath + File.separator + media.getName());
-            fotoGeneral = new AImage("fotoPedido", Imagen_A_Bytes(filePath + File.separator + media.getName()));
+            FileInputStream fs = new FileInputStream(f);
+            fs.read(buffer);
+            fs.close();
+
+            ByteArrayInputStream is = new ByteArrayInputStream(buffer);
+            fileContent = new AMedia("report", "pdf", "application/pdf", is);
 
             ExamenDao dao = new ExamenDao();
-            dao.setPath(filePath + File.separator + media.getName());
-            dao.setDescripcion("Examen");
+            dao.setPath(filePath);
+            dao.setDescripcion("Examen "+media.getName());
             dao.setFotoGeneral(fotoGeneral);
             ((ListModelList<ExamenDao>) listaExamenModel).add(dao);
 //            listaExamenModel.add(dao);
@@ -396,12 +412,27 @@ public class NuevoVisita {
     @NotifyChange({"listaPaciente", "buscarPaciente"})
     public void verImagen(@BindingParam("valor") ExamenDao valor) {
         try {
-//            if (Messagebox.show("¿Desea modificar el registro, recuerde que debe crear las reteniones nuevamente?", "Atención", Messagebox.YES | Messagebox.NO, Messagebox.INFORMATION) == Messagebox.YES) {
-            final HashMap<String, AImage> map = new HashMap<String, AImage>();
+////            if (Messagebox.show("¿Desea modificar el registro, recuerde que debe crear las reteniones nuevamente?", "Atención", Messagebox.YES | Messagebox.NO, Messagebox.INFORMATION) == Messagebox.YES) {
+//            final HashMap<String, AImage> map = new HashMap<String, AImage>();
+//
+//            map.put("valor", valor.getFotoGeneral());
+//            org.zkoss.zul.Window window = (org.zkoss.zul.Window) Executions.createComponents(
+//                        "/visor/visorimagen.zul", null, map);
+//            window.doModal();
+            File f = new File(valor.getPath());
+            // Messagebox.show(" dfdfdfdsfdsf" + filePath);
 
-            map.put("valor", valor.getFotoGeneral());
+            FileInputStream fs = new FileInputStream(f);
+            fs.read(buffer);
+            fs.close();
+            ByteArrayInputStream is = new ByteArrayInputStream(buffer);
+            AMedia amedia = new AMedia("Reporte", "pdf", "application/pdf", is);
+            fileContent = amedia;
+            final HashMap<String, AMedia> map = new HashMap<String, AMedia>();
+//para pasar al visor
+            map.put("pdf", fileContent);
             org.zkoss.zul.Window window = (org.zkoss.zul.Window) Executions.createComponents(
-                        "/visor/visorimagen.zul", null, map);
+                        "/visor/visorreporte.zul", null, map);
             window.doModal();
         } catch (Exception e) {
             Clients.showNotification("Ocurrio un error " + e.getMessage(),
@@ -444,7 +475,7 @@ public class NuevoVisita {
                         "/medico/nuevo/cargarcie10.zul", null, map);
             window.doModal();
             String CIE10CONCAt = entidad.getVisCargarCie10() != null ? entidad.getVisCargarCie10() : "";
-            CIE10CONCAt = CIE10CONCAt + "CIE10 "+CIE10.toUpperCase();
+            CIE10CONCAt = CIE10CONCAt + "CIE10 " + CIE10.toUpperCase();
             entidad.setVisCargarCie10(CIE10CONCAt);
         } catch (Exception e) {
             Clients.showNotification("Ocurrio un error " + e.getMessage(),
