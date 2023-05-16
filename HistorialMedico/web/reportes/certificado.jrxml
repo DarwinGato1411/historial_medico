@@ -188,7 +188,7 @@ INTENSIVISTA / MAPAS DE PRESION  / HOLTER 24 HORAS Y 48 HORAS
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[P	ACIENTE:]]></text>
+				<text><![CDATA[PACIENTE:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="9" y="207" width="98" height="14"/>

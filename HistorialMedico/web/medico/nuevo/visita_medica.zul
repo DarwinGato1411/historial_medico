@@ -12,9 +12,38 @@
     <div  >
         <div class="paciente" >
             <div class="leyenda" >
-                <label 
-                    class="form-control-sm" 
-                    value="@load(vm.fechaFomateada)" />     
+                <div>
+                    <label 
+                        class="form-control-sm" 
+                        value="Cédula: " />
+                    <label 
+                        class="form-control-sm" 
+                        value="@load(vm.pacienteSelected.pacRuc)" />
+                </div>
+                <div>
+                    <label 
+                        class="form-control-sm" 
+                        value="Nombre: " />
+                    <label 
+                        class="form-control-sm" 
+                        value="@load(vm.pacienteSelected.pacNombres)" />
+                </div>
+                <div>
+                    <label 
+                        class="form-control-sm" 
+                        value="Fecha nacimiento: " />
+                    <label 
+                        class="form-control-sm" 
+                        value="@load(vm.fechaFomateada)" />
+                </div>
+                <div>
+                    <label 
+                        class="form-control-sm" 
+                        value="Edad: " />
+                    <label 
+                        class="form-control-sm" 
+                        value="@load(vm.pacienteSelected.pacEdad)" />
+                </div>
             </div> 
             <div class="">                                    
                 <button    label="Nueva visita médica"
