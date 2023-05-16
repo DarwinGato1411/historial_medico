@@ -101,28 +101,12 @@ public class VisitaController {
     public void afterCompose(@ExecutionArgParam("valor") Paciente valor, @ContextParam(ContextType.VIEW) Component view) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException, JRException, IOException {
         Selectors.wireComponents(view, this, false);
         pacienteSelected = valor;
-        setFechaFomateada(infoPersonal(pacienteSelected));
+        
+        setFechaFomateada(new SimpleDateFormat("dd/MM/yyyy").format(pacienteSelected.getPacFechaNacimiento()));
         buscarVisita();
     }
 
-    public String infoPersonal(Paciente pacienteSelected) {
-        setFechaFomateada(new SimpleDateFormat("dd/MM/yyyy").format(pacienteSelected.getPacFechaNacimiento()));
-        String msg = "";
-        if (pacienteSelected.getPacRuc() != null) {
-            msg += " " + pacienteSelected.getPacRuc();
-        }
-        if (pacienteSelected.getPacNombres() != null) {
-            msg += " " + pacienteSelected.getPacNombres();
-        }
-        if (pacienteSelected.getPacFechaNacimiento() != null) {
-            msg += " " + new SimpleDateFormat("dd/MM/yyyy").format(pacienteSelected.getPacFechaNacimiento());
-        }
-        if (pacienteSelected.getPacEdad() != null) {
-            msg += " Edad:" + pacienteSelected.getPacEdad();
-        }
-
-        return msg;
-    }
+  
 
     public VisitaController() {
 

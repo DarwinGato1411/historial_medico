@@ -2,7 +2,9 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="certificado" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.771561000000002"/>
 	<property name="ireport.x" value="0"/>
+
 	<property name="ireport.y" value="294"/>
+
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -123,11 +125,12 @@
 	<title>
 		<band height="312" splitType="Stretch">
 			<staticText>
-				<reportElement x="107" y="23" width="426" height="26" forecolor="#1DA799"/>
+				<reportElement x="156" y="23" width="377" height="26" forecolor="#000000"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
-					<font size="10" isBold="true"/>
+					<font size="10" isBold="false"/>
 				</textElement>
-				<text><![CDATA[DR. MARCO ESCOBAR BUCHELI  CARDIOLOGO - INTENSIVISTA / MAPAS DE PRESION  / HOLTER 24 HORAS Y 48 HORAS
+				<text><![CDATA[DR. MARCO ESCOBAR BUCHELI  CARDIOLOGO
+INTENSIVISTA / MAPAS DE PRESION  / HOLTER 24 HORAS Y 48 HORAS
 ]]></text>
 			</staticText>
 			<image hAlign="Center" vAlign="Middle" onErrorType="Blank">
@@ -202,7 +205,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{pac_ruc}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="107" y="193" width="448" height="14"/>
+				<reportElement x="107" y="193" width="437" height="14"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{pac_nombres}]]></textFieldExpression>
 			</textField>
@@ -268,18 +271,17 @@
 				<textElement textAlignment="Justified">
 					<font isBold="false"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{vis_certificado}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{vis_certificado}?$F{vis_certificado}:""]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement positionType="Float" x="12" y="215" width="543" height="44"/>
+				<reportElement positionType="Float" x="12" y="205" width="543" height="54"/>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[DR. MARCO ANTONIO ESCOBAR BUCHELI
 CARDIOLOGO - INTENSIVISTA
 C.M.P 3418 - INHMT 17 - 0802117
-MSP: 1704353273001
-]]></text>
+MSP: 1704353273001]]></text>
 			</staticText>
 			<staticText>
 				<reportElement positionType="Float" x="9" y="53" width="65" height="14"/>
