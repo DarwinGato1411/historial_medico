@@ -146,8 +146,14 @@ public class NuevoPaciente {
                 } else if (entidad.getPacRuc().length() == 10) {
                     cedulaBuscar = entidad.getPacRuc();
                     aduana = ArchivoUtils.obtenerPorCedula(cedulaBuscar);
-                    entidad.setPacNombres(aduana.getNombre());
-                    entidad.setPacDomicilio(aduana.getDireccion());
+                    if (!aduana.getNombre().equals("")) {
+                        entidad.setPacNombres(aduana.getNombre());
+                        entidad.setPacDomicilio(aduana.getDireccion());
+
+                    } else {
+                        nombre = ArchivoUtils.obtenerPorRuc(cedulaBuscar + "001");
+                        entidad.setPacNombres(nombre);
+                    }
                 }
 
             }
@@ -167,8 +173,7 @@ public class NuevoPaciente {
     @Command
     public void guardar() {
         if (entidad.getPacRuc() != null
-                    && entidad.getPacNombres() != null
-                   ) {
+                    && entidad.getPacNombres() != null) {
 
             if (accion.equals("create")) {
                 servicio.crear(entidad);
