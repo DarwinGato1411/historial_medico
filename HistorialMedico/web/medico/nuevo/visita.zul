@@ -8,10 +8,44 @@
     
 
     <div class="container_modal">
-
+        
         <div class="bodyModal">
             <div class="container_row_input">  
-                
+                <div class="leyenda" >
+                    <div>
+                        <label 
+                            class="form-control-sm" 
+                            value="Cédula: " />
+                        <label 
+                            class="form-control-sm" 
+                            value="@load(vm.entidad.idPaciente.pacRuc)" />
+                    </div>
+                    <div>
+                        <label 
+                            class="form-control-sm" 
+                            value="Nombre: " />
+                        <label 
+                            class="form-control-sm" 
+                            value="@load(vm.entidad.idPaciente.pacNombres)" />
+                    </div>
+                    <div>
+                        <label 
+                            class="form-control-sm" 
+                            value="Fecha nacimiento: " />
+                        <label 
+                            class="form-control-sm" 
+                            value="@load(vm.fechaFomateada)" />
+                    </div>
+                    <div>
+                        <label 
+                            class="form-control-sm" 
+                            value="Edad: " />
+                        <label 
+                            class="form-control-sm" 
+                            value="@load(vm.entidad.idPaciente.pacEdad)" />
+                    </div>
+            
+                </div> 
                 <div class="VM">
                     <div class="wrapper_input_mod_group">
                         <div class="wrapper_input_mod">
@@ -203,9 +237,9 @@
                             <div class="wrapper_input_text">
                            
                                 <intbox constraint="no negative,no zero"  
-                                            value="@bind(vm.entidad.visReposo)" 
-                                            format="##" class="input_text"   
-                                            tabindex="1" />
+                                        value="@bind(vm.entidad.visReposo)" 
+                                        format="##" class="input_text"   
+                                        tabindex="1" />
                            
                             </div>
                     

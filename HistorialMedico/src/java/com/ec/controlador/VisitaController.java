@@ -146,7 +146,7 @@ public class VisitaController {
     @NotifyChange({"listaVisitaMedicas", "buscar"})
     public void modificarVisita(@BindingParam("valor") VisitaMedica valor) {
         try {
-//            if (Messagebox.show("¿Desea modificar el registro, recuerde que debe crear las reteniones nuevamente?", "Atención", Messagebox.YES | Messagebox.NO, Messagebox.INFORMATION) == Messagebox.YES) {
+
             final HashMap<String, NuevaVisitaParam> map = new HashMap<String, NuevaVisitaParam>();
             NuevaVisitaParam param = new NuevaVisitaParam("modifica", valor);
             param.setIdPaciente(pacienteSelected);

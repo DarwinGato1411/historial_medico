@@ -10,6 +10,7 @@ import com.ec.controlador.doa.RecetaDao;
 import com.ec.entidad.Capitulo;
 import com.ec.entidad.Detalle;
 import com.ec.entidad.Examen;
+import com.ec.entidad.Paciente;
 import com.ec.entidad.Parametrizar;
 import com.ec.entidad.Receta;
 import com.ec.entidad.Subcapitulo;
@@ -33,6 +34,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -78,7 +80,8 @@ public class NuevoVisita {
     ServicioVisitaMedica servicioVisitaMedica = new ServicioVisitaMedica();
     private VisitaMedica entidad = new VisitaMedica();
     UserCredential credential = new UserCredential();
-
+    
+    
     private String accion = "create";
     @Wire
     Window wVisita;
@@ -118,6 +121,7 @@ public class NuevoVisita {
     private List<Detalle> listaDetalles = new ArrayList<Detalle>();
     public static String CIE10 = "";
 
+    private String fechaFomateada = "";
     private String buscarCapitulo = "";
     private String buscarSubCapitulo = "";
     private String buscarDetalle = "";
@@ -131,7 +135,7 @@ public class NuevoVisita {
     @AfterCompose
     public void afterCompose(@ExecutionArgParam("valor") NuevaVisitaParam valor, @ContextParam(ContextType.VIEW) Component view) {
         Selectors.wireComponents(view, this, false);
-
+        setFechaFomateada(new SimpleDateFormat("dd/MM/yyyy").format(valor.getIdPaciente().getPacFechaNacimiento()));
         if (valor.getTipo().equals("cie")) {
             buscarDetalleBD();
         } else {
@@ -641,6 +645,14 @@ public class NuevoVisita {
 
         }
 
+    }
+
+    public String getFechaFomateada() {
+        return fechaFomateada;
+    }
+
+    public void setFechaFomateada(String fechaFomateada) {
+        this.fechaFomateada = fechaFomateada;
     }
 
 }
