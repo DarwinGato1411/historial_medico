@@ -40,6 +40,8 @@ public class Subcapitulo implements Serializable {
     private String subDetalle;
     @Column(name = "ciu_estado")
     private Boolean ciuEstado;
+    @Column(name = "sub_codigo")
+    private String subCodigo;
     @JoinColumn(name = "id_capitulo", referencedColumnName = "id_capitulo")
     @ManyToOne
     private Capitulo idCapitulo;
@@ -75,6 +77,14 @@ public class Subcapitulo implements Serializable {
 
     public void setCiuEstado(Boolean ciuEstado) {
         this.ciuEstado = ciuEstado;
+    }
+
+    public String getSubCodigo() {
+        return subCodigo;
+    }
+
+    public void setSubCodigo(String subCodigo) {
+        this.subCodigo = subCodigo;
     }
 
     public Capitulo getIdCapitulo() {

@@ -44,15 +44,17 @@ public class AutentificadorLogeo implements AutentificadorService, Serializable 
      */
     public boolean login(String nombreUsuario, String claveUsuario) {
         Usuario dato = (Usuario) servicioUsuario.findUsuarioPorNombre(nombreUsuario);
-        if (dato.getUsuFoto() != null) {
-            try {
-                System.out.println("PATH" + dato.getUsuFoto());
-                fotoGeneral = new AImage("fotoPedido", Imagen_A_Bytes(dato.getUsuFoto()));
+        if (dato != null) {
+            if (dato.getUsuFoto() != null) {
+                try {
+                    System.out.println("PATH" + dato.getUsuFoto());
+                    fotoGeneral = new AImage("fotoPedido", Imagen_A_Bytes(dato.getUsuFoto()));
 //                Imagen_A_Bytes(empresa.getIdUsuario().getUsuFoto());
-            } catch (FileNotFoundException e) {
-                System.out.println("error imagen " + e.getMessage());
-            } catch (IOException ex) {
-                Logger.getLogger(AutentificadorLogeo.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (FileNotFoundException e) {
+                    System.out.println("error imagen " + e.getMessage());
+                } catch (IOException ex) {
+                    Logger.getLogger(AutentificadorLogeo.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
 //        System.out.println("usuario " + nombreUsuario);
@@ -66,7 +68,7 @@ public class AutentificadorLogeo implements AutentificadorService, Serializable 
         }
 
         Session sess = Sessions.getCurrent();
-        UserCredential cre = new UserCredential(dato, dato.getUsuLogin(), dato.getUsuPassword(), dato.getUsuNivel(), dato.getUsuNombre(),fotoGeneral);
+        UserCredential cre = new UserCredential(dato, dato.getUsuLogin(), dato.getUsuPassword(), dato.getUsuNivel(), dato.getUsuNombre(), fotoGeneral);
         // System.out.println("VALOR DE LA CREDENCIAL ASIGNADA A LA SESSION"+EnumSesion.userCredential.getNombre());
 
         sess.setAttribute(EnumSesion.userCredential.getNombre(), cre);

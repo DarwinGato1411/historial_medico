@@ -58,8 +58,26 @@ public class Usuario implements Serializable {
     private String usuFoto;
     @Column(name = "usu_nivel")
     private Integer usuNivel;
+    @Column(name = "usu_logo")
+    private String usuLogo;
+    @Column(name = "usu_encabezado_receta")
+    private String usuEncabezadoReceta;
+    @Column(name = "usu_pie_pagina_receta")
+    private String usuPiePaginaReceta;
+    @Column(name = "usu_firma")
+    private String usuFirma;
+    @Column(name = "usu_encabezado_cert")
+    private String usuEncabezadoCert;
+    @Column(name = "usu_pie_pagina_ceritifacdo")
+    private String usuPiePaginaCeritifacdo;
+    @Column(name = "usu_ciudad")
+    private String usuCiudad;
+    @OneToMany(mappedBy = "idUsuario")
+    private Collection<Horario> horarioCollection;
     @OneToMany(mappedBy = "idUsuario")
     private Collection<Paciente> pacienteCollection;
+    @OneToMany(mappedBy = "idUsuario")
+    private Collection<Agendamiento> agendamientoCollection;
 
     public Usuario() {
     }
@@ -156,12 +174,84 @@ public class Usuario implements Serializable {
         this.usuNivel = usuNivel;
     }
 
+    public String getUsuLogo() {
+        return usuLogo;
+    }
+
+    public void setUsuLogo(String usuLogo) {
+        this.usuLogo = usuLogo;
+    }
+
+    public Collection<Horario> getHorarioCollection() {
+        return horarioCollection;
+    }
+
+    public void setHorarioCollection(Collection<Horario> horarioCollection) {
+        this.horarioCollection = horarioCollection;
+    }
+
     public Collection<Paciente> getPacienteCollection() {
         return pacienteCollection;
     }
 
     public void setPacienteCollection(Collection<Paciente> pacienteCollection) {
         this.pacienteCollection = pacienteCollection;
+    }
+
+    public Collection<Agendamiento> getAgendamientoCollection() {
+        return agendamientoCollection;
+    }
+
+    public void setAgendamientoCollection(Collection<Agendamiento> agendamientoCollection) {
+        this.agendamientoCollection = agendamientoCollection;
+    }
+
+    public String getUsuEncabezadoReceta() {
+        return usuEncabezadoReceta;
+    }
+
+    public void setUsuEncabezadoReceta(String usuEncabezadoReceta) {
+        this.usuEncabezadoReceta = usuEncabezadoReceta;
+    }
+
+    public String getUsuPiePaginaReceta() {
+        return usuPiePaginaReceta;
+    }
+
+    public void setUsuPiePaginaReceta(String usuPiePaginaReceta) {
+        this.usuPiePaginaReceta = usuPiePaginaReceta;
+    }
+
+    public String getUsuFirma() {
+        return usuFirma;
+    }
+
+    public void setUsuFirma(String usuFirma) {
+        this.usuFirma = usuFirma;
+    }
+
+    public String getUsuEncabezadoCert() {
+        return usuEncabezadoCert;
+    }
+
+    public void setUsuEncabezadoCert(String usuEncabezadoCert) {
+        this.usuEncabezadoCert = usuEncabezadoCert;
+    }
+
+    public String getUsuPiePaginaCeritifacdo() {
+        return usuPiePaginaCeritifacdo;
+    }
+
+    public void setUsuPiePaginaCeritifacdo(String usuPiePaginaCeritifacdo) {
+        this.usuPiePaginaCeritifacdo = usuPiePaginaCeritifacdo;
+    }
+
+    public String getUsuCiudad() {
+        return usuCiudad;
+    }
+
+    public void setUsuCiudad(String usuCiudad) {
+        this.usuCiudad = usuCiudad;
     }
 
     @Override
@@ -188,5 +278,5 @@ public class Usuario implements Serializable {
     public String toString() {
         return "com.ec.entidad.Usuario[ idUsuario=" + idUsuario + " ]";
     }
-    
+
 }

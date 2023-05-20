@@ -5,7 +5,6 @@
 package com.ec.controlador;
 
 
-import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.zk.ui.Executions;
 

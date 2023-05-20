@@ -100,6 +100,39 @@ public class ArchivoUtils {
 
     }
 
+    public static String diaSemanaLetras(Integer dia) {
+
+        String mesString;
+        switch (dia) {
+            case 1:
+                mesString = "DOMINGO";
+                break;
+            case 2:
+                mesString = "LUNES";
+                break;
+            case 3:
+                mesString = "MARTES";
+                break;
+            case 4:
+                mesString = "MIERCOLES";
+                break;
+            case 5:
+                mesString = "JUEVES";
+                break;
+            case 6:
+                mesString = "VIERNES";
+                break;
+            case 7:
+                mesString = "SABADO";
+                break;
+            default:
+                mesString = "DIA INVALIDO";
+                break;
+        }
+        System.out.println(mesString);
+        return mesString;
+    }
+
     public static String archivoToString(String rutaArchivo) {
         /*  70 */ StringBuffer buffer = new StringBuffer();
         try {
@@ -116,6 +149,20 @@ public class ArchivoUtils {
             /*  83 */ Logger.getLogger(ArchivoUtils.class.getName()).log(Level.SEVERE, null, e);
             /*  84 */        }
         return null;
+    }
+
+    public static String formatoFecha(Date fecha) {
+        String date = null;
+        try {
+
+            String pattern = "dd/MM/yyyy";
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+            date = simpleDateFormat.format(fecha);
+        } catch (Exception e) {
+            System.out.println("ERROR al formatear la fecha " + e.getMessage());
+            date = null;
+        }
+        return date;
     }
 
     public static File stringToArchivo(String rutaArchivo, String contenidoArchivo) {
@@ -760,8 +807,6 @@ public class ArchivoUtils {
 //                Logger.getLogger(Verificador.class.getName()).log(Level.SEVERE, null, ex);
             return "";
         }
-
-        
 
     }
 

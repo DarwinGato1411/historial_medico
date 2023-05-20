@@ -17,7 +17,7 @@ import javax.persistence.Query;
  *
  * @author gato
  */
-public class ServicioSubCapitulo {
+public class ServicioSubCapitulos {
 
     private EntityManager em;
 

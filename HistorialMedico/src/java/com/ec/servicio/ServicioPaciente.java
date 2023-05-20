@@ -5,6 +5,7 @@
 package com.ec.servicio;
 
 import com.ec.entidad.Paciente;
+import com.ec.entidad.Usuario;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -122,16 +123,18 @@ public class ServicioPaciente {
         return listaPacientes;
     }
 
-    public List<Paciente> finLike(String nombre) {
+    public List<Paciente> finLike(String nombre, Usuario idUsuario, Boolean pacEstado) {
         List<Paciente> listaPacientes = new ArrayList<Paciente>();
         try {
             System.out.println("Entra a consultar usuarios");
             //Connection connection = em.unwrap(Connection.class);
             em = HelperPersistencia.getEMF();
             em.getTransaction().begin();
-            Query query = em.createQuery("SELECT u FROM Paciente u WHERE u.pacNombres LIKE :pacNombre OR u.pacRuc LIKE :pacRuc");
+            Query query = em.createQuery("SELECT u FROM Paciente u WHERE u.idUsuario=:idUsuario AND u.pacEstado=:pacEstado AND (u.pacNombres LIKE :pacNombre OR u.pacRuc LIKE :pacRuc) ORDER BY u.pacNombres ASC");
             query.setParameter("pacNombre", "%" + nombre + "%");
             query.setParameter("pacRuc", "%" + nombre + "%");
+            query.setParameter("idUsuario", idUsuario);
+            query.setParameter("pacEstado", pacEstado);
             listaPacientes = (List<Paciente>) query.getResultList();
             em.getTransaction().commit();
         } catch (Exception e) {

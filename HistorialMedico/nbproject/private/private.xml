@@ -5,7 +5,7 @@
             <url>web/plantilla/banner.zul</url>
             <bookmark id="2">
                 <name/>
-                <line>25</line>
+                <line>28</line>
                 <key/>
             </bookmark>
         </file>
@@ -19,17 +19,17 @@
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/NanoDan/Documents/DEFACT/historial_medico/HistorialMedico/web/medico/paciente.zul</file>
-            <file>file:/C:/Users/NanoDan/Documents/DEFACT/historial_medico/HistorialMedico/web/css/style.css</file>
-            <file>file:/C:/Users/NanoDan/Documents/DEFACT/historial_medico/HistorialMedico/web/medico/catalogo.zul</file>
-            <file>file:/C:/Users/NanoDan/Documents/DEFACT/historial_medico/HistorialMedico/web/medico/nuevo/paciente.zul</file>
-            <file>file:/C:/Users/NanoDan/Documents/DEFACT/historial_medico/HistorialMedico/web/css/modales.css</file>
-            <file>file:/C:/Users/NanoDan/Documents/DEFACT/historial_medico/HistorialMedico/src/conf/persistence.xml</file>
-        </group>
-        <group>
-            <file>file:/D:/PROYECTOS/SISTEMA_HISTORIAL_MEDICO/historial_medico/HistorialMedico/src/java/com/ec/controlador/NuevoVisita.java</file>
-        </group>
         <group/>
+        <group>
+            <file>file:/D:/PROYECTOS/SISTEMA_HISTORIAL_MEDICO/historial_medico/HistorialMedico/src/java/com/ec/entidad/Agendamiento.java</file>
+            <file>file:/D:/PROYECTOS/SISTEMA_HISTORIAL_MEDICO/historial_medico/HistorialMedico/src/java/com/ec/entidad/Horario.java</file>
+            <file>file:/D:/PROYECTOS/SISTEMA_HISTORIAL_MEDICO/historial_medico/HistorialMedico/src/java/com/ec/entidad/Usuario.java</file>
+        </group>
+        <group>
+            <file>file:/D:/PROYECTOS/SISTEMA_HISTORIAL_MEDICO/historial_medico/HistorialMedico/src/java/com/ec/servicio/ServicioGeneral.java</file>
+            <file>file:/D:/PROYECTOS/SISTEMA_HISTORIAL_MEDICO/historial_medico/HistorialMedico/src/java/com/ec/seguridad/AutentificadorLogeo.java</file>
+            <file>file:/D:/PROYECTOS/SISTEMA_HISTORIAL_MEDICO/historial_medico/HistorialMedico/src/java/com/ec/controlador/AdmUsuarioController.java</file>
+            <file>file:/D:/PROYECTOS/SISTEMA_HISTORIAL_MEDICO/historial_medico/HistorialMedico/src/java/com/ec/controlador/AgendarController.java</file>
+        </group>
     </open-files>
 </project-private>

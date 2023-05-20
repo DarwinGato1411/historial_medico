@@ -92,6 +92,7 @@ public class PacienteController {
         try {
             if (Messagebox.show("¿Esta seguro de eliminar el paciente?", "Atención", Messagebox.YES | Messagebox.NO, Messagebox.INFORMATION) == Messagebox.YES) {
                 valor.setPacHabilitado(Boolean.FALSE);
+                valor.setPacEstado(Boolean.FALSE);
                 servicioPaciente.modificar(valor);
                 buscarLike();
             }
@@ -136,7 +137,7 @@ public class PacienteController {
     }
 
     private void buscarPaciente() {
-        listaPaciente = servicioPaciente.finLike(buscarPaciente);
+        listaPaciente = servicioPaciente.finLike(buscarPaciente, credential.getUsuarioSistema(), Boolean.TRUE);
     }
 
     public List<Paciente> getListaPaciente() {

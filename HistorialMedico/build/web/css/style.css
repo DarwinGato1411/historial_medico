@@ -3019,6 +3019,23 @@ input, button, select, textarea {
     margin-top: 20px;
 
 }
+.contenedorEmpresa .contenedorInfoCalendar {
+    border: solid 1px black;
+    width: 90%;
+    margin: auto;
+    /*background-image: linear-gradient(315deg, #97e4ff 0, #2073db 50%, #00123c 100%);*/
+    border-radius: 10px;
+    /* background: url(https://img.freepik.com/vector-gratis/fondo-geometrico-plano_23-2148967370.jpg?w=2000); */
+    margin-top: 20px;
+
+}
+.contenedorEmpresa .contenedorInfoCalendar .titulo {
+    padding: 10px;
+    background: #007bff;
+    border-radius: 10px 10px 0 0;
+    text-align: center;
+    color:white;
+}
 
 .contenedorEmpresa .contenedorInfo .titulo {
     padding: 10px;
@@ -3047,6 +3064,13 @@ input, button, select, textarea {
 
     display: grid;
     grid-template-columns:30% 70%;
+    gap:5px;
+
+}
+.contenedorEmpresa .contenedorInfo .contenedorInfoInputs .inputGroupFoto{
+
+    display: grid;
+    grid-template-columns:50% 50%;
     gap:5px;
 
 }
@@ -3317,14 +3341,32 @@ input, button, select, textarea {
     display: grid;
     grid-template-columns:15% 25% 30% 10% 25%;
 }
-
-
-
 .contenedorPacientes  .z-listbox .tblCuerpo{
 
     display: grid;
     grid-template-columns:15% 25% 30% 10% 25%;
 }
+
+
+.contenedorPacientes  .z-listbox .tblCabeceraHistorico{
+
+    display: grid;
+    grid-template-columns:10% 80% 10%;
+}
+.contenedorPacientes  .z-listbox .tblCuerpoHistorico{
+    display: grid;
+    grid-template-columns:10% 80% 10%;
+}
+
+
+.contenedorEmpresa .contenedorInfoCalendar .infoEmpresa .contenedorInfoInputs .inputCalendar{
+
+    display: grid;
+    grid-template-columns:60% 40%;
+    gap:5px;
+
+}
+
 
 .fondoBanner{
     background: #2d7fd2;
@@ -3363,6 +3405,7 @@ input, button, select, textarea {
 }
 
 
+
 @media only screen and (min-width: 1300px){
 
 
@@ -3376,6 +3419,41 @@ input, button, select, textarea {
         display: block ;
 
     }
+
+
+
+
+}
+@media only screen and (max-width: 1300px){
+
+
+    .contenedorPacientes  .paciente .table .tblCabecera{
+        display: grid;
+        grid-template-columns: none;
+    }
+
+
+
+    .contenedorPacientes  .z-listbox .tblCuerpo{
+
+        display: grid;
+        grid-template-columns: none;
+    }
+    .contenedorEmpresa .contenedorInfo .contenedorInfoInputs .inputGroupFoto{
+
+        display: grid;
+        grid-template-columns:100%;
+        gap:5px;
+
+    }
+    .contenedorEmpresa .contenedorInfoCalendar .infoEmpresa .contenedorInfoInputs .inputCalendar{
+
+        display: grid;
+        grid-template-columns:100%;
+        gap:5px;
+
+    }
+
 }
 
 
@@ -3470,6 +3548,14 @@ div.z-listbox-header th.z-listheader, div.z-listbox-header th.z-auxheader {
     font-family: Arial,Sans-serif !important;
     font-size: 16px;
     font-weight: bold !important;
+
+}
+.textoHeaderleft{
+    font-family: Arial,Sans-serif !important;
+    font-size: 28px;
+    text-decoration: none;
+    font-weight: bold !important;
+    /*color: #337ab7;*/
 
 }
 

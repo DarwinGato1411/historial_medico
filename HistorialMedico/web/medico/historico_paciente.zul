@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?link rel="stylesheet" type="text/css" href="/css/boostrap/bootstrap.css"?>  
+<?link rel="stylesheet" type="text/css" href="../css/style.css"?>
+<?link rel="stylesheet" type="text/css" href="/css/modales.css"?>
+<?init class="com.ec.seguridad.Autentificador"?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="/plantilla/plantilla.zul"?>
+<?link rel="icon" type="image/x-icon" href="/iconos/deckxel.ico"?>
+
+
+
+<zk   with="90%" >
+    <div self="@define(content)" apply="org.zkoss.bind.BindComposer" 
+         viewModel="@id('vm') @init('com.ec.controlador.HistoricoPacienteController')" >
+                  
+        <div  class="contenedorPacientes">
+            <div class="paciente" >
+                <div class="">     
+                    <div class="wrapper_input_text">                               
+                      <span>Inicio</span>
+                   
+                            
+                                <datebox compact="true" 
+                                         value="@bind(vm.fechaInicio)" 
+                                         readonly="false"   
+                                         buttonVisible="true" 
+                                         lenient="true" 
+                                         format="dd/MM/yyyy"
+                                         class="input_date"
+                                />
+                            
+                            <!--</div>-->
+                              <span>Fin</span>
+                   
+<!--                            <div class="wrapper_input_text">-->
+                                <datebox compact="true" 
+                                         value="@bind(vm.fechafin)" 
+                                         readonly="false"   
+                                         buttonVisible="true" 
+                                         lenient="true" 
+                                         format="dd/MM/yyyy"
+                                         class="input_date"
+                                />
+                            
+                            </div>
+                </div>    
+                <listbox class="tabla table-responsive table table-striped table-bordered second" model="@load(vm.listaPaciente)" 
+                         nonselectableTags="*"  mold="paging" pageSize="15"  >
+                               
+                    <custom-attributes org.zkoss.zul.listbox.rod="true"/>                       
+                    <listhead  class="tblCabeceraHistorico"> 
+                        <listheader label="" >
+                            <textbox value="@bind(vm.buscarPaciente)" 
+                                     class="form-control form-control-sm"
+                                     tooltiptext="Buscar por Nombre o Cédula "                         
+                                     placeholder="....."
+                                     onOK="@command('buscarLike')"
+                                     onChange="self.setValue(self.getValue().toUpperCase());" />
+                        </listheader>                                                                         
+                        <listheader label="Nombre" />                                                                         
+                        <!--                        <listheader label="Correo" />                                                                         
+                        <listheader label="Telefono" />                                                                         -->
+                        <listheader label=""  />                                                                         
+                    </listhead>  
+                    <template name="model" >                                                            
+                        <listitem class="tblCuerpoHistorico" >
+                              
+                            <listcell zclass = "mycss-listcell" style="width:100%;">
+                                <textbox readonly="true"  style="font-size:12px ;background:#EBF5FB"
+                                         class="form-control form-control-sm" 
+                                         value="@bind(each.pacRuc)" />
+                            </listcell>
+                            <listcell  zclass = "mycss-listcell" style="width:100%;">
+                                <textbox readonly="true"  style="font-size:12px ;background:#EBF5FB"
+                                         class="form-control form-control-sm" 
+                                         value="@bind(each.pacNombres)" />
+                            </listcell>
+                            <listcell zclass = "mycss-listcell"  class="btnCell"   style="font-size:12px;background:#F8F9F9">   
+                                <button    class="btn-success-zk"
+                                           iconSclass="z-icon-file-o"
+                                           onClick="@command('verHistorico',valor=each)" 
+                                           tooltiptext="">
+                                    
+                                </button>                                                  
+                                                                
+                                                  
+                            </listcell>
+
+                            <listcell zclass = "mycss-listcell"  class="btnPc" style="font-size:12px;background:#F8F9F9">   
+
+                                <button  class="btn-success-zk"
+                                         label="Reporte"                                      
+                                         iconSclass="z-icon-file-o"
+                                         onClick="@command('verHistorico',valor=each)" 
+                                         tooltiptext="">
+                                         
+                                </button>                                                  
+                                                                    
+                                                  
+                            </listcell>
+                                      
+                               
+                                
+                                
+                        </listitem>
+                    </template>
+                </listbox>
+            </div>
+                        
+                        
+        </div>
+    </div>
+
+
+</zk>

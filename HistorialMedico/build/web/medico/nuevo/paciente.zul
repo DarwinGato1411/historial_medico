@@ -430,7 +430,7 @@
         </div>
         <div class="fotoPerfil">
             <div class="perfil">
-                <div class="foto" align="center">
+                <div  align="center">
                     <image   content="@bind(vm.fotoGeneral)"  width="200px"/>
                 </div>
                 <div style="display:flex;justify-content:flex-end;">

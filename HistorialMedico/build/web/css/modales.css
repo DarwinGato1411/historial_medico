@@ -191,6 +191,71 @@
     font-weight: bold;
 }
 
+/*MODAL PEQUEÑO*/
+.modalForm{
+    width: 40%;
+
+}
+
+.modalForm .z-window-content{
+    padding: 0;
+    margin: 0;
+}
+
+.modalForm .z-window-header{
+    background: #007bff;
+    width: 100%;
+    padding: 0px;
+}
+
+.modalForm .titulo{
+    background: #007bff;
+    height: 100%;
+    display: flex;
+
+}
+
+.modalForm .titulo .z-caption-content{
+    width: 100%;
+    color: white;
+    font-size: 16px;
+    background: #007bff; 
+}
+
+.modalForm .container_modal{
+    display: flex;
+    flex-direction: column-reverse;    
+    padding: 20px;
+    overflow-y: scroll;
+    height: 700px;
+
+}
+
+.modalForm .container_modal .bodyModal .wrapper_input_mod{
+    display: grid;
+    grid-template-columns:100%;
+
+}
+
+.modalForm .container_modal .bodyModal .container_row_input{
+    display: grid;
+    gap:15px;
+}
+
+.modalForm .container_modal .bodyModal .wrapper_input_mod_group{
+    display: grid;
+    grid-template-columns:repeat(1 ,1fr);
+    gap:10px;
+
+}
+
+.modalForm .container_modal .bodyModal .wrapper_input_mod span{
+    display: block;
+    font-weight: bold;
+}
+
+
+
 /* modal hm*/
 
 .modalHm{
@@ -243,6 +308,77 @@
         gap:10px;
 
     }
+
+
+    
+
+}
+@media only screen and (max-width: 600px){
+    .modalForm{
+        width: 95%;
+
+    }
+
+    .modalForm .z-window-content{
+        padding: 0;
+        margin: 0;
+    }
+
+    .modalForm .z-window-header{
+        background: #007bff;
+        width: 100%;
+        padding: 0px;
+    }
+
+    .modalForm .titulo{
+        background: #007bff;
+        height: 100%;
+        display: flex;
+
+    }
+
+    .modalForm .titulo .z-caption-content{
+        width: 100%;
+        color: white;
+        font-size: 16px;
+        background: #007bff; 
+    }
+
+    .modalForm .container_modal{
+        display: flex;
+        flex-direction: column-reverse;    
+        padding: 20px;
+        overflow-y: scroll;
+        height: 700px;
+
+    }
+
+    .modalForm .container_modal .bodyModal .wrapper_input_mod{
+        display: grid;
+        grid-template-columns:100%;
+
+    }
+
+    .modalForm .container_modal .bodyModal .container_row_input{
+        display: grid;
+        gap:15px;
+    }
+
+    .modalForm .container_modal .bodyModal .wrapper_input_mod_group{
+        display: grid;
+        grid-template-columns:repeat(1 ,1fr);
+        gap:10px;
+
+    }
+
+    .modalForm .container_modal .bodyModal .wrapper_input_mod span{
+        display: block;
+        font-weight: bold;
+    }
+
+
+
+    
 
 }
 

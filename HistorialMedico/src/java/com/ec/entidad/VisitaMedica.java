@@ -53,15 +53,20 @@ public class VisitaMedica implements Serializable {
     @Column(name = "vis_hora")
     @Temporal(TemporalType.TIME)
     private Date visHora;
-    @Column(name = "vis_hora_fin")
-    @Temporal(TemporalType.TIME)
-    private Date visHoraFin;
     @Column(name = "vis_atendida")
     private Boolean visAtendida;
     @Column(name = "vis_fecha_atencion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date visFechaAtencion;
-
+    @Column(name = "vis_hora_fin")
+    @Temporal(TemporalType.TIME)
+    private Date visHoraFin;
+    @Column(name = "vis_certificado")
+    private String visCertificado;
+    @Column(name = "vis_reposo")
+    private Integer visReposo;
+    @Column(name = "vis_estado")
+    private Boolean visEstado;
     @OneToMany(mappedBy = "idVisitaMedica")
     private Collection<Receta> recetaCollection;
     @JoinColumn(name = "id_paciente", referencedColumnName = "id_paciente")
@@ -125,6 +130,62 @@ public class VisitaMedica implements Serializable {
         this.visObservacion = visObservacion;
     }
 
+    public Date getVisHora() {
+        return visHora;
+    }
+
+    public void setVisHora(Date visHora) {
+        this.visHora = visHora;
+    }
+
+    public Boolean getVisAtendida() {
+        return visAtendida;
+    }
+
+    public void setVisAtendida(Boolean visAtendida) {
+        this.visAtendida = visAtendida;
+    }
+
+    public Date getVisFechaAtencion() {
+        return visFechaAtencion;
+    }
+
+    public void setVisFechaAtencion(Date visFechaAtencion) {
+        this.visFechaAtencion = visFechaAtencion;
+    }
+
+    public Date getVisHoraFin() {
+        return visHoraFin;
+    }
+
+    public void setVisHoraFin(Date visHoraFin) {
+        this.visHoraFin = visHoraFin;
+    }
+
+    public String getVisCertificado() {
+        return visCertificado;
+    }
+
+    public void setVisCertificado(String visCertificado) {
+        this.visCertificado = visCertificado;
+    }
+
+    public Integer getVisReposo() {
+        return visReposo;
+    }
+
+    public void setVisReposo(Integer visReposo) {
+        this.visReposo = visReposo;
+    }
+
+    public Boolean getVisEstado() {
+        return visEstado;
+    }
+
+    public void setVisEstado(Boolean visEstado) {
+        this.visEstado = visEstado;
+    }
+
     public Collection<Receta> getRecetaCollection() {
         return recetaCollection;
     }
@@ -173,37 +234,5 @@ public class VisitaMedica implements Serializable {
     public String toString() {
         return "com.ec.entidad.VisitaMedica[ idVisitaMedica=" + idVisitaMedica + " ]";
     }
-
-    public Date getVisHora() {
-        return visHora;
-    }
-
-    public void setVisHora(Date visHora) {
-        this.visHora = visHora;
-    }
-
-    public Boolean getVisAtendida() {
-        return visAtendida;
-    }
-
-    public void setVisAtendida(Boolean visAtendida) {
-        this.visAtendida = visAtendida;
-    }
-
-    public Date getVisFechaAtencion() {
-        return visFechaAtencion;
-    }
-
-    public void setVisFechaAtencion(Date visFechaAtencion) {
-        this.visFechaAtencion = visFechaAtencion;
-    }
-
-    public Date getVisHoraFin() {
-        return visHoraFin;
-    }
-
-    public void setVisHoraFin(Date visHoraFin) {
-        this.visHoraFin = visHoraFin;
-    }
-
+    
 }

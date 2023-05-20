@@ -5,7 +5,7 @@
  */
 package com.ec.controlador;
 
-import com.ec.controlador.doa.NuevaVisitaParam;
+import com.ec.controlador.doa.NuevaVisitaParams;
 import com.ec.entidad.Paciente;
 import com.ec.entidad.Parametrizar;
 import com.ec.entidad.Receta;
@@ -18,7 +18,7 @@ import com.ec.servicio.ServicioParametrizar;
 import com.ec.servicio.ServicioReceta;
 
 import com.ec.servicio.ServicioUsuario;
-import com.ec.servicio.ServicioVisitaMedica;
+import com.ec.servicio.ServicioVisitaMedicas;
 import com.ec.utilitario.ArchivoUtils;
 import com.ec.utilitario.MailerClass;
 import java.io.ByteArrayInputStream;
@@ -31,9 +31,12 @@ import java.rmi.RemoteException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 import javax.naming.NamingException;
 import javax.persistence.EntityManager;
 import net.sf.jasperreports.engine.JRException;
@@ -63,7 +66,7 @@ public class VisitaController {
     private Usuario usuario;
     ServicioUsuario servicioUsuario = new ServicioUsuario();
     UserCredential credential = new UserCredential();
-    ServicioVisitaMedica servicioVisitaMedica = new ServicioVisitaMedica();
+    ServicioVisitaMedicas servicioVisitaMedica = new ServicioVisitaMedicas();
     private List<VisitaMedica> listaVisitaMedicas = new ArrayList<VisitaMedica>();
     private Paciente pacienteSelected = new Paciente();
     private String buscar = "";
@@ -84,6 +87,13 @@ public class VisitaController {
     AMedia fileContent = null;
     Connection con = null;
 
+    private final String[] UNIDADES = {"", "un ", "dos ", "tres ", "cuatro ", "cinco ", "seis ", "siete ", "ocho ", "nueve "};
+    private final String[] DECENAS = {"diez ", "once ", "doce ", "trece ", "catorce ", "quince ", "dieciseis ",
+        "diecisiete ", "dieciocho ", "diecinueve", "veinte ", "treinta ", "cuarenta ",
+        "cincuenta ", "sesenta ", "setenta ", "ochenta ", "noventa "};
+    private final String[] CENTENAS = {"", "ciento ", "doscientos ", "trecientos ", "cuatrocientos ", "quinientos ", "seiscientos ",
+        "setecientos ", "ochocientos ", "novecientos "};
+
     @AfterCompose
     public void afterCompose(@ExecutionArgParam("valor") Paciente valor, @ContextParam(ContextType.VIEW) Component view) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException, JRException, IOException {
         Selectors.wireComponents(view, this, false);
@@ -95,6 +105,7 @@ public class VisitaController {
 
         Session sess = Sessions.getCurrent();
         credential = (UserCredential) sess.getAttribute(EnumSesion.userCredential.getNombre());
+        usuario = credential.getUsuarioSistema();
         parametrizar = servicioParametrizar.findActivo();
     }
 
@@ -106,11 +117,11 @@ public class VisitaController {
     }
 
     @Command
-    @NotifyChange({"listaPaciente", "buscarPaciente","listaVisitaMedicas"})
+    @NotifyChange({"listaPaciente", "buscarPaciente", "listaVisitaMedicas"})
     public void nuevaVisita() {
         try {
-            final HashMap<String, NuevaVisitaParam> map = new HashMap<String, NuevaVisitaParam>();
-            NuevaVisitaParam param = new NuevaVisitaParam("nuevo", null);
+            final HashMap<String, NuevaVisitaParams> map = new HashMap<String, NuevaVisitaParams>();
+            NuevaVisitaParams param = new NuevaVisitaParams("nuevo", null);
             param.setIdPaciente(pacienteSelected);
             map.put("valor", param);
             org.zkoss.zul.Window window = (org.zkoss.zul.Window) Executions.createComponents(
@@ -129,8 +140,8 @@ public class VisitaController {
     public void modificarVisita(@BindingParam("valor") VisitaMedica valor) {
         try {
 //            if (Messagebox.show("¿Desea modificar el registro, recuerde que debe crear las reteniones nuevamente?", "Atención", Messagebox.YES | Messagebox.NO, Messagebox.INFORMATION) == Messagebox.YES) {
-            final HashMap<String, NuevaVisitaParam> map = new HashMap<String, NuevaVisitaParam>();
-            NuevaVisitaParam param = new NuevaVisitaParam("modifica", valor);
+            final HashMap<String, NuevaVisitaParams> map = new HashMap<String, NuevaVisitaParams>();
+            NuevaVisitaParams param = new NuevaVisitaParams("modifica", valor);
             param.setIdPaciente(pacienteSelected);
             map.put("valor", param);
             org.zkoss.zul.Window window = (org.zkoss.zul.Window) Executions.createComponents(
@@ -151,7 +162,9 @@ public class VisitaController {
             MailerClass mailerClass = new MailerClass();
             String pathReceta[] = new String[1];
             pathReceta[0] = pathEnvio;
-            mailerClass.sendMailSimple("darwinvinicio14_11@hotmail.com", "Saludos, estimado paciente envio su receta medica", pathReceta, "RECETA MEDICA");
+
+            mailerClass.sendMailSimple(valor.getIdPaciente().getPacCorreo() == null ? "darwinvinicio14_11@hotmail.com" : valor.getIdPaciente().getPacCorreo(),
+                        "Saludos, estimado paciente envio su receta medica", pathReceta, "RECETA MEDICA");
         } catch (RemoteException e) {
             Clients.showNotification("Ocurrio un error " + e.getMessage(),
                         Clients.NOTIFICATION_TYPE_ERROR, null, "middle_center", 2000, true);
@@ -205,10 +218,15 @@ public class VisitaController {
 
     @Command
     public void verReceta(@BindingParam("valor") VisitaMedica valor) throws JRException, IOException, NamingException, SQLException {
-        reporteGeneral(valor.getIdVisitaMedica());
+        reporteGeneralReceta(valor, "REC");
     }
 
-    public void reporteGeneral(Integer idVisitaMedica) throws JRException, IOException, NamingException, SQLException {
+    @Command
+    public void verCertificado(@BindingParam("valor") VisitaMedica valor) throws JRException, IOException, NamingException, SQLException {
+        reporteGeneralCert(valor, "CER");
+    }
+
+    public void reporteGeneralReceta(VisitaMedica valor, String tipo) throws JRException, IOException, NamingException, SQLException {
 
         EntityManager emf = HelperPersistencia.getEMF();
 
@@ -225,7 +243,86 @@ public class VisitaController {
             Map<String, Object> parametros = new HashMap<String, Object>();
 
             //  parametros.put("codUsuario", String.valueOf(credentialLog.getAdUsuario().getCodigoUsuario()));
-            parametros.put("IdVisitaMedica", idVisitaMedica);
+            parametros.put("IdVisitaMedica", valor.getIdVisitaMedica());
+            parametros.put("logo", usuario.getUsuLogo());
+            parametros.put("idUsuario", usuario.getIdUsuario());
+//            
+            System.out.println("Valores  " + valor.getIdVisitaMedica() + "  " + usuario.getIdUsuario());
+            if (con != null) {
+                System.out.println("Conexión Realizada Correctamenteeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+            }
+            FileInputStream is = null;
+            is = new FileInputStream(reportPath);
+
+            byte[] buf = JasperRunManager.runReportToPdf(is, parametros, con);
+            InputStream mediais = new ByteArrayInputStream(buf);
+            AMedia amedia = new AMedia("Reporte", "pdf", "application/pdf", mediais);
+            fileContent = amedia;
+            final HashMap<String, AMedia> map = new HashMap<String, AMedia>();
+//para pasar al visor
+            map.put("pdf", fileContent);
+            org.zkoss.zul.Window window = (org.zkoss.zul.Window) Executions.createComponents(
+                        "/visor/visorreporte.zul", null, map);
+            window.doModal();
+        } catch (Exception e) {
+            System.out.println("ERROR EL PRESENTAR EL REPORTE " + e.getMessage());
+        } finally {
+            if (emf != null) {
+                emf.getTransaction().commit();
+            }
+
+        }
+
+    }
+
+    public void reporteGeneralCert(VisitaMedica valor, String tipo) throws JRException, IOException, NamingException, SQLException {
+
+        EntityManager emf = HelperPersistencia.getEMF();
+
+        try {
+            emf.getTransaction().begin();
+            con = emf.unwrap(Connection.class);
+
+            String reportFile = Executions.getCurrent().getDesktop().getWebApp()
+                        .getRealPath("/reportes");
+            String reportPath = "";
+
+            if (tipo.equals("REC")) {
+                reportPath = reportFile + File.separator + "receta.jasper";
+            } else {
+                reportPath = reportFile + File.separator + "certificado.jasper";
+            }
+
+            Map<String, Object> parametros = new HashMap<String, Object>();
+
+            //  parametros.put("codUsuario", String.valueOf(credentialLog.getAdUsuario().getCodigoUsuario()));
+            parametros.put("IdVisitaMedica", valor.getIdVisitaMedica());
+           parametros.put("logo", usuario.getUsuLogo());
+            Calendar calendar = Calendar.getInstance(); //obtiene la fecha de hoy 
+            calendar.add(Calendar.HOUR, valor.getVisReposo() == null ? 0 : valor.getVisReposo()); //el -3 indica que se le restaran 3 dias 
+            Date fechaFinal = calendar.getTime();
+
+            Calendar c = Calendar.getInstance();
+            c.setTime(valor.getVisFecha());
+            Integer dia = c.get(Calendar.DATE);
+            Integer mes = c.get(Calendar.MONTH) + 1;
+            Integer annio = c.get(Calendar.YEAR);
+            Calendar cc = Calendar.getInstance();
+            cc.setTime(fechaFinal);
+
+            Integer diaF = cc.get(Calendar.DATE);
+            Integer mesF = cc.get(Calendar.MONTH) + 1;
+            Integer annioF = cc.get(Calendar.YEAR);
+
+            String textoFechaInicio = (Convertir(String.valueOf(dia), Boolean.TRUE) + "de " + mesLetras(mes) + " del " + Convertir(String.valueOf(annio), Boolean.TRUE));
+            String textoFechaFinal = (Convertir(String.valueOf(diaF), Boolean.TRUE) + "de " + mesLetras(mesF) + " del " + Convertir(String.valueOf(annioF), Boolean.TRUE));
+//                System.out.println("FECHA EN TEXTO "+calendar.);
+            System.out.println("FECHA INICIO " + dia + "   " + mes + "    " + annio + " " + textoFechaInicio.toLowerCase());
+            System.out.println("FECHA FIN " + fechaFinal + "  " + textoFechaFinal.toLowerCase());
+            parametros.put("fechaFinal", fechaFinal);
+            parametros.put("fechaInicioText", textoFechaInicio.toLowerCase());
+            parametros.put("fechaFinText", textoFechaFinal.toLowerCase());
+            parametros.put("idUsuario", usuario.getIdUsuario());
 
             if (con != null) {
                 System.out.println("Conexión Realizada Correctamenteeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
@@ -254,4 +351,157 @@ public class VisitaController {
 
     }
 
+    public String Convertir(String numero, boolean mayusculas) {
+        String literal = "";
+        String parte_decimal;
+        //si el numero utiliza (.) en lugar de (,) -> se reemplaza
+        numero = numero.replace(".", ",");
+        //si el numero no tiene parte decimal, se le agrega ,00
+        if (numero.indexOf(",") == -1) {
+            numero = numero + ",00";
+        }
+        //se valida formato de entrada -> 0,00 y 999 999 999,00
+        if (Pattern.matches("\\d{1,9},\\d{1,2}", numero)) {
+            //se divide el numero 0000000,00 -> entero y decimal
+            String Num[] = numero.split(",");
+            //de da formato al numero decimal
+//            parte_decimal = "y " + Num[1] ;
+            //se convierte el numero a literal
+            if (Integer.parseInt(Num[0]) == 0) {//si el valor es cero
+                literal = "cero ";
+            } else if (Integer.parseInt(Num[0]) > 999999) {//si es millon
+                literal = getMillones(Num[0]);
+            } else if (Integer.parseInt(Num[0]) > 999) {//si es miles
+                literal = getMiles(Num[0]);
+            } else if (Integer.parseInt(Num[0]) > 99) {//si es centena
+                literal = getCentenas(Num[0]);
+            } else if (Integer.parseInt(Num[0]) > 9) {//si es decena
+                literal = getDecenas(Num[0]);
+            } else {//sino unidades -> 9
+                literal = getUnidades(Num[0]);
+            }
+            //devuelve el resultado en mayusculas o minusculas
+            if (mayusculas) {
+                return (literal).toLowerCase();
+            } else {
+                return (literal.toLowerCase());
+            }
+        } else {//error, no se puede convertir
+            return literal = null;
+        }
+    }
+
+    /* funciones para convertir los numeros a literales */
+    private String getUnidades(String numero) {// 1 - 9
+        //si tuviera algun 0 antes se lo quita -> 09 = 9 o 009=9
+        String num = numero.substring(numero.length() - 1);
+        return UNIDADES[Integer.parseInt(num)];
+    }
+
+    private String getDecenas(String num) {// 99                        
+        int n = Integer.parseInt(num);
+        if (n < 10) {//para casos como -> 01 - 09
+            return getUnidades(num);
+        } else if (n > 19) {//para 20...99
+            String u = getUnidades(num);
+            if (u.equals("")) { //para 20,30,40,50,60,70,80,90
+                return DECENAS[Integer.parseInt(num.substring(0, 1)) + 8];
+            } else {
+                return DECENAS[Integer.parseInt(num.substring(0, 1)) + 8] + "y " + u;
+            }
+        } else {//numeros entre 11 y 19
+            return DECENAS[n - 10];
+        }
+    }
+
+    private String getCentenas(String num) {// 999 o 099
+        if (Integer.parseInt(num) > 99) {//es centena
+            if (Integer.parseInt(num) == 100) {//caso especial
+                return " cien ";
+            } else {
+                return CENTENAS[Integer.parseInt(num.substring(0, 1))] + getDecenas(num.substring(1));
+            }
+        } else {//por Ej. 099 
+            //se quita el 0 antes de convertir a decenas
+            return getDecenas(Integer.parseInt(num) + "");
+        }
+    }
+
+    private String getMiles(String numero) {// 999 999
+        //obtiene las centenas
+        String c = numero.substring(numero.length() - 3);
+        //obtiene los miles
+        String m = numero.substring(0, numero.length() - 3);
+        String n = "";
+        //se comprueba que miles tenga valor entero
+        if (Integer.parseInt(m) > 0) {
+            n = getCentenas(m);
+            return n + "mil " + getCentenas(c);
+        } else {
+            return "" + getCentenas(c);
+        }
+
+    }
+
+    private String getMillones(String numero) { //000 000 000        
+        //se obtiene los miles
+        String miles = numero.substring(numero.length() - 6);
+        //se obtiene los millones
+        String millon = numero.substring(0, numero.length() - 6);
+        String n = "";
+        if (millon.length() > 1) {
+            n = getCentenas(millon) + "millones ";
+        } else {
+            n = getUnidades(millon) + "millon ";
+        }
+        return n + getMiles(miles);
+    }
+
+    private String mesLetras(Integer mes) {
+
+        String mesString;
+        switch (mes) {
+            case 1:
+                mesString = "Enero";
+                break;
+            case 2:
+                mesString = "Febrero";
+                break;
+            case 3:
+                mesString = "Marzo";
+                break;
+            case 4:
+                mesString = "Abril";
+                break;
+            case 5:
+                mesString = "Mayo";
+                break;
+            case 6:
+                mesString = "Junio";
+                break;
+            case 7:
+                mesString = "Julio";
+                break;
+            case 8:
+                mesString = "Agosto";
+                break;
+            case 9:
+                mesString = "Septiembre";
+                break;
+            case 10:
+                mesString = "Octubre";
+                break;
+            case 11:
+                mesString = "Noviembre";
+                break;
+            case 12:
+                mesString = "Diciembre";
+                break;
+            default:
+                mesString = "Invalid month";
+                break;
+        }
+        System.out.println(mesString);
+        return mesString;
+    }
 }

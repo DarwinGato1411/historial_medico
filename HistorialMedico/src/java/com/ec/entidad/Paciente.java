@@ -44,8 +44,6 @@ public class Paciente implements Serializable {
     private String pacRuc;
     @Column(name = "pac_nombres")
     private String pacNombres;
-    @Column(name = "pac_apellidos")
-    private String pacApellidos;
     @Column(name = "pac_domicilio")
     private String pacDomicilio;
     @Column(name = "pac_correo")
@@ -63,6 +61,8 @@ public class Paciente implements Serializable {
     private String pacTipoSangre;
     @Column(name = "pac_aseguradora")
     private String pacAseguradora;
+    @Column(name = "pac_apellidos")
+    private String pacApellidos;
     @Column(name = "pac_edad")
     private Integer pacEdad;
     @Column(name = "pac_movil")
@@ -75,18 +75,13 @@ public class Paciente implements Serializable {
     private String pacEnfermedadExistente;
     @Column(name = "pac_enfermedad_familia")
     private String pacEnfermedadFamilia;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "pac_talla")
     private BigDecimal pacTalla;
     @Column(name = "pac_peso")
     private BigDecimal pacPeso;
     @Column(name = "pac_imc")
     private BigDecimal pacImc;
-    @Column(name = "pac_pa")
-    private String pacPa;
-    @Column(name = "pac_fc")
-    private String pacFc;
-    @Column(name = "pac_sp02")
-    private String pacSp02;
     @Column(name = "pac_tm_bucal")
     private String pacTmBucal;
     @Column(name = "pac_cuello")
@@ -95,6 +90,12 @@ public class Paciente implements Serializable {
     private String pacCintura;
     @Column(name = "pac_per_abdominal")
     private String pacPerAbdominal;
+    @Column(name = "pac_pa")
+    private String pacPa;
+    @Column(name = "pac_fc")
+    private String pacFc;
+    @Column(name = "pac_sp02")
+    private String pacSp02;
     @Column(name = "pac_fotografia")
     private String pacFotografia;
     @Column(name = "pac_ref_familiar")
@@ -105,7 +106,16 @@ public class Paciente implements Serializable {
     private String pacMedicacionActual;
     @Column(name = "pac_habilitado")
     private Boolean pacHabilitado;
-
+    @Column(name = "pac_estado")
+    private Boolean pacEstado;
+    @Column(name = "pac_direccion_trabajo")
+    private String pacDireccionTrabajo;
+    @Column(name = "pac_cargo")
+    private String pacCargo;
+    @Column(name = "pac_otros")
+    private String pacOtros;
+    @OneToMany(mappedBy = "idPaciente")
+    private Collection<Agendamiento> agendamientoCollection;
     @OneToMany(mappedBy = "idPaciente")
     private Collection<VisitaMedica> visitaMedicaCollection;
     @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
@@ -141,14 +151,6 @@ public class Paciente implements Serializable {
 
     public void setPacNombres(String pacNombres) {
         this.pacNombres = pacNombres;
-    }
-
-    public String getPacApellidos() {
-        return pacApellidos;
-    }
-
-    public void setPacApellidos(String pacApellidos) {
-        this.pacApellidos = pacApellidos;
     }
 
     public String getPacDomicilio() {
@@ -215,20 +217,12 @@ public class Paciente implements Serializable {
         this.pacAseguradora = pacAseguradora;
     }
 
-    public Collection<VisitaMedica> getVisitaMedicaCollection() {
-        return visitaMedicaCollection;
+    public String getPacApellidos() {
+        return pacApellidos;
     }
 
-    public void setVisitaMedicaCollection(Collection<VisitaMedica> visitaMedicaCollection) {
-        this.visitaMedicaCollection = visitaMedicaCollection;
-    }
-
-    public Usuario getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(Usuario idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setPacApellidos(String pacApellidos) {
+        this.pacApellidos = pacApellidos;
     }
 
     public Integer getPacEdad() {
@@ -399,6 +393,62 @@ public class Paciente implements Serializable {
         this.pacHabilitado = pacHabilitado;
     }
 
+    public Boolean getPacEstado() {
+        return pacEstado;
+    }
+
+    public void setPacEstado(Boolean pacEstado) {
+        this.pacEstado = pacEstado;
+    }
+
+    public String getPacDireccionTrabajo() {
+        return pacDireccionTrabajo;
+    }
+
+    public void setPacDireccionTrabajo(String pacDireccionTrabajo) {
+        this.pacDireccionTrabajo = pacDireccionTrabajo;
+    }
+
+    public String getPacCargo() {
+        return pacCargo;
+    }
+
+    public void setPacCargo(String pacCargo) {
+        this.pacCargo = pacCargo;
+    }
+
+    public String getPacOtros() {
+        return pacOtros;
+    }
+
+    public void setPacOtros(String pacOtros) {
+        this.pacOtros = pacOtros;
+    }
+
+    public Collection<Agendamiento> getAgendamientoCollection() {
+        return agendamientoCollection;
+    }
+
+    public void setAgendamientoCollection(Collection<Agendamiento> agendamientoCollection) {
+        this.agendamientoCollection = agendamientoCollection;
+    }
+
+    public Collection<VisitaMedica> getVisitaMedicaCollection() {
+        return visitaMedicaCollection;
+    }
+
+    public void setVisitaMedicaCollection(Collection<VisitaMedica> visitaMedicaCollection) {
+        this.visitaMedicaCollection = visitaMedicaCollection;
+    }
+
+    public Usuario getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(Usuario idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -423,5 +473,5 @@ public class Paciente implements Serializable {
     public String toString() {
         return "com.ec.entidad.Paciente[ idPaciente=" + idPaciente + " ]";
     }
-
+    
 }

@@ -7,7 +7,7 @@ package com.ec.controlador;
 import com.ec.entidad.Detalle;
 import com.ec.seguridad.EnumSesion;
 import com.ec.seguridad.UserCredential;
-import com.ec.servicio.ServicioDetalle;
+import com.ec.servicio.ServicioDetalles;
 import com.ec.utilitario.DetalleSubcapitulo;
 
 import org.zkoss.bind.annotation.AfterCompose;
@@ -29,7 +29,7 @@ import org.zkoss.zul.Window;
  */
 public class NuevoDetalle {
 
-    ServicioDetalle servicioDetalle = new ServicioDetalle();
+    ServicioDetalles servicioDetalle = new ServicioDetalles();
     private Detalle entidad = new Detalle();
     UserCredential credential = new UserCredential();
 

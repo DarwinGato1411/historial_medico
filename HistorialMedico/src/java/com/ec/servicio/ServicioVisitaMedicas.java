@@ -5,8 +5,10 @@
 package com.ec.servicio;
 
 import com.ec.entidad.Paciente;
+import com.ec.entidad.Usuario;
 import com.ec.entidad.VisitaMedica;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.ParameterMode;
@@ -17,7 +19,7 @@ import javax.persistence.StoredProcedureQuery;
  *
  * @author gato
  */
-public class ServicioVisitaMedica {
+public class ServicioVisitaMedicas {
 
     private EntityManager em;
 
@@ -88,7 +90,7 @@ public class ServicioVisitaMedica {
             query.setParameter("idPaciente", idPaciente);
             query.setParameter("visObservacion", "%" + buscar + "%");
             listado = (List<VisitaMedica>) query.getResultList();
-            
+
             em.getTransaction().commit();
         } catch (Exception e) {
             System.out.println("Error en lsa consulta usuario  FindVisitaMedicaPorNombre  " + e.getMessage());
@@ -118,8 +120,8 @@ public class ServicioVisitaMedica {
 
         return listaVisitaMedicas;
     }
-    
-     public void eliminarExamenesRecetas(Integer idVisitaMedica) {
+
+    public void eliminarExamenesRecetas(Integer idVisitaMedica) {
         try {
 
             em = HelperPersistencia.getEMF();
@@ -142,4 +144,31 @@ public class ServicioVisitaMedica {
         }
 
     }
+
+    public List<VisitaMedica> findForPacienteHoraUsuario(Paciente idPaciente, Date visFecha, Date hora, Usuario usuario) {
+
+        List<VisitaMedica> listado = new ArrayList<VisitaMedica>();
+//        VisitaMedica usuarioObtenido = new VisitaMedica();
+        try {
+            //Connection connection = em.unwrap(Connection.class);
+
+            em = HelperPersistencia.getEMF();
+            em.getTransaction().begin();
+            Query query = em.createQuery("SELECT u FROM VisitaMedica u WHERE u.idPaciente=:idPaciente AND u.visHora=:visHora AND u.visFecha=:visFecha AND u.idPaciente.idUsuario=:idUsuario ORDER BY u.visFecha DESC");
+            query.setParameter("idPaciente", idPaciente);
+            query.setParameter("visHora", hora);
+            query.setParameter("visFecha", visFecha);
+            query.setParameter("idUsuario", usuario);
+            listado = (List<VisitaMedica>) query.getResultList();
+
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println("Error en lsa consulta usuario  FindVisitaMedicaPorNombre  " + e.getMessage());
+        } finally {
+            em.close();
+        }
+
+        return listado;
+    }
+
 }

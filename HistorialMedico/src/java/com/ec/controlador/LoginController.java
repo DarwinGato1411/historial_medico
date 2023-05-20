@@ -48,17 +48,17 @@ public class LoginController extends SelectorComposer<Component> {
         if (servicioAuth.login(account.getValue(), password.getValue())) {
             Session sess = Sessions.getCurrent();
             UserCredential cre = (UserCredential) sess.getAttribute(EnumSesion.userCredential.getNombre());
-            System.out.println("ascacsa" + " " + cre.getNivelUsuario().intValue() + " " + GrupoUsuarioEnum.CANDIDATO.getCodigo());
+            System.out.println("tipo acceso" + " " + cre.getNivelUsuario().intValue() + " " + GrupoUsuarioEnum.MEDICO.getCodigo());
 
-            Executions.sendRedirect("/medico/paciente.zul");
-//            if (cre.getNivelUsuario().intValue() == GrupoUsuarioEnum.CANDIDATO.getCodigo()) {
-//                Executions.sendRedirect("/candidato/Historial.zul");
-//
-//            } else if (cre.getNivelUsuario().intValue() == GrupoUsuarioEnum.EMPRESA.getCodigo()) {
-//                Executions.sendRedirect("/empresa/empresa.zul");
-//            } else {
-//                Executions.sendRedirect("/empresa/empresa.zul");
-//            }
+            if (cre.getNivelUsuario().intValue() == GrupoUsuarioEnum.MEDICO.getCodigo()) {
+                Executions.sendRedirect("/medico/paciente.zul");
+
+            } else if (cre.getNivelUsuario().intValue() == GrupoUsuarioEnum.ADMINISTRADOR.getCodigo()) {
+                Executions.sendRedirect("/administrador/usuario.zul");
+            } else {
+                Clients.showNotification("El usuario no tiene permisos para ingrear a la plataforma.",
+                            Clients.NOTIFICATION_TYPE_ERROR, null, "middle_center", 2000, true);
+            }
         } else {
 
             Clients.showNotification("Usuario o Contraseña incorrecto. \n Contactese con el administrador.",
@@ -75,7 +75,7 @@ public class LoginController extends SelectorComposer<Component> {
         if (servicioAuth.login(account1.getValue(), password1.getValue())) {
             Session sess = Sessions.getCurrent();
             UserCredential cre = (UserCredential) sess.getAttribute(EnumSesion.userCredential.getNombre());
-            System.out.println("ascacsa" + " " + cre.getNivelUsuario().intValue() + " " + GrupoUsuarioEnum.CANDIDATO.getCodigo());
+            System.out.println("ascacsa" + " " + cre.getNivelUsuario().intValue() + " " + GrupoUsuarioEnum.MEDICO.getCodigo());
 
             Executions.sendRedirect("/medico/historial.zul");
 //            if (cre.getNivelUsuario().intValue() == GrupoUsuarioEnum.CANDIDATO.getCodigo()) {

@@ -4,7 +4,7 @@
          viewModel="@id('vm') @init('com.ec.controlador.NuevoVisita')"
          class="modalAll modalPaciente">
     
-    <caption label="Visita medica"  class="titulo"/> 
+    <caption label="VISITA MÉDICA"   class="titulo"/> 
     
 
     <div class="container_modal">
@@ -29,35 +29,6 @@
                             
                             </div>
                         </div>
-                        <div class="wrapper_input_mod">
-                            <span>Hora inicio:</span>
-                   
-                            <div class="">
-                                <timebox   
-                                         value="@bind(vm.entidad.visHora)" 
-                                         readonly="false"   
-                                         buttonVisible="true" 
-                                        style="display: contents"
-                                         format="short"
-                                         
-                                />
-                            
-                            </div>
-                        </div>
-                        <div class="wrapper_input_mod">
-                            <span>Hora fin</span>
-                   
-                            <div class="wrapper_input_text">
-                                <timebox  
-                                         value="@bind(vm.entidad.visHoraFin)" 
-                                         readonly="false"   
-                                         buttonVisible="true" 
-                                        style="display: contents"
-                                          format="short"
-                                />
-                            
-                            </div>
-                        </div>
                     
                     
                     </div>
@@ -66,11 +37,51 @@
                         <div class="wrapper_input_text">
                         
                             <textbox  
-                                maxlength="200" 
-                                rows="3"    
+                                maxlength="3000" 
+                                rows="10"    
                                 onChange="self.setValue(self.getValue().toUpperCase());"  
                                 value="@bind(vm.entidad.visObservacion)" 
                                 class="input_text" />
+                        </div>
+                    </div>
+                    <div class="wrapper_input_mod">
+                        <span>Certificado medico:</span>
+                        <div class="wrapper_input_text">
+                        
+                            <textbox  
+                                maxlength="3000" 
+                                rows="10"    
+                                onChange="self.setValue(self.getValue().toUpperCase());"  
+                                value="@bind(vm.entidad.visCertificado)" 
+                                class="input_text" />
+                        </div>
+                    </div>
+                     <div class="wrapper_input_mod_group">
+                        <div class="wrapper_input_mod">
+                            <span>Horas de reposo</span>
+                   
+                                <div class="wrapper_input_text">
+                           
+                                    <intbox constraint="no negative,no zero"  
+                                            value="@bind(vm.entidad.visReposo)" 
+                                            format="##" class="input_text"   
+                                            tabindex="1" />
+                           
+                                </div>
+                    
+                            
+                           
+                           
+                        </div>
+                        <div class="wrapper_input_mod">
+                           
+                   
+                    
+                    
+                        </div>
+                
+                        <div class="wrapper_input_mod_group">
+                           
                         </div>
                     </div>
 <!--                    <div class="wrapper_input_mod">
@@ -89,7 +100,7 @@
                 
                 <div class="VM">
                     <div class="wrapper_input_mod">
-                        <span>CI10 / I-10</span>
+                        <span>CIE10</span>
                         <div style="display:flex;justify-content:flex-end;">
                             <a class="btn_modal"  onClick="@command('cargarCie')"  >
                                 Seleccionar 
@@ -108,11 +119,11 @@
                 </div>
                 <div class="VM">
                     <div class="wrapper_input_mod">
-                        <span>Indicaciones</span>
+                        <span>Receta</span>
                         <div class="wrapper_input_text">
                             <div style="display:flex;justify-content:flex-end;">
                                 <a class="btn_modal"  onClick="@command('agregarItemReceta')"  >
-                                    Agregar indicación
+                                    Agregar
                                 </a>
                             </div>
                        
@@ -121,24 +132,49 @@
                                
                                 <custom-attributes org.zkoss.zul.listbox.rod="true"/>                       
                                 <listhead  > 
-                                    <listheader label="Medicamento" width="45%" /> 
-                                    <listheader label="Indicaciones" width="45%" /> 
+                                    <listheader label="Medicamento" width="25%" /> 
+                                    <listheader label="Cantidad" width="15%" /> 
+                                    <listheader label="Indicaciones" width="25%" /> 
+                                    <listheader label="Horario" width="25%" /> 
                                     <listheader label="" width="10%" /> 
                                                                                                       
                                 </listhead>  
                                 <template name="model" >                                                            
                                     <listitem >
                               
-                                        <listcell zclass = "mycss-listcell" style="width:100%;">
+                                        <listcell zclass = "mycss-listcell" >
                                        
                                             <textbox class="form-control form-control-sm" 
+                                                     rows="4" 
+                                                     onChange="self.setValue(self.getValue().toUpperCase());"  
                                                      value="@bind(each.medicamento)" />
                                         </listcell>
-                                        <listcell zclass = "mycss-listcell" style="width:100%;">
+                                        <listcell zclass = "mycss-listcell" >
                                             <textbox class="form-control form-control-sm" 
+                                                     rows="4" 
+                                                     onChange="self.setValue(self.getValue().toUpperCase());"  
+                                                     value="@bind(each.recCantidad)" />
+                                        </listcell>
+                                        
+                                        <listcell zclass = "mycss-listcell" >
+                                            <textbox class="form-control form-control-sm" 
+                                                     rows="4" 
+                                                     onChange="self.setValue(self.getValue().toUpperCase());"  
                                                      value="@bind(each.indicacion)" />
                                         </listcell>
-                                        <listcell zclass = "mycss-listcell" style="width:100%;">
+                                        <listcell zclass = "mycss-listcell" >
+                                            <checkbox label="M" 
+                                                      checked="@bind(each.recM)" 
+                                            />
+                                            <checkbox label="T" 
+                                                      checked="@bind(each.recT)" 
+                                            />
+                                            <checkbox label="N" 
+                                                      checked="@bind(each.recN)" 
+                                            />
+                                        </listcell>
+                                       
+                                        <listcell zclass = "mycss-listcell" >
                                             <button label="Eliminar"
                                                     iconSclass="z-icon-delete"
                                                     onClick="@command('eliminarReceta',valor=each)" 

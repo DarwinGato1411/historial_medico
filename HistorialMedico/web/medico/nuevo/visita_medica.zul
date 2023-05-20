@@ -21,12 +21,14 @@
                 </button>
             </div>    
             <listbox  model="@load(vm.listaVisitaMedicas)" 
-                      nonselectableTags="*"  mold="paging" pageSize="10"  >
+                      nonselectableTags="*"  mold="paging" pageSize="15"  >
                                
                 <custom-attributes org.zkoss.zul.listbox.rod="true"/>                       
                 <listhead  > 
-                    <listheader label="Fecha" width="20%" /> 
-                    <listheader label="" width="40%" >
+                    <listheader label="Fecha" width="10%" /> 
+                    <listheader label="Inicio" width="10%" /> 
+                    <listheader label="Fin" width="10%" /> 
+                    <listheader label="" width="30%" >
                            
                         <textbox value="@bind(vm.buscar)" 
                                  class="form-control form-control-sm"
@@ -37,7 +39,7 @@
                     </listheader>                                                                         
                                                                                                 
                                                                                            
-                    <listheader label="" width="40%" />                                                                         
+                    <listheader label="" width="40%"  />                                                                         
                 </listhead>  
                 <template name="model" >                                                            
                     <listitem >
@@ -48,6 +50,22 @@
                                      buttonVisible="false" lenient="true" readonly="true"
                                      format="medium" width="100%"  />
                         </listcell>
+                        <listcell zclass = "mycss-listcell" >
+                            <timebox readonly="true"  style="font-size:12px ;background:#EBF5FB"
+                                      buttonVisible="false"
+                                             
+                                      class="form-control form-control-sm" 
+                                      value="@bind(each.visHora)" />
+                            
+                        </listcell>
+                        <listcell zclass = "mycss-listcell" >
+                            <timebox readonly="true"  style="font-size:12px ;background:#EBF5FB"
+                                        buttonVisible="false"
+                                             
+                                        class="form-control form-control-sm" 
+                                        value="@bind(each.visHoraFin)" />
+                            
+                        </listcell>
                         <listcell zclass = "mycss-listcell"  >
                             <textbox readonly="true"  style="font-size:12px ;background:#EBF5FB"
                                      class="form-control form-control-sm" 
@@ -55,35 +73,46 @@
                         </listcell>
                             
                         <listcell zclass = "mycss-listcell" >                                  
-                            <button label="Editar visita"
-                                    class=" btn btn-primary btn-primary-zk"
-                                    iconSclass="z-icon-pencil"
+                            <button label="Ver"
                                     onClick="@command('modificarVisita',valor=each)" 
-                                    tooltiptext="Editar Receta">
+                                    tooltiptext="Editar visita">
                                         
-                            </button>                                      
-                            <button label="Enviar correo"
-                                    class=" btn btn-primary btn-primary-zk"
-                                    iconSclass="z-icon-files-o"
+                            </button>   
+                            <button 
+                                class="btn-success-zk"
+                                iconSclass="z-icon-file-text-o  "
+                                onClick="@command('verReceta',valor=each)" 
+                                tooltiptext="Imprimir receta">
+                                    
+                            </button>  
+                            <button 
+                                class="btn-success-zk"
+                                iconSclass="z-icon-file-o  "
+                                onClick="@command('verCertificado',valor=each)" 
+                                tooltiptext="Imprimir certificado">
+                                    
+                            </button>                                  
+                            <button iconSclass="z-icon-envelope-o"
                                     onClick="@command('enviarReceta',valor=each)" 
-                                    tooltiptext="Eniviar Receta Correo">
+                                    tooltiptext="Eniviar  Correo">
                                     
                             </button>                                      
-                            <button label="Enviar WhatsApp"
-                                    class=" btn btn-primary btn-success-zk"
-                                    iconSclass="z-icon-krw"
+                            <button label=""
+                                    class="btn-successws-zk"
+                                    iconSclass="z-icon-phone-square "
                                     onClick="@command('enviarWhastApp',valor=each)" 
                                     tooltiptext="Enviar Whatsapp">
                                     
                             </button>                                      
+                                                                
                             <button 
-                                class=" btn btn-primary btn-info-zk"
-                                label="Ver receta"
-                                iconSclass="z-icon-book"
-                                onClick="@command('verReceta',valor=each)" 
-                                tooltiptext="Ver Receta">
+                                class="btn-danger-zk"
+                                iconSclass="z-icon-trash-o"
+                                onClick="@command('eliminarVisita',valor=each)" 
+                                tooltiptext="Eliminar">
                                     
-                            </button>                                      
+                            </button>                                  
+                                  
                         </listcell>
                                       
                                

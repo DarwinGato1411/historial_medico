@@ -5,10 +5,12 @@
  */
 package com.ec.controlador;
 
+import com.ec.entidad.Horario;
 import com.ec.entidad.Parametrizar;
 import com.ec.entidad.Usuario;
 import com.ec.seguridad.EnumSesion;
 import com.ec.seguridad.UserCredential;
+import com.ec.servicio.ServicioHorario;
 import com.ec.servicio.ServicioParametrizar;
 import com.ec.servicio.ServicioUsuario;
 import java.io.ByteArrayOutputStream;
@@ -17,8 +19,11 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import net.sf.jasperreports.engine.JRException;
 import org.zkoss.bind.annotation.AfterCompose;
+import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.ContextParam;
 import org.zkoss.bind.annotation.ContextType;
@@ -47,11 +52,15 @@ public class PerfilController {
 
     //subir pdf
     private String filePath;
-    byte[] buffer = new byte[1024 * 1024];
     private AImage fotoGeneral = null;
+    private AImage fotoLogo = null;
 
     ServicioParametrizar servicioParametrizar = new ServicioParametrizar();
     private Parametrizar parametrizar = new Parametrizar();
+
+    /*HORARIO*/
+    ServicioHorario servicioHorario = new ServicioHorario();
+    private List<Horario> listaHorario = new ArrayList<>();
 
     public PerfilController() {
         Session sess = Sessions.getCurrent();
@@ -63,11 +72,15 @@ public class PerfilController {
     @AfterCompose
     public void afterCompose(@ExecutionArgParam("img") String recibido, @ContextParam(ContextType.VIEW) Component view) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException, JRException, IOException {
         Selectors.wireComponents(view, this, false);
+        listaHorario = servicioHorario.findByUsuario(usuario);
         if (usuario.getUsuFoto() != null) {
+
             try {
                 System.out.println("PATH" + usuario.getUsuFoto());
-                fotoGeneral = new AImage("fotoPedido", Imagen_A_Bytes(usuario.getUsuFoto()));
+                fotoGeneral = new AImage("fotografia", Imagen_A_Bytes(usuario.getUsuFoto() != null ? usuario.getUsuFoto() : ""));
+                fotoLogo = new AImage("fotoLogo", Imagen_A_Bytes(usuario.getUsuLogo() != null ? usuario.getUsuLogo() : ""));
 //                Imagen_A_Bytes(empresa.getIdUsuario().getUsuFoto());
+//                listaHorario = servicioHorario.findByUsuario(usuario);
             } catch (FileNotFoundException e) {
                 System.out.println("error imagen " + e.getMessage());
             }
@@ -76,7 +89,7 @@ public class PerfilController {
 
     @Command
     @NotifyChange({"fileContent", "empresa", "fotoGeneral"})
-    public void subirLogotipo() throws InterruptedException, IOException {
+    public void subirFotografia() throws InterruptedException, IOException {
 
         org.zkoss.util.media.Media media = Fileupload.get();
         if (media instanceof org.zkoss.image.Image) {
@@ -99,6 +112,35 @@ public class PerfilController {
             usuario.setUsuFoto(filePath + File.separator + media.getName());
             System.out.println("PATH SUBIR " + filePath + File.separator + media.getName());
             fotoGeneral = new AImage("fotoPedido", Imagen_A_Bytes(filePath + File.separator + media.getName()));
+
+        }
+    }
+
+    @Command
+    @NotifyChange({"fileContent", "empresa", "fotoLogo"})
+    public void subirLogotipo() throws InterruptedException, IOException {
+
+        org.zkoss.util.media.Media media = Fileupload.get();
+        if (media instanceof org.zkoss.image.Image) {
+            String nombre = media.getName();
+
+            if (media.getByteData().length > 10 * 1024 * 1024) {
+                Messagebox.show("El arhivo seleccionado sobrepasa el tamaño de 10Mb.\n Por favor seleccione un archivo más pequeño.", "Atención", Messagebox.OK, Messagebox.ERROR);
+
+                return;
+            }
+            filePath = parametrizar.getParBase() + File.separator + parametrizar.getParImagenes() + File.separator;
+
+            File baseDir = new File(filePath);
+            if (!baseDir.exists()) {
+                baseDir.mkdirs();
+            }
+            Files.copy(new File(filePath + File.separator + media.getName()),
+                        media.getStreamData());
+
+            usuario.setUsuLogo(filePath + File.separator + media.getName());
+            System.out.println("PATH SUBIR " + filePath + File.separator + media.getName());
+            fotoLogo = new AImage("fotoPedido", Imagen_A_Bytes(filePath + File.separator + media.getName()));
 
         }
     }
@@ -149,6 +191,31 @@ public class PerfilController {
 
     public void setFotoGeneral(AImage fotoGeneral) {
         this.fotoGeneral = fotoGeneral;
+    }
+
+    public AImage getFotoLogo() {
+        return fotoLogo;
+    }
+
+    public void setFotoLogo(AImage fotoLogo) {
+        this.fotoLogo = fotoLogo;
+    }
+
+    public List<Horario> getListaHorario() {
+        return listaHorario;
+    }
+
+    public void setListaHorario(List<Horario> listaHorario) {
+        this.listaHorario = listaHorario;
+    }
+
+    /**
+     * HORARIO
+     */
+    @Command
+    @NotifyChange({"listaHorario"})
+    public void actualizarHorario(@BindingParam("valor") Horario valor) {
+        servicioHorario.modificar(valor);
     }
 
 }

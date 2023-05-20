@@ -7,10 +7,11 @@ import javax.persistence.metamodel.CollectionAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2023-04-26T11:42:55")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2023-05-11T12:32:44")
 @StaticMetamodel(Subcapitulo.class)
 public class Subcapitulo_ { 
 
+    public static volatile SingularAttribute<Subcapitulo, String> subCodigo;
     public static volatile SingularAttribute<Subcapitulo, Boolean> ciuEstado;
     public static volatile CollectionAttribute<Subcapitulo, Detalle> detalleCollection;
     public static volatile SingularAttribute<Subcapitulo, Capitulo> idCapitulo;

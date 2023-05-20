@@ -154,6 +154,7 @@ public class NuevoPaciente {
                     && entidad.getPacCorreo() != null) {
             
             if (accion.equals("create")) {
+                entidad.setIdUsuario(credential.getUsuarioSistema());
                 servicio.crear(entidad);
                 //  Messagebox.show("Guardado con exito");
 

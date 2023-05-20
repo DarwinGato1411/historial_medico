@@ -13,16 +13,31 @@
             <div class="titulo">
                 Perfil Empresa
             </div>
+           
             <div class="infoEmpresa">
-                <div class="inputGroupImg" >
-                    <image   content="@bind(vm.fotoGeneral)" width="200px" />
-                    <button 
-                        class="btnSubirImg"
-                        onClick="@command('subirLogotipo')" 
-                        iconSclass="z-icon-plus"
-                        tooltiptext="Buscar">
-                        Subir Imagen
-                    </button>                               
+                <div  class="contenedorInfoInputs">
+                    <div  class="inputGroupFoto">
+                        <div class="inputGroupImg" >
+                            <image   content="@bind(vm.fotoGeneral)" width="200px" />
+                            <button 
+                                class="btnSubirImg"
+                                onClick="@command('subirFotografia')" 
+                                iconSclass="z-icon-plus"
+                                tooltiptext="Buscar">
+                                Subir fotografía
+                            </button>                               
+                        </div>
+                        <div class="inputGroupImg" >
+                            <image   content="@bind(vm.fotoLogo)" width="200px" />
+                            <button 
+                                class="btnSubirImg"
+                                onClick="@command('subirLogotipo')" 
+                                iconSclass="z-icon-plus"
+                                tooltiptext="Buscar">
+                                Subir Logotipo
+                            </button>                               
+                        </div>
+                    </div>
                 </div>
                 <div  class="contenedorInfoInputs">
                      
@@ -35,15 +50,24 @@
                                  width="90%"                    />
                     </div>                     
                     <div class="inputGroup"  >
-                        <label value="Dirección:"/>
+                        <label value="Nombre:"/>
                         <textbox value="@bind(vm.usuario.usuNombre)" 
-                                 placeholder="Dirección"
+                                 placeholder="Nombre"
                                  class="form-control form-control-sm"
-                                 tooltiptext="Dirección"
+                                 tooltiptext="Nombre"
+                                 width="90%"                    />
+                    </div>
+                    <div class="inputGroup"  >
+                        <label value="Ciudad:"/>
+                        <textbox value="@bind(vm.usuario.usuCiudad)" 
+                                 placeholder="Ciudad"
+                                 onChange="self.setValue(self.getValue().toUpperCase().trim());"
+                                 class="form-control form-control-sm"
+                                 tooltiptext="Ciudad"
                                  width="90%"                    />
                     </div>
                     <div class="inputGroup"  > 
-                        <label value="Teléfono:"/>
+                        <label value="Correo:"/>
                         <textbox value="@bind(vm.usuario.usuCorreo)" 
                                  placeholder="Telefono"
                                  class="form-control form-control-sm"
@@ -66,7 +90,52 @@
                                  class="form-control form-control-sm"
                                  tooltiptext="Nombre Comercial" 
                                  width="90%"/>
-                    </div>            
+                    </div>  
+                    <div class="inputGroup"  > 
+                        <label value="Encabezado receta:"/>
+                        <textbox value="@bind(vm.usuario.usuEncabezadoReceta)" 
+                                 placeholder=""
+                                 rows="6"
+                                 class="form-control form-control-sm"
+                                 tooltiptext="Encabezado para el informe de la receta"
+                                 width="90%"                    />
+                    </div>
+<!--                    <div class="inputGroup"  > 
+                        <label value="Pie de pagina receta"/>
+                        <textbox value="@bind(vm.usuario.usuPiePaginaReceta)" 
+                                 placeholder=""
+                                  rows="6"
+                                 class="form-control form-control-sm"
+                                 tooltiptext="Pie de pagina para la receta"
+                                 width="90%"                    />
+                    </div>-->
+                    <div class="inputGroup"  > 
+                        <label value="Encabezado certificado:"/>
+                        <textbox value="@bind(vm.usuario.usuEncabezadoCert)" 
+                                 placeholder=""
+                                  rows="6"
+                                 class="form-control form-control-sm"
+                                 tooltiptext="Encabezado para el informe de la receta"
+                                 width="90%"                    />
+                    </div>
+                    <div class="inputGroup"  > 
+                        <label value="Pie de pagina certificado"/>
+                        <textbox value="@bind(vm.usuario.usuPiePaginaReceta)" 
+                                 placeholder=""
+                                  rows="6"
+                                 class="form-control form-control-sm"
+                                 tooltiptext="Pie de pagina para la receta"
+                                 width="90%"                    />
+                    </div>
+                    <div class="inputGroup"  > 
+                        <label value="Datos firma:"/>
+                        <textbox value="@bind(vm.usuario.usuFirma)" 
+                                 placeholder=""
+                                  rows="4"
+                                 class="form-control form-control-sm"
+                                 tooltiptext="Datos para la firma"
+                                 width="90%"                    />
+                    </div>          
                   
                     
                     <button 
@@ -76,6 +145,83 @@
                         tooltiptext="Buscar">
                         Guardar Perfil
                     </button>      
+                </div>
+            </div>
+            
+            <div class="infoEmpresa">
+                <div  class="contenedorInfoInputs">
+                     
+                    <div class="inputCalendar"  >
+                        
+                        <listbox class="tabla table-responsive table table-striped table-bordered second"
+                                 model="@load(vm.listaHorario)" 
+                                 nonselectableTags="*"  mold="paging" pageSize="7"  >
+                               
+                            <custom-attributes org.zkoss.zul.listbox.rod="true"/>                       
+                            <listhead  > 
+                                <listheader label="DIA"  />
+                                <listheader label="INICIO MAÑANA"  />
+                                <listheader label="FIN MAÑANA" >
+                                </listheader>                                                                         
+                                <listheader label="INICIO TARDE"  />                                                                        
+                                <listheader label="FIN TARDE"  />                                                                         
+                                <listheader label="INTERVALO CONSULTA"   />                                                                         
+                            </listhead>  
+                            <template name="model" >                                                            
+                                <listitem  >
+                              
+                            
+                                    <listcell zclass = "mycss-listcell"  >
+                                        <textbox readonly="true"  style="font-size:12px ;background:#EBF5FB"
+                                                 class="form-control form-control-sm" 
+                                                 width="100%"
+                                                 value="@bind(each.horNombreDia)"
+                                        />
+                                    </listcell>
+                                    <listcell  zclass = "mycss-listcell" >
+                                        <timebox buttonVisible="true"
+                                                 width="100%"       
+                                                 onChange="@command('actualizarHorario',valor=each)"  
+                                                 class="form-control form-control-sm" 
+                                                 value="@bind(each.horInicioMan)" />
+                                    </listcell>
+                                    <listcell zclass = "mycss-listcell"     
+                                              style="font-size:12px;background:#F8F9F9">   
+                                        <timebox buttonVisible="true" 
+                                                 onChange="@command('actualizarHorario',valor=each)"  
+                                                 width="100%"           
+                                                 class="form-control form-control-sm" 
+                                                 value="@bind(each.horFinMan)" />                                                        
+                                    </listcell>
+                                    <listcell  zclass = "mycss-listcell" >
+                                        <timebox buttonVisible="true"
+                                                 onChange="@command('actualizarHorario',valor=each)"  
+                                                 width="100%"         
+                                                 class="form-control form-control-sm" 
+                                                 value="@bind(each.horInicioTar)" />
+                                    </listcell>
+                                    <listcell zclass = "mycss-listcell"     >   
+                                        <timebox buttonVisible="true" 
+                                                 onChange="@command('actualizarHorario',valor=each)"  
+                                                 width="100%"           
+                                                 class="form-control form-control-sm" 
+                                                 value="@bind(each.horFinTar)" />                                                        
+                                    </listcell>
+                                    <listcell zclass = "mycss-listcell"     
+                                              style="font-size:12px;background:#F8F9F9">   
+                                        <intbox width="100%"        
+                                                onChange="@command('actualizarHorario',valor=each)"     
+                                                class="form-control form-control-sm" 
+                                                value="@bind(each.horIntervalo)" />                                                        
+                                    </listcell>
+
+                            
+                                
+                                </listitem>
+                            </template>
+                        </listbox>
+                    </div> 
+                                        
                 </div>
             </div>
         </div>

@@ -36,10 +36,10 @@ public class Detalle implements Serializable {
     private Integer idDetalle;
     @Column(name = "det_detalle")
     private String detDetalle;
-    @Column(name = "det_codigo")
-    private String detCodigo;
     @Column(name = "can_estado")
     private Boolean canEstado;
+    @Column(name = "det_codigo")
+    private String detCodigo;
     @JoinColumn(name = "id_subcapitulo", referencedColumnName = "id_subcapitulo")
     @ManyToOne
     private Subcapitulo idSubcapitulo;
@@ -75,14 +75,6 @@ public class Detalle implements Serializable {
         this.canEstado = canEstado;
     }
 
-    public Subcapitulo getIdSubcapitulo() {
-        return idSubcapitulo;
-    }
-
-    public void setIdSubcapitulo(Subcapitulo idSubcapitulo) {
-        this.idSubcapitulo = idSubcapitulo;
-    }
-
     public String getDetCodigo() {
         return detCodigo;
     }
@@ -91,7 +83,14 @@ public class Detalle implements Serializable {
         this.detCodigo = detCodigo;
     }
 
-   
+    public Subcapitulo getIdSubcapitulo() {
+        return idSubcapitulo;
+    }
+
+    public void setIdSubcapitulo(Subcapitulo idSubcapitulo) {
+        this.idSubcapitulo = idSubcapitulo;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;

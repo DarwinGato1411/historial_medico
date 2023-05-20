@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?link rel="stylesheet" type="text/css" href="../resources/css/boostrap/bootstrap.css"?>  
+<?link rel="stylesheet" type="text/css" href="../resources/css/style.css"?>
+<?init class="com.ec.seguridad.Autentificador"?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="/plantilla/plantilla.zul"?>
+<?link rel="stylesheet" type="text/css" href="/css/style.css"?>
+
+<zk class="border border-primary">
+
+    
+    <style>
+        .z-calevent-inner
+        .z-calevent-cnt{background:${eventColor};font-size:11px;font-family:${fontFamilyC};padding-left:1px;padding-right:1px;line-height:14px;color:black;}
+    </style>
+
+    <div  self="@define(content)" class="contenedorEmpresa"  apply="org.zkoss.bind.BindComposer" 
+          viewModel="@id('vm') @init('com.ec.controlador.AgendarController')" > 
+        <div  class="contenedorInfoCalendar" >
+            <div class="titulo">
+                AGENDAMIENTO DE CITAS
+            </div>
+            <div class="infoEmpresa">
+                
+               
+                <div  class="contenedorInfoInputs">
+                     
+                    <div class="inputCalendar"  >
+                        <!--<label value="Calendario de citas médicas:"/>-->
+                        <calendar weekOfYear="true" id="idCalendar" height="250px" width="100%"
+                                  value="@bind(vm.fechaAgendar)" 
+                                  onChange="@command('agendar')" 
+                        />
+                           <listbox class="tabla table-responsive table table-striped table-bordered second"
+                                    model="@load(vm.listaAgenda)" 
+                         nonselectableTags="*"  mold="paging" pageSize="10"  >
+                               
+                    <custom-attributes org.zkoss.zul.listbox.rod="true"/>                       
+                    <listhead  > 
+                        <listheader label="" width="45px" />
+                        <listheader label="" width="45px" />
+                        <listheader label="Paciente" width="70%" >
+                        </listheader>                                                                         
+                        <listheader label="Inicio" width="15%" />                                                                        
+                        <listheader label="Fin"  width="15%" />                                                                         
+                    </listhead>  
+                    <template name="model" >                                                            
+                        <listitem  >
+                              
+                            <listcell zclass = "mycss-listcell" >
+                                <button  class="btn-success-zk"
+                                         iconSclass="z-icon-check  "
+                                             
+                                         onClick="@command('modelPaciente',valor=each)" 
+                                         tooltiptext="">
+                                </button>
+                            </listcell>
+                            <listcell zclass = "mycss-listcell" >
+                                <button  class="btn-danger-zk"
+                                         iconSclass="z-icon-trash-o  "
+                                             
+                                         onClick="@command('eliminarAgendamiento',valor=each)" 
+                                         tooltiptext="Cancelar agendamiento">
+                                </button>
+                            </listcell>
+                            <listcell zclass = "mycss-listcell"  >
+                                <textbox readonly="true"  style="font-size:12px ;background:#EBF5FB"
+                                         class="form-control form-control-sm" 
+                                         width="100%"
+                                         value="@bind(each.idPaciente.pacNombres)"
+                                          onDoubleClick="@command('modelPaciente',valor=each)"
+                                />
+                            </listcell>
+                            <listcell  zclass = "mycss-listcell" >
+                                <timebox readonly="true"  style="font-size:12px ;background:#EBF5FB"
+                                         buttonVisible="false"
+                                         width="100%"         
+                                         class="form-control form-control-sm" 
+                                         value="@bind(each.ageHoraInicio)" />
+                            </listcell>
+                            <listcell zclass = "mycss-listcell"     
+                                      style="font-size:12px;background:#F8F9F9">   
+                                <timebox readonly="true"
+                                         buttonVisible="false" 
+                                         width="100%"           
+                                         style="font-size:12px ;background:#EBF5FB"
+                                         class="form-control form-control-sm" 
+                                         value="@bind(each.ageHoraFin)" />                                              
+                                                                
+                                                  
+                            </listcell>
+
+                            
+                                
+                        </listitem>
+                    </template>
+                </listbox>
+                    </div> 
+                                        
+                </div>
+            </div>
+            <div class="infoEmpresa">
+                
+<!--                <div  class="contenedorInfoInputs">                     
+                            
+                        
+                    <div class="inputCalendar"  align="center" >
+                        <button 
+                            class="inputGroupBtn"
+                            onClick="@command('guardar')"
+                            iconSclass="z-icon-save"
+                            tooltiptext="Buscar">
+                            Guardar Perfil
+                        </button> 
+                    </div>     
+                </div>-->
+            </div>
+        </div>
+        
+    </div>
+</zk>
+
+
+
+

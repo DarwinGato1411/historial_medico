@@ -14,7 +14,12 @@ import javax.persistence.Persistence;
 public class HelperPersistencia {
 
     public static EntityManager getEMF() {
-        EntityManager emf = (EntityManager) Persistence.createEntityManagerFactory("HistorialMedicoPU").createEntityManager();
-        return emf;
+        try {
+            EntityManager emf = (EntityManager) Persistence.createEntityManagerFactory("HistorialMedicoPU").createEntityManager();
+            return emf;
+        } catch (Exception e) {
+            System.out.println("ERROR PERSISTENCIA " + e.getLocalizedMessage());
+        }
+        return null;
     }
 }

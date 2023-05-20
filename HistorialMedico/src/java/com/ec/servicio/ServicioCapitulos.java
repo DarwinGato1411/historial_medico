@@ -4,8 +4,9 @@
  */
 package com.ec.servicio;
 
-import com.ec.entidad.Detalle;
-import com.ec.entidad.Subcapitulo;
+import com.ec.entidad.Paciente;
+import com.ec.entidad.Capitulo;
+import com.ec.entidad.VisitaMedica;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -15,7 +16,7 @@ import javax.persistence.Query;
  *
  * @author gato
  */
-public class ServicioDetalle {
+public class ServicioCapitulos {
 
     private EntityManager em;
 
@@ -27,7 +28,7 @@ public class ServicioDetalle {
         this.em = em;
     }
 
-    public void crear(Detalle usuario) {
+    public void crear(Capitulo usuario) {
 
         try {
             em = HelperPersistencia.getEMF();
@@ -42,7 +43,7 @@ public class ServicioDetalle {
 
     }
 
-    public void eliminar(Detalle usuario) {
+    public void eliminar(Capitulo usuario) {
 
         try {
             em = HelperPersistencia.getEMF();
@@ -58,7 +59,7 @@ public class ServicioDetalle {
 
     }
 
-    public void modificar(Detalle usuario) {
+    public void modificar(Capitulo usuario) {
 
         try {
             em = HelperPersistencia.getEMF();
@@ -73,21 +74,21 @@ public class ServicioDetalle {
 
     }
 
-    public Detalle findForVisitaMedica(String detDetalle) {
+    public Capitulo findForVisitaMedica(String capDetalle) {
 
-        List<Detalle> listaClientes = new ArrayList<Detalle>();
-        Detalle usuarioObtenido = new Detalle();
+        List<Capitulo> listaClientes = new ArrayList<Capitulo>();
+        Capitulo usuarioObtenido = new Capitulo();
         try {
             //Connection connection = em.unwrap(Connection.class);
 
             em = HelperPersistencia.getEMF();
             em.getTransaction().begin();
-            Query query = em.createQuery("SELECT u FROM Detalle u WHERE u.detDetalle=:detDetalle ORDER BY u.detDetalle ASC");
-            query.setParameter("detDetalle", detDetalle);
+            Query query = em.createQuery("SELECT u FROM Capitulo u WHERE u.capDetalle=:capDetalle ORDER BY u.capDetalle ASC");
+            query.setParameter("capDetalle", capDetalle);
 //            query.setParameter("pacNombre", "%" + valor + "%");
-            listaClientes = (List<Detalle>) query.getResultList();
+            listaClientes = (List<Capitulo>) query.getResultList();
             if (listaClientes.size() > 0) {
-                for (Detalle usuario : listaClientes) {
+                for (Capitulo usuario : listaClientes) {
                     usuarioObtenido = usuario;
                 }
             } else {
@@ -95,7 +96,7 @@ public class ServicioDetalle {
             }
             em.getTransaction().commit();
         } catch (Exception e) {
-            System.out.println("Error en lsa consulta usuario  FindDetallePorNombre  " + e.getMessage());
+            System.out.println("Error en lsa consulta usuario  FindCapituloPorNombre  " + e.getMessage());
         } finally {
             em.close();
         }
@@ -103,63 +104,16 @@ public class ServicioDetalle {
         return usuarioObtenido;
     }
 
-    public List<Detalle> findBySubCapitulo(Subcapitulo subcapitulo, String valor) {
-
-        List<Detalle> listaDatos = new ArrayList<Detalle>();
-        Detalle usuarioObtenido = new Detalle();
-        try {
-            //Connection connection = em.unwrap(Connection.class);
-
-            em = HelperPersistencia.getEMF();
-            em.getTransaction().begin();
-            Query query = em.createQuery("SELECT u FROM Detalle u WHERE u.idSubcapitulo=:subcapitulo AND UPPER(u.detDetalle) LIKE :detDetalle ORDER BY u.detDetalle ASC");
-            query.setParameter("subcapitulo", subcapitulo);
-            query.setParameter("detDetalle", "%" + valor + "%");
-            listaDatos = (List<Detalle>) query.getResultList();
-
-            em.getTransaction().commit();
-        } catch (Exception e) {
-            System.out.println("Error en lsa consulta usuario  FindDetallePorNombre  " + e.getMessage());
-        } finally {
-            em.close();
-        }
-
-        return listaDatos;
-    }
-    public List<Detalle> findBySubCapituloLike( String valor) {
-
-        List<Detalle> listaDatos = new ArrayList<Detalle>();
-        Detalle usuarioObtenido = new Detalle();
-        try {
-            //Connection connection = em.unwrap(Connection.class);
-
-            em = HelperPersistencia.getEMF();
-            em.getTransaction().begin();
-            Query query = em.createQuery("SELECT u FROM Detalle u WHERE UPPER(u.detDetalle) LIKE :detDetalle ORDER BY u.detDetalle ASC");
-//            query.setParameter("subcapitulo", subcapitulo);
-            query.setParameter("detDetalle", "%" + valor + "%");
-            listaDatos = (List<Detalle>) query.getResultList();
-
-            em.getTransaction().commit();
-        } catch (Exception e) {
-            System.out.println("Error en lsa consulta usuario  FindDetallePorNombre  " + e.getMessage());
-        } finally {
-            em.close();
-        }
-
-        return listaDatos;
-    }
-
-    public List<Detalle> finAll(String nombre) {
-        List<Detalle> listaDetalles = new ArrayList<Detalle>();
+    public List<Capitulo> finAll() {
+        List<Capitulo> listaCapitulos = new ArrayList<Capitulo>();
         try {
             System.out.println("Entra a consultar usuarios");
             //Connection connection = em.unwrap(Connection.class);
             em = HelperPersistencia.getEMF();
             em.getTransaction().begin();
-            Query query = em.createQuery("SELECT u FROM Detalle u");
+            Query query = em.createQuery("SELECT u FROM Capitulo u");
 //            query.setParameter("usuNombre", "%" + nombre + "%");
-            listaDetalles = (List<Detalle>) query.getResultList();
+            listaCapitulos = (List<Capitulo>) query.getResultList();
             em.getTransaction().commit();
         } catch (Exception e) {
             System.out.println("Error usuarios finAll " + e.getMessage());
@@ -167,6 +121,26 @@ public class ServicioDetalle {
             em.close();
         }
 
-        return listaDetalles;
+        return listaCapitulos;
+    }
+
+    public List<Capitulo> finLike(String valor) {
+        List<Capitulo> listaCapitulos = new ArrayList<Capitulo>();
+        try {
+            System.out.println("Entra a consultar usuarios");
+            //Connection connection = em.unwrap(Connection.class);
+            em = HelperPersistencia.getEMF();
+            em.getTransaction().begin();
+            Query query = em.createQuery("SELECT u FROM Capitulo u WHERE UPPER(u.capDetalle) LIKE :capDetalle ORDER BY u.capDetalle ASC");
+            query.setParameter("capDetalle", "%" + valor + "%");
+            listaCapitulos = (List<Capitulo>) query.getResultList();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println("Error usuarios finAll " + e.getMessage());
+        } finally {
+            em.close();
+        }
+
+        return listaCapitulos;
     }
 }

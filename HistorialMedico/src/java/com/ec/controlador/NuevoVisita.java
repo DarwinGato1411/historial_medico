@@ -5,7 +5,7 @@
 package com.ec.controlador;
 
 import com.ec.controlador.doa.ExamenDao;
-import com.ec.controlador.doa.NuevaVisitaParam;
+import com.ec.controlador.doa.NuevaVisitaParams;
 import com.ec.controlador.doa.RecetaDao;
 import com.ec.entidad.Capitulo;
 import com.ec.entidad.Detalle;
@@ -17,13 +17,13 @@ import com.ec.entidad.VisitaMedica;
 import com.ec.seguridad.EnumSesion;
 import com.ec.seguridad.UserCredential;
 import com.ec.servicio.HelperPersistencia;
-import com.ec.servicio.ServicioCapitulo;
-import com.ec.servicio.ServicioDetalle;
+import com.ec.servicio.ServicioCapitulos;
+import com.ec.servicio.ServicioDetalles;
 import com.ec.servicio.ServicioExamen;
 import com.ec.servicio.ServicioParametrizar;
 import com.ec.servicio.ServicioReceta;
-import com.ec.servicio.ServicioSubCapitulo;
-import com.ec.servicio.ServicioVisitaMedica;
+import com.ec.servicio.ServicioSubCapitulos;
+import com.ec.servicio.ServicioVisitaMedicas;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -75,7 +75,7 @@ import org.zkoss.zul.Window;
  */
 public class NuevoVisita {
 
-    ServicioVisitaMedica servicioVisitaMedica = new ServicioVisitaMedica();
+    ServicioVisitaMedicas servicioVisitaMedica = new ServicioVisitaMedicas();
     private VisitaMedica entidad = new VisitaMedica();
     UserCredential credential = new UserCredential();
 
@@ -106,9 +106,9 @@ public class NuevoVisita {
     private Parametrizar parametrizar = new Parametrizar();
 
     /*CARGAR CIE 10*/
-    ServicioCapitulo servicioCapitulo = new ServicioCapitulo();
-    ServicioSubCapitulo servicioSubCapitulo = new ServicioSubCapitulo();
-    ServicioDetalle servicioDetalle = new ServicioDetalle();
+    ServicioCapitulos servicioCapitulo = new ServicioCapitulos();
+    ServicioSubCapitulos servicioSubCapitulo = new ServicioSubCapitulos();
+    ServicioDetalles servicioDetalle = new ServicioDetalles();
     private List<Capitulo> listaCapitulo = new ArrayList<Capitulo>();
     private Capitulo capituloSelected = null;
     private Subcapitulo subCapituloSelected = null;
@@ -127,7 +127,7 @@ public class NuevoVisita {
     Connection con = null;
 
     @AfterCompose
-    public void afterCompose(@ExecutionArgParam("valor") NuevaVisitaParam valor, @ContextParam(ContextType.VIEW) Component view) {
+    public void afterCompose(@ExecutionArgParam("valor") NuevaVisitaParams valor, @ContextParam(ContextType.VIEW) Component view) {
         Selectors.wireComponents(view, this, false);
 
         if (valor.getTipo().equals("cie")) {
@@ -151,6 +151,8 @@ public class NuevoVisita {
                 this.entidad = new VisitaMedica();
                 this.entidad.setIdPaciente(valor.getIdPaciente());
                 this.entidad.setVisFecha(new Date());
+                this.entidad.setVisEstado(Boolean.TRUE);
+                this.entidad.setVisCertificado("POR MEDIO DE LA PRESENTE CERTIFICO QUE EL PACIENTE ACUDE A CONSULTA ");
                 accion = "create";
 
             }
@@ -197,7 +199,10 @@ public class NuevoVisita {
             RecetaDao item = new RecetaDao();
             item.setMedicamento(receta.getRecMedicamento());
             item.setIndicacion(receta.getRecDescripcion());
-
+            item.setRecCantidad(receta.getRecCantidad());
+            item.setRecM(receta.getRecM());
+            item.setRecT(receta.getRecT());
+            item.setRecN(receta.getRecN());
             ((ListModelList<RecetaDao>) listaRecetaModel).add(item);
         }
     }
@@ -226,6 +231,10 @@ public class NuevoVisita {
                     receta.setRecDescripcion(recetaDao.getIndicacion());
                     receta.setRecMedicamento(recetaDao.getMedicamento());
                     receta.setIdVisitaMedica(entidad);
+                    receta.setRecCantidad(recetaDao.getRecCantidad());
+                    receta.setRecM(recetaDao.getRecM());
+                    receta.setRecT(recetaDao.getRecT());
+                    receta.setRecN(recetaDao.getRecN());
                     servicioReceta.crear(receta);
                 }
                 try {
@@ -253,6 +262,10 @@ public class NuevoVisita {
                     receta.setRecDescripcion(recetaDao.getIndicacion());
                     receta.setRecMedicamento(recetaDao.getMedicamento());
                     receta.setIdVisitaMedica(entidad);
+                    receta.setRecCantidad(recetaDao.getRecCantidad());
+                    receta.setRecM(recetaDao.getRecM());
+                    receta.setRecT(recetaDao.getRecT());
+                    receta.setRecN(recetaDao.getRecN());
                     servicioReceta.crear(receta);
                 }
 
@@ -418,8 +431,8 @@ public class NuevoVisita {
     public void cargarCie() {
         try {
 //            if (Messagebox.show("¿Desea modificar el registro, recuerde que debe crear las reteniones nuevamente?", "Atención", Messagebox.YES | Messagebox.NO, Messagebox.INFORMATION) == Messagebox.YES) {
-            final HashMap<String, NuevaVisitaParam> map = new HashMap<String, NuevaVisitaParam>();
-            NuevaVisitaParam param = new NuevaVisitaParam("cie", null);
+            final HashMap<String, NuevaVisitaParams> map = new HashMap<String, NuevaVisitaParams>();
+            NuevaVisitaParams param = new NuevaVisitaParams("cie", null);
             map.put("valor", param);
 
             org.zkoss.zul.Window window = (org.zkoss.zul.Window) Executions.createComponents(

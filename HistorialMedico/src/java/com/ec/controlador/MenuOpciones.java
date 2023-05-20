@@ -13,6 +13,8 @@ import org.zkoss.zk.ui.Session;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.Listen;
+import org.zkoss.zk.ui.select.annotation.Wire;
+import org.zkoss.zul.Label;
 
 /**
  *
@@ -22,12 +24,34 @@ public class MenuOpciones extends SelectorComposer<Component> {
 
     UserCredential credential = new UserCredential();
     private String acceso = "";
+    @Wire
+    Label btnPaciente;
+    @Wire
+    Label btnAgendamiento;
+    @Wire
+    Label btnHistorico;
+    @Wire
+    Label btnCatalogo;
+    @Wire
+    Label btnPerfil;
+    @Wire
+    Label btnAdmUsuario;
 
     public MenuOpciones() {
         Session sess = Sessions.getCurrent();
         UserCredential cre = (UserCredential) sess.getAttribute(EnumSesion.userCredential.getNombre());
         credential = cre;
-
+//        if (credential != null) {
+//            if (credential.getUsuarioSistema().getUsuNivel() == 1) {
+//                btnAdmUsuario.setVisible(Boolean.FALSE);
+//            } else if (credential.getUsuarioSistema().getUsuNivel() == 2) {
+//                btnPaciente.setVisible(Boolean.FALSE);
+//                btnAgendamiento.setVisible(Boolean.FALSE);
+//                btnHistorico.setVisible(Boolean.FALSE);
+//                btnCatalogo.setVisible(Boolean.FALSE);
+//                btnPerfil.setVisible(Boolean.FALSE);
+//            }
+//        }
     }
 
     @Override
@@ -51,6 +75,21 @@ public class MenuOpciones extends SelectorComposer<Component> {
     @Listen("onClick = #btnPaciente")
     public void btnPaciente() {
         Executions.sendRedirect("/medico/paciente.zul");
+    }
+
+    @Listen("onClick = #btnHistorico")
+    public void btnHistorico() {
+        Executions.sendRedirect("/medico/historico_paciente.zul");
+    }
+
+    @Listen("onClick = #btnAgendamiento")
+    public void btnAgendamiento() {
+        Executions.sendRedirect("/medico/agendar.zul");
+    }
+
+    @Listen("onClick = #btnAdmUsuario")
+    public void btnAdmUsuario() {
+        Executions.sendRedirect("/administrador/usuario.zul");
     }
 
     @Command

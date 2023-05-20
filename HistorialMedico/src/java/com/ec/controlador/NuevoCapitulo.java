@@ -7,7 +7,7 @@ package com.ec.controlador;
 import com.ec.entidad.Capitulo;
 import com.ec.seguridad.EnumSesion;
 import com.ec.seguridad.UserCredential;
-import com.ec.servicio.ServicioCapitulo;
+import com.ec.servicio.ServicioCapitulos;
 
 import org.zkforge.json.simple.Test;
 import org.zkoss.bind.annotation.AfterCompose;
@@ -29,7 +29,7 @@ import org.zkoss.zul.Window;
  */
 public class NuevoCapitulo {
 
-    ServicioCapitulo servicioCapitulo = new ServicioCapitulo();
+    ServicioCapitulos servicioCapitulo = new ServicioCapitulos();
     private Capitulo entidad = new Capitulo();
     UserCredential credential = new UserCredential();
 

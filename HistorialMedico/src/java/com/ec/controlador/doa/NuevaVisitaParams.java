@@ -12,16 +12,16 @@ import com.ec.entidad.VisitaMedica;
  *
  * @author Darwin
  */
-public class NuevaVisitaParam {
+public class NuevaVisitaParams {
 
     private String tipo;
     private VisitaMedica visita;
     private Paciente idPaciente;
 
-    public NuevaVisitaParam() {
+    public NuevaVisitaParams() {
     }
 
-    public NuevaVisitaParam(String tipo, VisitaMedica visita) {
+    public NuevaVisitaParams(String tipo, VisitaMedica visita) {
         this.tipo = tipo;
         this.visita = visita;
     }

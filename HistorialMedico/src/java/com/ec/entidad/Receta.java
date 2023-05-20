@@ -38,6 +38,16 @@ public class Receta implements Serializable {
     private String recMedicamento;
     @Column(name = "rec_descripcion")
     private String recDescripcion;
+    @Column(name = "host")
+    private String host;
+    @Column(name = "rec_cantidad")
+    private String recCantidad;
+    @Column(name = "rec_m")
+    private Boolean recM;
+    @Column(name = "rec_t")
+    private Boolean recT;
+    @Column(name = "rec_n")
+    private Boolean recN;
     @JoinColumn(name = "id_visita_medica", referencedColumnName = "id_visita_medica")
     @ManyToOne
     private VisitaMedica idVisitaMedica;
@@ -71,6 +81,46 @@ public class Receta implements Serializable {
 
     public void setRecDescripcion(String recDescripcion) {
         this.recDescripcion = recDescripcion;
+    }
+
+    public String getHost() {
+        return host;
+    }
+
+    public void setHost(String host) {
+        this.host = host;
+    }
+
+    public String getRecCantidad() {
+        return recCantidad;
+    }
+
+    public void setRecCantidad(String recCantidad) {
+        this.recCantidad = recCantidad;
+    }
+
+    public Boolean getRecM() {
+        return recM;
+    }
+
+    public void setRecM(Boolean recM) {
+        this.recM = recM;
+    }
+
+    public Boolean getRecT() {
+        return recT;
+    }
+
+    public void setRecT(Boolean recT) {
+        this.recT = recT;
+    }
+
+    public Boolean getRecN() {
+        return recN;
+    }
+
+    public void setRecN(Boolean recN) {
+        this.recN = recN;
     }
 
     public VisitaMedica getIdVisitaMedica() {

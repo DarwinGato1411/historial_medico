@@ -9,9 +9,9 @@ import com.ec.entidad.Detalle;
 import com.ec.entidad.Subcapitulo;
 import com.ec.seguridad.EnumSesion;
 import com.ec.seguridad.UserCredential;
-import com.ec.servicio.ServicioCapitulo;
-import com.ec.servicio.ServicioDetalle;
-import com.ec.servicio.ServicioSubCapitulo;
+import com.ec.servicio.ServicioCapitulos;
+import com.ec.servicio.ServicioDetalles;
+import com.ec.servicio.ServicioSubCapitulos;
 import com.ec.utilitario.DetalleSubcapitulo;
 import com.ec.utilitario.SubcapituloCapitulo;
 
@@ -34,9 +34,9 @@ import org.zkoss.zk.ui.util.Clients;
  */
 public class Catalogo {
     
-    ServicioCapitulo servicioCapitulo = new ServicioCapitulo();
-    ServicioSubCapitulo servicioSubCapitulo = new ServicioSubCapitulo();
-    ServicioDetalle servicioDetalle = new ServicioDetalle();
+    ServicioCapitulos servicioCapitulo = new ServicioCapitulos();
+    ServicioSubCapitulos servicioSubCapitulo = new ServicioSubCapitulos();
+    ServicioDetalles servicioDetalle = new ServicioDetalles();
     private List<Capitulo> listaCapitulo = new ArrayList<Capitulo>();
     private Capitulo capituloSelected = null;
     private Subcapitulo subCapituloSelected = null;

@@ -49,11 +49,15 @@
             <label class="m1" value="Agendamiento de citas" id="btnAgendamiento"/>
         </div>
         <div class="li">
+            <label class="m1" value="Reporte HCL" id="btnHistorico"/>
+        </div>
+        <div class="li">
             <label class="m1" value="Clasificación Internacional de Enfermedades (CIE-10)" id="btnCatalogo"/>
         </div>
         <div class="li">
             <label class="m1" value="Perfil" id="btnPerfil"/>
         </div>
+     
         <div  apply="com.ec.controlador.LogoutController">
             <button    
                 id="logout" 
