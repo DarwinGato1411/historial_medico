@@ -28,7 +28,9 @@ import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Session;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.select.Selectors;
+import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.util.Clients;
+import org.zkoss.zul.Window;
 
 /**
  *
@@ -36,6 +38,8 @@ import org.zkoss.zk.ui.util.Clients;
  */
 public class UsuarioController {
 
+    @Wire
+    Window wUsuario;
     private Usuario usuario;
     ServicioUsuario servicioUsuario = new ServicioUsuario();
 
@@ -48,14 +52,14 @@ public class UsuarioController {
     public UsuarioController() {
         Session sess = Sessions.getCurrent();
         credential = (UserCredential) sess.getAttribute(EnumSesion.userCredential.getNombre());
-        usuario = credential.getUsuarioSistema();
+//        usuario = credential.getUsuarioSistema();
 
     }
 
     @AfterCompose
     public void afterCompose(@ExecutionArgParam("valor") Usuario valor, @ContextParam(ContextType.VIEW) Component view) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException, JRException, IOException {
         Selectors.wireComponents(view, this, false);
-        if (usuario.getUsuFoto() != null) {
+        if (valor != null) {
             this.usuario = valor;
             accion = "update";
         } else {
@@ -100,15 +104,22 @@ public class UsuarioController {
     public void guardar() {
 
         if (accion.equals("create")) {
+            if (servicioUsuario.findUsuarioPorNombre(usuario.getUsuLogin()) != null) {
+                Clients.showNotification("ya existe una cuenta con ese usuario ... ",
+                            Clients.NOTIFICATION_TYPE_ERROR, null, "end_center", 3000, true);
+                return;
+            }
             servicioUsuario.crear(usuario);
             servicioGeneral.generarHorario(usuario.getIdUsuario());
             Clients.showNotification("Guardado correctamente... ",
                         Clients.NOTIFICATION_TYPE_INFO, null, "end_center", 3000, true);
+            wUsuario.detach();
 
         } else {
             servicioUsuario.modificar(usuario);
             Clients.showNotification("Guardado correctamente... ",
                         Clients.NOTIFICATION_TYPE_INFO, null, "end_center", 3000, true);
+            wUsuario.detach();
         }
 
     }

@@ -45,11 +45,11 @@ import org.zkoss.zul.Window;
  * @author gato
  */
 public class NuevoPaciente {
-    
+
     ServicioPaciente servicio = new ServicioPaciente();
     private Paciente entidad = new Paciente();
     UserCredential credential = new UserCredential();
-    
+
     private String accion = "create";
     @Wire
     Window wCapitulo;
@@ -58,17 +58,17 @@ public class NuevoPaciente {
     private String filePath;
     byte[] buffer = new byte[1024 * 1024];
     private AImage fotoGeneral = null;
-    
+
     ServicioParametrizar servicioParametrizar = new ServicioParametrizar();
     private Parametrizar parametrizar = new Parametrizar();
-    
+
     public NuevoPaciente() {
         Session sess = Sessions.getCurrent();
         credential = (UserCredential) sess.getAttribute(EnumSesion.userCredential.getNombre());
         parametrizar = servicioParametrizar.findActivo();
-        
+
     }
-    
+
     @AfterCompose
     public void afterCompose(@ExecutionArgParam("valor") Paciente valor, @ContextParam(ContextType.VIEW) Component view) throws IOException {
         Selectors.wireComponents(view, this, false);
@@ -78,9 +78,10 @@ public class NuevoPaciente {
         } else {
             this.entidad = new Paciente();
             this.entidad.setPacHabilitado(Boolean.TRUE);
+            this.entidad.setPacEstado(Boolean.TRUE);
             accion = "create";
         }
-        
+
         if (entidad.getPacFotografia() != null) {
             try {
                 System.out.println("FOTOGRAFIA" + entidad.getPacFotografia());
@@ -90,9 +91,9 @@ public class NuevoPaciente {
                 System.out.println("error imagen " + e.getMessage());
             }
         }
-        
+
     }
-    
+
     @Command
     @NotifyChange({"entidad"})
     public void calcularIMC() {
@@ -103,15 +104,15 @@ public class NuevoPaciente {
                     BigDecimal IMC = entidad.getPacPeso() != null ? entidad.getPacPeso().doubleValue() > 0 ? entidad.getPacPeso().divide(talla2, 5, RoundingMode.FLOOR) : BigDecimal.ZERO : BigDecimal.ZERO;
                     entidad.setPacImc(ArchivoUtils.redondearDecimales(IMC, 2));
                 }
-                
+
             } else {
                 entidad.setPacImc(BigDecimal.ZERO);
             }
-            
+
         }
-        
+
     }
-    
+
     @Command
     @NotifyChange({"entidad"})
     public void buscarInformacion() throws URISyntaxException, IOException, XPathExpressionException, JSONException {
@@ -124,19 +125,19 @@ public class NuevoPaciente {
                     cedulaBuscar = entidad.getPacRuc();
                     nombre = ArchivoUtils.obtenerPorRuc(cedulaBuscar);
                     entidad.setPacNombres(nombre);
-                    
+
                 } else if (entidad.getPacRuc().length() == 10) {
                     cedulaBuscar = entidad.getPacRuc();
                     aduana = ArchivoUtils.obtenerPorCedula(cedulaBuscar);
                     entidad.setPacNombres(aduana.getNombre());
                     entidad.setPacDomicilio(aduana.getDireccion());
                 }
-                
+
             }
         }
-        
+
     }
-    
+
     @Command
     @NotifyChange("entidad")
     public void obtenerEdad() {
@@ -145,14 +146,14 @@ public class NuevoPaciente {
             entidad.setPacEdad(edad.intValue());
         }
     }
-    
+
     @Command
     public void guardar() {
         if (entidad.getPacRuc() != null
                     && entidad.getPacNombres() != null
                     && entidad.getPacMovil() != null
                     && entidad.getPacCorreo() != null) {
-            
+
             if (accion.equals("create")) {
                 entidad.setIdUsuario(credential.getUsuarioSistema());
                 servicio.crear(entidad);
@@ -165,46 +166,46 @@ public class NuevoPaciente {
 
                 wCapitulo.detach();
             }
-            
+
         } else {
             Messagebox.show("Verifique la informacion requerida", "Atención", Messagebox.OK, Messagebox.ERROR);
         }
     }
-    
+
     @Command
     @NotifyChange({"fileContent", "entidad", "fotoGeneral"})
     public void subirFotografia() throws InterruptedException, IOException {
-        
+
         org.zkoss.util.media.Media media = Fileupload.get();
         if (media instanceof org.zkoss.image.Image) {
             String nombre = media.getName();
-            
+
             if (media.getByteData().length > 10 * 1024 * 1024) {
                 Messagebox.show("El arhivo seleccionado sobrepasa el tamaño de 10Mb.\n Por favor seleccione un archivo más pequeño.", "Atención", Messagebox.OK, Messagebox.ERROR);
-                
+
                 return;
             }
             filePath = parametrizar.getParBase() + File.separator + parametrizar.getParImagenes() + File.separator + "FOTO";
-            
+
             File baseDir = new File(filePath);
             if (!baseDir.exists()) {
                 baseDir.mkdirs();
             }
             Files.copy(new File(filePath + File.separator + media.getName()),
                         media.getStreamData());
-            
+
             entidad.setPacFotografia(filePath + File.separator + media.getName());
             System.out.println("PATH SUBIR " + filePath + File.separator + media.getName());
             fotoGeneral = new AImage("fotografia", Imagen_A_Bytes(filePath + File.separator + media.getName()));
-            
+
         }
     }
-    
+
     public byte[] Imagen_A_Bytes(String pathImagen) throws FileNotFoundException {
         String reportPath = "";
         reportPath = pathImagen;
         File file = new File(reportPath);
-        
+
         FileInputStream fis = new FileInputStream(file);
         //create FileInputStream which obtains input bytes from a file in a file system
         //FileInputStream is meant for reading streams of raw bytes such as image data. For reading streams of characters, consider using FileReader.
@@ -219,31 +220,31 @@ public class NuevoPaciente {
             }
         } catch (IOException ex) {
         }
-        
+
         byte[] bytes = bos.toByteArray();
         return bytes;
     }
-    
+
     public Paciente getEntidad() {
         return entidad;
     }
-    
+
     public void setEntidad(Paciente entidad) {
         this.entidad = entidad;
     }
-    
+
     public String getAccion() {
         return accion;
     }
-    
+
     public void setAccion(String accion) {
         this.accion = accion;
     }
-    
+
     public AImage getFotoGeneral() {
         return fotoGeneral;
     }
-    
+
     public void setFotoGeneral(AImage fotoGeneral) {
         this.fotoGeneral = fotoGeneral;
     }
