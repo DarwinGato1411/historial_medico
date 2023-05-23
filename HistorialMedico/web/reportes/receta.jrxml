@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="receta" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-	<property name="ireport.zoom" value="1.331000000000001"/>
+	<property name="ireport.zoom" value="1.2100000000000009"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="75"/>
+	<property name="ireport.y" value="97"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -342,7 +342,7 @@ EDIFICIO FORTUNE JUEVES Y VIERNES 9H00 A 14H00  Y  15H00 A 18H00  PREVIA CITA SA
 		</band>
 	</title>
 	<detail>
-		<band height="335" splitType="Stretch">
+		<band height="292" splitType="Stretch">
 			<componentElement>
 				<reportElement key="table 1" style="table" positionType="Float" x="9" y="0" width="313" height="33"/>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
@@ -503,7 +503,7 @@ MSP: 1704353273001
 ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="422" y="157" width="380" height="62"/>
+				<reportElement positionType="Float" x="422" y="217" width="380" height="62"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<text><![CDATA[DR. MARCO ANTONIO ESCOBAR BUCHELI
 CARDIOLOGO - INTENSIVISTA
@@ -517,15 +517,7 @@ MSP: 1704353273001]]></text>
 ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="422" y="39" width="132" height="15" forecolor="#FF0000"/>
-				<textElement>
-					<font size="8"/>
-				</textElement>
-				<text><![CDATA[SIGNOS DE ALARMA:
-]]></text>
-			</staticText>
-			<staticText>
-				<reportElement positionType="Float" x="422" y="115" width="132" height="15"/>
+				<reportElement positionType="Float" x="422" y="182" width="132" height="15"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
@@ -533,28 +525,20 @@ MSP: 1704353273001]]></text>
 ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="422" y="73" width="213" height="15"/>
-				<textElement>
-					<font size="8"/>
-				</textElement>
-				<text><![CDATA[RECOMENDACIONES GENERALES:
-]]></text>
-			</staticText>
-			<staticText>
-				<reportElement positionType="Float" x="0" y="207" width="313" height="64"/>
+				<reportElement positionType="Float" x="422" y="118" width="313" height="64"/>
 				<textElement/>
 				<text><![CDATA[RECOMENDACIONES GENERALES
 •Consumir Diet Sal para los Alimentos.
 •Realizar ejercicios respiratorios con el triflo aguantando la respiración por 40 segundos y repetir el ejercicio por 40 minutos al día]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="269" width="313" height="13" forecolor="#FF0000"/>
+				<reportElement positionType="Float" x="422" y="52" width="313" height="13" forecolor="#FF0000"/>
 				<textElement/>
 				<text><![CDATA[SIGNOS DE ALARMA: PACIENTE QUE PRESENTE
 ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="282" width="313" height="53" forecolor="#000000"/>
+				<reportElement positionType="Float" x="422" y="65" width="313" height="53" forecolor="#000000"/>
 				<textElement/>
 				<text><![CDATA[•Dolor de cabeza intenso.
 •Sensación de falta de aire.
