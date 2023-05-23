@@ -34,15 +34,21 @@
                             value="Fecha nacimiento: " />
                         <label 
                             class="form-control-sm" 
-                            value="@load(vm.fechaFomateada)" />
+                            value="@load(vm.entidad.idPaciente.pacFechaNacimiento)" />
                     </div>
                     <div>
                         <label 
                             class="form-control-sm" 
                             value="Edad: " />
-                        <label 
-                            class="form-control-sm" 
-                            value="@load(vm.entidad.idPaciente.pacEdad)" />
+                        <datebox compact="true" 
+                                         value="@load(vm.entidad.idPaciente.pacEdad)" 
+                                         readonly="false"   
+                                         buttonVisible="false" 
+                                         lenient="true" 
+                                         format="dd/MM/yyyy"
+                                         class="input_date"
+                                />
+                       
                     </div>
             
                 </div> 
