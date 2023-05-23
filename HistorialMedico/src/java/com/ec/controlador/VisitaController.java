@@ -122,6 +122,7 @@ public class VisitaController {
 
         buscarVisita();
     }
+   
 
     @Command
     @NotifyChange({"listaPaciente", "buscarPaciente", "listaVisitaMedicas"})

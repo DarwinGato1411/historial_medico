@@ -5,7 +5,7 @@
          class="modalAll modalPaciente">
     
     <caption label="VISITA MÉDICA"   class="titulo"/> 
-    
+     <timer id="timer" delay="300000" repeats="true" onTimer="@command('refrescar')" ></timer>
 
     <div class="container_modal">
         

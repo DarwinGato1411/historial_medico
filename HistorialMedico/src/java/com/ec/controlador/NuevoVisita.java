@@ -183,6 +183,15 @@ public class NuevoVisita {
         ((ListModelList<RecetaDao>) listaRecetaModel).add(rec);
     }
 
+    @Command    
+     @NotifyChange({"entidad"})
+    public void refrescar() {
+       Clients.showNotification("Por favor llene la información y presione guardar ",
+                            Clients.NOTIFICATION_TYPE_INFO, null, "end_center", 2000, true);
+    }
+    
+    
+
     @Command
     @NotifyChange({"listaRecetaModel", "listaExamenModel"})
     public void getRecetaExamen() {
