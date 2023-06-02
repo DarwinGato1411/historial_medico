@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="receta" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-	<property name="ireport.zoom" value="1.2100000000000009"/>
+	<property name="ireport.zoom" value="1.2100000000000013"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="89"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -114,7 +114,7 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="184">
+		<band height="179">
 			<staticText>
 				<reportElement x="64" y="0" width="307" height="20" forecolor="#5B9BD5"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
@@ -166,21 +166,21 @@
 				<text><![CDATA[PCTE:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="9" y="137" width="85" height="12"/>
+				<reportElement x="9" y="137" width="69" height="12"/>
 				<textElement>
 					<font size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[DIAGNÓSTICO:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="9" y="149" width="69" height="12"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="9" y="149" width="86" height="12" isPrintWhenDetailOverflows="true"/>
 				<textElement>
 					<font size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[HCL:]]></text>
 			</staticText>
-			<textField isBlankWhenNull="true">
-				<reportElement x="94" y="137" width="238" height="12"/>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="78" y="137" width="238" height="12" isPrintWhenDetailOverflows="true"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
@@ -214,81 +214,67 @@ EDIFICIO FORTUNE JUEVES Y VIERNES 9H00 A 14H00  Y  15H00 A 18H00  PREVIA CITA SA
 ]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement x="486" y="100" width="289" height="12"/>
+				<reportElement x="475" y="100" width="289" height="12"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{pac_nombres}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="422" y="101" width="64" height="12"/>
+				<reportElement x="411" y="101" width="64" height="12"/>
 				<textElement>
 					<font size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[PCTE:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="422" y="125" width="64" height="12"/>
+				<reportElement x="411" y="125" width="64" height="12"/>
 				<textElement>
 					<font size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Edad:]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement x="486" y="113" width="100" height="12"/>
+				<reportElement x="475" y="113" width="100" height="12"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{pac_ruc}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="422" y="113" width="64" height="12"/>
+				<reportElement x="411" y="113" width="64" height="12"/>
 				<textElement>
 					<font size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[CI:]]></text>
 			</staticText>
-			<textField isBlankWhenNull="true">
-				<reportElement x="507" y="137" width="268" height="12"/>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="496" y="137" width="268" height="12" isPrintWhenDetailOverflows="true"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{vis_cargar_cie10}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="422" y="137" width="85" height="12"/>
+				<reportElement x="411" y="137" width="85" height="12"/>
 				<textElement>
 					<font size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[DIAGNÓSTICO:]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement x="486" y="125" width="134" height="12"/>
+				<reportElement x="475" y="125" width="134" height="12"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{pac_edad}+" AÑOS"]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement x="9" y="165" width="55" height="14"/>
-				<textElement>
-					<font size="11" isBold="true"/>
-				</textElement>
-				<text><![CDATA[RECETA.-]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="422" y="165" width="132" height="14"/>
-				<textElement>
-					<font size="11" isBold="true"/>
-				</textElement>
-				<text><![CDATA[INDICACIONES.-]]></text>
-			</staticText>
 			<image hAlign="Center" vAlign="Middle" onErrorType="Blank">
-				<reportElement x="422" y="0" width="64" height="44"/>
+				<reportElement x="411" y="0" width="64" height="44"/>
 				<imageExpression class="java.lang.String"><![CDATA[$P{logo}]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement x="486" y="0" width="299" height="20" forecolor="#5B9BD5"/>
+				<reportElement x="475" y="0" width="310" height="20" forecolor="#5B9BD5"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font size="7" isBold="true"/>
 				</textElement>
@@ -296,7 +282,7 @@ EDIFICIO FORTUNE JUEVES Y VIERNES 9H00 A 14H00  Y  15H00 A 18H00  PREVIA CITA SA
 ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="486" y="20" width="299" height="65" forecolor="#5B9BD5"/>
+				<reportElement x="475" y="20" width="310" height="65" forecolor="#5B9BD5"/>
 				<textElement textAlignment="Center">
 					<font size="6"/>
 				</textElement>
@@ -318,22 +304,22 @@ e-mail:marcoescobar10@hotmail.com
 EDIFICIO FORTUNE JUEVES Y VIERNES 9H00 A 14H00  Y  15H00 A 18H00  PREVIA CITA SABADOS 9H00  A 13H00
 ]]></text>
 			</staticText>
-			<textField isBlankWhenNull="true">
-				<reportElement x="78" y="149" width="254" height="12"/>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="78" y="149" width="254" height="12"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA["Nº "+$F{id_paciente}]]></textFieldExpression>
 			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement x="507" y="149" width="268" height="12"/>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="496" y="149" width="268" height="12" isPrintWhenDetailOverflows="true"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA["Nº "+$F{id_paciente}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="422" y="149" width="85" height="12"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="411" y="149" width="98" height="12" isPrintWhenDetailOverflows="true"/>
 				<textElement>
 					<font size="8" isBold="true"/>
 				</textElement>
@@ -346,14 +332,14 @@ EDIFICIO FORTUNE JUEVES Y VIERNES 9H00 A 14H00  Y  15H00 A 18H00  PREVIA CITA SA
 				</textElement>
 				<text><![CDATA[Fecha:]]></text>
 			</staticText>
-			<textField pattern="yyyy/MM/dd" isBlankWhenNull="true">
+			<textField pattern="dd/MM/yy" isBlankWhenNull="true">
 				<reportElement x="241" y="125" width="100" height="12"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression class="java.util.Date"><![CDATA[$F{vis_fecha}]]></textFieldExpression>
 			</textField>
-			<textField pattern="yyyy/MM/dd" isBlankWhenNull="true">
+			<textField pattern="dd/MM/yy" isBlankWhenNull="true">
 				<reportElement x="664" y="125" width="100" height="12"/>
 				<textElement>
 					<font size="8"/>
@@ -370,9 +356,9 @@ EDIFICIO FORTUNE JUEVES Y VIERNES 9H00 A 14H00  Y  15H00 A 18H00  PREVIA CITA SA
 		</band>
 	</title>
 	<detail>
-		<band height="292" splitType="Stretch">
+		<band height="293" splitType="Stretch">
 			<componentElement>
-				<reportElement key="table 1" style="table" positionType="Float" x="9" y="0" width="313" height="33"/>
+				<reportElement key="table 1" style="table" x="9" y="14" width="323" height="33"/>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
 					<datasetRun subDataset="receta">
 						<datasetParameter name="IdVisitaMed">
@@ -392,7 +378,7 @@ EDIFICIO FORTUNE JUEVES Y VIERNES 9H00 A 14H00  Y  15H00 A 18H00  PREVIA CITA SA
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="table 1_TD" height="12" rowSpan="1">
-							<textField isStretchWithOverflow="true">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="188" height="12" isPrintWhenDetailOverflows="true"/>
 								<box leftPadding="3"/>
 								<textElement>
@@ -427,7 +413,7 @@ EDIFICIO FORTUNE JUEVES Y VIERNES 9H00 A 14H00  Y  15H00 A 18H00  PREVIA CITA SA
 				</jr:table>
 			</componentElement>
 			<componentElement>
-				<reportElement key="table 1" style="table" positionType="Float" x="422" y="0" width="380" height="33"/>
+				<reportElement key="table 1" style="table" x="411" y="14" width="391" height="33"/>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
 					<datasetRun subDataset="receta">
 						<datasetParameter name="IdVisitaMed">
@@ -435,32 +421,14 @@ EDIFICIO FORTUNE JUEVES Y VIERNES 9H00 A 14H00  Y  15H00 A 18H00  PREVIA CITA SA
 						</datasetParameter>
 						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 					</datasetRun>
-					<jr:column width="160">
-						<jr:columnHeader style="table" height="20" rowSpan="1">
-							<staticText>
-								<reportElement x="0" y="0" width="160" height="20"/>
-								<box leftPadding="3"/>
-								<textElement verticalAlignment="Middle">
-									<font isBold="true"/>
-								</textElement>
-								<text><![CDATA[Medicamentos]]></text>
-							</staticText>
-						</jr:columnHeader>
-						<jr:detailCell style="table 1_TD" height="12" rowSpan="1">
-							<textField isStretchWithOverflow="true">
-								<reportElement x="0" y="0" width="160" height="12" isPrintWhenDetailOverflows="true"/>
-								<box leftPadding="3"/>
-								<textElement>
-									<font size="8"/>
-								</textElement>
-								<textFieldExpression class="java.lang.String"><![CDATA[$F{rec_medicamento}]]></textFieldExpression>
-							</textField>
-						</jr:detailCell>
+					<jr:column width="0">
+						<jr:columnHeader style="table" height="20" rowSpan="1"/>
+						<jr:detailCell style="table 1_TD" height="12" rowSpan="1"/>
 					</jr:column>
-					<jr:column width="160">
+					<jr:column width="331">
 						<jr:columnHeader style="table" height="20" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="160" height="20"/>
+								<reportElement x="0" y="0" width="170" height="20"/>
 								<box leftPadding="3"/>
 								<textElement verticalAlignment="Middle">
 									<font isBold="true"/>
@@ -470,7 +438,7 @@ EDIFICIO FORTUNE JUEVES Y VIERNES 9H00 A 14H00  Y  15H00 A 18H00  PREVIA CITA SA
 						</jr:columnHeader>
 						<jr:detailCell style="table 1_TD" height="12" rowSpan="1">
 							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-								<reportElement x="0" y="0" width="160" height="12" isPrintWhenDetailOverflows="true"/>
+								<reportElement x="0" y="0" width="170" height="12" isPrintWhenDetailOverflows="true"/>
 								<box leftPadding="3"/>
 								<textElement>
 									<font size="8"/>
@@ -523,7 +491,7 @@ EDIFICIO FORTUNE JUEVES Y VIERNES 9H00 A 14H00  Y  15H00 A 18H00  PREVIA CITA SA
 				</jr:table>
 			</componentElement>
 			<staticText>
-				<reportElement positionType="Float" x="9" y="46" width="313" height="44"/>
+				<reportElement positionType="Float" x="9" y="65" width="313" height="44"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<text><![CDATA[DR. MARCO ANTONIO ESCOBAR BUCHELI
 CARDIOLOGO - INTENSIVISTA
@@ -531,21 +499,23 @@ MSP: 1704353273001
 ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="422" y="217" width="380" height="62"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<reportElement positionType="Float" x="411" y="247" width="391" height="46"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
 				<text><![CDATA[DR. MARCO ANTONIO ESCOBAR BUCHELI
 CARDIOLOGO - INTENSIVISTA
 C.M.P 3418 - INHMT 17 - 0802117
 MSP: 1704353273001]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="157" width="313" height="50"/>
+				<reportElement positionType="Float" x="9" y="119" width="313" height="50"/>
 				<textElement/>
 				<text><![CDATA[RECOMENDACIONES: Las enfermedades cardiovasculares son geneticas y deben darse control preventivo a partir de los 10 años en los padres portadores de cardiopatias
 ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="422" y="182" width="132" height="15"/>
+				<reportElement positionType="Float" x="411" y="181" width="132" height="15"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
@@ -553,26 +523,44 @@ MSP: 1704353273001]]></text>
 ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="422" y="118" width="313" height="64"/>
-				<textElement/>
+				<reportElement positionType="Float" x="411" y="133" width="391" height="48"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
 				<text><![CDATA[RECOMENDACIONES GENERALES
 •Consumir Diet Sal para los Alimentos.
 •Realizar ejercicios respiratorios con el triflo aguantando la respiración por 40 segundos y repetir el ejercicio por 40 minutos al día]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="422" y="52" width="313" height="13" forecolor="#FF0000"/>
+				<reportElement positionType="Float" x="411" y="65" width="313" height="13" forecolor="#FF0000"/>
 				<textElement/>
 				<text><![CDATA[SIGNOS DE ALARMA: PACIENTE QUE PRESENTE
 ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="422" y="65" width="313" height="53" forecolor="#000000"/>
-				<textElement/>
+				<reportElement positionType="Float" x="411" y="80" width="391" height="53" forecolor="#000000"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
 				<text><![CDATA[•Dolor de cabeza intenso.
 •Sensación de falta de aire.
 •Dolor de pecho.
 ACUDIR A CONSULTA.
 ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="9" y="0" width="323" height="14"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RECETA.-]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="411" y="0" width="353" height="14"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[INDICACIONES.-]]></text>
 			</staticText>
 		</band>
 	</detail>
