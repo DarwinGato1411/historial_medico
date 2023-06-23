@@ -5,7 +5,7 @@
          class="modalAll modalPaciente">
     
     <caption label="VISITA MÉDICA"   class="titulo"/> 
-     <timer id="timer" delay="300000" repeats="true" onTimer="@command('refrescar')" ></timer>
+    <timer id="timer" delay="300000" repeats="true" onTimer="@command('refrescar')" ></timer>
 
     <div class="container_modal">
         
@@ -32,24 +32,25 @@
                         <label 
                             class="form-control-sm" 
                             value="Fecha nacimiento: " />
-                        <label 
-                            class="form-control-sm" 
-                            value="@load(vm.entidad.idPaciente.pacFechaNacimiento)" />
+                        <datebox compact="true" 
+                                 value="@load(vm.entidad.idPaciente.pacFechaNacimiento)" 
+                                 readonly="true"   
+                                 buttonVisible="false" 
+                                 lenient="true" 
+                                 format="dd/MM/yyyy"
+                                 class="input_date"
+                        />
+                       
                     </div>
                     <div>
                         <label 
                             class="form-control-sm" 
                             value="Edad: " />
-                        <datebox compact="true" 
-                                         value="@load(vm.entidad.idPaciente.pacEdad)" 
-                                         readonly="false"   
-                                         buttonVisible="false" 
-                                         lenient="true" 
-                                         format="dd/MM/yyyy"
-                                         class="input_date"
-                                />
-                       
+                        <label 
+                            class="form-control-sm" 
+                            value="@load(vm.entidad.idPaciente.pacEdad)" />
                     </div>
+                   
             
                 </div> 
                 <div class="VM">

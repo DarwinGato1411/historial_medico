@@ -135,7 +135,7 @@ public class NuevoVisita {
     @AfterCompose
     public void afterCompose(@ExecutionArgParam("valor") NuevaVisitaParam valor, @ContextParam(ContextType.VIEW) Component view) {
         Selectors.wireComponents(view, this, false);
-//        setFechaFomateada(new SimpleDateFormat("dd/MM/yyyy").format(valor.getIdPaciente().getPacFechaNacimiento()));
+
         if (valor.getTipo().equals("cie")) {
             buscarDetalleBD();
         } else {

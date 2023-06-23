@@ -11,40 +11,49 @@
 
     <div  >
         <div class="paciente" >
+            
             <div class="leyenda" >
-                <div>
-                    <label 
-                        class="form-control-sm" 
-                        value="Cédula: " />
-                    <label 
-                        class="form-control-sm" 
-                        value="@load(vm.pacienteSelected.pacRuc)" />
-                </div>
-                <div>
-                    <label 
-                        class="form-control-sm" 
-                        value="Nombre: " />
-                    <label 
-                        class="form-control-sm" 
-                        value="@load(vm.pacienteSelected.pacNombres)" />
-                </div>
-                <div>
-                    <label 
-                        class="form-control-sm" 
-                        value="Fecha nacimiento: " />
-                    <label 
-                        class="form-control-sm" 
-                        value="@load(vm.fechaFomateada)" />
-                </div>
-                <div>
-                    <label 
-                        class="form-control-sm" 
-                        value="Edad: " />
-                    <label 
-                        class="form-control-sm" 
-                        value="@load(vm.pacienteSelected.pacEdad)" />
-                </div>
-            </div> 
+                    <div>
+                        <label 
+                            class="form-control-sm" 
+                            value="Cédula: " />
+                        <label 
+                            class="form-control-sm" 
+                            value="@load(vm.pacienteSelected.pacRuc)" />
+                    </div>
+                    <div>
+                        <label 
+                            class="form-control-sm" 
+                            value="Nombre: " />
+                        <label 
+                            class="form-control-sm" 
+                            value="@load(vm.pacienteSelected.pacNombres)" />
+                    </div>
+                    <div>
+                        <label 
+                            class="form-control-sm" 
+                            value="Fecha nacimiento: " />
+                        <datebox compact="true" 
+                                 value="@load(vm.pacienteSelected.pacFechaNacimiento)" 
+                                 readonly="true"   
+                                 buttonVisible="false" 
+                                 lenient="true" 
+                                 format="dd/MM/yyyy"
+                                 class="input_date"
+                        />
+                       
+                    </div>
+                    <div>
+                        <label 
+                            class="form-control-sm" 
+                            value="Edad: " />
+                        <label 
+                            class="form-control-sm" 
+                            value="@load(vm.pacienteSelected.pacEdad)" />
+                    </div>
+                   
+            
+                </div> 
             <div class="">                                    
                 <button    label="Nueva visita médica"
                            iconSclass="z-icon-plus"

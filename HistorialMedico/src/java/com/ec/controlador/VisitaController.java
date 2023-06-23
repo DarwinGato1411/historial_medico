@@ -102,7 +102,7 @@ public class VisitaController {
         Selectors.wireComponents(view, this, false);
         pacienteSelected = valor;
         
-        setFechaFomateada(new SimpleDateFormat("dd/MM/yyyy").format(pacienteSelected.getPacFechaNacimiento()));
+        
         buscarVisita();
     }
 
@@ -273,6 +273,8 @@ public class VisitaController {
             //  parametros.put("codUsuario", String.valueOf(credentialLog.getAdUsuario().getCodigoUsuario()));
             parametros.put("IdVisitaMedica", valor.getIdVisitaMedica());
             parametros.put("logo", parametrizar.getParBase() + File.separator + parametrizar.getParImagenes() + File.separator + "logohm.png");
+           
+            System.out.println(parametrizar.getParBase() + File.separator + parametrizar.getParImagenes() + File.separator + "logohm.png");
             Calendar calendar = Calendar.getInstance(); //obtiene la fecha de hoy 
             calendar.add(Calendar.HOUR, valor.getVisReposo() == null ? 0 : valor.getVisReposo()); //el -3 indica que se le restaran 3 dias 
             Date fechaFinal = calendar.getTime();
