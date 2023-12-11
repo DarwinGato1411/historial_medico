@@ -13,6 +13,7 @@ import com.ec.entidad.Examen;
 import com.ec.entidad.Paciente;
 import com.ec.entidad.Parametrizar;
 import com.ec.entidad.Receta;
+import com.ec.entidad.RecetaAnteriorVista;
 import com.ec.entidad.Subcapitulo;
 import com.ec.entidad.VisitaMedica;
 import com.ec.seguridad.EnumSesion;
@@ -80,8 +81,7 @@ public class NuevoVisita {
     ServicioVisitaMedica servicioVisitaMedica = new ServicioVisitaMedica();
     private VisitaMedica entidad = new VisitaMedica();
     UserCredential credential = new UserCredential();
-    
-    
+
     private String accion = "create";
     @Wire
     Window wVisita;
@@ -91,6 +91,7 @@ public class NuevoVisita {
     ServicioReceta servicioReceta = new ServicioReceta();
     private List<Receta> listaRecetas = new ArrayList<Receta>();
     private ListModelList<RecetaDao> listaRecetaModel;
+    private ListModelList<RecetaDao> listaRecetaAnteriorModel;
 //    private List<DetalleFacturaDAO> listaDetalleFacturaDAODatos = new ArrayList<DetalleFacturaDAO>();
     private Set<Receta> registroSelectedReceta = new HashSet<Receta>();
 
@@ -146,13 +147,16 @@ public class NuevoVisita {
 
                 if (listaRecetaModel == null) {
                     listaRecetaModel = new ListModelList();
+                    listaRecetaAnteriorModel = new ListModelList();
                 }
                 if (listaExamenModel == null) {
                     listaExamenModel = new ListModelList();
                 }
+                
                 getRecetaExamen();
             } else {
                 listaRecetaModel = new ListModelList();
+                listaRecetaAnteriorModel = new ListModelList();
                 listaExamenModel = new ListModelList();
                 this.entidad = new VisitaMedica();
                 this.entidad.setIdPaciente(valor.getIdPaciente());
@@ -160,6 +164,7 @@ public class NuevoVisita {
                 this.entidad.setVisEstado(Boolean.TRUE);
                 this.entidad.setVisCertificado("POR MEDIO DE LA PRESENTE CERTIFICO QUE EL PACIENTE ACUDE A CONSULTA ");
                 accion = "create";
+                getRecetaAnterior();
 
             }
         }
@@ -182,15 +187,22 @@ public class NuevoVisita {
         rec.setRecN(Boolean.TRUE);
         ((ListModelList<RecetaDao>) listaRecetaModel).add(rec);
     }
+    
+    @Command
+    @NotifyChange({"listaRecetaModel"})
+    public void agregarItemRecetaAnterior(@BindingParam("valor") RecetaDao valor) {
+        RecetaDao rec = new RecetaDao();
+        rec=valor;
 
-    @Command    
-     @NotifyChange({"entidad"})
-    public void refrescar() {
-       Clients.showNotification("Por favor llene la información y presione guardar ",
-                            Clients.NOTIFICATION_TYPE_INFO, null, "end_center", 2000, true);
+        ((ListModelList<RecetaDao>) listaRecetaModel).add(rec);
     }
-    
-    
+
+    @Command
+    @NotifyChange({"entidad"})
+    public void refrescar() {
+        Clients.showNotification("Por favor llene la información y presione guardar ",
+                Clients.NOTIFICATION_TYPE_INFO, null, "end_center", 2000, true);
+    }
 
     @Command
     @NotifyChange({"listaRecetaModel", "listaExamenModel"})
@@ -214,6 +226,23 @@ public class NuevoVisita {
         }
         List<Receta> listaReceta = servicioReceta.findForVisitaMedica(entidad);
         for (Receta receta : listaReceta) {
+            RecetaDao item = new RecetaDao();
+            item.setMedicamento(receta.getRecMedicamento());
+            item.setRecCantidad(receta.getRecCantidad());
+            item.setRecM(receta.getRecM());
+            item.setRecT(receta.getRecT());
+            item.setRecN(receta.getRecN());
+            item.setIndicacion(receta.getRecDescripcion());
+
+            ((ListModelList<RecetaDao>) listaRecetaModel).add(item);
+        }
+    }
+
+    @NotifyChange({"listaRecetaModel"})
+    public void getRecetaAnterior() {
+
+        List<RecetaAnteriorVista> listaReceta = servicioReceta.findVisitaMedicaAnterior(entidad.getIdPaciente());
+        for (RecetaAnteriorVista receta : listaReceta) {
             RecetaDao item = new RecetaDao();
             item.setMedicamento(receta.getRecMedicamento());
             item.setRecCantidad(receta.getRecCantidad());
@@ -337,6 +366,14 @@ public class NuevoVisita {
         this.listaRecetaModel = listaRecetaModel;
     }
 
+    public ListModelList<RecetaDao> getListaRecetaAnteriorModel() {
+        return listaRecetaAnteriorModel;
+    }
+
+    public void setListaRecetaAnteriorModel(ListModelList<RecetaDao> listaRecetaAnteriorModel) {
+        this.listaRecetaAnteriorModel = listaRecetaAnteriorModel;
+    }
+
     public Set<Receta> getRegistroSelectedReceta() {
         return registroSelectedReceta;
     }
@@ -356,7 +393,7 @@ public class NuevoVisita {
 
             if (!nombre.contains("pdf")) {
                 Clients.showNotification("Debe cargar un archivo PDF ",
-                            Clients.NOTIFICATION_TYPE_ERROR, null, "end_center", 3000, true);
+                        Clients.NOTIFICATION_TYPE_ERROR, null, "end_center", 3000, true);
 
                 return;
             }
@@ -373,7 +410,7 @@ public class NuevoVisita {
                 baseDir.mkdirs();
             }
             Files.copy(new File(filePath + File.separator + media.getName()),
-                        media.getStreamData());
+                    media.getStreamData());
             filePath = filePath + File.separator + media.getName();
             System.out.println("pathhhhhhh " + filePath);
             File f = new File(filePath);
@@ -388,7 +425,7 @@ public class NuevoVisita {
 
             ExamenDao dao = new ExamenDao();
             dao.setPath(filePath);
-            dao.setDescripcion("Examen "+media.getName());
+            dao.setDescripcion("Examen " + media.getName());
             dao.setFotoGeneral(fotoGeneral);
             ((ListModelList<ExamenDao>) listaExamenModel).add(dao);
 //            listaExamenModel.add(dao);
@@ -445,11 +482,11 @@ public class NuevoVisita {
 //para pasar al visor
             map.put("pdf", fileContent);
             org.zkoss.zul.Window window = (org.zkoss.zul.Window) Executions.createComponents(
-                        "/visor/visorreporte.zul", null, map);
+                    "/visor/visorreporte.zul", null, map);
             window.doModal();
         } catch (Exception e) {
             Clients.showNotification("Ocurrio un error " + e.getMessage(),
-                        Clients.NOTIFICATION_TYPE_ERROR, null, "middle_center", 2000, true);
+                    Clients.NOTIFICATION_TYPE_ERROR, null, "middle_center", 2000, true);
         }
     }
 
@@ -460,7 +497,7 @@ public class NuevoVisita {
             ((ListModelList<ExamenDao>) listaExamenModel).remove(valor);
         } catch (Exception e) {
             Clients.showNotification("Ocurrio un error no se puede eliminar" + e.getMessage(),
-                        Clients.NOTIFICATION_TYPE_ERROR, null, "middle_center", 2000, true);
+                    Clients.NOTIFICATION_TYPE_ERROR, null, "middle_center", 2000, true);
         }
     }
 
@@ -471,7 +508,7 @@ public class NuevoVisita {
             ((ListModelList<RecetaDao>) listaRecetaModel).remove(valor);
         } catch (Exception e) {
             Clients.showNotification("Ocurrio un error no se puede eliminar" + e.getMessage(),
-                        Clients.NOTIFICATION_TYPE_ERROR, null, "middle_center", 2000, true);
+                    Clients.NOTIFICATION_TYPE_ERROR, null, "middle_center", 2000, true);
         }
     }
 
@@ -485,14 +522,14 @@ public class NuevoVisita {
             map.put("valor", param);
 
             org.zkoss.zul.Window window = (org.zkoss.zul.Window) Executions.createComponents(
-                        "/medico/nuevo/cargarcie10.zul", null, map);
+                    "/medico/nuevo/cargarcie10.zul", null, map);
             window.doModal();
             String CIE10CONCAt = entidad.getVisCargarCie10() != null ? entidad.getVisCargarCie10() : "";
             CIE10CONCAt = CIE10CONCAt + "CIE10 " + CIE10.toUpperCase();
             entidad.setVisCargarCie10(CIE10CONCAt);
         } catch (Exception e) {
             Clients.showNotification("Ocurrio un error " + e.getMessage(),
-                        Clients.NOTIFICATION_TYPE_ERROR, null, "middle_center", 2000, true);
+                    Clients.NOTIFICATION_TYPE_ERROR, null, "middle_center", 2000, true);
         }
     }
 
@@ -619,7 +656,7 @@ public class NuevoVisita {
             con = emf.unwrap(Connection.class);
 
             String reportFile = Executions.getCurrent().getDesktop().getWebApp()
-                        .getRealPath("/reportes");
+                    .getRealPath("/reportes");
             String reportPath = "";
 
             reportPath = reportFile + File.separator + "receta.jasper";
@@ -643,7 +680,7 @@ public class NuevoVisita {
 //para pasar al visor
             map.put("pdf", fileContent);
             org.zkoss.zul.Window window = (org.zkoss.zul.Window) Executions.createComponents(
-                        "/visor/visorreporte.zul", null, map);
+                    "/visor/visorreporte.zul", null, map);
             window.doModal();
         } catch (Exception e) {
             System.out.println("ERROR EL PRESENTAR EL REPORTE " + e.getMessage());

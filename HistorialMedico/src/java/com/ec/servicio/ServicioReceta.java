@@ -4,7 +4,9 @@
  */
 package com.ec.servicio;
 
+import com.ec.entidad.Paciente;
 import com.ec.entidad.Receta;
+import com.ec.entidad.RecetaAnteriorVista;
 import com.ec.entidad.VisitaMedica;
 import java.util.ArrayList;
 import java.util.List;
@@ -119,6 +121,29 @@ public class ServicioReceta {
             em.getTransaction().commit();
         } catch (Exception e) {
             System.out.println("Error en lsa consulta usuario  FindRecetaPorNombre  " + e.getMessage());
+        } finally {
+            em.close();
+        }
+
+        return listaClientes;
+    }
+
+    public List<RecetaAnteriorVista> findVisitaMedicaAnterior(Paciente paciente) {
+
+        List<RecetaAnteriorVista> listaClientes = new ArrayList<RecetaAnteriorVista>();
+
+        try {
+            em = HelperPersistencia.getEMF();
+            em.getTransaction().begin();
+            Query query = em.createQuery("SELECT u FROM RecetaAnteriorVista u where u.id_Paciente=:idPaciente");
+            query.setParameter("idPaciente", paciente.getIdPaciente());
+//            query.setParameter("pacNombre", "%" + valor + "%");
+            query.setMaxResults(5);
+            listaClientes = (List<RecetaAnteriorVista>) query.getResultList();
+
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println("Error en la consulta findVisitaMedicaAnterior  " + e.getMessage());
         } finally {
             em.close();
         }

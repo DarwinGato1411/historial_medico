@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="receta" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.9487171000000043"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="13"/>
+	<property name="ireport.y" value="5"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -492,7 +492,7 @@ EDIFICIO FORTUNE JUEVES Y VIERNES 9H00 A 14H00  Y  15H00 A 18H00  PREVIA CITA SA
 				</jr:table>
 			</componentElement>
 			<staticText>
-				<reportElement positionType="Float" x="9" y="65" width="313" height="44"/>
+				<reportElement positionType="Float" x="9" y="103" width="313" height="44"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<text><![CDATA[DR. MARCO ANTONIO ESCOBAR BUCHELI
 CARDIOLOGO - INTENSIVISTA
@@ -510,13 +510,15 @@ C.M.P 3418 - INHMT 17 - 0802117
 MSP: 1704353273001]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="9" y="119" width="313" height="50"/>
-				<textElement/>
+				<reportElement positionType="Float" x="9" y="157" width="313" height="50"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
 				<text><![CDATA[RECOMENDACIONES: Las enfermedades cardiovasculares son geneticas y deben darse control preventivo a partir de los 10 años en los padres portadores de cardiopatias
 ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="411" y="181" width="132" height="15"/>
+				<reportElement positionType="Float" x="411" y="157" width="132" height="15"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
@@ -524,9 +526,9 @@ MSP: 1704353273001]]></text>
 ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="411" y="133" width="391" height="48"/>
+				<reportElement positionType="Float" x="411" y="118" width="391" height="39"/>
 				<textElement>
-					<font size="9"/>
+					<font size="7"/>
 				</textElement>
 				<text><![CDATA[RECOMENDACIONES GENERALES
 •Consumir Diet Sal para los Alimentos.
@@ -534,14 +536,16 @@ MSP: 1704353273001]]></text>
 			</staticText>
 			<staticText>
 				<reportElement positionType="Float" x="411" y="65" width="313" height="13" forecolor="#FF0000"/>
-				<textElement/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
 				<text><![CDATA[SIGNOS DE ALARMA: PACIENTE QUE PRESENTE
 ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="411" y="80" width="391" height="53" forecolor="#000000"/>
+				<reportElement positionType="Float" x="411" y="80" width="391" height="38" forecolor="#000000"/>
 				<textElement>
-					<font size="9"/>
+					<font size="7"/>
 				</textElement>
 				<text><![CDATA[•Dolor de cabeza intenso.
 •Sensación de falta de aire.

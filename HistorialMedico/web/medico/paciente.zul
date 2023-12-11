@@ -116,7 +116,7 @@
                                     onClick="@command('eliminarPaciente',valor=each)" 
                                     tooltiptext="">
                                     
-                                </button>                                      
+                                </button>                                    
                                                   
                             </listcell>
                                       

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="historico" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-	<property name="ireport.zoom" value="1.4641000000000006"/>
+	<property name="ireport.zoom" value="1.2100000000000006"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="6"/>
+	<property name="ireport.y" value="56"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -149,109 +149,21 @@ vm.id_visita_medica=rc.id_visita_medica and vm.vis_fecha between $P{inicio} and 
 	<field name="pac_medicacion_actual" class="java.lang.String"/>
 	<field name="pac_otros" class="java.lang.String"/>
 	<field name="pac_estado" class="java.lang.Boolean"/>
+	<field name="pac_direccion_trabajo" class="java.lang.String"/>
+	<field name="pac_cargo" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
 		<band height="270" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="555" height="79"/>
+				<reportElement x="274" y="0" width="276" height="79"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="14"/>
 				</textElement>
 				<text><![CDATA[DR. MARCO ESCOBAR BUCHELI
 CARDIOLOGO – INTENSIVISTA
-REPORTE HCL]]></text>
-			</staticText>
-			<textField isBlankWhenNull="true">
-				<reportElement x="115" y="108" width="422" height="20"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{pac_nombres}]]></textFieldExpression>
-			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement x="115" y="147" width="100" height="20"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{pac_movil}]]></textFieldExpression>
-			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement x="115" y="127" width="422" height="20"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{pac_domicilio}]]></textFieldExpression>
-			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement x="115" y="88" width="268" height="20"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{pac_ruc}]]></textFieldExpression>
-			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement x="283" y="148" width="100" height="20"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{pac_sexo}]]></textFieldExpression>
-			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement x="283" y="168" width="100" height="20"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{pac_edad}]]></textFieldExpression>
-			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement x="451" y="148" width="86" height="20"/>
-				<textElement/>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{pac_talla}]]></textFieldExpression>
-			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement x="115" y="164" width="100" height="20"/>
-				<textElement/>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{pac_peso}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="15" y="88" width="100" height="20"/>
-				<textElement/>
-				<text><![CDATA[Cédula:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="15" y="108" width="100" height="20"/>
-				<textElement/>
-				<text><![CDATA[Nombres:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="15" y="127" width="100" height="20"/>
-				<textElement/>
-				<text><![CDATA[Domicilio:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="15" y="144" width="100" height="20"/>
-				<textElement/>
-				<text><![CDATA[Movil:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="215" y="148" width="68" height="20"/>
-				<textElement/>
-				<text><![CDATA[Sexo:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="15" y="164" width="100" height="20"/>
-				<textElement/>
-				<text><![CDATA[Peso (kg):]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="383" y="148" width="68" height="20"/>
-				<textElement/>
-				<text><![CDATA[Talla (metros):]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="215" y="167" width="68" height="20"/>
-				<textElement/>
-				<text><![CDATA[Edad:]]></text>
-			</staticText>
-			<textField isBlankWhenNull="true">
-				<reportElement x="451" y="168" width="86" height="20"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{pac_tipo_sangre}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="383" y="168" width="68" height="20"/>
-				<textElement/>
-				<text><![CDATA[Tipo sangre:]]></text>
+RESUMEN HCL]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="15" y="199" width="522" height="20"/>
@@ -263,8 +175,8 @@ REPORTE HCL]]></text>
 				</textElement>
 				<text><![CDATA[Reporte generado]]></text>
 			</staticText>
-			<textField pattern="MM/dd/yyyy" isBlankWhenNull="true">
-				<reportElement x="102" y="219" width="100" height="20"/>
+			<textField pattern="d/M/yyyy" isBlankWhenNull="true">
+				<reportElement x="102" y="219" width="435" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.util.Date"><![CDATA[$P{inicio}]]></textFieldExpression>
 			</textField>
@@ -278,7 +190,7 @@ REPORTE HCL]]></text>
 				</textElement>
 				<text><![CDATA[Hasta:]]></text>
 			</staticText>
-			<textField pattern="MM/dd/yyyy" isBlankWhenNull="true">
+			<textField pattern="d/M/yyyy" isBlankWhenNull="true">
 				<reportElement x="102" y="239" width="435" height="20"/>
 				<box>
 					<bottomPen lineWidth="0.25"/>
@@ -293,12 +205,100 @@ REPORTE HCL]]></text>
 				</textElement>
 				<text><![CDATA[Desde:]]></text>
 			</staticText>
+			<image hAlign="Center" vAlign="Middle" onErrorType="Blank">
+				<reportElement x="15" y="0" width="259" height="79"/>
+				<imageExpression class="java.lang.String"><![CDATA["//SIS_MEDICO//IMG//logohm.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="16" y="151" width="98" height="13"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dirección:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="165" width="98" height="13"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DIR. Laboral]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="114" y="122" width="186" height="14"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{pac_edad}+" AÑOS"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="115" y="165" width="437" height="13"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{pac_direccion_trabajo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="16" y="122" width="99" height="14"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[EDAD:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="115" y="152" width="437" height="13"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{pac_domicilio}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="16" y="108" width="98" height="14"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CI:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="114" y="108" width="196" height="14"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{pac_ruc}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="16" y="94" width="98" height="14"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[PACIENTE:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="114" y="179" width="437" height="13"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{pac_cargo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="16" y="179" width="98" height="13"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cargo:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="115" y="136" width="186" height="14"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{pac_sexo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="16" y="136" width="99" height="14"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SEXO:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="114" y="94" width="437" height="14"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{pac_nombres}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<detail>
-		<band height="162" splitType="Stretch">
+		<band height="248" splitType="Stretch">
 			<componentElement>
-				<reportElement key="table 1" x="15" y="0" width="522" height="162"/>
+				<reportElement key="table 1" x="0" y="14" width="555" height="175"/>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
 					<datasetRun subDataset="receta">
 						<datasetParameter name="idpaciente">
@@ -312,31 +312,33 @@ REPORTE HCL]]></text>
 						</datasetParameter>
 						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 					</datasetRun>
-					<jr:column width="519">
-						<jr:detailCell height="112" rowSpan="1">
+					<jr:column width="555">
+						<jr:detailCell height="111" rowSpan="1">
 							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-								<reportElement x="0" y="14" width="519" height="14"/>
+								<reportElement x="0" y="14" width="555" height="14"/>
 								<box leftPadding="3">
 									<bottomPen lineWidth="0.0"/>
 								</box>
 								<textElement/>
 								<textFieldExpression class="java.lang.String"><![CDATA[$F{vis_observacion}]]></textFieldExpression>
 							</textField>
-							<textField pattern="MM/dd/yyyy">
-								<reportElement x="0" y="0" width="87" height="14"/>
+							<textField pattern="d/M/yyyy">
+								<reportElement x="116" y="0" width="439" height="14"/>
 								<textElement>
-									<font isBold="true"/>
+									<font isBold="false"/>
 								</textElement>
 								<textFieldExpression class="java.util.Date"><![CDATA[$F{vis_fecha}]]></textFieldExpression>
 							</textField>
 							<staticText>
-								<reportElement x="87" y="0" width="432" height="14"/>
+								<reportElement x="0" y="0" width="116" height="14"/>
 								<box leftPadding="3"/>
-								<textElement/>
+								<textElement>
+									<font isBold="true"/>
+								</textElement>
 								<text><![CDATA[Fecha visita:]]></text>
 							</staticText>
 							<staticText>
-								<reportElement positionType="Float" x="0" y="56" width="519" height="14"/>
+								<reportElement positionType="Float" x="0" y="56" width="555" height="14"/>
 								<box leftPadding="3"/>
 								<textElement>
 									<font isBold="true"/>
@@ -344,7 +346,7 @@ REPORTE HCL]]></text>
 								<text><![CDATA[Medicamento]]></text>
 							</staticText>
 							<staticText>
-								<reportElement positionType="Float" x="0" y="28" width="519" height="14"/>
+								<reportElement positionType="Float" x="0" y="28" width="555" height="14"/>
 								<box leftPadding="3"/>
 								<textElement>
 									<font isBold="true"/>
@@ -352,12 +354,12 @@ REPORTE HCL]]></text>
 								<text><![CDATA[Diagnóstico]]></text>
 							</staticText>
 							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-								<reportElement positionType="Float" x="0" y="70" width="519" height="14" isPrintWhenDetailOverflows="true"/>
+								<reportElement positionType="Float" x="0" y="70" width="555" height="14" isPrintWhenDetailOverflows="true"/>
 								<textElement/>
 								<textFieldExpression class="java.lang.String"><![CDATA[$F{rec_medicamento}]]></textFieldExpression>
 							</textField>
 							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-								<reportElement positionType="Float" x="0" y="98" width="519" height="14" isPrintWhenDetailOverflows="true"/>
+								<reportElement positionType="Float" x="0" y="97" width="555" height="14" isPrintWhenDetailOverflows="true"/>
 								<box>
 									<bottomPen lineWidth="0.25"/>
 								</box>
@@ -365,12 +367,12 @@ REPORTE HCL]]></text>
 								<textFieldExpression class="java.lang.String"><![CDATA[$F{rec_descripcion}]]></textFieldExpression>
 							</textField>
 							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-								<reportElement positionType="Float" x="0" y="42" width="519" height="14" isPrintWhenDetailOverflows="true"/>
+								<reportElement positionType="Float" x="0" y="42" width="555" height="14" isPrintWhenDetailOverflows="true"/>
 								<textElement/>
 								<textFieldExpression class="java.lang.String"><![CDATA[$F{vis_cargar_cie10}]]></textFieldExpression>
 							</textField>
 							<staticText>
-								<reportElement positionType="Float" x="0" y="84" width="519" height="14"/>
+								<reportElement positionType="Float" x="0" y="84" width="555" height="14"/>
 								<box leftPadding="3"/>
 								<textElement>
 									<font isBold="true"/>
@@ -384,19 +386,11 @@ REPORTE HCL]]></text>
 		</band>
 	</detail>
 	<pageFooter>
-		<band height="54" splitType="Stretch">
-			<staticText>
-				<reportElement x="0" y="0" width="555" height="54"/>
-				<textElement textAlignment="Center"/>
-				<text><![CDATA[Consultorio: Ulpiano Páez N22-188 y Veintimilla Consultorios Médicos Pichincha Torre C Piso 4 Oficina 413
-Teléfono: 2559133 Cel. 0997124127/ 0980023883.
-Consultorio: Av. Eloy Alfaro N29-235 entre Alemania e Italia Edificio Fortune Plaza
-Frente a la Clínica Pasteur, Piso 7 Oficina 710 Teléfono: 3801640
-Cel. 0997124127 / 0980023883.
-Síguenos en Facebook: Centro Integral de Cardiología CITAS: https://marcoescobarcardiologointensivista.com
-e-mail:marcoescobar10@hotmail.com
-]]></text>
-			</staticText>
+		<band height="132" splitType="Stretch">
+			<image hAlign="Center" vAlign="Middle" onErrorType="Blank">
+				<reportElement x="0" y="8" width="555" height="124"/>
+				<imageExpression class="java.lang.String"><![CDATA["//SIS_MEDICO//IMG//historial2.png"]]></imageExpression>
+			</image>
 		</band>
 	</pageFooter>
 </jasperReport>

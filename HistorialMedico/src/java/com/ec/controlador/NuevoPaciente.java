@@ -26,7 +26,6 @@ import java.util.List;
 import javax.xml.xpath.XPathExpressionException;
 import org.json.JSONException;
 
-
 import org.zkoss.bind.annotation.AfterCompose;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.ContextParam;
@@ -159,6 +158,12 @@ public class NuevoPaciente {
 
             }
         }
+        if (accion.equals("create")) {
+            boolean cedulaRepetida = servicio.findCedulaRepetida(entidad.getPacRuc(), Boolean.TRUE);
+            if (cedulaRepetida) {
+                Messagebox.show("Este usuario ya se encuentra registrado", "Atención", Messagebox.OK, Messagebox.EXCLAMATION);
+            }
+        }
 
     }
 
@@ -174,17 +179,22 @@ public class NuevoPaciente {
     @Command
     public void guardar() {
         if (entidad.getPacRuc() != null
-                    && entidad.getPacNombres() != null) {
+                && entidad.getPacNombres() != null) {
 
             if (accion.equals("create")) {
-                servicio.crear(entidad);
-                //  Messagebox.show("Guardado con exito");
 
-                wCapitulo.detach();
+                boolean cedulaRepetida = servicio.findCedulaRepetida(entidad.getPacRuc(), Boolean.TRUE);
+                if (cedulaRepetida) {
+                    Messagebox.show("Este usuario ya se encuentra registrado", "Atención", Messagebox.OK, Messagebox.EXCLAMATION);
+                } else {
+                    servicio.crear(entidad);
+                    wCapitulo.detach();
+                }
+
+                
             } else {
                 servicio.modificar(entidad);
                 // Messagebox.show("Guardado con exito");
-
                 wCapitulo.detach();
             }
 
@@ -213,7 +223,7 @@ public class NuevoPaciente {
                 baseDir.mkdirs();
             }
             Files.copy(new File(filePath + File.separator + media.getName()),
-                        media.getStreamData());
+                    media.getStreamData());
 
             entidad.setPacFotografia(filePath + File.separator + media.getName());
             System.out.println("PATH SUBIR " + filePath + File.separator + media.getName());

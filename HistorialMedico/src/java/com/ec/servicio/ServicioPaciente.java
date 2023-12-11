@@ -103,6 +103,33 @@ public class ServicioPaciente {
         return usuarioObtenido;
     }
 
+    public boolean findCedulaRepetida(String valor, Boolean estado) {
+
+        List<Paciente> listaClientes = new ArrayList<Paciente>();
+
+        boolean repetido = false;
+        try {
+            //Connection connection = em.unwrap(Connection.class);
+
+            em = HelperPersistencia.getEMF();
+            em.getTransaction().begin();
+            Query query = em.createQuery("SELECT u FROM Paciente u WHERE u.pacRuc =:pacRuc AND u.pacEstado=:pacEstado");
+            query.setParameter("pacRuc", valor );
+            query.setParameter("pacEstado", estado);
+            listaClientes = (List<Paciente>) query.getResultList();
+            if (listaClientes.size() > 0) {
+                repetido = true;
+            }
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println("Error en lsa consulta usuario  FindPacientePorNombre  " + e);
+        } finally {
+            em.close();
+        }
+
+        return repetido;
+    }
+
     public List<Paciente> finAll(String nombre) {
         List<Paciente> listaPacientes = new ArrayList<Paciente>();
         try {
