@@ -89,6 +89,7 @@ public class AgendarController {
         credential = (UserCredential) sess.getAttribute(EnumSesion.userCredential.getNombre());
         usuario = credential.getUsuarioSistema();
         parametrizar = servicioParametrizar.findActivo();
+        idCalendar.get(1);
     }
 
     @AfterCompose

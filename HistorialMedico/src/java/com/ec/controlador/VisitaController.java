@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package com.ec.controlador;
-
 import com.ec.controlador.doa.NuevaVisitaParams;
 import com.ec.entidad.Paciente;
 import com.ec.entidad.Parametrizar;
@@ -21,6 +20,8 @@ import com.ec.servicio.ServicioUsuario;
 import com.ec.servicio.ServicioVisitaMedicas;
 import com.ec.utilitario.ArchivoUtils;
 import com.ec.utilitario.MailerClass;
+import com.groupdocs.signature.exception.GroupDocsSignatureException;
+import com.groupdocs.signature.licensing.License;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -297,7 +298,7 @@ public class VisitaController {
 
             //  parametros.put("codUsuario", String.valueOf(credentialLog.getAdUsuario().getCodigoUsuario()));
             parametros.put("IdVisitaMedica", valor.getIdVisitaMedica());
-           parametros.put("logo", usuario.getUsuLogo());
+            parametros.put("logo", usuario.getUsuLogo());
             Calendar calendar = Calendar.getInstance(); //obtiene la fecha de hoy 
             calendar.add(Calendar.HOUR, valor.getVisReposo() == null ? 0 : valor.getVisReposo()); //el -3 indica que se le restaran 3 dias 
             Date fechaFinal = calendar.getTime();
@@ -332,6 +333,10 @@ public class VisitaController {
 
             byte[] buf = JasperRunManager.runReportToPdf(is, parametros, con);
             InputStream mediais = new ByteArrayInputStream(buf);
+
+            /*Firmar PDF */
+            // objects
+          
             AMedia amedia = new AMedia("Reporte", "pdf", "application/pdf", mediais);
             fileContent = amedia;
             final HashMap<String, AMedia> map = new HashMap<String, AMedia>();
@@ -350,6 +355,8 @@ public class VisitaController {
         }
 
     }
+
+//   s
 
     public String Convertir(String numero, boolean mayusculas) {
         String literal = "";

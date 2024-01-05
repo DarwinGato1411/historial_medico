@@ -165,7 +165,7 @@
 				<text><![CDATA[Edad:]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement x="78" y="110" width="254" height="12"/>
+				<reportElement x="78" y="110" width="124" height="12"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
@@ -197,7 +197,7 @@
 				<textElement>
 					<font size="8" isBold="true"/>
 				</textElement>
-				<text><![CDATA[HCL Nº:]]></text>
+				<text><![CDATA[HCL:]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
 				<reportElement x="94" y="122" width="238" height="12"/>
@@ -303,7 +303,7 @@
 				<textElement>
 					<font size="8" isBold="true"/>
 				</textElement>
-				<text><![CDATA[HCL Nº:]]></text>
+				<text><![CDATA[HCL:]]></text>
 			</staticText>
 			<textField>
 				<reportElement mode="Transparent" x="64" y="0" width="319" height="76" forecolor="#5B9BD5" backcolor="#FFFFFF"/>
@@ -318,6 +318,34 @@
 					<font fontName="SansSerif" size="6" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{usu_encabezado_receta}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="202" y="110" width="69" height="12"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<textField pattern="yyyy/MM/dd" isBlankWhenNull="true">
+				<reportElement x="271" y="110" width="112" height="12"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{vis_fecha}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="621" y="110" width="69" height="12"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<textField pattern="yyyy/MM/dd" isBlankWhenNull="true">
+				<reportElement x="690" y="110" width="112" height="12"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{vis_fecha}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
