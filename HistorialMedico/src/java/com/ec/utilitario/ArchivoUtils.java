@@ -25,9 +25,12 @@ import java.nio.charset.Charset;
 import java.security.cert.X509Certificate;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.Date;
@@ -742,6 +745,20 @@ public class ArchivoUtils {
                 atZone(ZoneId.systemDefault()).toLocalDate();
         long edad = ChronoUnit.YEARS.between(nacimiento, hoy);
         return BigDecimal.valueOf(edad);
+    }
+
+    public static BigDecimal obtenerEdadV2(Date param) {
+        // 01/01/2000
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String strDate = dateFormat.format(param);
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate fechaNac = LocalDate.parse(strDate, fmt);
+        LocalDate ahora = LocalDate.now();
+
+        Period periodo = Period.between(fechaNac, ahora);
+        System.out.printf("Tu edad es: %s años, %s meses y %s días",
+                periodo.getYears(), periodo.getMonths(), periodo.getDays());
+        return BigDecimal.valueOf(periodo.getYears());
     }
 
     public static String obtenerPorRuc(String cedula) {

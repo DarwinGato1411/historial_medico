@@ -138,7 +138,7 @@ public class ServicioReceta {
             Query query = em.createQuery("SELECT u FROM RecetaAnteriorVista u where u.id_Paciente=:idPaciente");
             query.setParameter("idPaciente", paciente.getIdPaciente());
 //            query.setParameter("pacNombre", "%" + valor + "%");
-            query.setMaxResults(5);
+            query.setMaxResults(20);
             listaClientes = (List<RecetaAnteriorVista>) query.getResultList();
 
             em.getTransaction().commit();

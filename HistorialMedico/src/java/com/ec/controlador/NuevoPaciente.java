@@ -171,7 +171,7 @@ public class NuevoPaciente {
     @NotifyChange("entidad")
     public void obtenerEdad() {
         if (entidad.getPacFechaNacimiento() != null) {
-            BigDecimal edad = ArchivoUtils.obtenerEdad(entidad.getPacFechaNacimiento());
+            BigDecimal edad = ArchivoUtils.obtenerEdadV2(entidad.getPacFechaNacimiento());
             entidad.setPacEdad(edad.intValue());
         }
     }

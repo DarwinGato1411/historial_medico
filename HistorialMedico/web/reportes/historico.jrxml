@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="historico" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-	<property name="ireport.zoom" value="1.2100000000000006"/>
+	<property name="ireport.zoom" value="1.9487171000000019"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="56"/>
+	<property name="ireport.y" value="0"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -43,68 +43,121 @@
 			<pen lineWidth="0.5" lineColor="#000000"/>
 		</box>
 	</style>
+	<style name="table 2">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 4">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 4_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 4_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 4_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 5">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 5_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 5_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 5_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 6">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 6_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 6_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 6_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
 	<subDataset name="receta">
-		<parameter name="idpaciente" class="java.lang.Integer">
-			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
-		</parameter>
-		<parameter name="inicio" class="java.util.Date">
-			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
-		</parameter>
-		<parameter name="fin" class="java.util.Date">
-			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
-		</parameter>
+		<parameter name="idVisita" class="java.lang.Integer"/>
 		<queryString>
-			<![CDATA[select * from public.visita_medica vm,public.paciente pc, receta rc
-where pc.id_paciente=vm.id_paciente  and vis_estado=true and pc.id_paciente=$P{idpaciente}  and
-vm.id_visita_medica=rc.id_visita_medica and vm.vis_fecha between $P{inicio} and $P{fin}]]>
+			<![CDATA[select * from  receta rc
+where rc.id_visita_medica=$P{idVisita};]]>
 		</queryString>
-		<field name="id_visita_medica" class="java.lang.Integer"/>
-		<field name="id_paciente" class="java.lang.Integer"/>
-		<field name="vis_fecha" class="java.sql.Date"/>
-		<field name="vis_diagnostico" class="java.lang.String"/>
-		<field name="vis_cargar_cie10" class="java.lang.String"/>
-		<field name="vis_reseta" class="java.lang.String"/>
-		<field name="vis_observacion" class="java.lang.String"/>
-		<field name="vis_estado" class="java.lang.Boolean"/>
-		<field name="vis_certificado" class="java.lang.String"/>
-		<field name="id_usuario" class="java.lang.Integer"/>
-		<field name="pac_ruc" class="java.lang.String"/>
-		<field name="pac_nombres" class="java.lang.String"/>
-		<field name="pac_domicilio" class="java.lang.String"/>
-		<field name="pac_correo" class="java.lang.String"/>
-		<field name="pac_telefono" class="java.lang.String"/>
-		<field name="pac_fecha_nacimiento" class="java.sql.Date"/>
-		<field name="pac_sexo" class="java.lang.String"/>
-		<field name="pac_estado_civil" class="java.lang.String"/>
-		<field name="pac_tipo_sangre" class="java.lang.String"/>
-		<field name="pac_aseguradora" class="java.lang.String"/>
-		<field name="pac_apellidos" class="java.lang.String"/>
-		<field name="pac_edad" class="java.lang.Integer"/>
-		<field name="pac_movil" class="java.lang.String"/>
-		<field name="pac_alegias" class="java.lang.String"/>
-		<field name="pac_cirugias" class="java.lang.String"/>
-		<field name="pac_enfermedad_existente" class="java.lang.String"/>
-		<field name="pac_enfermedad_familia" class="java.lang.String"/>
-		<field name="pac_talla" class="java.math.BigDecimal"/>
-		<field name="pac_peso" class="java.math.BigDecimal"/>
-		<field name="pac_imc" class="java.math.BigDecimal"/>
-		<field name="pac_tm_bucal" class="java.lang.String"/>
-		<field name="pac_cuello" class="java.lang.String"/>
-		<field name="pac_cintura" class="java.lang.String"/>
-		<field name="pac_per_abdominal" class="java.lang.String"/>
-		<field name="pac_pa" class="java.lang.String"/>
-		<field name="pac_fc" class="java.lang.String"/>
-		<field name="pac_sp02" class="java.lang.String"/>
-		<field name="pac_fotografia" class="java.lang.String"/>
-		<field name="pac_ref_familiar" class="java.lang.String"/>
-		<field name="pac_telefono_referencia" class="java.lang.String"/>
-		<field name="pac_medicacion_actual" class="java.lang.String"/>
-		<field name="pac_otros" class="java.lang.String"/>
-		<field name="pac_estado" class="java.lang.Boolean"/>
 		<field name="id_receta" class="java.lang.Integer"/>
+		<field name="id_visita_medica" class="java.lang.Integer"/>
 		<field name="rec_medicamento" class="java.lang.String"/>
 		<field name="rec_descripcion" class="java.lang.String"/>
 		<field name="host" class="java.lang.String"/>
+		<field name="rec_m" class="java.lang.Boolean"/>
+		<field name="rec_cantidad" class="java.lang.String"/>
+		<field name="rec_t" class="java.lang.Boolean"/>
+		<field name="rec_n" class="java.lang.Boolean"/>
 	</subDataset>
 	<parameter name="idPaciente" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -112,9 +165,20 @@ vm.id_visita_medica=rc.id_visita_medica and vm.vis_fecha between $P{inicio} and 
 	<parameter name="inicio" class="java.util.Date"/>
 	<parameter name="fin" class="java.util.Date"/>
 	<queryString>
-		<![CDATA[select * from public.paciente pc where pc.id_paciente=$P{idPaciente} limit 1]]>
+		<![CDATA[select * from public.visita_medica vm,public.paciente pc
+where pc.id_paciente=vm.id_paciente  and vis_estado=true and pc.id_paciente=$P{idPaciente}  and
+vm.vis_fecha between $P{inicio} and $P{fin} order by vm.vis_fecha asc]]>
 	</queryString>
+	<field name="id_visita_medica" class="java.lang.Integer"/>
 	<field name="id_paciente" class="java.lang.Integer"/>
+	<field name="vis_fecha" class="java.sql.Date"/>
+	<field name="vis_diagnostico" class="java.lang.String"/>
+	<field name="vis_cargar_cie10" class="java.lang.String"/>
+	<field name="vis_reseta" class="java.lang.String"/>
+	<field name="vis_observacion" class="java.lang.String"/>
+	<field name="vis_estado" class="java.lang.Boolean"/>
+	<field name="vis_certificado" class="java.lang.String"/>
+	<field name="vis_reposo" class="java.lang.Integer"/>
 	<field name="id_usuario" class="java.lang.Integer"/>
 	<field name="pac_ruc" class="java.lang.String"/>
 	<field name="pac_nombres" class="java.lang.String"/>
@@ -296,89 +360,97 @@ RESUMEN HCL]]></text>
 		</band>
 	</title>
 	<detail>
-		<band height="248" splitType="Stretch">
+		<band height="132" splitType="Stretch">
 			<componentElement>
-				<reportElement key="table 1" x="0" y="14" width="555" height="175"/>
+				<reportElement key="table 1" positionType="Float" isPrintRepeatedValues="false" x="16" y="81" width="522" height="14"/>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
 					<datasetRun subDataset="receta">
-						<datasetParameter name="idpaciente">
-							<datasetParameterExpression><![CDATA[$P{idPaciente}]]></datasetParameterExpression>
-						</datasetParameter>
-						<datasetParameter name="inicio">
-							<datasetParameterExpression><![CDATA[$P{inicio}]]></datasetParameterExpression>
-						</datasetParameter>
-						<datasetParameter name="fin">
-							<datasetParameterExpression><![CDATA[$P{fin}]]></datasetParameterExpression>
+						<datasetParameter name="idVisita">
+							<datasetParameterExpression><![CDATA[$F{id_visita_medica}]]></datasetParameterExpression>
 						</datasetParameter>
 						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 					</datasetRun>
 					<jr:column width="555">
-						<jr:detailCell height="111" rowSpan="1">
-							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-								<reportElement x="0" y="14" width="555" height="14"/>
-								<box leftPadding="3">
-									<bottomPen lineWidth="0.0"/>
-								</box>
-								<textElement/>
-								<textFieldExpression class="java.lang.String"><![CDATA[$F{vis_observacion}]]></textFieldExpression>
-							</textField>
-							<textField pattern="d/M/yyyy">
-								<reportElement x="116" y="0" width="439" height="14"/>
+						<jr:detailCell height="14" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement stretchType="RelativeToBandHeight" isPrintRepeatedValues="false" x="0" y="0" width="555" height="14" isPrintWhenDetailOverflows="true"/>
 								<textElement>
-									<font isBold="false"/>
+									<font size="9"/>
 								</textElement>
-								<textFieldExpression class="java.util.Date"><![CDATA[$F{vis_fecha}]]></textFieldExpression>
-							</textField>
-							<staticText>
-								<reportElement x="0" y="0" width="116" height="14"/>
-								<box leftPadding="3"/>
-								<textElement>
-									<font isBold="true"/>
-								</textElement>
-								<text><![CDATA[Fecha visita:]]></text>
-							</staticText>
-							<staticText>
-								<reportElement positionType="Float" x="0" y="56" width="555" height="14"/>
-								<box leftPadding="3"/>
-								<textElement>
-									<font isBold="true"/>
-								</textElement>
-								<text><![CDATA[Medicamento]]></text>
-							</staticText>
-							<staticText>
-								<reportElement positionType="Float" x="0" y="28" width="555" height="14"/>
-								<box leftPadding="3"/>
-								<textElement>
-									<font isBold="true"/>
-								</textElement>
-								<text><![CDATA[Diagnóstico]]></text>
-							</staticText>
-							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-								<reportElement positionType="Float" x="0" y="70" width="555" height="14" isPrintWhenDetailOverflows="true"/>
-								<textElement/>
 								<textFieldExpression class="java.lang.String"><![CDATA[$F{rec_medicamento}]]></textFieldExpression>
 							</textField>
-							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-								<reportElement positionType="Float" x="0" y="97" width="555" height="14" isPrintWhenDetailOverflows="true"/>
-								<box>
-									<bottomPen lineWidth="0.25"/>
-								</box>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<staticText>
+				<reportElement positionType="Float" x="16" y="10" width="86" height="14" isPrintWhenDetailOverflows="true"/>
+				<box leftPadding="3"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha visita:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="16" y="53" width="522" height="14" isPrintWhenDetailOverflows="true"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{vis_cargar_cie10}]]></textFieldExpression>
+			</textField>
+			<textField pattern="d/M/yyyy">
+				<reportElement positionType="Float" x="102" y="10" width="435" height="14"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{vis_fecha}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="16" y="39" width="522" height="14"/>
+				<box leftPadding="3"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Diagnóstico]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="16" y="24" width="521" height="14"/>
+				<box leftPadding="3">
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{vis_observacion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="16" y="95" width="521" height="14" isPrintWhenDetailOverflows="true"/>
+				<box leftPadding="3"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Indicaciones]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="16" y="67" width="521" height="14"/>
+				<box leftPadding="3"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Medicamento]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement key="table 6" positionType="Float" x="17" y="110" width="520" height="22"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="receta">
+						<datasetParameter name="idVisita">
+							<datasetParameterExpression><![CDATA[$F{id_visita_medica}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="520">
+						<jr:detailCell height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="520" height="20"/>
 								<textElement/>
 								<textFieldExpression class="java.lang.String"><![CDATA[$F{rec_descripcion}]]></textFieldExpression>
 							</textField>
-							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-								<reportElement positionType="Float" x="0" y="42" width="555" height="14" isPrintWhenDetailOverflows="true"/>
-								<textElement/>
-								<textFieldExpression class="java.lang.String"><![CDATA[$F{vis_cargar_cie10}]]></textFieldExpression>
-							</textField>
-							<staticText>
-								<reportElement positionType="Float" x="0" y="84" width="555" height="14"/>
-								<box leftPadding="3"/>
-								<textElement>
-									<font isBold="true"/>
-								</textElement>
-								<text><![CDATA[Indicaciones]]></text>
-							</staticText>
 						</jr:detailCell>
 					</jr:column>
 				</jr:table>

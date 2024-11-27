@@ -89,7 +89,7 @@ public class ServicioVisitaMedica {
             query.setParameter("visObservacion", "%" + buscar + "%");
             query.setParameter("visEstado", estado);
             listado = (List<VisitaMedica>) query.getResultList();
-            
+
             em.getTransaction().commit();
         } catch (Exception e) {
             System.out.println("Error en lsa consulta usuario  FindVisitaMedicaPorNombre  " + e.getMessage());
@@ -98,6 +98,37 @@ public class ServicioVisitaMedica {
         }
 
         return listado;
+    }
+
+    public VisitaMedica findForPacienteUltima(Paciente idPaciente, String buscar, Boolean estado) {
+        VisitaMedica respuesta = null;
+        List<VisitaMedica> listado = new ArrayList<VisitaMedica>();
+//        VisitaMedica usuarioObtenido = new VisitaMedica();
+        try {
+            //Connection connection = em.unwrap(Connection.class);
+
+            em = HelperPersistencia.getEMF();
+            em.getTransaction().begin();
+            Query query = em.createQuery("SELECT u FROM VisitaMedica u WHERE u.idPaciente=:idPaciente AND  u.visEstado=:visEstado ORDER BY u.idVisitaMedica DESC");
+            query.setParameter("idPaciente", idPaciente);
+//            query.setParameter("visObservacion", "%" + buscar + "%");
+            query.setParameter("visEstado", estado);
+            query.setMaxResults(1);
+            listado = (List<VisitaMedica>) query.getResultList();
+            em.getTransaction().commit();
+            if (!listado.isEmpty()) {
+                respuesta = listado.get(0);
+            } else {
+                respuesta = null;
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error en lsa consulta usuario  FindVisitaMedicaPorNombre  " + e.getMessage());
+        } finally {
+            em.close();
+        }
+
+        return respuesta;
     }
 
     public List<VisitaMedica> finAll(String nombre) {
@@ -119,8 +150,8 @@ public class ServicioVisitaMedica {
 
         return listaVisitaMedicas;
     }
-    
-     public void eliminarExamenesRecetas(Integer idVisitaMedica) {
+
+    public void eliminarExamenesRecetas(Integer idVisitaMedica) {
         try {
 
             em = HelperPersistencia.getEMF();
