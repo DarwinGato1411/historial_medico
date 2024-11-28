@@ -112,21 +112,21 @@ public class AgendarController {
     public void agendar() {
 
         try {
-            
-        java.util.Calendar calendario = new GregorianCalendar();
-        calendario.get(java.util.Calendar.DAY_OF_WEEK);
+
+            java.util.Calendar calendario = new GregorianCalendar();
+            calendario.get(java.util.Calendar.DAY_OF_WEEK);
 //        servicioUsuario.modificar(usuario);
-        System.out.println("DIA DE LA SEMANA " + calendario.get(java.util.Calendar.DAY_OF_WEEK));
+            System.out.println("DIA DE LA SEMANA " + calendario.get(java.util.Calendar.DAY_OF_WEEK));
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(fechaAgendar);
-        System.out.println("DIA DE LA SEMANA ACTUAL " + calendario.get(java.util.Calendar.DAY_OF_WEEK) + "DIA DE LA SEMANA seleccion " + calendar.get(Calendar.DAY_OF_WEEK));
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(fechaAgendar);
+            System.out.println("DIA DE LA SEMANA ACTUAL " + calendario.get(java.util.Calendar.DAY_OF_WEEK) + "DIA DE LA SEMANA seleccion " + calendar.get(Calendar.DAY_OF_WEEK));
 
-        String mensaje = servicioGeneral.generarAgenda(usuario.getIdUsuario(), calendar.get(java.util.Calendar.DAY_OF_WEEK), fechaAgendar);
-        consultaAgenda();
+            String mensaje = servicioGeneral.generarAgenda(usuario.getIdUsuario(), calendar.get(java.util.Calendar.DAY_OF_WEEK), fechaAgendar);
+            consultaAgenda();
 
         } catch (Exception e) {
-             Clients.showNotification("No se pudo generar la agenda  ",
+            Clients.showNotification("No se pudo generar la agenda  ",
                     Clients.NOTIFICATION_TYPE_ERROR, null, "end_center", 3000, true);
         }
 //        if (mensaje.contains("CORRECTAMENTE")) {
@@ -197,7 +197,7 @@ public class AgendarController {
 
             map.put("valor", "buscar");
             org.zkoss.zul.Window window = (org.zkoss.zul.Window) Executions.createComponents(
-                        "/medico/paciente_agendar.zul", null, map);
+                    "/medico/paciente_agendar.zul", null, map);
             window.doModal();
             valor.setIdPaciente(pacienteSelected);
             servicioAgendamiento.modificar(valor);
@@ -214,7 +214,7 @@ public class AgendarController {
             consultaAgenda();
         } catch (Exception e) {
             Clients.showNotification("Ocurrio un error " + e.getMessage(),
-                        Clients.NOTIFICATION_TYPE_ERROR, null, "middle_center", 1000, true);
+                    Clients.NOTIFICATION_TYPE_ERROR, null, "middle_center", 1000, true);
         }
     }
 
@@ -227,7 +227,7 @@ public class AgendarController {
             wPacienteAgendar.detach();
         } catch (Exception e) {
             Clients.showNotification("Ocurrio un error " + e.getMessage(),
-                        Clients.NOTIFICATION_TYPE_ERROR, null, "middle_center", 2000, true);
+                    Clients.NOTIFICATION_TYPE_ERROR, null, "middle_center", 2000, true);
         }
     }
 
