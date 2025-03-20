@@ -3362,7 +3362,7 @@ input, button, select, textarea {
 .contenedorEmpresa .contenedorInfoCalendar .infoEmpresa .contenedorInfoInputs .inputCalendar{
 
     display: grid;
-    grid-template-columns:60% 40%;
+    grid-template-columns:40% 60%;
     gap:5px;
 
 }

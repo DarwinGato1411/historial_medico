@@ -38,10 +38,25 @@
                     <listhead  > 
                         <listheader label="" width="45px" />
                         <listheader label="" width="45px" />
-                        <listheader label="Paciente" width="70%" >
+                        <listheader label="Paciente" width="40%" >
                         </listheader>                                                                         
-                        <listheader label="Inicio" width="15%" />                                                                        
-                        <listheader label="Fin"  width="15%" />                                                                         
+                        <listheader label="Inicio" width="10%" />                                                                        
+                        <listheader label="Fin"  width="10%" />                                                                         
+                        <listheader label="C1"  width="10%" />                                                                         
+                        <listheader label="C2"  width="10%" />                                                                         
+                        <listheader label="C3"  width="10%" />                                                                         
+                        <listheader label="C4"  width="10%" />                                                                         
+                        <listheader label="C5"  width="10%" />                                                                         
+                        <listheader label="C6"  width="10%" />                                                                         
+                        <listheader label="C7"  width="10%" />                                                                         
+                        <listheader label="C8"  width="10%" />                                                                         
+                        <listheader label="C9"  width="10%" />                                                                         
+                        <listheader label="C10"  width="10%" />                                                                         
+                        <listheader label="C11"  width="10%" />                                                                         
+                        <listheader label="C12"  width="10%" />                                                                         
+                        <listheader label="C13"  width="10%" />                                                                         
+                        <listheader label="C14"  width="10%" />                                                                         
+                        <listheader label="C15"  width="10%" />                                                                         
                     </listhead>  
                     <template name="model" >                                                            
                         <listitem  >
@@ -89,8 +104,157 @@
                                                   
                             </listcell>
 
-                            
+                            <listcell zclass = "mycss-listcell"  >
+                                <textbox readonly="false"  style="font-size:12px ;background:#EBF5FB"
+                                         class="form-control form-control-sm" 
+                                         width="100%"
+                                         value="@bind(each.c1)"
+                                         
+                                />
                                 
+                                 </listcell>
+                                 
+                                 
+                            <listcell zclass = "mycss-listcell"  >
+                                <textbox readonly="false"  style="font-size:12px ;background:#EBF5FB"
+                                         class="form-control form-control-sm" 
+                                         width="100%"
+                                            value="@bind(each.c2)"
+                                         
+                                />
+                                
+                                 </listcell>
+                                 
+                            <listcell zclass = "mycss-listcell"  >
+                                <textbox readonly="false"  style="font-size:12px ;background:#EBF5FB"
+                                         class="form-control form-control-sm" 
+                                         width="100%"
+                                           value="@bind(each.c3)"
+                                         
+                                />
+                                
+                                 </listcell>
+                                 
+                            <listcell zclass = "mycss-listcell"  >
+                                <textbox readonly="false"  style="font-size:12px ;background:#EBF5FB"
+                                         class="form-control form-control-sm" 
+                                         width="100%"
+                                         value="@bind(each.C4)"
+                                         
+                                />
+                                
+                                 </listcell>
+                                 
+                            <listcell zclass = "mycss-listcell"  >
+                                <textbox readonly="false"  style="font-size:12px ;background:#EBF5FB"
+                                         class="form-control form-control-sm" 
+                                         width="100%"
+                                           value="@bind(each.c5)"
+                                         
+                                />
+                                
+                                 </listcell>
+                                 
+                            <listcell zclass = "mycss-listcell"  >
+                                <textbox readonly="false"  style="font-size:12px ;background:#EBF5FB"
+                                         class="form-control form-control-sm" 
+                                         width="100%"
+                                           value="@bind(each.c6)"
+                                         
+                                />
+                                
+                                 </listcell>
+                                 
+                            <listcell zclass = "mycss-listcell"  >
+                                <textbox readonly="false"  style="font-size:12px ;background:#EBF5FB"
+                                         class="form-control form-control-sm" 
+                                         width="100%"
+                                           value="@bind(each.c7)"
+                                         
+                                />
+                                
+                                 </listcell>
+                                 
+                            <listcell zclass = "mycss-listcell"  >
+                                <textbox readonly="false"  style="font-size:12px ;background:#EBF5FB"
+                                         class="form-control form-control-sm" 
+                                         width="100%"
+                                           value="@bind(each.c8)"
+                                         
+                                />
+                                
+                                 </listcell>
+                                 
+                            <listcell zclass = "mycss-listcell"  >
+                                <textbox readonly="false"  style="font-size:12px ;background:#EBF5FB"
+                                         class="form-control form-control-sm" 
+                                         width="100%"
+                                           value="@bind(each.c9)"
+                                         
+                                />
+                                
+                                 </listcell>
+                                 
+                            <listcell zclass = "mycss-listcell"  >
+                                <textbox readonly="false"  style="font-size:12px ;background:#EBF5FB"
+                                         class="form-control form-control-sm" 
+                                         width="100%"
+                                           value="@bind(each.c10)"
+                                         
+                                />
+                                
+                                 </listcell>
+                                 
+                            <listcell zclass = "mycss-listcell"  >
+                                <textbox readonly="false"  style="font-size:12px ;background:#EBF5FB"
+                                         class="form-control form-control-sm" 
+                                         width="100%"
+                                           value="@bind(each.c11)"
+                                         
+                                />
+                                
+                                 </listcell>
+                                 
+                            <listcell zclass = "mycss-listcell"  >
+                                <textbox readonly="false"  style="font-size:12px ;background:#EBF5FB"
+                                         class="form-control form-control-sm" 
+                                         width="100%"
+                                           value="@bind(each.c12)"
+                                         
+                                />
+                                
+                                 </listcell>
+                                 
+                            <listcell zclass = "mycss-listcell"  >
+                                <textbox readonly="false"  style="font-size:12px ;background:#EBF5FB"
+                                         class="form-control form-control-sm" 
+                                         width="100%"
+                                           value="@bind(each.c13)"
+                                         
+                                />
+                                
+                                 </listcell>
+                                 
+                            <listcell zclass = "mycss-listcell"  >
+                                <textbox readonly="false"  style="font-size:12px ;background:#EBF5FB"
+                                         class="form-control form-control-sm" 
+                                         width="100%"
+                                           value="@bind(each.c14)"
+                                         
+                                />
+                                
+                                 </listcell>
+                                 
+                            <listcell zclass = "mycss-listcell"  >
+                                <textbox readonly="false"  style="font-size:12px ;background:#EBF5FB"
+                                         class="form-control form-control-sm" 
+                                         width="100%"
+                                           value="@bind(each.c15)"
+                                         
+                                />
+                                
+                                 </listcell>
+                                 
                         </listitem>
                     </template>
                 </listbox>

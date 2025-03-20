@@ -21,9 +21,10 @@ import com.ec.servicio.ServicioVisitaMedicas;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Calendar;
+ 
 import java.util.Date;
 import java.util.GregorianCalendar;
+
 import java.util.HashMap;
 import java.util.List;
 import net.sf.jasperreports.engine.JRException;
@@ -44,6 +45,7 @@ import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Window;
+import org.zkoss.zul.Calendar;
 
 /**
  *
@@ -89,7 +91,7 @@ public class AgendarController {
         credential = (UserCredential) sess.getAttribute(EnumSesion.userCredential.getNombre());
         usuario = credential.getUsuarioSistema();
         parametrizar = servicioParametrizar.findActivo();
-        idCalendar.get(1);
+//        idCalendar.get(1);
     }
 
     @AfterCompose
@@ -118,9 +120,9 @@ public class AgendarController {
 //        servicioUsuario.modificar(usuario);
         System.out.println("DIA DE LA SEMANA " + calendario.get(java.util.Calendar.DAY_OF_WEEK));
 
-        Calendar calendar = Calendar.getInstance();
+        java.util.Calendar calendar = java.util.Calendar.getInstance();
         calendar.setTime(fechaAgendar);
-        System.out.println("DIA DE LA SEMANA ACTUAL " + calendario.get(java.util.Calendar.DAY_OF_WEEK) + "DIA DE LA SEMANA seleccion " + calendar.get(Calendar.DAY_OF_WEEK));
+        System.out.println("DIA DE LA SEMANA ACTUAL " + calendario.get(java.util.Calendar.DAY_OF_WEEK) + "DIA DE LA SEMANA seleccion " + calendar.get(java.util.Calendar.DAY_OF_WEEK));
 
         String mensaje = servicioGeneral.generarAgenda(usuario.getIdUsuario(), calendar.get(java.util.Calendar.DAY_OF_WEEK), fechaAgendar);
         consultaAgenda();
