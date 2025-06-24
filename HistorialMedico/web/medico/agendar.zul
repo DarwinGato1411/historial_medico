@@ -5,13 +5,9 @@
 <?init class="org.zkoss.zk.ui.util.Composition" arg0="/plantilla/plantilla.zul"?>
 <?link rel="stylesheet" type="text/css" href="/css/style.css"?>
 
-<zk class="border border-primary">
+<zk  contentStyle="overflow:auto"  class="border border-primary">
 
-    
-    <style>
-        .z-calevent-inner
-        .z-calevent-cnt{background:${eventColor};font-size:11px;font-family:${fontFamilyC};padding-left:1px;padding-right:1px;line-height:14px;color:black;}
-    </style>
+  
 
     <div  self="@define(content)" class="contenedorEmpresa"  apply="org.zkoss.bind.BindComposer" 
           viewModel="@id('vm') @init('com.ec.controlador.AgendarController')" > 
@@ -19,34 +15,117 @@
             <div class="titulo">
                 AGENDAMIENTO DE CITAS
             </div>
-            <div class="infoEmpresa">
-                
-               
-                <div  class="contenedorInfoInputs">
+         
+            <div class="infoEmpresa"  >
+                <div class="contenedorInfoInputs"  >
                      
                     <div class="inputCalendar"  >
                         <!--<label value="Calendario de citas médicas:"/>-->
-                        <calendar weekOfYear="true" id="idCalendar" height="250px" width="100%"
+                        <calendar weekOfYear="true" id="idCalendar" height="200px" width="100%"
                                   value="@bind(vm.fechaAgendar)" 
                                   onChange="@command('agendar')" 
+                                  onDayClick="@command('clickEnFecha', fecha=event.data)"
                         />
-                           <listbox class="tabla table-responsive table table-striped table-bordered second"
-                                    model="@load(vm.listaAgenda)" 
-                         nonselectableTags="*"  mold="paging" pageSize="10"  >
+                           
+                        <div   >
+                            
+                            <div  class="contenedorInfoH" >
+                                <div class="titulo">
+                                    Datos del paciente (Hora de atención: )
+                                    <label value="1718264839001" 
+                                           class="form-control form-control-sm"
+                                           tooltiptext="Ruc (1718264839001)"
+                                           width="90%"                    />
+                                </div>
+           
+                                <div class="infoEmpresa">
+                                    <div  class="contenedorInfoInputs">
+                     
+                                        <div class="inputGroup"  >
+                                            <label value="RUC:"/>
+                                            <textbox value="1718264839001" 
+                                                     placeholder="RUC"
+                                                     class="form-control form-control-sm"
+                                                     tooltiptext="Ruc (1718264839001)"
+                                                     width="90%"                    />
+                                        </div>                     
+                                        <div class="inputGroup"  >
+                                            <label value="Nombre:"/>
+                                            <textbox value="Darwin Vinicio Morocho " 
+                                                     placeholder="Nombre"
+                                                     class="form-control form-control-sm"
+                                                     tooltiptext="Nombre"
+                                                     width="90%"                    />
+                                        </div>
+                          
+                                        <div style="display: flex; justify-content: center; align-items: flex-end; height: 100%;">
+                                            <hbox spacing="5px" pack="center">
+                                            
+                                            
+                                                <button width="100%"  label="Odontograma"
+                                                        class="btn-primary-zk"    
+                                                        iconSclass="z-icon-plus-circle"                                            
+                                                        onClick="@command('eliminarPaciente',valor=each,sillon='1')" />
+                                                <button width="100%"  label="Historial"
+                                                        class="btn-info-zk"    
+                                                        iconSclass="z-icon-eye"                                          
+                                                        onClick="@command('eliminarPaciente',valor=each,sillon='1')" />
+                                                <button width="100%"  label="Facturar"
+                                                        class="btn-success-zk"    
+                                                        iconSclass="z-icon-file-o"                                            
+                                                        onClick="@command('eliminarPaciente',valor=each,sillon='1')" />
+                                        
+                                            </hbox>
+                                        </div>
+                                    </div>
+                                </div>
+            
+            
+                            </div>  
+                        </div> 
+                    </div> 
+                </div> 
+                    
+                       
+            </div>
+                                             
+               
+                <div class="inputCalendar" >
+                <listbox model="@load(vm.listaAgenda)" style="overflow-x:auto;"
+                             nonselectableTags="*" mold="paging" pageSize="15"
+                              width="100%" height="100%" 
+                  >
                                
-                    <custom-attributes org.zkoss.zul.listbox.rod="true"/>                       
+                        <custom-attributes org.zkoss.zul.listbox.rod="true"/>        
+                        <!-- CONGELAR LAS PRIMERAS 5 COLUMNAS -->
+                        <frozen columns="2"/>   
                     <listhead  > 
-                        <listheader label="" width="45px" />
-                        <listheader label="" width="45px" />
-                        <listheader label="Paciente" width="70%" >
-                        </listheader>                                                                         
-                        <listheader label="Inicio" width="15%" />                                                                        
-                        <listheader label="Fin"  width="15%" />                                                                         
+<!--                        <listheader label="" width="45px" />
+                        <listheader label="" width="45px" />-->
+                        <listheader label="Inicio" width="100px" />                                                                        
+                        <listheader label="Fin"  width="100px" /> 
+                        <listheader label="SILLON 1" width="200px" />
+                        <listheader label="SILLON 2" width="200px" />
+                        <listheader label="SILLON 3" width="200px" />
+                        <listheader label="SILLON 4" width="200px" />
+                        <listheader label="SILLON 5" width="200px" />
+                        <listheader label="SILLON 6" width="200px" />
+                        <listheader label="SILLON 7" width="200px" />
+                        <listheader label="SILLON 8" width="200px" />
+                        <listheader label="SILLON 9" width="200px" />
+                        <listheader label="SILLON 10" width="200px" />
+                        <listheader label="SILLON 11" width="200px" />
+                        <listheader label="SILLON 12" width="200px" />
+                        <listheader label="SILLON 13" width="200px" />
+                        <listheader label="SILLON 14" width="200px" />
+                        <listheader label="SILLON 15" width="200px" />
+                                                                                             
+                                                                        
                     </listhead>  
                     <template name="model" >                                                            
                         <listitem  >
                               
-                            <listcell zclass = "mycss-listcell" >
+<!--                            <listcell zclass = "mycss-listcell" >
                                 <button  class="btn-success-zk"
                                          iconSclass="z-icon-check  "
                                              
@@ -58,47 +137,451 @@
                                 <button  class="btn-danger-zk"
                                          iconSclass="z-icon-trash-o  "
                                              
-                                         onClick="@command('eliminarAgendamiento',valor=each)" 
-                                         tooltiptext="Cancelar agendamiento">
-                                </button>
-                            </listcell>
-                            <listcell zclass = "mycss-listcell"  >
-                                <textbox readonly="true"  style="font-size:12px ;background:#EBF5FB"
-                                         class="form-control form-control-sm" 
-                                         width="100%"
-                                         value="@bind(each.idPaciente.pacNombres)"
-                                          onDoubleClick="@command('modelPaciente',valor=each)"
-                                />
-                            </listcell>
-                            <listcell  zclass = "mycss-listcell" >
-                                <timebox readonly="true"  style="font-size:12px ;background:#EBF5FB"
-                                         buttonVisible="false"
-                                         width="100%"         
-                                         class="form-control form-control-sm" 
-                                         value="@bind(each.ageHoraInicio)" />
-                            </listcell>
-                            <listcell zclass = "mycss-listcell"     
-                                      style="font-size:12px;background:#F8F9F9">   
-                                <timebox readonly="true"
-                                         buttonVisible="false" 
-                                         width="100%"           
-                                         style="font-size:12px ;background:#EBF5FB"
-                                         class="form-control form-control-sm" 
-                                         value="@bind(each.ageHoraFin)" />                                              
+                                             onClick="@command('eliminarAgendamiento',valor=each)" 
+                                             tooltiptext="Cancelar agendamiento">
+                                    </button>
+                                </listcell>-->
+                                <listcell  zclass = "mycss-listcell" style="font-size:12px ;background:#EBF5FB;border: 1px solid #cfcfcf;">
+                                    <timebox readonly="true"  style="font-size:12px ;background:#EBF5FB"
+                                             buttonVisible="false"
+                                             width="100%"         
+                                             class="form-control form-control-sm" 
+                                             value="@bind(each.ageHoraInicio)" />
+                                </listcell>
+                                <listcell zclass = "mycss-listcell"     
+                                          style="font-size:12px ;background:#EBF5FB;border: 1px solid #cfcfcf;">   
+                                    <timebox readonly="true"
+                                             buttonVisible="false" 
+                                             width="100%"           
+                                             style="font-size:12px ;background:#EBF5FB"
+                                             class="form-control form-control-sm" 
+                                             value="@bind(each.ageHoraFin)" />                                              
                                                                 
                                                   
-                            </listcell>
+                                </listcell>
+                                <!--                            <listcell zclass = "mycss-listcell"  >
+                                    <textbox readonly="true"  style="font-size:12px ;background:#EBF5FB"
+                                             class="form-control form-control-sm" 
+                                             width="100%"
+                                             value="@bind(each.idPaciente.pacNombres)"
+                                              onDoubleClick="@command('modelPaciente',valor=each)"
+                                    />
+                                </listcell>-->
+                                <listcell zclass = "mycss-listcell" style="font-size:12px ;background:#EBF5FB;border: 1px solid #cfcfcf;" >
+                               
+
+                                    <div style="display: flex; flex-direction: column; height: 90%;">
+                                        <div >
+                                            <textbox readonly="true"  style="font-size:12px ;background:#EBF5FB"
+                                                     class="form-control form-control-sm" 
+                                                     width="100%"
+                                                     multiline="true"
+                                                     rows="3"
+                                                     value="@bind(each.c1)"
+                                                     onDoubleClick="@command('modelPaciente',valor=each,sillon='1')"
+                                            />
+                        
+                                        </div> <!-- espacio arriba -->
+                                         <div style="display: flex; justify-content: center; align-items: flex-end; height: 100%;">
+                                        <hbox spacing="5px" pack="center">
+                                            <button width="100%" label="Eliminar"  tooltiptext="Eliminar paciente" 
+                                                    class="btn-danger-zk" iconSclass="z-icon-trash-o" 
+                                                    onClick="@command('eliminarPaciente',valor=each,sillon='1')" />
+                                            <button width="100%"  label="Atender"
+                                                    class="btn-success-zk"    
+                                                    iconSclass="z-icon-plus-circle"                                            
+                                                    onClick="@command('eliminarPaciente',valor=each,sillon='1')" />
+                                        
+                                        </hbox>
+                                        </div>
+                                    </div>                                
+                                </listcell>
+                               <listcell zclass = "mycss-listcell" style="font-size:12px ;background:#EBF5FB;border: 1px solid #cfcfcf;" >
+                                
+                                    <div style="display: flex; flex-direction: column; height: 100%;">
+                                        <div style="flex: 1;">
+                                            <textbox readonly="true"  style="font-size:12px ;background:#EBF5FB"
+                                                     class="form-control form-control-sm" 
+                                                     width="100%"
+                                                     multiline="true"
+                                                     rows="3"
+                                                     value="@bind(each.c2)"
+                                                     onDoubleClick="@command('modelPaciente',valor=each,sillon='2')" />
+                        
+                                        </div> <!-- espacio arriba -->
+                                        <hbox spacing="5px" pack="center">
+                                            <button width="100%" label="Eliminar"  tooltiptext="Eliminar paciente" 
+                                                    class="btn-danger-zk" iconSclass="z-icon-trash-o" 
+                                                    onClick="@command('eliminarPaciente',valor=each,sillon='2')" />
+                                            <button width="100%"  label="Atender"
+                                                    class="btn-success-zk"    
+                                                    iconSclass="z-icon-plus-circle"                                            
+                                                    onClick="@command('eliminarPaciente',valor=each,sillon='2')" />
+                                        
+                                        </hbox>
+                                    </div>
+                                
+                                
+                                </listcell>
+                               <listcell zclass = "mycss-listcell" style="font-size:12px ;background:#EBF5FB;border: 1px solid #cfcfcf;" >
+                               
+                                
+                                    <div style="display: flex; flex-direction: column; height: 100%;">
+                                        <div style="flex: 1;">
+                                            <textbox readonly="true"  style="font-size:12px ;background:#EBF5FB"
+                                                     class="form-control form-control-sm" 
+                                                     width="100%"
+                                                     multiline="true"
+                                                     rows="3"
+                                                     value="@bind(each.c3)"
+                                                     onDoubleClick="@command('modelPaciente',valor=each,sillon='3')"
+                                            />
+                        
+                                        </div> <!-- espacio arriba -->
+                                        <hbox spacing="5px" pack="center">
+                                            <button width="100%" label="Eliminar"  tooltiptext="Eliminar paciente" 
+                                                    class="btn-danger-zk" iconSclass="z-icon-trash-o" 
+                                                    onClick="@command('eliminarPaciente',valor=each,sillon='3')" />
+                                            <button width="100%"  label="Atender"
+                                                    class="btn-success-zk"    
+                                                    iconSclass="z-icon-plus-circle"                                            
+                                                    onClick="@command('eliminarPaciente',valor=each,sillon='3')" />
+                                        
+                                        </hbox>
+                                    </div>
+
+                                </listcell>
+                               <listcell zclass = "mycss-listcell" style="font-size:12px ;background:#EBF5FB;border: 1px solid #cfcfcf;" >
+                               
+                                    <div style="display: flex; flex-direction: column; height: 100%;">
+                                        <div style="flex: 1;">
+                                            <textbox readonly="true"  style="font-size:12px ;background:#EBF5FB"
+                                                     class="form-control form-control-sm" 
+                                                     width="100%"
+                                                     multiline="true"
+                                                     rows="3"
+                                                     value="@bind(each.c4)"
+                                                     onDoubleClick="@command('modelPaciente',valor=each,sillon='4')"
+                                            />
+                        
+                                        </div> <!-- espacio arriba -->
+                                        <hbox spacing="5px" pack="center">
+                                            <button width="100%" label="Eliminar"  tooltiptext="Eliminar paciente" 
+                                                    class="btn-danger-zk" iconSclass="z-icon-trash-o" 
+                                                    onClick="@command('eliminarPaciente',valor=each,sillon='4')" />
+                                            <button width="100%"  label="Atender"
+                                                    class="btn-success-zk"    
+                                                    iconSclass="z-icon-plus-circle"                                            
+                                                    onClick="@command('eliminarPaciente',valor=each,sillon='4')" />
+                                        
+                                        </hbox>
+                                    </div>
+                                </listcell>
+                               <listcell zclass = "mycss-listcell" style="font-size:12px ;background:#EBF5FB;border: 1px solid #cfcfcf;" >
+                              
+                                
+                                    <div style="display: flex; flex-direction: column; height: 100%;">
+                                        <div style="flex: 1;">
+                                            <textbox readonly="true"  style="font-size:12px ;background:#EBF5FB"
+                                                     class="form-control form-control-sm" 
+                                                     width="100%"
+                                                     multiline="true"
+                                                     rows="3"
+                                                     value="@bind(each.c5)"
+                                                     onDoubleClick="@command('modelPaciente',valor=each,sillon='5')"
+                                            />
+                        
+                                        </div> <!-- espacio arriba -->
+                                        <hbox spacing="5px" pack="center">
+                                            <button width="100%" label="Eliminar"  tooltiptext="Eliminar paciente" 
+                                                    class="btn-danger-zk" iconSclass="z-icon-trash-o" 
+                                                    onClick="@command('eliminarPaciente',valor=each,sillon='5')" />
+                                            <button width="100%"  label="Atender"
+                                                    class="btn-success-zk"    
+                                                    iconSclass="z-icon-plus-circle"                                            
+                                                    onClick="@command('eliminarPaciente',valor=each,sillon='5')" />
+                                        
+                                        </hbox>
+                                    </div>
+                                </listcell>
+                               <listcell zclass = "mycss-listcell" style="font-size:12px ;background:#EBF5FB;border: 1px solid #cfcfcf;" >
+                                
+                                  
+                                    <div style="display: flex; flex-direction: column; height: 100%;">
+                                        <div style="flex: 1;">
+                                            <textbox readonly="true"  style="font-size:12px ;background:#EBF5FB"
+                                                     class="form-control form-control-sm" 
+                                                     width="100%"
+                                                     multiline="true"
+                                                     rows="3"
+                                                     value="@bind(each.c6)"
+                                                     onDoubleClick="@command('modelPaciente',valor=each,sillon='6')"
+                                            />
+                        
+                                        </div> <!-- espacio arriba -->
+                                        <hbox spacing="5px" pack="center">
+                                            <button width="100%" label="Eliminar"  tooltiptext="Eliminar paciente" 
+                                                    class="btn-danger-zk" iconSclass="z-icon-trash-o" 
+                                                    onClick="@command('eliminarPaciente',valor=each,sillon='6')" />
+                                            <button width="100%"  label="Atender"
+                                                    class="btn-success-zk"    
+                                                    iconSclass="z-icon-plus-circle"                                            
+                                                    onClick="@command('eliminarPaciente',valor=each,sillon='6')" />
+                                        
+                                        </hbox>
+                                    </div>
+                                
+                                </listcell>
+                               <listcell zclass = "mycss-listcell" style="font-size:12px ;background:#EBF5FB;border: 1px solid #cfcfcf;" >
+                               
+                                
+                                    <div style="display: flex; flex-direction: column; height: 100%;">
+                                        <div style="flex: 1;">
+                                            <textbox readonly="true"  style="font-size:12px ;background:#EBF5FB"
+                                                     class="form-control form-control-sm" 
+                                                     width="100%"
+                                                     multiline="true"
+                                                     rows="3"
+                                                     value="@bind(each.c7)"
+                                                     onDoubleClick="@command('modelPaciente',valor=each,sillon='7')"
+                                            />
+                        
+                                        </div> <!-- espacio arriba -->
+                                        <hbox spacing="5px" pack="center">
+                                            <button width="100%" label="Eliminar"  tooltiptext="Eliminar paciente" 
+                                                    class="btn-danger-zk" iconSclass="z-icon-trash-o" 
+                                                    onClick="@command('eliminarPaciente',valor=each,sillon='7')" />
+                                            <button width="100%"  label="Atender"
+                                                    class="btn-success-zk"    
+                                                    iconSclass="z-icon-plus-circle"                                            
+                                                    onClick="@command('eliminarPaciente',valor=each,sillon='7')" />
+                                        
+                                        </hbox>
+                                    </div>
+                                </listcell>
+                               <listcell zclass = "mycss-listcell" style="font-size:12px ;background:#EBF5FB;border: 1px solid #cfcfcf;" >
+                               
+                                
+                                    <div style="display: flex; flex-direction: column; height: 100%;">
+                                        <div style="flex: 1;">
+                                            <textbox readonly="true"  style="font-size:12px ;background:#EBF5FB"
+                                                      class="form-control form-control-sm" 
+                                                      width="100%"
+                                                      multiline="true"
+                                                      rows="3"
+                                                      value="@bind(each.c8)"
+                                                      onDoubleClick="@command('modelPaciente',valor=each,sillon='8')"
+                                            />
+                        
+                                        </div> <!-- espacio arriba -->
+                                        <hbox spacing="5px" pack="center">
+                                            <button width="100%" label="Eliminar"  tooltiptext="Eliminar paciente" 
+                                                    class="btn-danger-zk" iconSclass="z-icon-trash-o" 
+                                                    onClick="@command('eliminarPaciente',valor=each,sillon='8')" />
+                                            <button width="100%"  label="Atender"
+                                                    class="btn-success-zk"    
+                                                    iconSclass="z-icon-plus-circle"                                            
+                                                    onClick="@command('eliminarPaciente',valor=each,sillon='8')" />
+                                        
+                                        </hbox>
+                                    </div>
+                                </listcell>
+                               <listcell zclass = "mycss-listcell" style="font-size:12px ;background:#EBF5FB;border: 1px solid #cfcfcf;" >
+                              
+                                
+                                    <div style="display: flex; flex-direction: column; height: 100%;">
+                                        <div style="flex: 1;">
+                                            <textbox readonly="true"  style="font-size:12px ;background:#EBF5FB"
+                                                        class="form-control form-control-sm" 
+                                                        width="100%"
+                                                        multiline="true"
+                                                        rows="3"
+                                                        value="@bind(each.c9)"
+                                                        onDoubleClick="@command('modelPaciente',valor=each,sillon='9')"
+                                            />
+                        
+                                        </div> <!-- espacio arriba -->
+                                        <hbox spacing="5px" pack="center">
+                                            <button width="100%" label="Eliminar"  tooltiptext="Eliminar paciente" 
+                                                    class="btn-danger-zk" iconSclass="z-icon-trash-o" 
+                                                    onClick="@command('eliminarPaciente',valor=each,sillon='9')" />
+                                            <button width="100%"  label="Atender"
+                                                    class="btn-success-zk"    
+                                                    iconSclass="z-icon-plus-circle"                                            
+                                                    onClick="@command('eliminarPaciente',valor=each,sillon='9')" />
+                                        
+                                        </hbox>
+                                    </div>
+                                </listcell>
+                               <listcell zclass = "mycss-listcell" style="font-size:12px ;background:#EBF5FB;border: 1px solid #cfcfcf;" >
+                              
+                                
+                                    <div style="display: flex; flex-direction: column; height: 100%;">
+                                        <div style="flex: 1;">
+                                            <textbox readonly="true"  style="font-size:12px ;background:#EBF5FB"
+                                                     class="form-control form-control-sm" 
+                                                     width="100%"
+                                                     multiline="true"
+                                                     rows="3"
+                                                     value="@bind(each.c10)"
+                                                     onDoubleClick="@command('modelPaciente',valor=each,sillon='10')"
+                                            />
+                        
+                                        </div> <!-- espacio arriba -->
+                                        <hbox spacing="5px" pack="center">
+                                            <button width="100%" label="Eliminar"  tooltiptext="Eliminar paciente" 
+                                                    class="btn-danger-zk" iconSclass="z-icon-trash-o" 
+                                                    onClick="@command('eliminarPaciente',valor=each,sillon='10')" />
+                                            <button width="100%"  label="Atender"
+                                                    class="btn-success-zk"    
+                                                    iconSclass="z-icon-plus-circle"                                            
+                                                    onClick="@command('eliminarPaciente',valor=each,sillon='10')" />
+                                        
+                                        </hbox>
+                                    </div>
+                                </listcell>
+                               <listcell zclass = "mycss-listcell" style="font-size:12px ;background:#EBF5FB;border: 1px solid #cfcfcf;" >
+                            
+                                
+                                    <div style="display: flex; flex-direction: column; height: 100%;">
+                                        <div style="flex: 1;">
+                                            <textbox readonly="true"  style="font-size:12px ;background:#EBF5FB"
+                                                     class="form-control form-control-sm" 
+                                                     width="100%"
+                                                     multiline="true"
+                                                     rows="3"
+                                                     value="@bind(each.c11)"
+                                                     onDoubleClick="@command('modelPaciente',valor=each,sillon='11')"
+                                            />
+                        
+                                        </div> <!-- espacio arriba -->
+                                        <hbox spacing="5px" pack="center">
+                                            <button width="100%" label="Eliminar"  tooltiptext="Eliminar paciente" 
+                                                    class="btn-danger-zk" iconSclass="z-icon-trash-o" 
+                                                    onClick="@command('eliminarPaciente',valor=each,sillon='11')" />
+                                            <button width="100%"  label="Atender"
+                                                    class="btn-success-zk"    
+                                                    iconSclass="z-icon-plus-circle"                                            
+                                                    onClick="@command('eliminarPaciente',valor=each,sillon='11')" />
+                                        
+                                        </hbox>
+                                    </div>
+                                </listcell>
+                               <listcell zclass = "mycss-listcell" style="font-size:12px ;background:#EBF5FB;border: 1px solid #cfcfcf;" >
+                              
+                                
+                                    <div style="display: flex; flex-direction: column; height: 100%;">
+                                        <div style="flex: 1;">
+                                            <textbox readonly="true"  style="font-size:12px ;background:#EBF5FB"
+                                                     class="form-control form-control-sm" 
+                                                     width="100%"
+                                                     multiline="true"
+                                                     rows="3"
+                                                     value="@bind(each.c12)"
+                                                     onDoubleClick="@command('modelPaciente',valor=each,sillon='12')"
+                                            />
+                        
+                                        </div> <!-- espacio arriba -->
+                                        <hbox spacing="5px" pack="center">
+                                            <button width="100%" label="Eliminar"  tooltiptext="Eliminar paciente" 
+                                                    class="btn-danger-zk" iconSclass="z-icon-trash-o" 
+                                                    onClick="@command('eliminarPaciente',valor=each,sillon='12')" />
+                                            <button width="100%"  label="Atender"
+                                                    class="btn-success-zk"    
+                                                    iconSclass="z-icon-plus-circle"                                            
+                                                    onClick="@command('eliminarPaciente',valor=each,sillon='12')" />
+                                        
+                                        </hbox>
+                                    </div>
+                                </listcell>
+                               <listcell zclass = "mycss-listcell" style="font-size:12px ;background:#EBF5FB;border: 1px solid #cfcfcf;" >
+                              
+                                
+                                    <div style="display: flex; flex-direction: column; height: 100%;">
+                                        <div style="flex: 1;">
+                                            <textbox readonly="true"  style="font-size:12px ;background:#EBF5FB"
+                                                     class="form-control form-control-sm" 
+                                                     width="100%"
+                                                     multiline="true"
+                                                     rows="3"
+                                                     value="@bind(each.c13)"
+                                                     onDoubleClick="@command('modelPaciente',valor=each,sillon='13')"
+                                            />
+                        
+                                        </div> <!-- espacio arriba -->
+                                        <hbox spacing="5px" pack="center">
+                                            <button width="100%" label="Eliminar"  tooltiptext="Eliminar paciente" 
+                                                    class="btn-danger-zk" iconSclass="z-icon-trash-o" 
+                                                    onClick="@command('eliminarPaciente',valor=each,sillon='13')" />
+                                            <button width="100%"  label="Atender"
+                                                    class="btn-success-zk"    
+                                                    iconSclass="z-icon-plus-circle"                                            
+                                                    onClick="@command('eliminarPaciente',valor=each,sillon='13')" />
+                                        
+                                        </hbox>
+                                    </div>
+                                </listcell>
+                               <listcell zclass = "mycss-listcell" style="font-size:12px ;background:#EBF5FB;border: 1px solid #cfcfcf;" >
+                                
+                                    <div style="display: flex; flex-direction: column; height: 100%;">
+                                        <div style="flex: 1;">
+                                            <textbox readonly="true"  style="font-size:12px ;background:#EBF5FB"
+                                                     class="form-control form-control-sm" 
+                                                     width="100%"
+                                                     multiline="true"
+                                                     rows="3"
+                                                     value="@bind(each.c14)"
+                                                     onDoubleClick="@command('modelPaciente',valor=each,sillon='14')"
+                                            />
+                                
+                        
+                                        </div> <!-- espacio arriba -->
+                                        <hbox spacing="5px" pack="center">
+                                            <button width="100%" label="Eliminar"  tooltiptext="Eliminar paciente" 
+                                                    class="btn-danger-zk" iconSclass="z-icon-trash-o" 
+                                                    onClick="@command('eliminarPaciente',valor=each,sillon='14')" />
+                                            <button width="100%"  label="Atender"
+                                                    class="btn-success-zk"    
+                                                    iconSclass="z-icon-plus-circle"                                            
+                                                    onClick="@command('eliminarPaciente',valor=each,sillon='14')" />
+                                        
+                                        </hbox>
+                                    </div>
+                                </listcell>
+                               <listcell zclass = "mycss-listcell" style="font-size:12px ;background:#EBF5FB;border: 1px solid #cfcfcf;" >
+                               
+                                
+                                    <div style="display: flex; flex-direction: column; height: 100%;">
+                                        <div style="flex: 1;">
+                                            <textbox readonly="true"  style="font-size:12px ;background:#EBF5FB"
+                                                     class="form-control form-control-sm" 
+                                                     width="100%"
+                                                     multiline="true"
+                                                     rows="3"
+                                                     value="@bind(each.c15)"
+                                                     onDoubleClick="@command('modelPaciente',valor=each,sillon='15')"
+                                            />
+                        
+                                        </div> <!-- espacio arriba -->
+                                        <hbox spacing="1px" pack="center">
+                                            <button width="100%" label="Eliminar"  tooltiptext="Eliminar paciente" 
+                                                    class="btn-danger-zk" iconSclass="z-icon-trash-o" 
+                                                    onClick="@command('eliminarPaciente',valor=each,sillon='15')" />
+                                            <button width="100%"  label="Atender"
+                                                    class="btn-success-zk"    
+                                                    iconSclass="z-icon-plus-circle"                                            
+                                                    onClick="@command('eliminarPaciente',valor=each,sillon='15')" />
+                                        
+                                        </hbox>
+                                    </div>
+                                </listcell>
+                         
 
                             
                                 
-                        </listitem>
-                    </template>
-                </listbox>
-                    </div> 
-                                        
-                </div>
-            </div>
-            <div class="infoEmpresa">
+                            </listitem>
+                        </template>
+                    </listbox>
                 
 <!--                <div  class="contenedorInfoInputs">                     
                             
@@ -117,6 +600,7 @@
         </div>
         
     </div>
+    
 </zk>
 
 

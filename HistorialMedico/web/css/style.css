@@ -46,7 +46,7 @@ element.style {
 }
 .z-tabbox-autopaging .z-listcell-cnt {
     height: 30px;
-    overflow: hidden;
+   overflow-y: auto !important;
 }
 .banner {
     background-color:transparent;
@@ -239,7 +239,7 @@ element.style {
 {
     height: 32px;
     margin: 0;
-    overflow: hidden;
+   overflow-y: auto !important;
     position: relative;
     height: 32px;
 }
@@ -530,7 +530,7 @@ element.style {
 div.z-listbox-body {
     background: white;
     border: 0;
-    overflow: hidden;
+  overflow: auto !important;
     width: 100%;
     position: relative;
 }
@@ -538,7 +538,7 @@ div.z-listbox-body {
 element.style {
     width: 652px;
     height: 586px;
-    overflow: hidden;
+   overflow-y: auto !important;
     position: relative;
 }
 /*quita lo trasparente de los windows*/
@@ -569,7 +569,7 @@ element.style {
     color: #636363;
     padding: 4px 5px 3px;
     line-height: 24px;
-    overflow: hidden;
+   overflow-y: auto !important;
     background: white;
 }
 
@@ -579,13 +579,7 @@ element.style {
     margin-right: auto;
     margin-left: auto;
 }
-div.z-listbox-body {
-    background: white;
-    border: 0;
-    overflow: hidden;
-    width: 100%;
-    position: relative;
-}
+
 
 .z-auxheader-content {
     font-family: Arial,Sans-serif;
@@ -595,7 +589,7 @@ div.z-listbox-body {
     color: #636363;
     padding: 4px 5px 3px;
     line-height: 24px;
-    overflow: hidden;
+   overflow-y: auto !important;
     background: white;
 }
 
@@ -614,7 +608,7 @@ div.z-listbox-body {
 
 div.z-listbox-header th.z-listheader, div.z-listbox-header th.z-auxheader {
     position: relative;
-    overflow: hidden;
+   overflow-y: auto !important;
     border: 1px solid;
     white-space: nowrap;
     color: black;
@@ -693,7 +687,7 @@ div.z-listfooter-cnt, div.z-listcell-cnt, div.z-listheader-cnt {
 }
 
 .z-window-modal-header, .z-window-popup-header, .z-window-highlighted-header, .z-window-overlapped-header, .z-window-embedded-header {
-    overflow: hidden;
+   overflow-y: auto !important;
     zoom: 1;
     padding-bottom: 4px;
     font-family: arial, sans-serif;
@@ -2927,7 +2921,7 @@ input, button, select, textarea {
 }
 .z-listbox-autopaging .z-listcell-cnt {
     height: 14px;
-    overflow: hidden;
+   overflow-y: auto !important;
 }
 
 .celdabloqueada{
@@ -3019,6 +3013,17 @@ input, button, select, textarea {
     margin-top: 20px;
 
 }
+
+.contenedorEmpresa .contenedorInfoH {
+    border: solid 1px black;
+    width: 98%;
+    margin: auto;
+    /*background-image: linear-gradient(315deg, #97e4ff 0, #2073db 50%, #00123c 100%);*/
+    border-radius: 10px;
+    /* background: url(https://img.freepik.com/vector-gratis/fondo-geometrico-plano_23-2148967370.jpg?w=2000); */
+    margin-top: 20px;
+
+}
 .contenedorEmpresa .contenedorInfoCalendar {
     border: solid 1px black;
     width: 90%;
@@ -3061,6 +3066,13 @@ input, button, select, textarea {
 }
 
 .contenedorEmpresa .contenedorInfo .contenedorInfoInputs .inputGroup{
+
+    display: grid;
+    grid-template-columns:30% 70%;
+    gap:5px;
+
+}
+.contenedorEmpresa .contenedorInfoH .contenedorInfoInputs .inputGroup{
 
     display: grid;
     grid-template-columns:30% 70%;
@@ -3362,7 +3374,7 @@ input, button, select, textarea {
 .contenedorEmpresa .contenedorInfoCalendar .infoEmpresa .contenedorInfoInputs .inputCalendar{
 
     display: grid;
-    grid-template-columns:60% 40%;
+    grid-template-columns:50% 50%;
     gap:5px;
 
 }
@@ -3500,7 +3512,7 @@ input, button, select, textarea {
 
 div.z-listbox-header th.z-listheader, div.z-listbox-header th.z-auxheader {
     position: relative;
-    overflow: hidden;
+   overflow-y: auto !important;
     border: 1px solid;
     white-space: nowrap;
     color: black;
@@ -3584,3 +3596,4 @@ div.z-listbox-header th.z-listheader, div.z-listbox-header th.z-auxheader {
     background-color: #ffc107 !important;
     border-color: #ffc107 !important;
 }
+

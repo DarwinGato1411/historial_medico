@@ -43,11 +43,12 @@
     
     <div class="nav ul" viewModel="@id('vm')" apply="com.ec.controlador.MenuOpciones" >
         <div class="li">
-            <label class="m1" value="Gestion de Pacientes" id="btnPaciente"/>
-        </div>
-        <div class="li">
             <label class="m1" value="Agendamiento de citas" id="btnAgendamiento"/>
         </div>
+        <div class="li">
+            <label class="m1" value="Gestion de Pacientes" id="btnPaciente"/>
+        </div>
+        
         <div class="li">
             <label class="m1" value="Reporte HCL" id="btnHistorico"/>
         </div>

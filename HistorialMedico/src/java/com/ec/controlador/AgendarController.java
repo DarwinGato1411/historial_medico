@@ -89,7 +89,7 @@ public class AgendarController {
         credential = (UserCredential) sess.getAttribute(EnumSesion.userCredential.getNombre());
         usuario = credential.getUsuarioSistema();
         parametrizar = servicioParametrizar.findActivo();
-        idCalendar.get(1);
+//        idCalendar.get(1);
     }
 
     @AfterCompose
@@ -105,6 +105,32 @@ public class AgendarController {
     private void consultaAgenda() {
 
         listaAgenda = servicioAgendamiento.findByFechaRegistradoUsuario(fechaAgendar, Boolean.TRUE, usuario);
+    }
+
+    @Command
+    @NotifyChange({"listaAgenda", "fechaAgendar"})
+    public void clickEnFecha(@BindingParam("fecha") Date fecha) {
+        this.fechaAgendar = fecha;
+        // Aquí puedes hacer lo que necesites con la fecha seleccionada
+        try {
+
+            java.util.Calendar calendario = new GregorianCalendar();
+            calendario.get(java.util.Calendar.DAY_OF_WEEK);
+//        servicioUsuario.modificar(usuario);
+            System.out.println("DIA DE LA SEMANA " + calendario.get(java.util.Calendar.DAY_OF_WEEK));
+
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(fechaAgendar);
+            System.out.println("DIA DE LA SEMANA ACTUAL " + calendario.get(java.util.Calendar.DAY_OF_WEEK) + "DIA DE LA SEMANA seleccion " + calendar.get(Calendar.DAY_OF_WEEK));
+
+            String mensaje = servicioGeneral.generarAgenda(usuario.getIdUsuario(), calendar.get(java.util.Calendar.DAY_OF_WEEK), fechaAgendar);
+            consultaAgenda();
+
+        } catch (Exception e) {
+            Clients.showNotification("No se pudo generar la agenda  ",
+                    Clients.NOTIFICATION_TYPE_ERROR, null, "end_center", 3000, true);
+        }
+
     }
 
     @Command
@@ -191,7 +217,7 @@ public class AgendarController {
 
     @Command
     @NotifyChange({"listaAgenda", "buscarPaciente"})
-    public void modelPaciente(@BindingParam("valor") Agendamiento valor) {
+    public void modelPaciente(@BindingParam("valor") Agendamiento valor, @BindingParam("sillon") String sillon) {
         try {
             final HashMap<String, String> map = new HashMap<String, String>();
 
@@ -200,6 +226,38 @@ public class AgendarController {
                     "/medico/paciente_agendar.zul", null, map);
             window.doModal();
             valor.setIdPaciente(pacienteSelected);
+            if (sillon.equals("1")) {
+                valor.setC1(pacienteSelected.getIdPaciente() + " - " + pacienteSelected.getPacNombres());
+            } else if (sillon.equals("2")) {
+                valor.setC2(pacienteSelected.getIdPaciente() + " - " + pacienteSelected.getPacNombres());
+            } else if (sillon.equals("3")) {
+                valor.setC3(pacienteSelected.getIdPaciente() + " - " + pacienteSelected.getPacNombres());
+            } else if (sillon.equals("4")) {
+                valor.setC4(pacienteSelected.getIdPaciente() + " - " + pacienteSelected.getPacNombres());
+            } else if (sillon.equals("5")) {
+                valor.setC6(pacienteSelected.getIdPaciente() + " - " + pacienteSelected.getPacNombres());
+            } else if (sillon.equals("6")) {
+                valor.setC6(pacienteSelected.getIdPaciente() + " - " + pacienteSelected.getPacNombres());
+            } else if (sillon.equals("7")) {
+                valor.setC7(pacienteSelected.getIdPaciente() + " - " + pacienteSelected.getPacNombres());
+            } else if (sillon.equals("8")) {
+                valor.setC8(pacienteSelected.getIdPaciente() + " - " + pacienteSelected.getPacNombres());
+            } else if (sillon.equals("9")) {
+                valor.setC9(pacienteSelected.getIdPaciente() + " - " + pacienteSelected.getPacNombres());
+            } else if (sillon.equals("10")) {
+                valor.setC10(pacienteSelected.getIdPaciente() + " - " + pacienteSelected.getPacNombres());
+            } else if (sillon.equals("11")) {
+                valor.setC11(pacienteSelected.getIdPaciente() + " - " + pacienteSelected.getPacNombres());
+            } else if (sillon.equals("12")) {
+                valor.setC12(pacienteSelected.getIdPaciente() + " - " + pacienteSelected.getPacNombres());
+            } else if (sillon.equals("13")) {
+                valor.setC13(pacienteSelected.getIdPaciente() + " - " + pacienteSelected.getPacNombres());
+            } else if (sillon.equals("14")) {
+                valor.setC14(pacienteSelected.getIdPaciente() + " - " + pacienteSelected.getPacNombres());
+            } else if (sillon.equals("15")) {
+                valor.setC15(pacienteSelected.getIdPaciente() + " - " + pacienteSelected.getPacNombres());
+            }
+
             servicioAgendamiento.modificar(valor);
             if (servicioVisitaMedicas.findForPacienteHoraUsuario(pacienteSelected, valor.getAgeFecha(), valor.getAgeHoraInicio(), usuario).isEmpty()) {
                 VisitaMedica medica = new VisitaMedica();
@@ -212,6 +270,70 @@ public class AgendarController {
                 servicioVisitaMedicas.crear(medica);
             }
             consultaAgenda();
+        } catch (Exception e) {
+            Clients.showNotification("Ocurrio un error " + e.getMessage(),
+                    Clients.NOTIFICATION_TYPE_ERROR, null, "middle_center", 1000, true);
+        }
+    }
+
+    @Command
+    @NotifyChange({"listaAgenda", "buscarPaciente"})
+    public void eliminarPaciente(@BindingParam("valor") Agendamiento valor, @BindingParam("sillon") String sillon) {
+        try {
+//            final HashMap<String, String> map = new HashMap<String, String>();
+//            
+//            map.put("valor", "buscar");
+//            org.zkoss.zul.Window window = (org.zkoss.zul.Window) Executions.createComponents(
+//                    "/medico/paciente_agendar.zul", null, map);
+//            window.doModal();
+//            valor.setIdPaciente(pacienteSelected);
+
+            if (Messagebox.show("¿Desea elimninar el agendamiento?", "Atención", Messagebox.YES | Messagebox.NO, Messagebox.INFORMATION) == Messagebox.YES) {
+                if (sillon.equals("1")) {
+                    valor.setC1("");
+                } else if (sillon.equals("2")) {
+                    valor.setC2("");
+                } else if (sillon.equals("3")) {
+                    valor.setC3("");
+                } else if (sillon.equals("4")) {
+                    valor.setC4("");
+                } else if (sillon.equals("5")) {
+                    valor.setC6("");
+                } else if (sillon.equals("6")) {
+                    valor.setC6("");
+                } else if (sillon.equals("7")) {
+                    valor.setC7("");
+                } else if (sillon.equals("8")) {
+                    valor.setC8("");
+                } else if (sillon.equals("9")) {
+                    valor.setC9("");
+                } else if (sillon.equals("10")) {
+                    valor.setC10("");
+                } else if (sillon.equals("11")) {
+                    valor.setC11("");
+                } else if (sillon.equals("12")) {
+                    valor.setC12("");
+                } else if (sillon.equals("13")) {
+                    valor.setC13("");
+                } else if (sillon.equals("14")) {
+                    valor.setC14("");
+                } else if (sillon.equals("15")) {
+                    valor.setC15("");
+                }
+
+                servicioAgendamiento.modificar(valor);
+                if (servicioVisitaMedicas.findForPacienteHoraUsuario(pacienteSelected, valor.getAgeFecha(), valor.getAgeHoraInicio(), usuario).isEmpty()) {
+                    VisitaMedica medica = new VisitaMedica();
+                    medica.setIdPaciente(pacienteSelected);
+                    medica.setVisHora(valor.getAgeHoraInicio());
+                    medica.setVisHoraFin(valor.getAgeHoraFin());
+                    medica.setVisFecha(valor.getAgeFecha());
+                    medica.setVisEstado(Boolean.TRUE);
+                    medica.setVisObservacion("AGENDADO");
+                    servicioVisitaMedicas.crear(medica);
+                }
+                consultaAgenda();
+            }
         } catch (Exception e) {
             Clients.showNotification("Ocurrio un error " + e.getMessage(),
                     Clients.NOTIFICATION_TYPE_ERROR, null, "middle_center", 1000, true);
@@ -253,6 +375,23 @@ public class AgendarController {
 
     public static void setPacienteSelected(Paciente pacienteSelected) {
         AgendarController.pacienteSelected = pacienteSelected;
+    }
+
+    @Command
+    @NotifyChange({"listaAgenda", "fechaAgendar"})
+    public void registrarPaciente(@BindingParam("valor") Agendamiento valor) {
+
+//        // Aquí puedes hacer lo que necesites con la fecha seleccionada
+//        try {
+//            if (sillon.equals("1")) {
+//               valor.set
+//            }
+//           servicioAgendamiento.modificar(agendamiento);
+//
+//        } catch (Exception e) {
+//            Clients.showNotification("No se pudo generar la agenda  ",
+//                    Clients.NOTIFICATION_TYPE_ERROR, null, "end_center", 3000, true);
+//        }
     }
 
 }
