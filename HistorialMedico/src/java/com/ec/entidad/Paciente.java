@@ -114,35 +114,35 @@ public class Paciente implements Serializable {
     private String pacCargo;
     @Column(name = "pac_otros")
     private String pacOtros;
-    @Column(name = "pac_otros")
+    @Column(name = "c1")
     private String c1;
-    @Column(name = "pac_otros")
+    @Column(name = "c2")
     private String c2;
-    @Column(name = "pac_otros")
+    @Column(name = "c3")
     private String c3;
-    @Column(name = "pac_otros")
+    @Column(name = "c4")
     private String c4;
-    @Column(name = "pac_otros")
+    @Column(name = "c5")
     private String c5;
-    @Column(name = "pac_otros")
+    @Column(name = "c6")
     private String c6;
-    @Column(name = "pac_otros")
+    @Column(name = "c7")
     private String c7;
-    @Column(name = "pac_otros")
+    @Column(name = "c8")
     private String c8;
-    @Column(name = "pac_otros")
+    @Column(name = "c9")
     private String c9;
-    @Column(name = "pac_otros")
+    @Column(name = "c10")
     private String c10;
-    @Column(name = "pac_otros")
+    @Column(name = "c11")
     private String c11;
-    @Column(name = "pac_otros")
+    @Column(name = "c12")
     private String c12;
-    @Column(name = "pac_otros")
+    @Column(name = "c13")
     private String c13;
-    @Column(name = "pac_otros")
+    @Column(name = "c14")
     private String c14;
-    @Column(name = "pac_otros")
+    @Column(name = "c15")
     private String c15;
 
     @OneToMany(mappedBy = "idPaciente")
