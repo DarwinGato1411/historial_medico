@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="certificado" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.4641000000000033"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="192"/>
+	<property name="ireport.y" value="0"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -305,6 +305,10 @@ MSP: 1704353273001]]></text>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[((!$F{vis_reposo})||($F{vis_reposo}!=0))?"HASTA: "+(new java.text.SimpleDateFormat("EEEEE dd MMMMM yyyy",new Locale("es", "ES"))).format($P{fechaFinal})+"    "+"("+$P{fechaFinText}+")":""]]></textFieldExpression>
 			</textField>
+			<image hAlign="Center" vAlign="Middle" onErrorType="Blank">
+				<reportElement x="456" y="185" width="99" height="64"/>
+				<imageExpression class="java.lang.String"><![CDATA["//SIS_MEDICO//IMG//escobarqr.jpeg"]]></imageExpression>
+			</image>
 		</band>
 	</detail>
 	<pageFooter>

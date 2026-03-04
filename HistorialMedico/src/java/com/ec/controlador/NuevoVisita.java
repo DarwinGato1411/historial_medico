@@ -22,10 +22,12 @@ import com.ec.servicio.HelperPersistencia;
 import com.ec.servicio.ServicioCapitulo;
 import com.ec.servicio.ServicioDetalle;
 import com.ec.servicio.ServicioExamen;
+import com.ec.servicio.ServicioPaciente;
 import com.ec.servicio.ServicioParametrizar;
 import com.ec.servicio.ServicioReceta;
 import com.ec.servicio.ServicioSubCapitulo;
 import com.ec.servicio.ServicioVisitaMedica;
+import com.ec.utilitario.ArchivoUtils;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -33,9 +35,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -77,11 +79,12 @@ import org.zkoss.zul.Window;
  * @author gato
  */
 public class NuevoVisita {
-    
+
     ServicioVisitaMedica servicioVisitaMedica = new ServicioVisitaMedica();
+    ServicioPaciente servicioPaciente = new ServicioPaciente();
     private VisitaMedica entidad = new VisitaMedica();
     UserCredential credential = new UserCredential();
-    
+
     private String accion = "create";
     @Wire
     Window wVisita;
@@ -105,9 +108,9 @@ public class NuevoVisita {
     private String filePath;
     byte[] buffer = new byte[2024 * 1024];
     private AImage fotoGeneral = null;
-    
+
     AMedia fileContent = null;
-    
+
     ServicioParametrizar servicioParametrizar = new ServicioParametrizar();
     private Parametrizar parametrizar = new Parametrizar();
 
@@ -121,7 +124,7 @@ public class NuevoVisita {
     private List<Subcapitulo> listaSubcapitulos = new ArrayList<Subcapitulo>();
     private List<Detalle> listaDetalles = new ArrayList<Detalle>();
     public static String CIE10 = "";
-    
+
     private String fechaFomateada = "";
     private String buscarCapitulo = "";
     private String buscarSubCapitulo = "";
@@ -132,19 +135,19 @@ public class NuevoVisita {
     //reporte
 //    AMedia fileContent = null;
     Connection con = null;
-    
+
     @AfterCompose
     public void afterCompose(@ExecutionArgParam("valor") NuevaVisitaParam valor, @ContextParam(ContextType.VIEW) Component view) {
         Selectors.wireComponents(view, this, false);
-        
+
         if (valor.getTipo().equals("cie")) {
             buscarDetalleBD();
         } else {
             if (valor.getTipo().equals("modifica")) {
                 this.entidad = valor.getVisita();
-                
+
                 accion = "update";
-                
+
                 if (listaRecetaModel == null) {
                     listaRecetaModel = new ListModelList();
                     listaRecetaAnteriorModel = new ListModelList();
@@ -152,7 +155,7 @@ public class NuevoVisita {
                 if (listaExamenModel == null) {
                     listaExamenModel = new ListModelList();
                 }
-                
+
                 getRecetaExamen();
             } else {
                 listaRecetaModel = new ListModelList();
@@ -166,19 +169,26 @@ public class NuevoVisita {
                 accion = "create";
                 getRecetaAnterior();
                 getCie10Anterior();
-                
+
             }
+            if (valor.getIdPaciente() != null) {
+                Paciente nuevaEdad = valor.getIdPaciente();
+                BigDecimal edad = ArchivoUtils.obtenerEdadV2(nuevaEdad.getPacFechaNacimiento());
+                nuevaEdad.setPacEdad(edad.intValue());
+                servicioPaciente.modificar(nuevaEdad);
+            }
+
         }
-        
+
     }
-    
+
     public NuevoVisita() {
         Session sess = Sessions.getCurrent();
         credential = (UserCredential) sess.getAttribute(EnumSesion.userCredential.getNombre());
         parametrizar = servicioParametrizar.findActivo();
-        
+
     }
-    
+
     @Command
     @NotifyChange({"listaRecetaModel"})
     public void agregarItemReceta() {
@@ -188,33 +198,33 @@ public class NuevoVisita {
         rec.setRecN(Boolean.TRUE);
         ((ListModelList<RecetaDao>) listaRecetaModel).add(rec);
     }
-    
+
     @Command
     @NotifyChange({"listaRecetaModel"})
     public void agregarItemRecetaAnterior(@BindingParam("valor") RecetaDao valor) {
         RecetaDao rec = new RecetaDao();
         rec = valor;
-        
+
         ((ListModelList<RecetaDao>) listaRecetaModel).add(rec);
     }
-    
+
     @Command
     @NotifyChange({"entidad"})
     public void refrescar() {
         Clients.showNotification("Por favor llene la información y presione guardar ",
                 Clients.NOTIFICATION_TYPE_INFO, null, "end_center", 2000, true);
     }
-    
+
     @Command
     @NotifyChange({"listaRecetaModel", "listaExamenModel"})
     public void getRecetaExamen() {
-        
+
         List<Examen> listaExamRecup = servicioExamen.findForVisiMedica(entidad);
         for (Examen examen : listaExamRecup) {
             ExamenDao item = new ExamenDao();
             item.setPath(examen.getExaPath());
             item.setDescripcion(examen.getExaDescripcion());
-            
+
             try {
                 fotoGeneral = new AImage("fotoPedido", Imagen_A_Bytes(examen.getExaPath()));
             } catch (FileNotFoundException ex) {
@@ -234,14 +244,14 @@ public class NuevoVisita {
             item.setRecT(receta.getRecT());
             item.setRecN(receta.getRecN());
             item.setIndicacion(receta.getRecDescripcion());
-            
+
             ((ListModelList<RecetaDao>) listaRecetaModel).add(item);
         }
     }
-    
+
     @NotifyChange({"listaRecetaModel"})
     public void getRecetaAnterior() {
-        
+
         List<RecetaAnteriorVista> listaReceta = servicioReceta.findVisitaMedicaAnterior(entidad.getIdPaciente());
         for (RecetaAnteriorVista receta : listaReceta) {
             RecetaDao item = new RecetaDao();
@@ -251,23 +261,23 @@ public class NuevoVisita {
             item.setRecT(receta.getRecT());
             item.setRecN(receta.getRecN());
             item.setIndicacion(receta.getRecDescripcion());
-            
+
             ((ListModelList<RecetaDao>) listaRecetaModel).add(item);
         }
     }
-    
+
     public void getCie10Anterior() {
-        
+
         VisitaMedica visitaAnterior = servicioVisitaMedica.findForPacienteUltima(entidad.getIdPaciente(), "", Boolean.TRUE);
-        this.entidad.setVisCargarCie10(visitaAnterior!=null?visitaAnterior.getVisCargarCie10():"");
+        this.entidad.setVisCargarCie10(visitaAnterior != null ? visitaAnterior.getVisCargarCie10() : "");
     }
-    
+
     @Command
     public void guardar() throws JRException, IOException, NamingException {
         if (entidad.getVisObservacion() != null) {
-            
+
             if (accion.equals("create")) {
-                
+
                 servicioVisitaMedica.crear(entidad);
                 //  Messagebox.show("Guardado con exito");
 
@@ -299,7 +309,7 @@ public class NuevoVisita {
                 }
                 wVisita.detach();
             } else {
-                
+
                 servicioVisitaMedica.modificar(entidad);
                 servicioVisitaMedica.eliminarExamenesRecetas(entidad.getIdVisitaMedica());
                 Examen examen = new Examen();
@@ -310,7 +320,7 @@ public class NuevoVisita {
                     examen.setExaPath(examenDao.getPath());
                     examen.setExaDescripcion(examenDao.getDescripcion());
                     examen.setIdVisitaMedica(entidad);
-                    
+
                     servicioExamen.crear(examen);
                 }
                 for (RecetaDao recetaDao : listaRecetaModel) {
@@ -324,67 +334,67 @@ public class NuevoVisita {
                     receta.setRecN(recetaDao.getRecN());
                     servicioReceta.crear(receta);
                 }
-                
+
                 wVisita.detach();
             }
-            
+
         } else {
             Messagebox.show("Verifique la informacion requerida", "Atención", Messagebox.OK, Messagebox.ERROR);
         }
     }
-    
+
     public VisitaMedica getEntidad() {
         return entidad;
     }
-    
+
     public void setEntidad(VisitaMedica entidad) {
         this.entidad = entidad;
     }
-    
+
     public String getAccion() {
         return accion;
     }
-    
+
     public void setAccion(String accion) {
         this.accion = accion;
     }
-    
+
     public List<Receta> getListaRecetas() {
         return listaRecetas;
     }
-    
+
     public void setListaRecetas(List<Receta> listaRecetas) {
         this.listaRecetas = listaRecetas;
     }
-    
+
     public ListModelList<ExamenDao> getListaExamenModel() {
         return listaExamenModel;
     }
-    
+
     public void setListaExamenModel(ListModelList<ExamenDao> listaExamenModel) {
         this.listaExamenModel = listaExamenModel;
     }
-    
+
     public ListModelList<RecetaDao> getListaRecetaModel() {
         return listaRecetaModel;
     }
-    
+
     public void setListaRecetaModel(ListModelList<RecetaDao> listaRecetaModel) {
         this.listaRecetaModel = listaRecetaModel;
     }
-    
+
     public ListModelList<RecetaDao> getListaRecetaAnteriorModel() {
         return listaRecetaAnteriorModel;
     }
-    
+
     public void setListaRecetaAnteriorModel(ListModelList<RecetaDao> listaRecetaAnteriorModel) {
         this.listaRecetaAnteriorModel = listaRecetaAnteriorModel;
     }
-    
+
     public Set<Receta> getRegistroSelectedReceta() {
         return registroSelectedReceta;
     }
-    
+
     public void setRegistroSelectedReceta(Set<Receta> registroSelectedReceta) {
         this.registroSelectedReceta = registroSelectedReceta;
     }
@@ -393,25 +403,25 @@ public class NuevoVisita {
     @Command
     @NotifyChange({"fileContent", "empresa", "fotoGeneral", "listaExamenModel"})
     public void subirExamen() throws InterruptedException, IOException {
-        
+
         org.zkoss.util.media.Media media = Fileupload.get();
         if (media instanceof org.zkoss.util.media.AMedia) {
             String nombre = media.getName();
-            
+
             if (!nombre.contains("pdf")) {
                 Clients.showNotification("Debe cargar un archivo PDF ",
                         Clients.NOTIFICATION_TYPE_ERROR, null, "end_center", 3000, true);
-                
+
                 return;
             }
-            
+
             if (media.getByteData().length > 10 * 1024 * 1024) {
                 Messagebox.show("El arhivo seleccionado sobrepasa el tamaño de 10Mb.\n Por favor seleccione un archivo más pequeño.", "Atención", Messagebox.OK, Messagebox.ERROR);
-                
+
                 return;
             }
             filePath = parametrizar.getParBase() + File.separator + parametrizar.getParImagenes() + File.separator;
-            
+
             File baseDir = new File(filePath);
             if (!baseDir.exists()) {
                 baseDir.mkdirs();
@@ -426,10 +436,10 @@ public class NuevoVisita {
             FileInputStream fs = new FileInputStream(f);
             fs.read(buffer);
             fs.close();
-            
+
             ByteArrayInputStream is = new ByteArrayInputStream(buffer);
             fileContent = new AMedia("report", "pdf", "application/pdf", is);
-            
+
             ExamenDao dao = new ExamenDao();
             dao.setPath(filePath);
             dao.setDescripcion("Examen " + media.getName());
@@ -438,14 +448,14 @@ public class NuevoVisita {
 //            listaExamenModel.add(dao);
 
         }
-        
+
     }
-    
+
     public byte[] Imagen_A_Bytes(String pathImagen) throws FileNotFoundException {
         String reportPath = "";
         reportPath = pathImagen;
         File file = new File(reportPath);
-        
+
         FileInputStream fis = new FileInputStream(file);
         //create FileInputStream which obtains input bytes from a file in a file system
         //FileInputStream is meant for reading streams of raw bytes such as image data. For reading streams of characters, consider using FileReader.
@@ -460,11 +470,11 @@ public class NuevoVisita {
             }
         } catch (IOException ex) {
         }
-        
+
         byte[] bytes = bos.toByteArray();
         return bytes;
     }
-    
+
     @Command
     @NotifyChange({"listaPaciente", "buscarPaciente"})
     public void verImagen(@BindingParam("valor") ExamenDao valor) {
@@ -496,7 +506,7 @@ public class NuevoVisita {
                     Clients.NOTIFICATION_TYPE_ERROR, null, "middle_center", 2000, true);
         }
     }
-    
+
     @Command
     @NotifyChange({"listaPaciente", "buscarPaciente"})
     public void eliminarExamen(@BindingParam("valor") ExamenDao valor) {
@@ -507,7 +517,7 @@ public class NuevoVisita {
                     Clients.NOTIFICATION_TYPE_ERROR, null, "middle_center", 2000, true);
         }
     }
-    
+
     @Command
     @NotifyChange({"listaPaciente", "buscarPaciente"})
     public void eliminarReceta(@BindingParam("valor") RecetaDao valor) {
@@ -518,7 +528,7 @@ public class NuevoVisita {
                     Clients.NOTIFICATION_TYPE_ERROR, null, "middle_center", 2000, true);
         }
     }
-    
+
     @Command
     @NotifyChange({"entidad"})
     public void cargarCie() {
@@ -527,7 +537,7 @@ public class NuevoVisita {
             final HashMap<String, NuevaVisitaParam> map = new HashMap<String, NuevaVisitaParam>();
             NuevaVisitaParam param = new NuevaVisitaParam("cie", null);
             map.put("valor", param);
-            
+
             org.zkoss.zul.Window window = (org.zkoss.zul.Window) Executions.createComponents(
                     "/medico/nuevo/cargarcie10.zul", null, map);
             window.doModal();
@@ -544,16 +554,16 @@ public class NuevoVisita {
     private void buscarCapituloBD() {
         listaCapitulo = servicioCapitulo.finLike(buscarCapitulo);
     }
-    
+
     private void buscarSubcapituloBD() {
         listaSubcapitulos = servicioSubCapitulo.findByCapitulo(capituloSelected, buscarSubCapitulo);
     }
-    
+
     private void buscarDetalleBD() {
         listaDetalles = servicioDetalle.findBySubCapituloLike(buscarDetalle);
 //        listaDetalles = servicioDetalle.findBySubCapitulo(subCapituloSelected, buscarDetalle);
     }
-    
+
     @Command
     @NotifyChange({"listaSubcapitulos", "buscarSubCapitulo", "capituloSelected", "listaDetalles"})
     public void buscarSubCapitulo(@BindingParam("valor") Capitulo valor) {
@@ -564,14 +574,14 @@ public class NuevoVisita {
         buscarSubcapituloBD();
         buscarDetalleBD();
     }
-    
+
     @Command
     @NotifyChange({"listaCapitulo", "buscarCapitulo"})
     public void buscarCapitulo(@BindingParam("valor") Capitulo valor) {
-        
+
         buscarCapituloBD();
     }
-    
+
     @Command
     @NotifyChange({"listaDetalles", "buscar", "subCapituloSelected"})
     public void busacarDetalle() {
@@ -581,7 +591,7 @@ public class NuevoVisita {
 //        }
         buscarDetalleBD();
     }
-    
+
     @Command
     @NotifyChange({"listaDetalles", "buscarDetalle", "subCapituloSelected"})
     public void seleccionarCie(@BindingParam("valor") Detalle valor) {
@@ -589,96 +599,96 @@ public class NuevoVisita {
         CIE10 = valor.getDetCodigo() + " - " + valor.getDetDetalle() + "\n";
         wVCargarCie.detach();
     }
-    
+
     public List<Capitulo> getListaCapitulo() {
         return listaCapitulo;
     }
-    
+
     public void setListaCapitulo(List<Capitulo> listaCapitulo) {
         this.listaCapitulo = listaCapitulo;
     }
-    
+
     public Capitulo getCapituloSelected() {
         return capituloSelected;
     }
-    
+
     public void setCapituloSelected(Capitulo capituloSelected) {
         this.capituloSelected = capituloSelected;
     }
-    
+
     public Subcapitulo getSubCapituloSelected() {
         return subCapituloSelected;
     }
-    
+
     public void setSubCapituloSelected(Subcapitulo subCapituloSelected) {
         this.subCapituloSelected = subCapituloSelected;
     }
-    
+
     public List<Subcapitulo> getListaSubcapitulos() {
         return listaSubcapitulos;
     }
-    
+
     public void setListaSubcapitulos(List<Subcapitulo> listaSubcapitulos) {
         this.listaSubcapitulos = listaSubcapitulos;
     }
-    
+
     public List<Detalle> getListaDetalles() {
         return listaDetalles;
     }
-    
+
     public void setListaDetalles(List<Detalle> listaDetalles) {
         this.listaDetalles = listaDetalles;
     }
-    
+
     public String getBuscarCapitulo() {
         return buscarCapitulo;
     }
-    
+
     public void setBuscarCapitulo(String buscarCapitulo) {
         this.buscarCapitulo = buscarCapitulo;
     }
-    
+
     public String getBuscarSubCapitulo() {
         return buscarSubCapitulo;
     }
-    
+
     public void setBuscarSubCapitulo(String buscarSubCapitulo) {
         this.buscarSubCapitulo = buscarSubCapitulo;
     }
-    
+
     public String getBuscarDetalle() {
         return buscarDetalle;
     }
-    
+
     public void setBuscarDetalle(String buscarDetalle) {
         this.buscarDetalle = buscarDetalle;
     }
-    
+
     public void reporteGeneral(Integer idVisitaMedica) throws JRException, IOException, NamingException, SQLException {
-        
+
         EntityManager emf = HelperPersistencia.getEMF();
-        
+
         try {
             emf.getTransaction().begin();
             con = emf.unwrap(Connection.class);
-            
+
             String reportFile = Executions.getCurrent().getDesktop().getWebApp()
                     .getRealPath("/reportes");
             String reportPath = "";
-            
+
             reportPath = reportFile + File.separator + "receta.jasper";
-            
+
             Map<String, Object> parametros = new HashMap<String, Object>();
 
             //  parametros.put("codUsuario", String.valueOf(credentialLog.getAdUsuario().getCodigoUsuario()));
             parametros.put("IdVisitaMedica", idVisitaMedica);
-            
+
             if (con != null) {
                 System.out.println("Conexión Realizada Correctamenteeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
             }
             FileInputStream is = null;
             is = new FileInputStream(reportPath);
-            
+
             byte[] buf = JasperRunManager.runReportToPdf(is, parametros, con);
             InputStream mediais = new ByteArrayInputStream(buf);
             AMedia amedia = new AMedia("Reporte", "pdf", "application/pdf", mediais);
@@ -695,17 +705,17 @@ public class NuevoVisita {
             if (emf != null) {
                 emf.getTransaction().commit();
             }
-            
+
         }
-        
+
     }
-    
+
     public String getFechaFomateada() {
         return fechaFomateada;
     }
-    
+
     public void setFechaFomateada(String fechaFomateada) {
         this.fechaFomateada = fechaFomateada;
     }
-    
+
 }

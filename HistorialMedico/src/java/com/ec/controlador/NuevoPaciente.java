@@ -80,6 +80,12 @@ public class NuevoPaciente {
         Selectors.wireComponents(view, this, false);
         if (valor != null) {
             this.entidad = valor;
+
+            if (entidad.getPacFechaNacimiento() != null) {
+                BigDecimal edad = ArchivoUtils.obtenerEdadV2(entidad.getPacFechaNacimiento());
+                entidad.setPacEdad(edad.intValue());
+                servicio.modificar(entidad);
+            }
             accion = "update";
         } else {
             this.entidad = new Paciente();
@@ -191,7 +197,6 @@ public class NuevoPaciente {
                     wCapitulo.detach();
                 }
 
-                
             } else {
                 servicio.modificar(entidad);
                 // Messagebox.show("Guardado con exito");

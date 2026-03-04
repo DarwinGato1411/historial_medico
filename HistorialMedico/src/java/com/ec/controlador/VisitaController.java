@@ -14,6 +14,7 @@ import com.ec.entidad.VisitaMedica;
 import com.ec.seguridad.EnumSesion;
 import com.ec.seguridad.UserCredential;
 import com.ec.servicio.HelperPersistencia;
+import com.ec.servicio.ServicioPaciente;
 import com.ec.servicio.ServicioParametrizar;
 import com.ec.servicio.ServicioReceta;
 
@@ -27,6 +28,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
 import java.rmi.RemoteException;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -90,6 +92,8 @@ public class VisitaController {
     AMedia fileContent = null;
     Connection con = null;
 
+    ServicioPaciente servicioPaciente = new ServicioPaciente();
+
     private final String[] UNIDADES = {"", "un ", "dos ", "tres ", "cuatro ", "cinco ", "seis ", "siete ", "ocho ", "nueve "};
     private final String[] DECENAS = {"diez ", "once ", "doce ", "trece ", "catorce ", "quince ", "dieciseis ",
         "diecisiete ", "dieciocho ", "diecinueve", "veinte ", "treinta ", "cuarenta ",
@@ -101,12 +105,16 @@ public class VisitaController {
     public void afterCompose(@ExecutionArgParam("valor") Paciente valor, @ContextParam(ContextType.VIEW) Component view) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException, JRException, IOException {
         Selectors.wireComponents(view, this, false);
         pacienteSelected = valor;
-        
-        
+
+        if (valor.getIdPaciente() != null) {
+            Paciente nuevaEdad = valor;
+            BigDecimal edad = ArchivoUtils.obtenerEdadV2(nuevaEdad.getPacFechaNacimiento());
+            nuevaEdad.setPacEdad(edad.intValue());
+            servicioPaciente.modificar(nuevaEdad);
+        }
+
         buscarVisita();
     }
-
-  
 
     public VisitaController() {
 
@@ -122,7 +130,6 @@ public class VisitaController {
 
         buscarVisita();
     }
-   
 
     @Command
     @NotifyChange({"listaPaciente", "buscarPaciente", "listaVisitaMedicas"})
@@ -273,7 +280,7 @@ public class VisitaController {
             //  parametros.put("codUsuario", String.valueOf(credentialLog.getAdUsuario().getCodigoUsuario()));
             parametros.put("IdVisitaMedica", valor.getIdVisitaMedica());
             parametros.put("logo", parametrizar.getParBase() + File.separator + parametrizar.getParImagenes() + File.separator + "logohm.png");
-           
+
             System.out.println(parametrizar.getParBase() + File.separator + parametrizar.getParImagenes() + File.separator + "logohm.png");
             Calendar calendar = Calendar.getInstance(); //obtiene la fecha de hoy 
             calendar.add(Calendar.HOUR, valor.getVisReposo() == null ? 0 : valor.getVisReposo()); //el -3 indica que se le restaran 3 dias 

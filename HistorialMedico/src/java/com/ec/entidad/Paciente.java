@@ -182,7 +182,7 @@ public class Paciente implements Serializable {
     }
 
     public Date getPacFechaNacimiento() {
-        return pacFechaNacimiento;
+        return pacFechaNacimiento == null ? new Date() : pacFechaNacimiento;
     }
 
     public void setPacFechaNacimiento(Date pacFechaNacimiento) {
