@@ -42,7 +42,7 @@
                         </listheader>                                                                         
                         <listheader label="Inicio" width="10%" />                                                                        
                         <listheader label="Fin"  width="10%" />                                                                         
-                        <listheader label="C1"  width="10%" />                                                                         
+<!--                        <listheader label="C1"  width="10%" />                                                                         
                         <listheader label="C2"  width="10%" />                                                                         
                         <listheader label="C3"  width="10%" />                                                                         
                         <listheader label="C4"  width="10%" />                                                                         
@@ -56,7 +56,7 @@
                         <listheader label="C12"  width="10%" />                                                                         
                         <listheader label="C13"  width="10%" />                                                                         
                         <listheader label="C14"  width="10%" />                                                                         
-                        <listheader label="C15"  width="10%" />                                                                         
+                        <listheader label="C15"  width="10%" />                                                                         -->
                     </listhead>  
                     <template name="model" >                                                            
                         <listitem  >
@@ -104,7 +104,7 @@
                                                   
                             </listcell>
 
-                            <listcell zclass = "mycss-listcell"  >
+<!--                            <listcell zclass = "mycss-listcell"  >
                                 <textbox readonly="false"  style="font-size:12px ;background:#EBF5FB"
                                          class="form-control form-control-sm" 
                                          width="100%"
@@ -253,7 +253,7 @@
                                          
                                 />
                                 
-                                 </listcell>
+                                 </listcell>-->
                                  
                         </listitem>
                     </template>
